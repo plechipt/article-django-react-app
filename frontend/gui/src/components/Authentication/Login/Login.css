@@ -1,0 +1,25 @@
+.login-container {
+    margin-top: 5rem !important;
+    width: 40% !important;
+    margin: auto;
+}
+
+.error-message-container {
+    margin-bottom: 2rem !important;
+}
+
+.submit-button {
+    margin-top: 0.25rem !important;
+}
+
+@media all and (max-width: 1400px) {
+    .login-container {
+        width: 60% !important;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .login-container {
+        width: 80% !important;
+    }
+}

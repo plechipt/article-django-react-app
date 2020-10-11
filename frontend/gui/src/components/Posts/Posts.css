@@ -1,0 +1,117 @@
+.post-create-container {
+    margin-top: 5rem !important;
+    width: 40% !important;
+    margin: auto;
+}
+
+.submit-button {
+    margin-top: 0.25rem !important;
+}
+
+.ui.modal, .ui.active.modal {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -17.5%);
+    transform-origin: center !important;
+    transition: all ease .5s;
+    align-items: center !important;
+}
+
+.post {
+    margin-bottom: 6rem !important;
+    cursor: pointer;
+}
+
+.post-title {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    max-width: 55% !important;
+    word-break: break-all;
+}
+
+.post-user {
+    font-size: 1.1rem !important;
+    margin-top: 1rem !important;
+}
+
+.post-date {
+    font-size: 1rem !important;
+    margin-top: 0.5rem !important;
+}
+
+.post-textfield {
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+    font-size: 1.2rem !important;
+    width: 75% !important;
+    word-break: break-all;
+}
+
+.post-detail-buttons-container {
+    margin-top: 2.5rem !important;
+}
+
+.post-detail-edit-button {
+    margin-left: 2.5rem !important;
+}
+
+.post-detail-delete-button {
+    margin-left: 1rem !important;
+}
+
+.search-bar-container {
+    margin: auto;
+    width: 25% !important;
+}
+
+@media all and (max-width: 1400px) {
+    .post-create-container {
+        width: 60% !important;
+    }
+
+    .search-bar-container {
+        width: 30% !important;
+    }
+}
+
+
+@media all and (max-width: 1300px) {
+    .search-bar-container {
+        width: 40% !important;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .post-create-container {
+        width: 80% !important;
+    }
+
+    .post-content {
+        display: flex !important;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .post-textfield {
+        display: flex; 
+        justify-content: center;
+    }
+    
+    .post a {
+        font-size: 1.5rem !important;
+    }
+
+    .post-user {
+        font-size: 1.1rem !important;
+        margin-top: 1.5rem !important;
+    }
+    
+    .post-date {
+        margin-top: 0.2rem !important;
+    }
+
+    .search-bar-container {
+        width: 50% !important;
+    }
+}

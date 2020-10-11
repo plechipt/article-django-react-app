@@ -1,0 +1,70 @@
+
+.chat-room-container {
+    margin-top: 5rem !important;
+    overflow: hidden !important;
+}
+
+.messages-and-create-form-container {
+    display: flex !important;
+    flex-direction: column !important;
+    margin: auto !important;
+    width: 30% !important;
+    margin-left: auto !important;
+}
+
+.messages-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-container {
+    word-break: break-word;
+}
+
+.chat-user-container {
+    background: #F5F4F6;
+}
+
+.message-create-container {
+    display: flex;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 2rem;
+}
+
+.text-area-container {    
+    resize: none !important;
+    max-height: 3rem;
+}
+
+.message-create-form-container {
+    display: flex;
+    flex: 1;
+}
+
+.message-button-container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    cursor: pointer;
+    color: #007BFF;
+}
+
+@media all and (max-width: 1400px) {
+    .messages-and-create-form-container {
+        width: 40% !important;
+    }
+}
+
+@media all and (max-width: 1000px) {
+    .messages-and-create-form-container {
+        width: 50% !important;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .messages-and-create-form-container {
+        width: 80% !important;
+    }
+}
+
