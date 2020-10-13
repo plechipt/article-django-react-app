@@ -1,9 +1,14 @@
 import os
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MAIN_DIR = r'C:\Users\Admin\programs\django+react\tutorials\graphql_django'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(MAIN_DIR, 'build')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -47,10 +52,13 @@ STATIC_URL = '/static/'
 
 #roots 
 MEDIA_DIR = r'C:\Users\Admin\programs\django+react\tutorials\graphql_django\gui\src\components\Profiles'
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 MEDIA_ROOT = os.path.join(MEDIA_DIR, 'media')
 MEDIA_URL = os.path.join(MEDIA_DIR, '/media/')
+
+STATICFILES_DIRS = [
+    os.path.join(MAIN_DIR, 'build/static')
+]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
