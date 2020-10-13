@@ -32,7 +32,7 @@ const CustomComment = ({ id, replys, content, posted, username, image }) => {
             <Comment>
                 <Comment.Avatar src={require(`../../${PATH_TO_PICTURES}/small/${image.image}`)} />
                 <Comment.Content>
-                    <Comment.Author>
+                    <Comment.Author as="a">
                         <Link to={`profile/${username}`}>{username}</Link>
                     </Comment.Author>
                     <Comment.Metadata>
