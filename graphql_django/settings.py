@@ -15,6 +15,7 @@ from graphql_django.files.development import *
 from graphql_django.files.graphql import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print(BASE_DIR)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
@@ -42,7 +43,6 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'build'),
             os.path.join(BASE_DIR, 'build/index.html'),
-
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -62,8 +62,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'build/static'),
     os.path.join(BASE_DIR, 'build'),
-    os.path.join(BASE_DIR, 'build/static')
 ]
 
 #roots 

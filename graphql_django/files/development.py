@@ -1,8 +1,5 @@
 import os
 
-MEDIA_DIR = r'C:\Users\Admin\programs\django+react\tutorials\graphql_django\gui\src\components\Profiles'
-MAIN_DIR = r'C:\Users\Admin\programs\django+react\tutorials\graphql_django'
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
