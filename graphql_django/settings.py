@@ -13,6 +13,7 @@ import os
 from graphql_django.files.basic import *
 from graphql_django.files.development import *
 from graphql_django.files.graphql import *
+from graphql_django.files.production import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -29,12 +30,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['article-django-react-app.herokuapp.com', '127.0.0.1:8000', '127.0.0.1']
 
 #database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+
+
 
 TEMPLATES = [
     {
@@ -69,4 +66,4 @@ MEDIA_URL = os.path.join(MEDIA_DIR, '/media/')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

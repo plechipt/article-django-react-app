@@ -20,6 +20,8 @@ graphene-subscriptions = "*"
 django-channels-graphql-ws = "*"
 whitenoise = "*"
 gunicorn = "*"
+dj-database-url = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.7"

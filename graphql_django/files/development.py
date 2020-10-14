@@ -27,7 +27,7 @@ CORS_ORIGIN_WHITELIST = (
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-'
+
 
 WSGI_APPLICATION = 'graphql_django.wsgi.application'
 ROOT_URLCONF = 'graphql_django.urls'
