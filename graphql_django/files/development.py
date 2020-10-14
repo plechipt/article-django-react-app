@@ -51,6 +51,11 @@ CORS_ORIGIN_WHITELIST = (
     'https://article-django-react-app.herokuapp.com'
 )
 
+STATICFILES_DIRS = [
+    os.path.join(MAIN_DIR, 'build'),
+    os.path.join(MAIN_DIR, 'build/static')
+]
+
 #roots 
 MEDIA_ROOT = os.path.join(MEDIA_DIR, 'media')
 MEDIA_URL = os.path.join(MEDIA_DIR, '/media/')
