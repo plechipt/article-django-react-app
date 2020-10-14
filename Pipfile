@@ -19,6 +19,7 @@ django-channels = "*"
 graphene-subscriptions = "*"
 django-channels-graphql-ws = "*"
 whitenoise = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
