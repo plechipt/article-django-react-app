@@ -13,7 +13,6 @@ import os
 from graphql_django.files.basic import *
 from graphql_django.files.development import *
 from graphql_django.files.graphql import *
-from graphql_django.files.production import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
