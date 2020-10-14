@@ -38,37 +38,3 @@ DATABASES = {
     }
 }
 
-#templates
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'build'),
-            os.path.join(BASE_DIR, 'build/index.html'),
-        ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-        'APP_DIRS': True,
-    },
-]
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build'),
-    os.path.join(BASE_DIR, 'build/static')
-]
-
-#roots 
-MEDIA_DIR = r'C:\Users\Admin\programs\django+react\tutorials\graphql_django\gui\src\components\Profiles'
-MEDIA_ROOT = os.path.join(MEDIA_DIR, 'media')
-MEDIA_URL = os.path.join(MEDIA_DIR, '/media/')
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
