@@ -13,7 +13,6 @@ import os
 from graphql_django.files.basic import *
 from graphql_django.files.development import *
 from graphql_django.files.graphql import *
-from graphql_django.files.production import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -65,9 +64,9 @@ STATICFILES_DIRS = [
 
 #roots 
 MEDIA_DIR = r'C:\Users\Admin\programs\django+react\tutorials\graphql_django\gui\src\components\Profiles'
-
 MEDIA_ROOT = os.path.join(MEDIA_DIR, 'media')
 MEDIA_URL = os.path.join(MEDIA_DIR, '/media/')
 
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage

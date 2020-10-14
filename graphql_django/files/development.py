@@ -21,15 +21,13 @@ AUTH_PASSWORD_VALIDATORS = [
 #allowed urls which can access api
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
+    'https://article-django-react-app.herokuapp.com'
 )
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-STATIC_URL = '/static/'
-
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+'
 
 WSGI_APPLICATION = 'graphql_django.wsgi.application'
 ROOT_URLCONF = 'graphql_django.urls'
