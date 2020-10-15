@@ -15,8 +15,9 @@ from graphql_django.files.development import *
 from graphql_django.files.graphql import *
 
 BASE_DIR = r'C:\Users\Admin\programs\django+react\tutorials\graphql_django'
-DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
+
+print(SETTINGS_PATH)
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
