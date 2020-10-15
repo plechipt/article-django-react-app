@@ -1,9 +1,5 @@
 import os
 
-PROJECT_DIR = os.path.dirname(__file__)
-
-print(PROJECT_DIR + ' ez')
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
