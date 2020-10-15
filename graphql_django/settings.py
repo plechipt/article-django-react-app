@@ -37,13 +37,12 @@ DATABASES = {
     }
 }
 
-print(BASE_DIR)
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(r'C:\Users\Admin\programs\django+react\tutorials\graphql_django\build'),
+            os.path.join(BASE_DIR, 'build'),
+            os.path.join(BASE_DIR, 'build/index.html'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -63,7 +62,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
-    os.path.join(r'C:\Users\Admin\programs\django+react\tutorials\graphql_django\build\static'),
+    os.path.join(BASE_DIR, 'build/static'),
 ]
 
 #roots 
