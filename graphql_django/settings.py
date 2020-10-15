@@ -26,7 +26,7 @@ SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['article-django-react-app.herokuapp.com', '127.0.0.1:8000', '127.0.0.1']
 
 #database
@@ -36,12 +36,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'build'),
-    # here you can add another templates directory if you wish.
-)
-
 
 TEMPLATES = [
     {
