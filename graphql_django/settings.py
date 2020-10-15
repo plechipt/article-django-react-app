@@ -17,8 +17,6 @@ from graphql_django.files.graphql import *
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 
-print(BASE_DIR)
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 # Quick-start development settings - unsuitable for production
@@ -38,6 +36,11 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'build'),
+    # here you can add another templates directory if you wish.
+)
 
 
 TEMPLATES = [
@@ -59,7 +62,6 @@ TEMPLATES = [
     },
 ]
 
-print(BASE_DIR, 'build')
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
