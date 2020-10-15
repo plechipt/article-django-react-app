@@ -64,8 +64,6 @@ MEDIA_DIR = r'C:\Users\Admin\programs\django+react\tutorials\graphql_django\gui\
 MEDIA_ROOT = os.path.join(MEDIA_DIR, 'media')
 MEDIA_URL = os.path.join(MEDIA_DIR, '/media/')
 
-
-
 WSGI_APPLICATION = 'graphql_django.wsgi.application'
 ROOT_URLCONF = 'graphql_django.urls'
 
