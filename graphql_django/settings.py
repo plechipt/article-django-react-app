@@ -39,6 +39,7 @@ DATABASES = {
     }
 }
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -58,6 +59,7 @@ TEMPLATES = [
     },
 ]
 
+print(BASE_DIR, 'build')
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
