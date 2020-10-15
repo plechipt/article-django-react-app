@@ -14,6 +14,7 @@ const Message = ({ id, content, messaged, username }) => {
                     <div className="py-3 px-3 rounded-pill chat-user-container message-container">
                         {/*Popup to show date*/}
                         <Popup
+                            className="mr-4"
                             content={messaged}
                             inverted
                             position='left center'
@@ -28,6 +29,7 @@ const Message = ({ id, content, messaged, username }) => {
                     <div className="py-3 px-3 rounded-pill bg-primary message-container">
                         {/*Popup to show date*/}
                         <Popup
+                            className="ml-4"
                             content={messaged}
                             inverted
                             position='right center'
