@@ -28,7 +28,7 @@ from api.schema import schema
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', csrf_exempt(GraphQLView.as_view(schema=schema, graphiql=True))),
-    re_path('', TemplateView.as_view(template_name='index.html'))
+    re_path('.*', TemplateView.as_view(template_name='index.html'))
 ]
 
 if settings.DEBUG:

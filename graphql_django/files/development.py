@@ -21,7 +21,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 #allow all websites to fetch api
-CORS_ORIGIN_ALLOW_ALL = True
+#CORS_ORIGIN_ALLOW_ALL = True
 
 #allowed urls which can access api
 CORS_ORIGIN_WHITELIST = (
