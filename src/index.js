@@ -7,7 +7,7 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 const apiClient = new ApolloClient({
-  uri: 'http://127.0.0.1:8000/api/',
+  uri: 'https://article-django-react-app.herokuapp.com/api/',
 })
 
 ReactDOM.render(
