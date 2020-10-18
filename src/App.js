@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 
 import './App.css'
@@ -26,6 +26,7 @@ import Profile from './components/Profiles/Profile'
 import MessagesContainer from './components/Messages/Messages/MessagesContainer'
 
 function App () {
+  const history = useHistory()
   const user = localStorage.getItem('user')
   const token = localStorage.getItem('token')
   const [ allowUserToEnter, setAllowUserToEnter ]= useState(false)
@@ -59,8 +60,7 @@ function App () {
     }
   }, [tokenData])
 
-  
-  
+
   return (
     <div className="App">
       <Navbar />
@@ -77,6 +77,11 @@ function App () {
                 <Route path="/createPost" component={() => <PostCreate />} />
                 <Route path="/:id" component={() => <PostDetail />} />
                 <Route path="/" component={() => <Posts />} />
+                {window.location.pathname === '/api/' ? (
+                  <>
+                    {history.push('/')}
+                  </>
+                ) : null}
               </Switch>  
             ) : (
               <h1 align="center">Failed to connect</h1>
