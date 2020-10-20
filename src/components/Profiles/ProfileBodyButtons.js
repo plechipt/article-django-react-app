@@ -2,11 +2,12 @@ import React from 'react'
 import { Button, Icon, Label } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import { USER_PROFILE_FOLLOW_MUTATION, USER_PROFILE_UNFOLLOW_MUTATION  } from '../Api/user'
 
 const ProfileBodyButtons = ({ profileData: { profileInfo: { profile } } }) => {
-    const user = localStorage.getItem('user')
+    const user = Cookies.get('user')
     const history = useHistory()
 
     //destructuring users total followers and users username

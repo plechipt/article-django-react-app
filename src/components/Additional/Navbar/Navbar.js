@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Menu, Segment } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import './Navbar.css'
 
 const Navbar = () => {
-    const user = localStorage.getItem('user')
-    const token = localStorage.getItem('token')
+    const user = Cookies.get('user')
+    const token = Cookies.get('token')
 
     const history = useHistory()
     const [ activeItem, setActiveItem ] = useState()
@@ -16,8 +17,8 @@ const Navbar = () => {
     }
 
     const handleOnLogout = () => {
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
+        Cookies.remove('token')
+        Cookies.remove('user') 
         history.push('/login')
         //reset site
         window.location.reload(false);

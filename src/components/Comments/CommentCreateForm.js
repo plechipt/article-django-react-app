@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import Cookies from 'js-cookie'
 
 import { Button, Form } from 'semantic-ui-react'
 import { COMMENT_ADD_MUTATION } from '../Api/comment'
 
 const CommentCreateForm = ({ id }) => {
-    const user = localStorage.getItem('user')
+    const user = Cookies.get('user')
     const [ allowButton, setAllowButton ] = useState(false)
     
     const [ commentInput, setCommentInput ] = useState('')

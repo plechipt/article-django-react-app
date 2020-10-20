@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { useParams } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import { MESSAGE_LIST_MUTATION } from '../../Api/message'
 import MessagesMap from './MessagesMap'
 import MessageCreate from '../MessageCreate'
 
 const MessagesContainer = () => {
-    const user = localStorage.getItem('user')
+    const user = Cookies.get('user')
     const { chatUser } = useParams()
 
     const [ queryUserMessages, { data: messagesData }] = useMutation(MESSAGE_LIST_MUTATION)

@@ -3,6 +3,7 @@ import { Button, Form, Message } from 'semantic-ui-react'
 import { useHistory, useParams } from 'react-router-dom'
 import { USER_PROFILE_INFO_MUTATION, USER_UPDATE_MUTATION } from '../Api/user'
 import { useMutation } from '@apollo/react-hooks'
+import Cookies from 'js-cookie'
 
 import ProfileImage from './ProfileImages'
 import ProfileBodyButtons from './ProfileBodyButtons'
@@ -12,7 +13,7 @@ const PATH_TO_PICTURES = 'media/profile_pictures'
 
 const Profile = () => {
     const { user } = useParams()
-    const currentUser = localStorage.getItem('user')
+    const currentUser = Cookies.get('user')
     const history = useHistory()
 
     const [ profileInfo, { data: profileData } ] = useMutation(USER_PROFILE_INFO_MUTATION)
@@ -54,18 +55,23 @@ const Profile = () => {
 
     useEffect(() => {
         if (updateData !== undefined && updateData.profileUpdate.message === 'Success') {
-            localStorage.removeItem('user')
-            localStorage.removeItem('token')
             history.push('/login')
             window.location.reload(false)
         }
     }, [updateData])
 
-    const handleOnSubmit = () => {
-        profileUpdate({ variables: { 
-            user: user, newUser: usernameInput,
-            newEmail: emailInput, image: profileImage }
-        })
+    const handleOnSubmit = (event) => {
+        //if user hit enter or button
+        if (event.key === 'Enter' || event.target.tagName === 'FORM') {
+            profileUpdate({ variables: { 
+                user: user, newUser: usernameInput,
+                newEmail: emailInput, image: profileImage }
+            })
+
+            //remove user info
+            Cookies.remove('user')
+            Cookies.remove('token')
+        }
     }
 
     const onImageChange = (image) => {
@@ -99,7 +105,7 @@ const Profile = () => {
                         <div className="form-group">
                             <p className="profile-info-text">Profile Info</p>
                             <hr className="mb-4" />
-                            <Form>
+                            <Form onKeyPress={handleOnSubmit} onSubmit={handleOnSubmit}>
                                 <Form.Field>
                                     <label>Username</label>
                                     <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} placeholder='Username' />
@@ -113,8 +119,7 @@ const Profile = () => {
                                     {/*User can choose between images*/}
                                     <ProfileImage userImage={profileData.profileInfo.profile.image} onImageChange={onImageChange} />
                                 </Form.Field>
-                                <Button onClick={handleOnSubmit} className="submit-button" type='button' primary>Update</Button>
-                                {/*<Button className="ml-3" color='red'>Change Password</Button>*/}
+                                <Button className="submit-button" type='submit' primary>Update</Button>
                             </Form>
                         </div>
                     ) : null }

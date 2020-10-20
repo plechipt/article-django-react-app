@@ -2,12 +2,12 @@ import React from 'react'
 import { Comment } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { REPLY_DELETE_MUTATION } from '../Api/reply'
+import Cookies from 'js-cookie'
 
-const DEFAULT_ICON = 'https://react.semantic-ui.com/images/avatar/small/matt.jpg'
 const PATH_TO_PICTURES = 'Profiles/media/profile_pictures'
 
 const CustomReply = ({ id, content, posted, username, image }) => {
-    const user = localStorage.getItem('user')
+    const user = Cookies.get('user')
     const [ replyDelete ] = useMutation(REPLY_DELETE_MUTATION)
 
     const handleOnDelete = () => {

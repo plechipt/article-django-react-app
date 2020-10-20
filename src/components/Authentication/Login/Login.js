@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
+import Cookies from 'js-cookie'
 
 import { USER_LOGIN_MUTATION, USER_CHECK_PROFILE_MUTATION } from '../../Api/user'
 import './Login.css'
@@ -32,21 +33,24 @@ const Login = () => {
             if (loginData.tokenAuth.success === true) {
                 const token = loginData.tokenAuth.token
 
-                localStorage.setItem('user', usernameInput)
-                localStorage.setItem('token', token)
+                Cookies.set('user', usernameInput)
+                Cookies.set('token', token)
 
                 //if user doesnt have profile -> create new one
                 checkUserProfile({ variables: { user: usernameInput }})
-                
+        
                 window.location.reload(false);
             }
         }
     }, [loginData])
    
-    const handleOnSubmit = () => {
-        loginUser({ variables: {
-            username: usernameInput, password: passwordInput
-        }})
+    const handleOnSubmit = (event) => {
+        //if username and password are filled and user hit enter or create button
+        if ((usernameInput !== '' && passwordInput !== '') && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
+            loginUser({ variables: {
+                username: usernameInput, password: passwordInput
+            }})
+        }
     }
     
     //Check if username and password was filled
@@ -71,7 +75,7 @@ const Login = () => {
                     header="Please, enter valid credentials"
                 />
             ) : null }
-            <Form>
+            <Form onSubmit={handleOnSubmit}>
                 <Form.Field>
                     <label>Username</label>
                     <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} placeholder='Username' />
@@ -85,9 +89,9 @@ const Login = () => {
                 </Form.Field>
                 {/*If both fields were filled -> show undisabled button*/}
                 {(allowButton) ? (
-                    <Button onClick={handleOnSubmit} className="submit-button" type='button' primary>Login</Button>
+                    <Button className="submit-button" type='submit' primary>Login</Button>
                 ) : (
-                    <Button disabled onClick={handleOnSubmit} className="submit-button" type='button' primary>Login</Button>
+                    <Button disabled className="submit-button" type='submit' primary>Login</Button>
                 )}
             </Form>
         </div>

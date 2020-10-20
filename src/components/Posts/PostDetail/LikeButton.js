@@ -1,11 +1,12 @@
 import React from 'react'
 import { Button, Icon, Label } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
+import Cookies from 'js-cookie'
 
 import { POST_LIKE_MUTATION, POST_UNLIKE_MUTATION } from '../../Api/post'
 
 const LikeButton = ({ id, likes, detailData }) => {
-    const user = localStorage.getItem('user')
+    const user = Cookies.get('user')
     const { findPost: { post: { likes: usersLikes }}} = detailData
 
     const [ postLike ] = useMutation(POST_LIKE_MUTATION)

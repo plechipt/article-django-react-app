@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { Button } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import { POST_DELETE_MUTATION } from '../../Api/post'
 import DeleteModal from './DeleteModal'
 
 const EditDeleteButtons = ({ id, detailData }) => {
-    const user = localStorage.getItem('user')
+    const user = Cookies.get('user')
     const history = useHistory()
 
     const [ open, setOpen ] = useState(false)

@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory, useParams } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import { POST_EDIT_MUTATION, POST_FIND_MUTATION } from '../Api/post' 
 
 const PostEdit = () => {    
     const { id } = useParams()
     const history = useHistory()
-    const user = localStorage.getItem('user')
+    const user = Cookies.get('user')
 
     const [ allowButton, setAllowButton ] = useState(false)
     const [ titleInput, setTitleInput ] = useState('')
@@ -45,9 +46,12 @@ const PostEdit = () => {
         }
     }, [titleInput, textAreaInput])
 
-    const handleOnSubmit = () => {
-        postEdit({ variables: { id: id, title: titleInput, content: textAreaInput } })
-        history.push('/')
+    const handleOnSubmit = (event) => {
+         //if title and textarea are filled and user hit enter or hit create button
+        if ((titleInput !== '' && textAreaInput !== '') && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
+            postEdit({ variables: { id: id, title: titleInput, content: textAreaInput } })
+            history.push('/')
+        }
     }
     
     
@@ -55,7 +59,7 @@ const PostEdit = () => {
         <div className="post-create-container">
             {(detailData && detailData.findPost.message === 'Success' &&
               detailData.findPost.post.user.username === user) ? (
-                <Form>
+                <Form onKeyPress={handleOnSubmit} onSubmit={handleOnSubmit}>
                     <Form.Field>
                         <label>Title</label>
                         <input onChange={event => setTitleInput(event.target.value)} value={titleInput} placeholder="Title" />
@@ -65,9 +69,9 @@ const PostEdit = () => {
                         <textarea onChange={event => setTextAreaInput(event.target.value)} value={textAreaInput} placeholder='Enter something...' />
                     </Form.Field>
                     {(allowButton) ? (
-                        <Button onClick={handleOnSubmit} className="submit-button" type='button' primary>Edit</Button>
+                        <Button className="submit-button" type='submit' primary>Edit</Button>
                     ) : (
-                        <Button disabled onClick={handleOnSubmit} className="submit-button" type='button' primary>Edit</Button>
+                        <Button disabled className="submit-button" type='submit' primary>Edit</Button>
                     )}
                 </Form>
             ) : null }

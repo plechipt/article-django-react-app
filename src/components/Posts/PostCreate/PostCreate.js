@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Button, Form, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import { POST_CREATE_MUTATION, POST_LIST_QUERY } from '../../Api/post'
 
 //import styles from './Posts.module.css'
 
 const PostCreate = () => {
+    const user = Cookies.get('user')
     const history = useHistory()
     
     const [ errorMessage, setErrorMessage ] = useState() 
@@ -19,11 +21,12 @@ const PostCreate = () => {
     const [ createPost, { data: postData } ] = useMutation(POST_CREATE_MUTATION)
   
     
-    const handleOnSubmit = () => {
-        const user = localStorage.getItem('user')
-        
-        createPost({ variables: { title: titleInput, content: textareaInput, user: user }})
-        //history.push('/')
+    const handleOnSubmit = (event) => {
+        //if title and textarea are filled and user hit enter or create button
+        if ((titleInput !== '' && textareaInput !== '') && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
+            createPost({ variables: { title: titleInput, content: textareaInput, user: user }})
+            //history.push('/')
+        }
     }
 
     //check post was successfully created
@@ -62,7 +65,7 @@ const PostCreate = () => {
                     header={errorMessage}
                 />
             ) : null }
-            <Form>
+            <Form onKeyPress={handleOnSubmit} onSubmit={handleOnSubmit}>
                 <Form.Field>
                     <label>Title</label>
                     <input onChange={event => setTitleInput(event.target.value)} value={titleInput} placeholder='Title' />
@@ -76,9 +79,9 @@ const PostCreate = () => {
                     />
                 </Form.Field>
                 {(allowButton) ? (
-                    <Button onClick={handleOnSubmit} className="submit-button" primary>Create</Button>
+                    <Button className="submit-button" type="submit" primary>Create</Button>
                 ) : (
-                    <Button disabled onClick={handleOnSubmit} className="submit-button" primary>Create</Button>
+                    <Button disabled className="submit-button" type="submit" primary>Create</Button>
                 ) }
             </Form>
         </div>

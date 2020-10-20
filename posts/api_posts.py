@@ -198,5 +198,31 @@ class FilterPost(graphene.Mutation):
    def mutate(root, info, input=None):
       #filter post that starts with input in search bar
       filtered_posts = Post.objects.filter(title__startswith=input.title)
+      print(filtered_posts)
 
       return FilterPost(filtered_posts=filtered_posts)
+
+
+#Verify is user has reached daily limit of posts (5 posts max)
+class VerifyLimitInput(graphene.InputObjectType):
+   user = graphene.String()
+
+
+class VerifyLimit(graphene.Mutation):
+   class Arguments:
+      input = VerifyLimitInput(required=True)
+
+   message = graphene.String()
+
+   @staticmethod
+   def mutate(root, info, input=None):
+      message = 'hfghf'
+      #filter post that starts with input in search bar
+      
+      all_posts = Post.objects.all()
+      filtered_posts = Post.objects.filter(user__username=input.user)
+
+      print(filtered_posts, all_posts)
+
+      return VerifyLimit(message=message)
+

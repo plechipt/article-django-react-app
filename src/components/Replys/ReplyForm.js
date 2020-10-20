@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Comment, Form } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
+import Cookies from 'js-cookie'
 
 import { REPLY_ADD_MUTATION } from '../Api/reply'
 import './Replys.css'
 
 const ReplyForm = ({ id, showReplyForm }) => {
-    const user = localStorage.getItem('user')
+    const user = Cookies.get('user')
 
     const [ replyComment ] = useMutation(REPLY_ADD_MUTATION)
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Comment } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import { COMMENT_DELETE_MUTATION } from '../../Api/comment'
 import ReplyForm from '../../Replys/ReplyForm'
@@ -10,7 +11,7 @@ import ReplysMap from '../../Replys/ReplysMap'
 const PATH_TO_PICTURES = 'Profiles/media/profile_pictures'
 
 const CustomComment = ({ id, replys, content, posted, username, image }) => {
-    const user = localStorage.getItem('user')
+    const user = Cookies.get('user')
     const [ commentDelete ] = useMutation(COMMENT_DELETE_MUTATION)
     const [ showReplyForm, setShowReplyForm ] = useState(false)
 

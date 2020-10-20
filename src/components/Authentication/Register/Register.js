@@ -51,11 +51,16 @@ const Register = () => {
     }
   }, [data])
   
-  const handleOnClick = () => {
-    registerUser({ variables: {
-      username: usernameInput, email: emailInput,
-      password1: passwordInput, password2: passwordConfirmInput
-    }})
+  const handleOnClick = (event) => {
+    //if username and email and password and confirm passwowrd are filled and user hit enter or create button
+    if (
+      (usernameInput !== '' && emailInput && passwordInput !== '' && passwordConfirmInput !== '')
+      && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
+        registerUser({ variables: {
+          username: usernameInput, email: emailInput,
+          password1: passwordInput, password2: passwordConfirmInput
+      }})
+    }
   }
   
   //check if username, email, password and 2nd password were filled
@@ -83,7 +88,7 @@ const Register = () => {
           list={message.text}
         />
         ) : null }
-      <Form>
+      <Form onSubmit={handleOnClick}>
         <Form.Field>
           <label>Username</label>
           <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} placeholder='Username' />
@@ -105,9 +110,9 @@ const Register = () => {
         </Form.Field>
         {/*If both fields were filled -> show undisabled button*/}
         {(allowButton) ? (
-          <Button onClick={handleOnClick} className="submit-button" type='button' primary>Register</Button>
+          <Button className="submit-button" type='submit' primary>Register</Button>
         ) : (
-          <Button disabled onClick={handleOnClick} className="submit-button" type='button' primary>Register</Button>
+          <Button disabled className="submit-button" type='submit' primary>Register</Button>
         )}
       </Form>
     </div>

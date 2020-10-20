@@ -1,9 +1,10 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { Popup } from 'semantic-ui-react'
+import Cookies from 'js-cookie'
 
 const Message = ({ id, content, messaged, username }) => {
-    const user = localStorage.getItem('user')
+    const user = Cookies.get('user')
     const { chatUser } = useParams()
 
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
+import Cookies from 'js-cookie'
 
 import './App.css'
 import { USER_REFRESH_TOKEN_MUTATION } from './components/Api/user'
@@ -27,13 +28,13 @@ import MessagesContainer from './components/Messages/Messages/MessagesContainer'
 
 function App () {
   const history = useHistory()
-  const user = localStorage.getItem('user')
-  const token = localStorage.getItem('token')
+  const user = Cookies.get('user')
+  const token = Cookies.get('token')
   const [ allowUserToEnter, setAllowUserToEnter ]= useState(false)
 
   const [ verifyToken, { data: tokenData }] = useMutation(USER_REFRESH_TOKEN_MUTATION)
 
-  //verify user's token from localStorage
+  //verify user's token from cookies
   useEffect(() => {
     const tokenVerifycation = () => {
       if (token) {
@@ -67,7 +68,7 @@ function App () {
       <div>
         {(tokenData) ? (
           <div>
-            {/*check if verification was successfull and user from localStorage is same from backend*/}
+            {/*check if verification was successfull and user from cookies is same from backend*/}
             {(allowUserToEnter) ? (
               <Switch>
                 <Route path="/users" component={() => <Users />} />

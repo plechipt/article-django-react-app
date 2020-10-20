@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { useParams } from 'react-router-dom'
 import { Icon } from 'semantic-ui-react'
+import Cookies from 'js-cookie'
 
 import { MESSAGE_CREATE_MUTATION } from '../Api/message'
 
 const MessageCreate = () => {
-    const user = localStorage.getItem('user')
+    const user = Cookies.get('user')
     const { chatUser } = useParams()
 
     const [ messageInput, setMessageInput ] = useState('')
