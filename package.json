@@ -29,7 +29,7 @@
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.1.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.3",
+    "react-scripts": "^3.4.4",
     "semantic-ui-css": "^2.2.14",
     "semantic-ui-react": "^1.2.1"
   },

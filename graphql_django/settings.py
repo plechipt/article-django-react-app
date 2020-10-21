@@ -27,7 +27,13 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['article-django-react-app.herokuapp.com', '127.0.0.1:8000', '127.0.0.1', 'localhost:3000']
+ALLOWED_HOSTS = [
+    'article-django-react-app.herokuapp.com',
+    '127.0.0.1:8000',
+    '127.0.0.1',
+    'localhost:3000',
+    'localhost:3001',
+]
 
 #database
 DATABASES = {

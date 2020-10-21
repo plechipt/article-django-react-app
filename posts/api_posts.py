@@ -216,13 +216,17 @@ class VerifyLimit(graphene.Mutation):
 
    @staticmethod
    def mutate(root, info, input=None):
-      message = 'hfghf'
+      message = ''
+
       #filter post that starts with input in search bar
-      
-      all_posts = Post.objects.all()
       filtered_posts = Post.objects.filter(user__username=input.user)
 
-      print(filtered_posts, all_posts)
+      #if user hasnt reach his maximum
+      if filtered_posts.count() < 5:
+         message = 'Success'
 
+      else:
+         message = 'You have reached your maximum posts per day!'
+      
       return VerifyLimit(message=message)
 
