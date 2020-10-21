@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
-import { POST_CREATE_MUTATION, POST_VERIFY_LIMIT_MUTATION } from '../../Api/post'
+import { POST_CREATE_MUTATION } from '../../Api/post'
 
 //import styles from './Posts.module.css'
 
@@ -19,23 +19,15 @@ const PostCreate = () => {
     const [ textareaInput, setTextareaInput ] = useState('')
 
     const [ createPost, { data: postData }] = useMutation(POST_CREATE_MUTATION)
-    const [ limitVerify, { data: limitData }] = useMutation(POST_VERIFY_LIMIT_MUTATION)
     
     const handleOnSubmit = (event) => {
-        limitVerify({ variables: { user: user } })
         //if title and textarea are filled and user hit enter or create button
         if ((titleInput !== '' && textareaInput !== '') && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
             createPost({ variables: { title: titleInput, content: textareaInput, user: user }})
         }
     }
 
-    useEffect(() => {
-        if (limitData) {
-            console.log(limitData)
-        }
-    }, [limitData])
-
-    //check post was successfully created
+    //check if post was successfully created
     useEffect(() => {
         if (postData) {
             const message = postData.addPost.message
@@ -67,8 +59,9 @@ const PostCreate = () => {
             {errorMessage ? (
                 <Message
                     className="error-message-container"
-                    error
-                    header={errorMessage}
+                    error       
+                    header="There was some errors with your submission"
+                    list={errorMessage}
                 />
             ) : null }
             <Form onKeyPress={handleOnSubmit} onSubmit={handleOnSubmit}>

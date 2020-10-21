@@ -18,7 +18,6 @@ from users.api_profiles import (
 from posts.api_posts import (
    FindPost, AddPost, DeletePost, EditPost,
    LikePost, UnlikePost, FilterPost,
-   VerifyLimit,
    Post, PostType, 
 )
 
@@ -43,7 +42,6 @@ class Mutation(AuthMutation, graphene.ObjectType):
    like_post = LikePost.Field()
    unlike_post = UnlikePost.Field()
    post_filter = FilterPost.Field()
-   limit_verify = VerifyLimit.Field()
    comment_post = PostComment.Field()
    comment_delete = DeleteComment.Field()
    reply_comment = ReplyComment.Field()

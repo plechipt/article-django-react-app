@@ -125,10 +125,3 @@ export const POST_FILTER_MUTATION = gql`
     }
 `
 
-export const POST_VERIFY_LIMIT_MUTATION = gql`
-    mutation limitVerify ($user: String!) {
-        limitVerify(input: {user: $user}) {
-            message
-        }
-    }
-`

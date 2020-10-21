@@ -55,11 +55,18 @@ class AddPost(graphene.Mutation):
    def mutate(root, info, input=None):
       message = ''
       user = CustomUser.objects.get(username=input.user)
+      today = datetime.datetime.now().strftime('%d %B %Y')
+
+      #filter posts that belongs to user and are posted today
+      filtered_posts = Post.objects.filter(user__username=input.user, posted=today)
 
       #check if title is under 100 chars
       if len(input.title) > 100:
          message = 'Title has more than 100 characters'
          return AddPost(message=message)
+
+      elif filtered_posts.count() > 5:
+         message += 'You have reached your maximum posts per day!'
 
       #create date when was the post posted
       posted = datetime.datetime.now().strftime('%d %B %Y')
@@ -201,32 +208,3 @@ class FilterPost(graphene.Mutation):
       print(filtered_posts)
 
       return FilterPost(filtered_posts=filtered_posts)
-
-
-#Verify is user has reached daily limit of posts (5 posts max)
-class VerifyLimitInput(graphene.InputObjectType):
-   user = graphene.String()
-
-
-class VerifyLimit(graphene.Mutation):
-   class Arguments:
-      input = VerifyLimitInput(required=True)
-
-   message = graphene.String()
-
-   @staticmethod
-   def mutate(root, info, input=None):
-      message = ''
-
-      #filter post that starts with input in search bar
-      filtered_posts = Post.objects.filter(user__username=input.user)
-
-      #if user hasnt reach his maximum
-      if filtered_posts.count() < 5:
-         message = 'Success'
-
-      else:
-         message = 'You have reached your maximum posts per day!'
-      
-      return VerifyLimit(message=message)
-
