@@ -61,7 +61,7 @@ class AddPost(graphene.Mutation):
       filtered_posts = Post.objects.filter(user__username=input.user, posted=today)
 
       #if boths problems
-      if len(input.title) > 100 and filtered_posts.count() > 5:
+      if len(input.title) > 100 and filtered_posts.count() > 4:
          message += 'Title has more than 100 characters and you have reached your maximum posts per day!'
          return AddPost(message=message)
 
@@ -71,7 +71,7 @@ class AddPost(graphene.Mutation):
          return AddPost(message=message)
 
       #check if user hasn't reached more than 5 posts per day
-      elif filtered_posts.count() > 5:
+      elif filtered_posts.count() > 4:
          message += 'You have reached your maximum posts per day!'
          return AddPost(message=message)
 
