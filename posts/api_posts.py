@@ -60,13 +60,20 @@ class AddPost(graphene.Mutation):
       #filter posts that belongs to user and are posted today
       filtered_posts = Post.objects.filter(user__username=input.user, posted=today)
 
-      #check if title is under 100 chars
-      if len(input.title) > 100:
-         message = 'Title has more than 100 characters'
+      #if boths problems
+      if len(input.title) > 100 and filtered_posts.count() > 5:
+         message += 'Title has more than 100 characters and you have reached your maximum posts per day!'
          return AddPost(message=message)
 
+      #check if title is under 100 chars
+      elif len(input.title) > 100:
+         message = 'Title has more than 100 characters '
+         return AddPost(message=message)
+
+      #check if user hasn't reached more than 5 posts per day
       elif filtered_posts.count() > 5:
          message += 'You have reached your maximum posts per day!'
+         return AddPost(message=message)
 
       #create date when was the post posted
       posted = datetime.datetime.now().strftime('%d %B %Y')

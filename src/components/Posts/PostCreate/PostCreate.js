@@ -61,7 +61,7 @@ const PostCreate = () => {
                     className="error-message-container"
                     error       
                     header="There was some errors with your submission"
-                    list={errorMessage}
+                    list={[errorMessage]}
                 />
             ) : null }
             <Form onKeyPress={handleOnSubmit} onSubmit={handleOnSubmit}>
