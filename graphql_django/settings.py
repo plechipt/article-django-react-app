@@ -13,6 +13,7 @@ import os
 from graphql_django.files.basic import *
 from graphql_django.files.development import *
 from graphql_django.files.graphql import *
+from graphql_django.files.production import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
@@ -27,22 +28,18 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = [
-    'article-django-react-app.herokuapp.com',
-    '127.0.0.1:8000',
-    '127.0.0.1',
-    'localhost:3000',
-    'localhost:3001',
-]
 
 #database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': 5432,
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD')
     }
 }
-
 
 '''
 Connect frontend on backend

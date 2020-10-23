@@ -20,6 +20,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ALLOWED_HOSTS = [
+    'article-django-react-app.herokuapp.com',
+    '127.0.0.1:8000',
+    '127.0.0.1',
+    'localhost:3000',
+    'localhost:3001',
+]
+
 #allow all websites to fetch api
 #CORS_ORIGIN_ALLOW_ALL = True
 
