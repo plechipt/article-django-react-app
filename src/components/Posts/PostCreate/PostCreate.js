@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { Button, Form, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
-import Cookies from 'js-cookie'
 
 import { POST_CREATE_MUTATION } from '../../Api/post'
 
 //import styles from './Posts.module.css'
 
-const PostCreate = () => {
-    const user = Cookies.get('user')
+const PostCreate = ({ currentUser }) => {
     const history = useHistory()
     
     const [ errorMessage, setErrorMessage ] = useState() 
@@ -23,7 +21,7 @@ const PostCreate = () => {
     const handleOnSubmit = (event) => {
         //if title and textarea are filled and user hit enter or create button
         if ((titleInput !== '' && textareaInput !== '') && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
-            createPost({ variables: { title: titleInput, content: textareaInput, user: user }})
+            createPost({ variables: { title: titleInput, content: textareaInput, user: currentUser }})
         }
     }
 

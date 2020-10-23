@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { useParams } from 'react-router-dom'
-import Cookies from 'js-cookie'
 
 import { MESSAGE_LIST_MUTATION } from '../../Api/message'
 import MessagesMap from './MessagesMap'
 import MessageCreate from '../MessageCreate'
 
-const MessagesContainer = () => {
-    const user = Cookies.get('user')
+const MessagesContainer = ({ currentUser }) => {
     const { chatUser } = useParams()
 
     const [ queryUserMessages, { data: messagesData }] = useMutation(MESSAGE_LIST_MUTATION)
 
     //query all chat room messages
     useEffect(() => {
-        queryUserMessages({ variables: {user: user, chatUser: chatUser} })
+        queryUserMessages({ variables: {user: currentUser, chatUser: chatUser} })
     }, [chatUser])
 
     
@@ -26,9 +24,9 @@ const MessagesContainer = () => {
             {(messagesData && messagesData.queryUserMessages.message === 'Success') ? (
                 <>
                     {messagesData && messagesData.queryUserMessages.messages.length !== 0 ? (
-                        <MessagesMap messagesData={messagesData} />
+                        <MessagesMap messagesData={messagesData} currentUser={currentUser} />
                     ) : null }
-                    <MessageCreate />
+                    <MessageCreate currentUser={currentUser} />
                 </>
             ) : null}
             </div>

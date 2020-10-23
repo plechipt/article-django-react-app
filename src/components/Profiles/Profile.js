@@ -11,9 +11,8 @@ import './Profile.css'
 
 const PATH_TO_PICTURES = 'media/profile_pictures'
 
-const Profile = () => {
+const Profile = ({ currentUser }) => {
     const { user } = useParams()
-    const currentUser = Cookies.get('user')
     const history = useHistory()
 
     const [ profileInfo, { data: profileData } ] = useMutation(USER_PROFILE_INFO_MUTATION)
@@ -69,7 +68,6 @@ const Profile = () => {
             })
 
             //remove user info
-            Cookies.remove('user')
             Cookies.remove('token')
         }
     }
@@ -99,7 +97,7 @@ const Profile = () => {
                             <h2 className="account-heading">{profileData.profileInfo.profile.user.username}</h2>
                             <p className="text-secondary">{profileData.profileInfo.profile.user.email}</p>
                         </div>
-                        <ProfileBodyButtons profileData={profileData} />
+                        <ProfileBodyButtons profileData={profileData} currentUser={currentUser} />
                     </div>
                     {(user === currentUser) ? (
                         <div className="form-group">

@@ -1,30 +1,28 @@
 import React from 'react'
 import { Button, Icon, Label } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
-import Cookies from 'js-cookie'
 
 import { POST_LIKE_MUTATION, POST_UNLIKE_MUTATION } from '../../Api/post'
 
-const LikeButton = ({ id, likes, detailData }) => {
-    const user = Cookies.get('user')
+const LikeButton = ({ id, likes, detailData, currentUser }) => {
     const { findPost: { post: { likes: usersLikes }}} = detailData
 
     const [ postLike ] = useMutation(POST_LIKE_MUTATION)
     const [ unlikePost ] = useMutation(POST_UNLIKE_MUTATION)
 
     const handleOnLike = () => {
-        postLike({ variables: { id: id, user: user } })
+        postLike({ variables: { id: id, user: currentUser } })
         window.location.reload(false); //reset site
     }
 
     const handleOnUnlike = () => {
-        unlikePost({ variables: { id: id, user: user } })
+        unlikePost({ variables: { id: id, user: currentUser } })
         window.location.reload(false); //reset site
     }
 
     //check if user has like this post
     const userHasLikedPost = usersLikes.some(({ username }) => {
-        return username === user
+        return username === currentUser
     })
 
 

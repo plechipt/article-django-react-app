@@ -2,13 +2,11 @@ import React, { useState } from 'react'
 import { Button } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
-import Cookies from 'js-cookie'
 
 import { POST_DELETE_MUTATION } from '../../Api/post'
 import DeleteModal from './DeleteModal'
 
-const EditDeleteButtons = ({ id, detailData }) => {
-    const user = Cookies.get('user')
+const EditDeleteButtons = ({ id, detailData, currentUser }) => {
     const history = useHistory()
 
     const [ open, setOpen ] = useState(false)
@@ -33,7 +31,7 @@ const EditDeleteButtons = ({ id, detailData }) => {
     return (
         <>  
             {/*If post it is user's post -> show edit and delete button*/}
-            {(user === detailData.findPost.post.user.username) ? (
+            {(currentUser === detailData.findPost.post.user.username) ? (
                 <>
                     <Button onClick={handleOnEdit} className="post-detail-edit-button" color="teal">Edit</Button>
                     <Button onClick={() => handleAction(true)} className="post-detail-delete-button" color="red">Delete</Button>

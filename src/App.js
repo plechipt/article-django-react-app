@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch, useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
-import Cookies from 'js-cookie'
+import Cookies, { set } from 'js-cookie'
 
 import './App.css'
 import { USER_REFRESH_TOKEN_MUTATION } from './components/Api/user'
@@ -28,8 +28,10 @@ import MessagesContainer from './components/Messages/Messages/MessagesContainer'
 
 function App () {
   const history = useHistory()
-  const user = Cookies.get('user')
   const token = Cookies.get('token')
+
+  //current logged in user
+  const [ currentUser, setCurrentUser ] = useState('')
   const [ allowUserToEnter, setAllowUserToEnter ]= useState(false)
 
   const [ verifyToken, { data: tokenData }] = useMutation(USER_REFRESH_TOKEN_MUTATION)
@@ -43,14 +45,14 @@ function App () {
     }
     tokenVerifycation()
   }, [token])
-
   
   useEffect(() => {
     if (tokenData) {
       const { verifyToken: { success, payload }} = tokenData
 
       //if success is true and the user from backend is same in frontend
-      if (success === true && payload.username === user) {
+      if (success === true) {
+        setCurrentUser(payload.username)
         setAllowUserToEnter(true)
       }
 
@@ -64,7 +66,7 @@ function App () {
   
   return (
     <div className="App">
-      <Navbar />
+      <Navbar currentUser={currentUser} />
       <div>
         {(tokenData) ? (
           <div>
@@ -72,11 +74,11 @@ function App () {
             {(allowUserToEnter) ? (
               <Switch>
                 <Route path="/users" component={() => <Users />} />
-                <Route path="/message/:chatUser" component={() => <MessagesContainer />} />
-                <Route path="/profile/:user" component={() => <Profile />} />
-                <Route path="/editPost/:id" component={() => <PostEdit />} />
-                <Route path="/createPost" component={() => <PostCreate />} />
-                <Route path="/:id" component={() => <PostDetail />} />
+                <Route path="/message/:chatUser" component={() => <MessagesContainer currentUser={currentUser} />} />
+                <Route path="/profile/:user" component={() => <Profile currentUser={currentUser} />} />
+                <Route path="/editPost/:id" component={() => <PostEdit currentUser={currentUser} />} />
+                <Route path="/createPost" component={() => <PostCreate currentUser={currentUser} />} />
+                <Route path="/:id" component={() => <PostDetail currentUser={currentUser} />} />
                 <Route path="/" component={() => <Posts />} />
                 {window.location.pathname === '/api/' ? (
                   <>

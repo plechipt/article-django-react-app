@@ -2,12 +2,10 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { useParams } from 'react-router-dom'
 import { Icon } from 'semantic-ui-react'
-import Cookies from 'js-cookie'
 
 import { MESSAGE_CREATE_MUTATION } from '../Api/message'
 
-const MessageCreate = () => {
-    const user = Cookies.get('user')
+const MessageCreate = ({ currentUser }) => {
     const { chatUser } = useParams()
 
     const [ messageInput, setMessageInput ] = useState('')
@@ -17,7 +15,7 @@ const MessageCreate = () => {
     const handleOnSubmit = (event) => {
         //if user click enter or click message button and enter something to textarea 
         if ((event.key === 'Enter' && messageInput !== '') || event.target.tagName === 'I') {
-            messageCreate({ variables: { user: user, chatUser: chatUser, content: messageInput }})
+            messageCreate({ variables: { user: currentUser, chatUser: chatUser, content: messageInput }})
             setMessageInput('')
             
             //reset site

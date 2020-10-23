@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Comment, Form } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
-import Cookies from 'js-cookie'
 
 import { REPLY_ADD_MUTATION } from '../Api/reply'
 import './Replys.css'
 
-const ReplyForm = ({ id, showReplyForm }) => {
-    const user = Cookies.get('user')
+const ReplyForm = ({ id, showReplyForm, currentUser }) => {
 
     const [ replyComment ] = useMutation(REPLY_ADD_MUTATION)
 
@@ -15,7 +13,7 @@ const ReplyForm = ({ id, showReplyForm }) => {
     const [ allowButton, setAllowButton ] = useState(false)
     
     const handleOnAddReply = () => {
-        replyComment({ variables: { id: id, user: user, content: replyInput } })
+        replyComment({ variables: { id: id, user: currentUser, content: replyInput } })
 
         //reset site
         window.location.reload(false);

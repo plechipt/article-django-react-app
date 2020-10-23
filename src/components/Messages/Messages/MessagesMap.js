@@ -4,7 +4,7 @@ import Message from './Message'
 import '../Messages.css' 
 
 
-const MessagesMap = ({ messagesData: { queryUserMessages: { messages }}}) => {
+const MessagesMap = ({ messagesData: { queryUserMessages: { messages }}, currentUser }) => {
 
     return (
         <div className="messages-container">
@@ -14,6 +14,7 @@ const MessagesMap = ({ messagesData: { queryUserMessages: { messages }}}) => {
                         key={id} 
                         id={id}
                         username={username}
+                        currentUser={currentUser}
                         content={content}
                         messaged={messaged}
                     />

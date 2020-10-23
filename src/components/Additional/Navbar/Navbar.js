@@ -5,8 +5,7 @@ import Cookies from 'js-cookie'
 
 import './Navbar.css'
 
-const Navbar = () => {
-    const user = Cookies.get('user')
+const Navbar = ({ currentUser }) => {
     const token = Cookies.get('token')
 
     const history = useHistory()
@@ -18,7 +17,6 @@ const Navbar = () => {
 
     const handleOnLogout = () => {
         Cookies.remove('token')
-        Cookies.remove('user') 
         history.push('/login')
         //reset site
         window.location.reload(false);
@@ -62,7 +60,7 @@ const Navbar = () => {
                                     active={activeItem === "profile"}
                                     onClick={() => {
                                         handleItemClick('profile')
-                                        history.push(`/profile/${user}`)
+                                        history.push(`/profile/${currentUser}`)
                                     }}
                                 />
                                 <Menu.Item

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Comment } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { Link } from 'react-router-dom'
-import Cookies from 'js-cookie'
 
 import { COMMENT_DELETE_MUTATION } from '../../Api/comment'
 import ReplyForm from '../../Replys/ReplyForm'
@@ -10,8 +9,7 @@ import ReplysMap from '../../Replys/ReplysMap'
 
 const PATH_TO_PICTURES = 'Profiles/media/profile_pictures'
 
-const CustomComment = ({ id, replys, content, posted, username, image }) => {
-    const user = Cookies.get('user')
+const CustomComment = ({ id, replys, content, posted, username, currentUser, image }) => {
     const [ commentDelete ] = useMutation(COMMENT_DELETE_MUTATION)
     const [ showReplyForm, setShowReplyForm ] = useState(false)
 
@@ -42,18 +40,18 @@ const CustomComment = ({ id, replys, content, posted, username, image }) => {
                     <Comment.Text>{content}</Comment.Text>
                     <Comment.Actions>
                     <Comment.Action onClick={handleOnReply}>Reply</Comment.Action>
-                    {(user === username) ? (
+                    {(currentUser === username) ? (
                         <Comment.Action onClick={handleOnDelete}>Delete</Comment.Action>
                     ) : null}
                     </Comment.Actions>
                 </Comment.Content>
 
                 {/*Reply form when reply button is clicked*/}
-                <ReplyForm id={id} showReplyForm={showReplyForm} />
+                <ReplyForm id={id} showReplyForm={showReplyForm} currentUser={currentUser} />
 
                 {/*Mapping all replys of comment*/}
                 {(replys) ? (
-                   <ReplysMap replys={replys} /> 
+                   <ReplysMap replys={replys} currentUser={currentUser} /> 
                 ) : null}
             </Comment>
         </div>

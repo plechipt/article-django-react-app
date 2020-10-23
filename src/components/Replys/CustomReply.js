@@ -2,12 +2,10 @@ import React from 'react'
 import { Comment } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { REPLY_DELETE_MUTATION } from '../Api/reply'
-import Cookies from 'js-cookie'
 
 const PATH_TO_PICTURES = 'Profiles/media/profile_pictures'
 
-const CustomReply = ({ id, content, posted, username, image }) => {
-    const user = Cookies.get('user')
+const CustomReply = ({ id, content, posted, username, image, currentUser }) => {
     const [ replyDelete ] = useMutation(REPLY_DELETE_MUTATION)
 
     const handleOnDelete = () => {
@@ -28,7 +26,7 @@ const CustomReply = ({ id, content, posted, username, image }) => {
                         </Comment.Metadata>
                             <Comment.Text>{content}</Comment.Text>
                         <Comment.Actions>
-                            {(user === username) ? (
+                            {(currentUser === username) ? (
                                 <Comment.Action onClick={handleOnDelete}>Delete</Comment.Action>
                             ) : null}
                         </Comment.Actions>

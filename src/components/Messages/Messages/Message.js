@@ -1,16 +1,15 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { Popup } from 'semantic-ui-react'
-import Cookies from 'js-cookie'
 
-const Message = ({ id, content, messaged, username }) => {
-    const user = Cookies.get('user')
+const Message = ({ id, content, messaged, username, currentUser }) => {
     const { chatUser } = useParams()
 
 
     return (
         <>
-            {(username !== user) ? (
+            {/*Chat users side*/}
+            {(username === chatUser) ? (
                 <div className="d-flex my-2 mr-auto">
                     <div className="py-3 px-3 rounded-pill chat-user-container message-container">
                         {/*Popup to show date*/}

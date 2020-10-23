@@ -32,8 +32,6 @@ const Login = () => {
             
             if (loginData.tokenAuth.success === true) {
                 const token = loginData.tokenAuth.token
-
-                Cookies.set('user', usernameInput)
                 Cookies.set('token', token)
 
                 //if user doesnt have profile -> create new one

@@ -12,7 +12,7 @@ import EditDeleteButtons from './EditDeleteButtons'
 
 const DEFAULT_IMAGE = 'https://miro.medium.com/max/550/1*TxgjUE2uJuiRUVVmE_kU6g.png'
 
-const PostDetail = () => {
+const PostDetail = ({ currentUser }) => {
     const { id } = useParams()
     
     //set likes temporarily on frontend
@@ -53,16 +53,16 @@ const PostDetail = () => {
 
                         {/*Includes like, edit and delete buttons*/}
                         <div className="post-detail-buttons-container">
-                            <LikeButton id={id} likes={likes} detailData={detailData} />
-                            <EditDeleteButtons id={id} detailData={detailData} />
+                            <LikeButton id={id} likes={likes} detailData={detailData} currentUser={currentUser} />
+                            <EditDeleteButtons id={id} detailData={detailData} currentUser={currentUser} />
                         </div>
                         
                         <div className="comments-container">
                             {/*Map all comments from post*/}
-                            <CommentsMap detailData={detailData} />
+                            <CommentsMap detailData={detailData} currentUser={currentUser} />
 
                             {/*Reply form for comments*/}
-                            <CommentCreateForm id={id} />
+                            <CommentCreateForm id={id} currentUser={currentUser} />
                         </div>
                     </Item.Content>
                 </Item>

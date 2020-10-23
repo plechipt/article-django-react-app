@@ -5,7 +5,7 @@ import CustomComment  from './CustomComment'
 import '../Comments.css'
 
 //map all comments
-const CommentsMap = ({ detailData }) => {
+const CommentsMap = ({ detailData, currentUser }) => {
     const { findPost: { post: { commentSet } } } = detailData
 
     
@@ -24,6 +24,7 @@ const CommentsMap = ({ detailData }) => {
                             content={content}
                             posted={posted}
                             username={username}
+                            currentUser={currentUser}
                             image={image}
                         />
                     )
