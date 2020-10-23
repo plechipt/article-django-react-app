@@ -13,7 +13,6 @@ import os
 from graphql_django.files.basic import *
 from graphql_django.files.development import *
 from graphql_django.files.graphql import *
-from graphql_django.files.production import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
@@ -35,7 +34,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DATABASE_NAME'),
         'HOST': os.environ.get('DATABASE_HOST'),
-        'PORT': 5432,
+        'PORT': os.environ.get('DATABASE_PORT'),
         'USER': os.environ.get('DATABASE_USER'),
         'PASSWORD': os.environ.get('DATABASE_PASSWORD')
     }
