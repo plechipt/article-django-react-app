@@ -1,6 +1,29 @@
 # Article-Django-React-App
-Web app for posting articles
 
-https://article-django-react-app.herokuapp.com/
-<!-- BLOG-POST-LIST:END -->
-<!-- BLOG-POST-LIST:START -->
+## Overview
+---
+Article app with decent features
+
+#### **Link: https://article-django-react-app.herokuapp.com/**
+
+<br>
+
+## Features
+---
+### Users
+- Authentication
+- Listing all users
+### Posts
+- Searching for Posts
+- Creating Posts
+- Editing Posts
+- Deleting Posts
+- Liking Posts
+- Commenting Posts
+- Deleting Comments
+- Replying Comments
+- Deleting Replys
+### Profile
+- Following Users
+- Messaging Users
+- Updating Profile
