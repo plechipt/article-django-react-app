@@ -5,13 +5,19 @@ Article app with decent features
 
 #### **Link: https://article-django-react-app.herokuapp.com/**
 
-<br>
+<br/>
+
+## Technologies used
+- On backend Django with GraphQL
+- On frontend React
+
+<br/>
 
 ## Features
-### Users
+#### Users
 - Authentication
 - Listing all users
-### Posts
+#### Posts
 - Searching for Posts
 - Creating Posts
 - Editing Posts
@@ -21,7 +27,7 @@ Article app with decent features
 - Deleting Comments
 - Replying Comments
 - Deleting Replys
-### Profile
+#### Profile
 - Following Users
 - Messaging Users
 - Updating Profile
