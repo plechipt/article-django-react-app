@@ -1,7 +1,6 @@
 # Article-Django-React-App
 
 ## Overview
----
 Article app with decent features
 
 #### **Link: https://article-django-react-app.herokuapp.com/**
@@ -9,7 +8,6 @@ Article app with decent features
 <br>
 
 ## Features
----
 ### Users
 - Authentication
 - Listing all users
