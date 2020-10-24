@@ -28,9 +28,6 @@ ALLOWED_HOSTS = [
     'localhost:3001',
 ]
 
-#allow all websites to fetch api
-#CORS_ORIGIN_ALLOW_ALL = True
-
 #allowed urls which can access api
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
