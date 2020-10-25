@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
     'localhost:5000',
 ]
 
+#
 #allowed urls which can access api
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
