@@ -17,11 +17,6 @@ from graphql_django.files.graphql import *
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback')
 
