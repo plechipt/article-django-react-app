@@ -6,6 +6,22 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+django = "*"
+ipython = "*"
+django-extensions = "*"
+django-cors-headers = "*"
+graphene-django = "*"
+graphene = "*"
+django-graphql-jwt = "*"
+django-graphql-auth = "*"
+pillow = "*"
+django-channels = "*"
+graphene-subscriptions = "*"
+django-channels-graphql-ws = "*"
+whitenoise = "*"
+gunicorn = "*"
+dj-database-url = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.8"
