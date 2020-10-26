@@ -21,7 +21,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback')
 
 DEBUG = True
 
-#database
+#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
