@@ -33,7 +33,11 @@ DATABASES = {
     }
 }
 
-#postgres://wtcvdvsvayavgs:f88113c3033ce9b119e343cf8dfaa88f198a383c9adc3e02a300021151bdd1ef@ec2-54-217-236-206.eu-west-1.compute.amazonaws.com:5432/dq74p9cqbnkuo
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
+
 '''
 Connect frontend on backend
 '''
@@ -56,6 +60,7 @@ TEMPLATES = [
         'APP_DIRS': True,
     },
 ]
+
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
