@@ -21,7 +21,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback')
 
 DEBUG = True
 
-#databases
+#database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -33,6 +33,7 @@ DATABASES = {
     }
 }
 
+#postgres://wtcvdvsvayavgs:f88113c3033ce9b119e343cf8dfaa88f198a383c9adc3e02a300021151bdd1ef@ec2-54-217-236-206.eu-west-1.compute.amazonaws.com:5432/dq74p9cqbnkuo
 '''
 Connect frontend on backend
 '''

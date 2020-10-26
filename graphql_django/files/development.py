@@ -24,6 +24,7 @@ ALLOWED_HOSTS = [
     'article-django-react-app.herokuapp.com',
     '127.0.0.1:8000',
     '127.0.0.1',
+    'localhost',
     'localhost:3000',
     'localhost:3001',
     'localhost:5000',
@@ -32,6 +33,7 @@ ALLOWED_HOSTS = [
 #
 #allowed urls which can access api
 CORS_ORIGIN_WHITELIST = (
+    'http://localhost',
     'http://localhost:3000',
     'http://localhost:3001',
     'http://localhost:5000',
