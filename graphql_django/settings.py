@@ -19,7 +19,7 @@ SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback')
 
-DEBUG = True
+DEBUG = False
 
 #database
 DATABASES = {
