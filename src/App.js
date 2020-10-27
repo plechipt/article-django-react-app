@@ -80,11 +80,6 @@ function App () {
                 <Route path="/createPost" component={() => <PostCreate currentUser={currentUser} />} />
                 <Route path="/:id" component={() => <PostDetail currentUser={currentUser} />} />
                 <Route path="/" component={() => <Posts />} />
-                {window.location.pathname === '/api/' ? (
-                  <>
-                    {history.push('/')}
-                  </>
-                ) : null}
               </Switch>  
             ) : (
               <h1 align="center">Failed to connect</h1>
@@ -92,8 +87,8 @@ function App () {
           </div>
         ) : (
           <Switch>
-            <Route path="/login" component={() => <Login />} />
             <Route path="/register" component={() => <Register />} />
+            <Route path="/" component={() => <Login />} />
           </Switch>
         ) }
       </div>
