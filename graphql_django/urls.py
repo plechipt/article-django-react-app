@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+import os
 from django.contrib import admin
 from django.urls import path, re_path
 from django.conf import settings
@@ -24,10 +26,11 @@ from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
 from api.schema import schema
 
+print(os.environ.get('ADMIN_PATH'))
 
 urlpatterns = [
     path('api/', csrf_exempt(GraphQLView.as_view(schema=schema, graphiql=False))),
-    path('admin/', admin.site.urls),
+    path(os.environ.get('ADMIN_PATH'), admin.site.urls),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ]
 
