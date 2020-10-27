@@ -26,8 +26,10 @@ from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
 from api.schema import schema
 
+ADMIN_PATH = os.environ.get('ADMIN_PATH')
+
 urlpatterns = [
-    path(os.environ.get('ADMIN_PATH'), admin.site.urls),
+    path(f'{ADMIN_PATH}/', admin.site.urls),
     path('api/', csrf_exempt(GraphQLView.as_view(schema=schema, graphiql=False))),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ]
