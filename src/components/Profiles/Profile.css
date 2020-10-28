@@ -13,7 +13,11 @@
 }
 
 .profile-media {
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
+}
+
+.profile-body {
+    margin-left: 2rem !important;
 }
 
 .profile-picture {
@@ -21,6 +25,10 @@
     width: 125px;
     margin-right: 20px;
     margin-bottom: 16px;;
+}
+
+.profile-buttons-container {
+    margin-left: 3rem !important;
 }
 
 .profile-info-text {
@@ -81,5 +89,34 @@
 @media all and (max-width: 767px) {
     .profile-container {
         width: 90% !important;
+    }
+
+    .profile-picture {
+        display: none;
+    }
+
+    .profile-media {
+        margin-bottom: 4rem;
+    }
+}
+
+@media all and (max-width: 420px) {
+    .profile-buttons, .profile-body, .profile-media {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .profile-buttons-container {
+        margin-top: 2rem !important;
+    }
+
+    .profile-buttons-container, .profile-body {
+        margin-left: 0rem !important;
+    }
+
+    .profile-container {
+        padding: 2rem !important;
     }
 }

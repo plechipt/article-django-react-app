@@ -40,10 +40,10 @@ const ProfileBodyButtons = ({ profileData: { profileInfo: { profile } }, current
 
 
     return (        
-        <div className="ml-5">
+        <div className="profile-buttons-container">
             {/*If this is not users profile*/}
             {(currentUser !== usersProfile) ? (
-                <div>
+                <div className="profile-buttons">
                     <Button as='div' labelPosition='right'>
                         {(userIsFollowingProfile) ? (
                             <Button onClick={handleOnUnfollow} color='blue'>

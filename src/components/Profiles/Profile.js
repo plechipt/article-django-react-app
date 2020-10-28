@@ -93,7 +93,7 @@ const Profile = ({ currentUser }) => {
                     ) : null}
                     <div className="media profile-media">
                         <img className="rounded-circle profile-picture" src={require(`./${PATH_TO_PICTURES}/large/${profileData.profileInfo.profile.image}`)} />
-                        <div className="profile-body ml-4">
+                        <div className="profile-body">
                             <h2 className="account-heading">{profileData.profileInfo.profile.user.username}</h2>
                             <p className="text-secondary">{profileData.profileInfo.profile.user.email}</p>
                         </div>

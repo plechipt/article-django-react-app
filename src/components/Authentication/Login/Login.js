@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
+import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 import { USER_LOGIN_MUTATION, USER_CHECK_PROFILE_MUTATION } from '../../Api/user'
 import './Login.css'
 
 const Login = () => {
+    const history = useHistory('')
 
     const [ failedToLogin, setFailedToLogin ] = useState('') 
     const [ allowButton, setAllowButton ] = useState(false)
@@ -36,8 +38,10 @@ const Login = () => {
 
                 //if user doesnt have profile -> create new one
                 checkUserProfile({ variables: { user: usernameInput }})
-        
+                
+                history.push('/')
                 window.location.reload(false);
+                history.push('/')
             }
         }
     }, [loginData])
@@ -63,7 +67,6 @@ const Login = () => {
     }, [usernameInput, passwordInput])
 
 
-
     return (
         <div className="login-container">
             {(failedToLogin !== false && failedToLogin !== '') ? (
@@ -76,11 +79,11 @@ const Login = () => {
             <Form onSubmit={handleOnSubmit}>
                 <Form.Field>
                     <label>Username</label>
-                    <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} placeholder='Username' />
+                    <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} autocomplete="one-time-code" placeholder='Username' />
                 </Form.Field>
                 <Form.Field>
                     <label>Password</label>
-                    <input onChange={event => setPasswordInput(event.target.value)} value={passwordInput} type="password" placeholder='Password' />
+                    <input onChange={event => setPasswordInput(event.target.value)} value={passwordInput} autocomplete="one-time-code" type="password" placeholder='Password' />
                 </Form.Field>
                 <Form.Field>
                     <p className="text-muted">Need an an account? <a href="/register" className="ml-2" >Sign up</a></p>

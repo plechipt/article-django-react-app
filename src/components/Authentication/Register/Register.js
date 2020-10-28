@@ -91,19 +91,19 @@ const Register = () => {
       <Form onSubmit={handleOnClick}>
         <Form.Field>
           <label>Username</label>
-          <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} placeholder='Username' />
+          <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} autocomplete="one-time-code" placeholder='Username' />
         </Form.Field>
         <Form.Field>
           <label>Email</label>
-          <input onChange={event => setEmailInput(event.target.value)} value={emailInput} placeholder='Email' />
+          <input onChange={event => setEmailInput(event.target.value)} value={emailInput} autocomplete="one-time-code" placeholder='Email' />
         </Form.Field>
         <Form.Field>
           <label>Password</label>
-          <input onChange={event => setPasswordInput(event.target.value)} value={passwordInput} type="password" placeholder='Password' />
+          <input onChange={event => setPasswordInput(event.target.value)} value={passwordInput} autocomplete="one-time-code" type="password" placeholder='Password' />
         </Form.Field>
         <Form.Field>
           <label>Confirm Password</label>
-          <input onChange={event => setPasswordConfirmInput(event.target.value)} value={passwordConfirmInput} type="password" placeholder='Confirm Password' />
+          <input onChange={event => setPasswordConfirmInput(event.target.value)} value={passwordConfirmInput} autocomplete="one-time-code" type="password" placeholder='Confirm Password' />
         </Form.Field>
         <Form.Field>
           <p className="text-muted">Already have an account? <a href="/login" className="ml-2" >Sign in</a></p>

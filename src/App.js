@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch, useHistory } from 'react-router-dom'
+import { Route, Switch, useHistory, Redirect } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
-import Cookies, { set } from 'js-cookie'
+import Cookies from 'js-cookie'
 
 import './App.css'
 import { USER_REFRESH_TOKEN_MUTATION } from './components/Api/user'
 
 //Additional Components
+import Welcome from './components/Additional/Welcome/Welcome'
 import Navbar from './components/Additional/Navbar/Navbar'
 import Users from './components/Additional/Users/Users'
 
@@ -27,7 +28,6 @@ import Profile from './components/Profiles/Profile'
 import MessagesContainer from './components/Messages/Messages/MessagesContainer'
 
 function App () {
-  const history = useHistory()
   const token = Cookies.get('token')
 
   //current logged in user
@@ -67,9 +67,9 @@ function App () {
   return (
     <div className="App">
       <Navbar currentUser={currentUser} />
-      <div>
+        <div>
         {(tokenData) ? (
-          <div>
+          <>
             {/*check if verification was successfull and user from cookies is same from backend*/}
             {(allowUserToEnter) ? (
               <Switch>
@@ -84,11 +84,11 @@ function App () {
             ) : (
               <h1 align="center">Failed to connect</h1>
             )}
-          </div>
-        ) : (
+          </>
+        ) : ( 
           <Switch>
             <Route path="/register" component={() => <Register />} />
-            <Route path="/" component={() => <Login />} />
+            <Route path="/login" component={() => <Login />} />
           </Switch>
         ) }
       </div>

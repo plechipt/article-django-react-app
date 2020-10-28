@@ -19,6 +19,6 @@
 
 @media all and (max-width: 1000px) {
     .comments-container {
-        width: 75% !important;
+        width: 85% !important;
     }
 }

@@ -64,7 +64,7 @@
 
 @media all and (max-width: 767px) {
     .messages-and-create-form-container {
-        width: 80% !important;
+        width: 90% !important;
     }
 }
 
