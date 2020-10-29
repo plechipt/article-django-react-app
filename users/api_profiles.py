@@ -82,6 +82,11 @@ class UpdateUser(graphene.Mutation):
    @staticmethod
    def mutate(root, info, input=None):
       message = ''
+      forbidden_chars = [
+         '!','@','#','$','%','^','&','*','(',')','`','/',',','.','',';','[',']'
+         '+','-','>','<','=','\\','*','_','+','{','}',':','"','|','?'
+      ],
+
       user = CustomUser.objects.get(username=input.user)
       profile = Profile.objects.get(user=user)
 
@@ -93,16 +98,20 @@ class UpdateUser(graphene.Mutation):
 
       #if nothing was updated
       if user.username == input.new_user and user.email == input.new_email and input.image == 'none':
-         message = 'You need to change your username or email or image in order to update your profile'
+         message = 'You need to change your username or email or image in order to update your profile!'
 
       #if new_user already exists and users name !== new_user
       elif user_already_exists == True and user.username != input.new_user:
-         message = 'This name is already taken'
+         message = 'This name is already taken!'
 
       #if new_email already exists and users emails !== new_email
       elif email_already_exists == True and user.email != input.new_email:
-         message = 'This email already exists'
-   
+         message = 'This email already exists!'
+
+      #if new_email includes forbidden characters from forbidden_chars variable
+      elif ([char for char in forbidden_chars if char in forbidden_chars] == []) != True:
+         message = 'Name must not include special characters!'
+
       else:
          message = 'Success'
          user.username = input.new_user
