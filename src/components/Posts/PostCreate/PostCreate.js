@@ -31,7 +31,7 @@ const PostCreate = ({ currentUser }) => {
             const message = postData.addPost.message
 
             if (message === 'Success') {
-                history.push('/')
+                history.push('/posts')
             } 
 
             else {

@@ -54,6 +54,7 @@ const Profile = ({ currentUser }) => {
 
     useEffect(() => {
         if (updateData !== undefined && updateData.profileUpdate.message === 'Success') {
+            console.log(updateData)
             history.push('/login')
             window.location.reload(false)
         }

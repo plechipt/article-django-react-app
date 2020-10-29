@@ -34,7 +34,7 @@ const Navbar = ({ currentUser }) => {
                                 active={activeItem === 'home'}
                                 onClick={() => {
                                     handleItemClick('home')
-                                    history.push('/')
+                                    history.push('/posts')
                                 }}
                             />
                             <Menu.Item

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch, useHistory, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import Cookies from 'js-cookie'
 
@@ -7,7 +7,7 @@ import './App.css'
 import { USER_REFRESH_TOKEN_MUTATION } from './components/Api/user'
 
 //Additional Components
-import Welcome from './components/Additional/Welcome/Welcome'
+//import Welcome from './components/Additional/Welcome/Welcome'
 import Navbar from './components/Additional/Navbar/Navbar'
 import Users from './components/Additional/Users/Users'
 
@@ -73,13 +73,13 @@ function App () {
             {/*check if verification was successfull and user from cookies is same from backend*/}
             {(allowUserToEnter) ? (
               <Switch>
+                <Route path="/posts" component={() => <Posts />} />
                 <Route path="/users" component={() => <Users />} />
                 <Route path="/message/:chatUser" component={() => <MessagesContainer currentUser={currentUser} />} />
                 <Route path="/profile/:user" component={() => <Profile currentUser={currentUser} />} />
                 <Route path="/editPost/:id" component={() => <PostEdit currentUser={currentUser} />} />
                 <Route path="/createPost" component={() => <PostCreate currentUser={currentUser} />} />
                 <Route path="/:id" component={() => <PostDetail currentUser={currentUser} />} />
-                <Route path="/" component={() => <Posts />} />
               </Switch>  
             ) : (
               <h1 align="center">Failed to connect</h1>
@@ -88,7 +88,7 @@ function App () {
         ) : ( 
           <Switch>
             <Route path="/register" component={() => <Register />} />
-            <Route path="/login" component={() => <Login />} />
+            <Route path="/" component={() => <Login />} />
           </Switch>
         ) }
       </div>

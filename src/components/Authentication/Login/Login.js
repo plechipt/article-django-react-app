@@ -39,9 +39,9 @@ const Login = () => {
                 //if user doesnt have profile -> create new one
                 checkUserProfile({ variables: { user: usernameInput }})
                 
-                history.push('/')
+                history.push('/posts')
                 window.location.reload(false);
-                history.push('/')
+                history.push('/posts')
             }
         }
     }, [loginData])

@@ -49,7 +49,7 @@ const PostEdit = ({ currentUser }) => {
          //if title and textarea are filled and user hit enter or hit create button
         if ((titleInput !== '' && textAreaInput !== '') && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
             postEdit({ variables: { id: id, title: titleInput, content: textAreaInput } })
-            history.push('/')
+            history.push('/posts')
         }
     }
     

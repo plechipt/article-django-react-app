@@ -15,7 +15,7 @@ const EditDeleteButtons = ({ id, detailData, currentUser }) => {
     //delete post here
     const handleOnDelete = () => {
         postDelete({ variables: { id: id } })
-        history.push('/')
+        history.push('/posts')
     }
 
     //redirect to edit page
