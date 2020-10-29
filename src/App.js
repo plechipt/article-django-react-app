@@ -37,6 +37,7 @@ function App () {
   const [ verifyToken, { data: tokenData }] = useMutation(USER_REFRESH_TOKEN_MUTATION)
 
   //verify user's token from cookies
+  console.log(token)
   useEffect(() => {
     const tokenVerifycation = () => {
       if (token) {

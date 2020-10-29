@@ -34,7 +34,7 @@ const Login = () => {
             
             if (loginData.tokenAuth.success === true) {
                 const token = loginData.tokenAuth.token
-                Cookies.set('token', token)
+                Cookies.set('token', token, { expires: 1 })
 
                 //if user doesnt have profile -> create new one
                 checkUserProfile({ variables: { user: usernameInput }})
