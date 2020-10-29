@@ -212,6 +212,5 @@ class FilterPost(graphene.Mutation):
    def mutate(root, info, input=None):
       #filter post that starts with input in search bar
       filtered_posts = Post.objects.filter(title__startswith=input.title)
-      print(filtered_posts)
 
       return FilterPost(filtered_posts=filtered_posts)
