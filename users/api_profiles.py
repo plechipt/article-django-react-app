@@ -108,9 +108,9 @@ class UpdateUser(graphene.Mutation):
       elif email_already_exists == True and user.email != input.new_email:
          message = 'This email already exists!'
 
-      #if new_email includes forbidden characters from forbidden_chars variable
+      #if new_user or new_email includes forbidden characters from forbidden_chars variable
       elif ([char for char in forbidden_chars if char in forbidden_chars] == []) != True:
-         message = 'Name must not include special characters!'
+         message = 'Name or email must not include special characters!'
 
       else:
          message = 'Success'
