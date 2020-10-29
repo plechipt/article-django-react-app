@@ -12,11 +12,10 @@ from graphene_django.views import GraphQLView
 from api.schema import schema
 
 ADMIN_PATH = os.environ.get('ADMIN_PATH')
-API_PATH = os.environ.get('API_PATH')
 
 urlpatterns = [
     path(f'{ADMIN_PATH}/', admin.site.urls),
-    path(f'{API_PATH}/', csrf_exempt(GraphQLView.as_view(schema=schema, graphiql=True))),
+    path('api/', csrf_exempt(GraphQLView.as_view(schema=schema, graphiql=True))),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ]
 

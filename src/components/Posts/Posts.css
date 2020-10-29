@@ -111,7 +111,11 @@
         margin-top: 0.2rem !important;
     }
 
-    .search-bar-container, .post-detail-buttons-container {
+    .search-bar-container {
         width: 80% !important;
+    }
+
+    .post-detail-buttons-container {
+        width: 90% !important;
     }
 }
