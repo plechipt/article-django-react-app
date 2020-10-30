@@ -54,6 +54,7 @@ const Profile = ({ currentUser }) => {
 
     useEffect(() => {
         if (updateData !== undefined && updateData.profileUpdate.message === 'Success') {
+            Cookies.remove('token')
             history.push('/login')
             window.location.reload(false)
         }
@@ -66,9 +67,6 @@ const Profile = ({ currentUser }) => {
                 user: user, newUser: usernameInput,
                 newEmail: emailInput, image: profileImage }
             })
-
-            //remove user info
-            Cookies.remove('token')
         }
     }
 
