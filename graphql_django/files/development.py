@@ -42,15 +42,6 @@ CORS_ORIGIN_WHITELIST = (
     'https://article-django-react-app.herokuapp.com',
 )
 
-STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-#roots 
-MEDIA_DIR = r'C:\Users\Admin\programs\django+react\tutorials\graphql_django\gui\src\components\Profiles'
-
-MEDIA_ROOT = os.path.join(MEDIA_DIR, 'media')
-MEDIA_URL = os.path.join(MEDIA_DIR, '/media/')
-
 WSGI_APPLICATION = 'graphql_django.wsgi.application'
 ROOT_URLCONF = 'graphql_django.urls'
 
