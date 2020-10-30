@@ -33,4 +33,5 @@ MIDDLEWARE = [
 
     'corsheaders.middleware.CorsMiddleware', #users can fetch api
     'django.contrib.auth.middleware.AuthenticationMiddleware', #user authentication
+    'whitenoise.middleware.WhiteNoiseMiddleware', #whitenoise
 ]

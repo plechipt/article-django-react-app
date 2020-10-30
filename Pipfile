@@ -23,6 +23,7 @@ gunicorn = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
 dj-static = "*"
+django-debug-toolbar = "*"
 
 [requires]
 python_version = "3.8"
