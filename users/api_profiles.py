@@ -82,6 +82,9 @@ class UpdateUser(graphene.Mutation):
    @staticmethod
    def mutate(root, info, input=None):
       message = ''
+
+      #new_user and new_email combined
+      new_user_and_new_email = input.new_user + input.new_email
       forbidden_chars = [
          '!','#','$','%','^','&','*','(',')','`','/',',','.','',';','[',']'
          '+','-','>','<','=','\\','*','_','+','{','}',':','"','|','?'
@@ -89,6 +92,8 @@ class UpdateUser(graphene.Mutation):
 
       user = CustomUser.objects.get(username=input.user)
       profile = Profile.objects.get(user=user)
+
+      print(input.new_email)
 
       #check if new_user already exists
       user_already_exists = CustomUser.objects.filter(username=input.new_user).exists()
@@ -109,7 +114,7 @@ class UpdateUser(graphene.Mutation):
          message = 'This email already exists!'
 
       #if new_user or new_email includes forbidden characters from forbidden_chars variable
-      elif ([char for char in forbidden_chars if char in forbidden_chars] == []) != True or input.new_email.count('@') > 1 or '@' in input.new_user:
+      elif ([char for char in forbidden_chars (if char in new_user_and_new_email)] == []) != True or input.new_email.count('@') > 1 or '@' in input.new_user:
          message = 'Name or email must not include special characters!'
 
       else:
