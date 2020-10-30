@@ -47,19 +47,11 @@ TEMPLATES = [
     },
 ]
 
-
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static'),
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-#roots 
-#MEDIA_DIR = r'C:\Users\Admin\programs\django+react\tutorials\graphql_django\src\components\Profiles'
-MEDIA_DIR = os.path.join(BASE_DIR, 'src/components/Profiles')
-
-MEDIA_ROOT = os.path.join(MEDIA_DIR, 'media')
-MEDIA_URL = os.path.join(MEDIA_DIR, '/media/')
