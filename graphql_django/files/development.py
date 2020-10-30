@@ -50,7 +50,7 @@ ROOT_URLCONF = 'graphql_django.urls'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 AUTH_USER_MODEL = 'users.CustomUser'
 
-# Internationalization
+#Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
