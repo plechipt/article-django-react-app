@@ -55,3 +55,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static'),
 ]
+
+
+#roots 
+#MEDIA_DIR = r'C:\Users\Admin\programs\django+react\tutorials\graphql_django\src\components\Profiles'
+MEDIA_DIR = os.path.join(BASE_DIR, 'src/components/Profiles')
+
+MEDIA_ROOT = os.path.join(MEDIA_DIR, 'media')
+MEDIA_URL = os.path.join(MEDIA_DIR, '/media/')
