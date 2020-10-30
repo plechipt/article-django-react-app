@@ -36,9 +36,13 @@ class CreateMessage(graphene.Mutation):
 
    @staticmethod
    def mutate(root, info, input=None):
-      message = 'Success'
       #create date when message was messaged
       messaged = datetime.datetime.now().strftime('%d %B %Y, %H:%M')
+
+      if input.content == '':
+         message = "Message must not be empty!"
+         return CreateMessage(message=message)
+
 
       user = CustomUser.objects.get(username=input.user)
       chat_user = CustomUser.objects.get(username=input.chat_user)
@@ -52,6 +56,7 @@ class CreateMessage(graphene.Mutation):
       users_message = Message.objects.create(user=user, content=input.content, messaged=messaged)
       #add the message to chat_room messages
       chat_room.messages.add(users_message)
+      message = 'Success'
 
       return CreateMessage(message=message)
 
