@@ -116,6 +116,8 @@
     }
 
     .post-detail-buttons-container {
-        width: 90% !important;
+        display: flex;
+        justify-content: center;
+        width: 100% !important;
     }
 }
