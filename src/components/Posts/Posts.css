@@ -64,6 +64,11 @@
     width: 25% !important;
 }
 
+.paginate-container {
+    display: flex !important;
+    justify-content: center;
+}
+
 @media all and (max-width: 1400px) {
     .post-create-container {
         width: 60% !important;

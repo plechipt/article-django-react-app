@@ -2,18 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { Form } from 'semantic-ui-react'
 
-import { POST_LIST_QUERY } from '../../Api/post'
 import { POST_FILTER_MUTATION  } from '../../Api/post'
 import '../Posts.css'
 
 import MapPosts from './MapPosts'
-import MapFilteredPosts from './MapFilteredPosts'
+import CustomPagination from './Pagination'
 
 
 const Posts = () => {
-    const { data: postsData } = useQuery(POST_LIST_QUERY)
     const [ postFilter, { data: filteredData }] = useMutation(POST_FILTER_MUTATION)
-    
     const [ searchInput, setSearchInput ] = useState('')
    
     //filter posts by user search bar input
@@ -21,6 +18,7 @@ const Posts = () => {
         postFilter({ variables: { title: searchInput } })
     }, [searchInput])
 
+    
    
     return (
         <div>
@@ -35,19 +33,18 @@ const Posts = () => {
                     </Form.Field>
                 </Form>
             </div>
-            {(filteredData || postsData) ? (
+            {(filteredData) ? (
                 <div>
                     {(filteredData) ? (
                         <>
-                            {/*If user has fillen search bar -> show filtered posts*/}
-                            <MapFilteredPosts filteredData={filteredData} />
+                            {/*If user has fillen search bar -> shows filteredPosts*/}
+                            <MapPosts filteredData={filteredData} />
                         </>
-                    ) : (
-                        <>
-                            {/*Otherwise show all posts*/}    
-                            <MapPosts postsData={postsData} searchValue={searchInput} />
-                        </>
-                    )}
+                    ) : null}
+                {/*If user has not filtered data*/}
+                {searchInput === '' ? (
+                    <CustomPagination/> 
+                ) : null}
                 </div>
             ) : null}
         </div>
