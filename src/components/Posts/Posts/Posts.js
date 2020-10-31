@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { Form, Icon } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 
 import { POST_LIST_QUERY } from '../../Api/post'
 import { POST_FILTER_MUTATION  } from '../../Api/post'
@@ -15,13 +15,13 @@ const Posts = () => {
     const [ postFilter, { data: filteredData }] = useMutation(POST_FILTER_MUTATION)
     
     const [ searchInput, setSearchInput ] = useState('')
-
+   
     //filter posts by user search bar input
     useEffect(() => {
         postFilter({ variables: { title: searchInput } })
     }, [searchInput])
 
-
+   
     return (
         <div>
             <div className="mb-5 search-bar-container">
@@ -39,7 +39,7 @@ const Posts = () => {
                 <div>
                     {(filteredData) ? (
                         <>
-                            {/*If user has fillen search bar -> show filtere posts*/}
+                            {/*If user has fillen search bar -> show filtered posts*/}
                             <MapFilteredPosts filteredData={filteredData} />
                         </>
                     ) : (

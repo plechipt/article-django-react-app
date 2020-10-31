@@ -6,6 +6,7 @@ import Post from './Post'
 const MapFilteredPosts = ({ filteredData }) => {
     const { postFilter: { filteredPosts }} = filteredData
 
+
     return (
         <div>
             {filteredPosts.map(({ user: { username }, title, posted, id }) => {
