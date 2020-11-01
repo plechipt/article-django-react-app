@@ -67,9 +67,9 @@
 .paginate-container {
     display: flex !important;
     justify-content: center;
-    bottom: 30px;
+    bottom: 40px;
     width: 100%;
-    position: absolute !important;
+    position: fixed !important;
 }
 
 @media all and (max-width: 1400px) {
@@ -105,6 +105,10 @@
         display: flex; 
         justify-content: center;
     }
+
+    .post {
+        margin-bottom: 7rem !important;
+    }
     
     .post a {
         font-size: 1.5rem !important;
@@ -127,5 +131,9 @@
         display: flex;
         justify-content: center;
         width: 100% !important;
+    }
+
+    .paginate-container {
+        position: relative;
     }
 }

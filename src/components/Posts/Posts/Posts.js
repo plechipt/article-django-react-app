@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/react-hooks'
 import { Form } from 'semantic-ui-react'
 
 import { POST_FILTER_MUTATION  } from '../../Api/post'
