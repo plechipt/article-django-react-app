@@ -19,7 +19,7 @@ Article app with decent features
 - Listing all users
 #### Posts
 - Searching for Posts
-- Paginating Posts
+- Pagination
 - Creating Posts
 - Editing Posts
 - Deleting Posts
