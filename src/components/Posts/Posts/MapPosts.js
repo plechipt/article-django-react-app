@@ -20,7 +20,7 @@ const MapPosts = ({ filteredData, searchInput }) => {
         setCurrentPage(value.activePage)
     }
 
-
+    
     return (
         <div>
             {currentPosts.map(({ user: { username }, title, posted, id }) => {

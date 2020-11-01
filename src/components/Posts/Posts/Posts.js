@@ -16,8 +16,6 @@ const Posts = () => {
     useEffect(() => {
         postFilter({ variables: { title: searchInput } })
     }, [searchInput])
-
-    
    
     return (
         <div>
