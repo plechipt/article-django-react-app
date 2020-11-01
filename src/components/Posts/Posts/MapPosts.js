@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 
 import Post from './Post'
+import CustomPagination from './Pagination'
 
 //Map all filtered posts
-const MapPosts = ({ filteredData }) => {
+const MapPosts = ({ filteredData, searchInput }) => {
     const { postFilter: { filteredPosts }} = filteredData
 
     const [ currentPage, setCurrentPage ] = useState(1)
@@ -13,6 +14,12 @@ const MapPosts = ({ filteredData }) => {
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirstPost = indexOfLastPost - postsPerPage
     const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost)
+
+    //Change page
+    const handlePaginationChange = (event, value) => {
+        setCurrentPage(value.activePage)
+    }
+
 
     return (
         <div>
@@ -25,7 +32,15 @@ const MapPosts = ({ filteredData }) => {
                         posted={posted}
                         id={id}
                     />
-                )})}
+
+                    )})}
+                {searchInput === '' ? (
+                    <CustomPagination
+                        postsPerPage={postsPerPage}
+                        totalPosts={filteredPosts.length}
+                        handlePaginationChange={handlePaginationChange} 
+                    /> 
+                ) : null}
         </div>
     )
 }

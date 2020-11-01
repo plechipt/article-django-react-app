@@ -67,6 +67,9 @@
 .paginate-container {
     display: flex !important;
     justify-content: center;
+    bottom: 30px;
+    width: 100%;
+    position: absolute !important;
 }
 
 @media all and (max-width: 1400px) {

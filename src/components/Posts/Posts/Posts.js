@@ -6,7 +6,6 @@ import { POST_FILTER_MUTATION  } from '../../Api/post'
 import '../Posts.css'
 
 import MapPosts from './MapPosts'
-import CustomPagination from './Pagination'
 
 
 const Posts = () => {
@@ -38,13 +37,9 @@ const Posts = () => {
                     {(filteredData) ? (
                         <>
                             {/*If user has fillen search bar -> shows filteredPosts*/}
-                            <MapPosts filteredData={filteredData} />
+                            <MapPosts filteredData={filteredData} searchInput={searchInput} />
                         </>
                     ) : null}
-                {/*If user has not filtered data*/}
-                {searchInput === '' ? (
-                    <CustomPagination/> 
-                ) : null}
                 </div>
             ) : null}
         </div>
