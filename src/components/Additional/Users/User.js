@@ -16,7 +16,6 @@ const User = ({ id, username, email, image }) => {
             <Item.Image size='tiny' src={require(`../../${PATH_TO_PICTURES}/large/${image}`)} />
             <Item.Content className="user-content-container">
                 <Item.Header>{username}</Item.Header>
-                <Item.Description>{email}</Item.Description>
             </Item.Content>
         </Item>
     )
