@@ -31,7 +31,9 @@ function App () {
   const token = Cookies.get('token')
 
   //current logged in user
+  const [ loading, setLoading ] = useState(false)
   const [ currentUser, setCurrentUser ] = useState('')
+  const [ dataToken, setDataToken ] = useState({})
   const [ allowUserToEnter, setAllowUserToEnter ]= useState(false)
 
   const [ verifyToken, { data: tokenData }] = useMutation(USER_REFRESH_TOKEN_MUTATION)
@@ -40,6 +42,7 @@ function App () {
   useEffect(() => {
     const tokenVerifycation = () => {
       if (token) {
+        setLoading(true)
         verifyToken({ variables: { token: token } })
       }
     }
@@ -52,6 +55,8 @@ function App () {
 
       //if success is true and the user from backend is same in frontend
       if (success === true) {
+        setLoading(false)
+        setDataToken(tokenData)
         setCurrentUser(payload.username)
         setAllowUserToEnter(true)
       }
@@ -63,7 +68,6 @@ function App () {
     }
   }, [tokenData])
 
-  
   return (
     <div className="App">
       <Navbar currentUser={currentUser} />
@@ -71,7 +75,7 @@ function App () {
         {(tokenData) ? (
           <>
             {/*check if verification was successfull and user from cookies is same from backend*/}
-            {(allowUserToEnter) ? (
+            {(loading === false && allowUserToEnter) ? (
               <Switch>
                 <Route path="/posts" component={() => <Posts />} />
                 <Route path="/users" component={() => <Users />} />
@@ -81,16 +85,18 @@ function App () {
                 <Route path="/createPost" component={() => <PostCreate currentUser={currentUser} />} />
                 <Route path="/:id" component={() => <PostDetail currentUser={currentUser} />} />
               </Switch>  
-            ) : (
-              <h1 align="center">Failed to connect</h1>
-            )}
+            ) : null }
           </>
         ) : ( 
-          <Switch>
-            <Route path="/register" component={() => <Register />} />
-            <Route path="/" component={() => <Login />} />
-          </Switch>
-        ) }
+          <>
+            {loading === false ? (
+              <Switch>
+                <Route path="/register" component={() => <Register />} />
+                <Route path="/" component={() => <Login />} />
+              </Switch>
+            ) : null}
+          </>
+        )}
       </div>
     </div>
   );
