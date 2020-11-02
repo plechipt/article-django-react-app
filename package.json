@@ -17,6 +17,7 @@
     "apollo-client": "^2.6.10",
     "apollo-upload-client": "^14.1.2",
     "bootstrap": "^4.5.3",
+    "dotenv": "^8.2.0",
     "graphql": "^15.4.0",
     "graphql-tools": "^6.2.6",
     "graphql-upload": "^11.0.0",
