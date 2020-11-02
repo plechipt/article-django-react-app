@@ -19,6 +19,6 @@ print(API_PATH)
 
 urlpatterns = [
     path(f'{ADMIN_PATH}/', admin.site.urls),
-    path(f'{API_PATH}/', csrf_exempt(GraphQLView.as_view(schema=schema, graphiql=False))),
+    path(f'api/', csrf_exempt(GraphQLView.as_view(schema=schema, graphiql=False))),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
