@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
  
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback')
-DEBUG = False
+DEBUG = True
 
 #database
 DATABASES = {
@@ -46,7 +46,6 @@ TEMPLATES = [
         'APP_DIRS': True,
     },
 ]
-
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [

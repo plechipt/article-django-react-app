@@ -1,9 +1,0 @@
-
-
--site keep logging out 
--after edit, create -> code doesnt update
--solve when server is not avaible
-
-*END
--> remove react errors
-
