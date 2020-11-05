@@ -116,6 +116,12 @@ class UpdateUser(graphene.Mutation):
       input.new_email.count('@') > 1 or '@' in input.new_user or '.' in input.new_user):
          message = 'Name or email must not include special characters!'
 
+      elif len(input.new_user) >= 40:
+         message = 'Your new name has reached maximum of characters! (40 characters)'
+
+      elif len(input.new_email) >= 50:
+         message = 'Your new email has reached maximum of characters! (50 characters)'
+
       else:
          message = 'Success'
          user.username = input.new_user
