@@ -60,20 +60,25 @@ class AddPost(graphene.Mutation):
       #filter posts that belongs to user and are posted today
       filtered_posts = Post.objects.filter(user__username=input.user, posted=today)
 
-      #if boths problems
-      if len(input.title) > 100 and filtered_posts.count() > 4:
+      #if boths title is over 100 chars and user has reached more than 5 posts
+      if len(input.title) > 100 and filtered_posts.count() >= 5:
          message += 'Title has more than 100 characters and you have reached your maximum posts per day!'
          return AddPost(message=message)
 
-      #check if title is under 100 chars
+      #check if title is over 100 chars
       elif len(input.title) > 100:
-         message = 'Title has more than 100 characters '
+         message = 'Title has more than 100 characters!'
          return AddPost(message=message)
 
       #check if user hasn't reached more than 5 posts per day
-      elif filtered_posts.count() > 4:
+      elif filtered_posts.count() >= 5:
          message += 'You have reached your maximum posts per day!'
          return AddPost(message=message)
+
+      #if content is over 10K chars
+      elif len(input.content) > 10000:
+         message = 'Content is over 10,000 characters!'
+         return EditPost(message=message)
 
       #create date when was the post posted
       posted = datetime.datetime.now().strftime('%d %B %Y')
@@ -121,7 +126,18 @@ class EditPost(graphene.Mutation):
    def mutate(root, info, input=None):
       message = ''
 
-      if Post.objects.filter(id=input.id).count() != 0:
+      #if title is over 100 chars
+      if len(input.title) > 100:
+         message = 'Title has more than 100 characters!'
+         return EditPost(message=message)
+
+      #if content is over 10K chars
+      elif len(input.content) > 10000:
+         message = 'Content is over 10,000 characters!'
+         return EditPost(message=message)
+
+      #success
+      elif Post.objects.filter(id=input.id).count() != 0:
          message = 'Success'
          post = Post.objects.get(id=input.id)
 
@@ -130,7 +146,8 @@ class EditPost(graphene.Mutation):
          post.save()
 
          return EditPost(message=message, post=post)
-      
+
+      #id doesnt match with post      
       else:
          message = "ID doesn't match with post"
          return EditPost(message=message)
