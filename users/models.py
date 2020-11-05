@@ -27,7 +27,7 @@ class Message(models.Model):
     messaged = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return f'{self.user.username} message'
+        return f'{self.user.username} - {self.content}'
 
 
 class ChatRoom(models.Model):
