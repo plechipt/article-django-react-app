@@ -91,7 +91,7 @@ const Register = () => {
       <Form onSubmit={handleOnClick}>
         <Form.Field>
           <label>Username</label>
-          <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} autocomplete="one-time-code" placeholder='Username' />
+          <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} autocomplete="one-time-code" placeholder='Username' autoFocus />
         </Form.Field>
         <Form.Field>
           <label>Email</label>

@@ -79,7 +79,7 @@ const Login = () => {
             <Form onSubmit={handleOnSubmit}>
                 <Form.Field>
                     <label>Username</label>
-                    <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} autoComplete="one-time-code" placeholder='Username' />
+                    <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} autoComplete="one-time-code" placeholder='Username' autoFocus/>
                 </Form.Field>
                 <Form.Field>
                     <label>Password</label>

@@ -33,6 +33,7 @@ const MessageCreate = ({ currentUser }) => {
                         value={messageInput}
                         className="form-control form-control-lg text-area-container"
                         placeholder="Enter a message..." 
+                        autoFocus
                     />
                 </div>
             </div>

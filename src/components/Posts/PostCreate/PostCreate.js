@@ -64,7 +64,7 @@ const PostCreate = ({ currentUser }) => {
             <Form onKeyPress={handleOnSubmit} onSubmit={handleOnSubmit}>
                 <Form.Field>
                     <label>Title</label>
-                    <input onChange={event => setTitleInput(event.target.value)} value={titleInput} placeholder='Title' />
+                    <input onChange={event => setTitleInput(event.target.value)} value={titleInput} placeholder='Title' autoFocus />
                 </Form.Field>
                 <Form.Field>
                     <label>Content</label>
