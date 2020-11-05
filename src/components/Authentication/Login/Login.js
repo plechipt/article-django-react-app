@@ -79,11 +79,25 @@ const Login = () => {
             <Form onSubmit={handleOnSubmit}>
                 <Form.Field>
                     <label>Username</label>
-                    <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} autoComplete="one-time-code" placeholder='Username' autoFocus/>
+                    <input
+                        onChange={event => setUsernameInput(event.target.value)}
+                        value={usernameInput}
+                        autoComplete="one-time-code"
+                        placeholder='Username'
+                        maxLength="40"
+                        autoFocus
+                    />
                 </Form.Field>
                 <Form.Field>
                     <label>Password</label>
-                    <input onChange={event => setPasswordInput(event.target.value)} value={passwordInput} autoComplete="one-time-code" type="password" placeholder='Password' />
+                    <input
+                        onChange={event => setPasswordInput(event.target.value)}
+                        value={passwordInput}
+                        autoComplete="one-time-code"
+                        type="password"
+                        maxLength="30"
+                        placeholder='Password' 
+                    />
                 </Form.Field>
                 <Form.Field>
                     <p className="text-muted">Need an an account? <a href="/register" className="ml-2" >Sign up</a></p>
