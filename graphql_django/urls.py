@@ -1,4 +1,3 @@
-
 import os
 from django.contrib import admin
 from django.urls import path, re_path
@@ -13,7 +12,6 @@ from api.schema import schema
 
 
 ADMIN_PATH = os.environ.get('ADMIN_PATH')
-API_PATH = os.environ.get('API_PATH')
 
 urlpatterns = [
     path(f'{ADMIN_PATH}/', admin.site.urls),

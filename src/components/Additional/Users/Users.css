@@ -4,7 +4,15 @@
 }
 
 .user-container {
-    margin-bottom: 4rem !important;
+    margin-bottom: 3rem !important;
+}
+
+.paginate-container {
+    display: flex !important;
+    justify-content: center;
+    bottom: 40px;
+    width: 100%;
+    position: fixed !important;
 }
 
 @media all and (max-width: 767px) {
