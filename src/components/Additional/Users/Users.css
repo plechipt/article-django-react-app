@@ -4,7 +4,7 @@
 }
 
 .user-container {
-    margin-bottom: 3rem !important;
+    margin-bottom: 3.5rem !important;
 }
 
 .paginate-container {
@@ -24,5 +24,9 @@
         display: flex !important;
         flex-direction: column;
         align-items: center !important;
+    }
+
+    .user-container {
+        margin-bottom: 7rem !important;
     }
 }
