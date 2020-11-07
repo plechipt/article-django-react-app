@@ -23,20 +23,22 @@ class PostComment(graphene.Mutation):
    class Arguments:
       input = CommentPostInput(required=True)
 
-   comment = graphene.Field(CommentType)
+   message = graphene.String()
 
    @staticmethod
    def mutate(root, info, input=None):
+      message = ''
       post = Post.objects.get(id=input.id)
       user = CustomUser.objects.get(username=input.user)   
 
       #create date when was the post posted
       posted = datetime.datetime.now().strftime('%d %B %Y')
+      date_now = datetime.datetime.now()
 
-      comment = Comment(post=post, user=user, content=input.content, posted=posted)
+      comment = Comment(post=post, user=user, content=input.content, posted=posted, date=date_now)
       comment.save()
 
-      return PostComment(comment=comment)
+      return PostComment(message=message)
    
 
 #Delete Comment

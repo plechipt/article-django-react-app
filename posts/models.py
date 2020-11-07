@@ -23,9 +23,10 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
     content = models.TextField()
     posted = models.CharField(max_length=50, blank=True)
+    date = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
-        return self.content + '  | ' + self.user.username
+        return self.user.username + ' - ' + self.content
 
     class Meta:
         ordering = ['-id']
@@ -38,7 +39,7 @@ class Reply(models.Model):
     posted = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
-        return self.content + '  | ' + self.user.username
+        return self.user.username + ' - ' + self.content
 
     class Meta:
         verbose_name_plural = "Reply's"
