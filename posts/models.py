@@ -23,13 +23,17 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
     content = models.TextField()
     posted = models.CharField(max_length=50, blank=True)
-    date = models.CharField(max_length=50, blank=True)
-
-    def __str__(self):
-        return self.user.username + ' - ' + self.content
+    date = models.DateTimeField(default=timezone.now)
 
     class Meta:
         ordering = ['-id']
+
+    #how many seconds ago was the comment published in seconds
+    def how_many_seconds_ago(self):
+        return (timezone.now() - self.date).seconds
+
+    def __str__(self):
+        return self.user.username + ' - ' + self.content
 
 
 class Reply(models.Model):
@@ -38,11 +42,11 @@ class Reply(models.Model):
     content = models.TextField()
     posted = models.CharField(max_length=50, blank=True)
 
-    def __str__(self):
-        return self.user.username + ' - ' + self.content
-
     class Meta:
         verbose_name_plural = "Reply's"
+
+    def __str__(self):
+        return self.user.username + ' - ' + self.content
 
 
     
