@@ -8,18 +8,20 @@ const CommentCreateForm = ({ id, currentUser }) => {
     const [ allowButton, setAllowButton ] = useState(false)
     
     const [ commentInput, setCommentInput ] = useState('')
-    const [ commentAdd, { commentData } ] = useMutation(COMMENT_ADD_MUTATION)
+    const [ commentAdd, { data: commentData } ] = useMutation(COMMENT_ADD_MUTATION)
 
     const handleOnComment = () => {
         commentAdd({ variables: { id: id, user: currentUser, content: commentInput } })
 
         //reset site
-        window.location.reload(false);
+        //window.location.reload(false);
     }
 
     useEffect(() => {
         if (commentData) {
-            console.log(commentData)
+            const { commentPost: { message } } = commentData
+
+            console.log(message)
         }
     }, [commentData])
 
