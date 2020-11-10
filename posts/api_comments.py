@@ -1,8 +1,9 @@
-
+import time
 import graphene
 import datetime
 from django.utils import timezone
 from graphene_django.types import DjangoObjectType
+from django_graphql_ratelimit import ratelimit
 
 from .models import Comment, Post 
 from users.models import CustomUser
@@ -27,6 +28,7 @@ class PostComment(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @ratelimit(key="ip", rate="4/m", block=True)
    def mutate(root, info, input=None):
       message = ''
       post = Post.objects.get(id=input.id)
@@ -36,20 +38,10 @@ class PostComment(graphene.Mutation):
       #create date when was the post posted
       posted = datetime.datetime.now().strftime('%d %B %Y')
 
-      #check how many comments are posted recently
-      comments_posted_recently = 0
-      for comment in all_comments:
-         if comment.how_many_seconds_ago() < 5:
-            comments_posted_recently += 1
 
-      #if user has posted 4 or more posts -> send error message
-      if comments_posted_recently >= 3:
-         message = 'You need to wait to wait to post more comments!'
-
-      else:
-         message = 'Success'
-         comment = Comment(post=post, user=user, content=input.content, posted=posted)
-         comment.save()
+      message = 'Success'
+      comment = Comment(post=post, user=user, content=input.content, posted=posted)
+      comment.save()
 
       return PostComment(message=message)
    

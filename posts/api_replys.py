@@ -1,6 +1,7 @@
 import graphene
 import datetime
 from graphene_django.types import DjangoObjectType
+from django_graphql_ratelimit import ratelimit
 
 from .models import Comment, Reply 
 from users.models import CustomUser
@@ -24,7 +25,9 @@ class ReplyComment(graphene.Mutation):
 
    reply = graphene.Field(ReplyType)
 
+   
    @staticmethod
+   @ratelimit(key="ip", rate="4/m", block=True)
    def mutate(root, info, input=None):
       comment = Comment.objects.get(id=input.id)
       user = CustomUser.objects.get(username=input.user)   

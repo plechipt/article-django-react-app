@@ -5,7 +5,7 @@ import { Popup } from 'semantic-ui-react'
 const Message = ({ id, content, messaged, username, currentUser }) => {
     const { chatUser } = useParams()
 
-
+    
     return (
         <>
             {/*Chat users side*/}

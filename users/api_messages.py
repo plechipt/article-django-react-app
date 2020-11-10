@@ -2,6 +2,7 @@ import graphene
 import datetime
 from graphql_auth import mutations
 from graphene_django.types import DjangoObjectType
+from django_graphql_ratelimit import ratelimit
 
 from .models import CustomUser, Profile, Message, ChatRoom
 
@@ -35,6 +36,7 @@ class CreateMessage(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @ratelimit(key="ip", rate="8/m", block=True)
    def mutate(root, info, input=None):
       #create date when message was messaged
       messaged = datetime.datetime.now().strftime('%d %B %Y, %H:%M')

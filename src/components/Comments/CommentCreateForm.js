@@ -20,6 +20,8 @@ const CommentCreateForm = ({ id, currentUser }) => {
     useEffect(() => {
         if (commentData) {
             const { commentPost: { message } } = commentData
+            console.log(message)
+
         }
     }, [commentData])
 
