@@ -85,7 +85,9 @@ function App () {
                 <Route path="/createPost" component={() => <PostCreate currentUser={currentUser} />} />
                 <Route path="/:id" component={() => <PostDetail currentUser={currentUser} />} />
               </Switch>  
-            ) : null }
+            ) : (
+              <h1 align="center">Failed to connect</h1>
+            ) }
           </>
         ) : ( 
           <>

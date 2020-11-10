@@ -112,11 +112,11 @@ const Profile = ({ currentUser }) => {
                             <Form onKeyPress={handleOnSubmit} onSubmit={handleOnSubmit}>
                                 <Form.Field>
                                     <label>Username</label>
-                                    <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} placeholder='Username' />
+                                    <input onChange={event => setUsernameInput(event.target.value)} value={usernameInput} placeholder='Username' maxLength="39" />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Email</label>
-                                    <input onChange={event => setEmailInput(event.target.value)} value={emailInput} placeholder='Email' />
+                                    <input onChange={event => setEmailInput(event.target.value)} value={emailInput} placeholder='Email' maxLength="49" />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Image</label>

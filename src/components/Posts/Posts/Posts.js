@@ -26,6 +26,7 @@ const Posts = () => {
                             onChange={event => setSearchInput(event.target.value)}
                             value={searchInput}
                             placeholder='Search...'
+                            maxLength="100"
                         />
                     </Form.Field>
                 </Form>

@@ -14,14 +14,12 @@ const CommentCreateForm = ({ id, currentUser }) => {
         commentAdd({ variables: { id: id, user: currentUser, content: commentInput } })
 
         //reset site
-        //window.location.reload(false);
+        window.location.reload(false);
     }
 
     useEffect(() => {
         if (commentData) {
             const { commentPost: { message } } = commentData
-
-            console.log(message)
         }
     }, [commentData])
 
@@ -39,15 +37,18 @@ const CommentCreateForm = ({ id, currentUser }) => {
 
     return (
         <div className="comment-create-container">
+            {/*
             <Message
                 className="error-message-container"
                 error
                 header="You have posted maximum of comments!"
             />
+            */}
             <Form reply>
                 <textarea
                     onChange={event => setCommentInput(event.target.value)}
                     placeholder='Enter something...' 
+                    maxLength="100"
                 />
                 {(allowButton) ? (
                     <Button onClick={handleOnComment} className="comment-create-button" content='Comment' labelPosition='left' icon='edit' primary />
