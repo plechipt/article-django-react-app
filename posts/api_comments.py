@@ -12,31 +12,38 @@ class CommentType(DjangoObjectType):
       model = Comment
 
 
-#Create comment on post
-class CommentPostInput(graphene.InputObjectType):
-   id = graphene.ID()
-   user = graphene.String()
-   content = graphene.String()
-
-
 class PostComment(graphene.Mutation):
    class Arguments:
       input = CommentPostInput(required=True)
 
-   comment = graphene.Field(CommentType)
+   message = graphene.String()
 
    @staticmethod
    def mutate(root, info, input=None):
+      message = ''
       post = Post.objects.get(id=input.id)
-      user = CustomUser.objects.get(username=input.user)   
+      user = CustomUser.objects.get(username=input.user) 
+      all_comments = Comment.objects.all()
 
       #create date when was the post posted
       posted = datetime.datetime.now().strftime('%d %B %Y')
 
-      comment = Comment(post=post, user=user, content=input.content, posted=posted)
-      comment.save()
+      #check how many comments are posted recently
+      comments_posted_recently = 0
+      for comment in all_comments:
+         if comment.how_many_seconds_ago() < 5:
+            comments_posted_recently += 1
 
-      return PostComment(comment=comment)
+      #if user has posted 4 or more posts -> send error message
+      if comments_posted_recently >= 3:
+         message = 'You need to wait to wait to post more comments!'
+
+      else:
+         message = 'Success'
+         comment = Comment(post=post, user=user, content=input.content, posted=posted)
+         comment.save()
+
+      return PostComment(message=message)
    
 
 #Delete Comment
