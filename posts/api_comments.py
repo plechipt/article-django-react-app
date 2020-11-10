@@ -28,7 +28,7 @@ class PostComment(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
-   @ratelimit(key="ip", rate="4/m", block=True)
+   @ratelimit(key="ip", rate="5/m", block=True)
    def mutate(root, info, input=None):
       message = ''
       post = Post.objects.get(id=input.id)
