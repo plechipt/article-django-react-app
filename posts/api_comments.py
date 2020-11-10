@@ -1,6 +1,7 @@
 
 import graphene
 import datetime
+from django.utils import timezone
 from graphene_django.types import DjangoObjectType
 
 from .models import Comment, Post 

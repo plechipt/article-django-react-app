@@ -17,6 +17,7 @@ Article app with decent features
 #### Users
 - Authentication
 - Listing all users
+- Pagination
 #### Posts
 - Searching for Posts
 - Pagination

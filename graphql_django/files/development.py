@@ -1,10 +1,6 @@
 import os
 
-
 # Password validation
-# https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
-
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -30,7 +26,6 @@ ALLOWED_HOSTS = [
     'localhost:5000',
 ]
 
-#
 #allowed urls which can access api
 CORS_ORIGIN_WHITELIST = (
     'http://localhost',
