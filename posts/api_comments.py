@@ -13,6 +13,13 @@ class CommentType(DjangoObjectType):
       model = Comment
 
 
+#Comment post
+class CommentPostInput(graphene.InputObjectType):
+   id = graphene.ID()
+   user = graphene.String()
+   content = graphene.String()
+
+
 class PostComment(graphene.Mutation):
    class Arguments:
       input = CommentPostInput(required=True)
