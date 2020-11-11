@@ -36,7 +36,7 @@ class CreateMessage(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
-   @ratelimit(key="ip", rate="10/m", block=True)
+   @ratelimit(key="ip", rate="20/m", block=True)
    def mutate(root, info, input=None):
       #create date when message was messaged
       messaged = datetime.datetime.now().strftime('%d %B %Y, %H:%M')
