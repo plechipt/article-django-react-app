@@ -34,14 +34,22 @@ class PostComment(graphene.Mutation):
       message = ''
       post = Post.objects.get(id=input.id)
       user = CustomUser.objects.get(username=input.user) 
-      all_comments = Comment.objects.all()
+      today = datetime.datetime.now().strftime('%d %B %Y')
 
-      #create date when was the post posted
-      posted = datetime.datetime.now().strftime('%d %B %Y')
+      #filter comments that belongs to user and are posted today
+      comments_posted_today = Comment.objects.filter(user__username=input.user, posted=today)
+      
+      #if user has posted 20 or more comments
+      if comments_posted_today.count() >= 20:
+         message = 'You have reached your maximum comments per day!'
 
-      message = 'Success'
-      comment = Comment(post=post, user=user, content=input.content, posted=posted)
-      comment.save()
+      else:
+         #create date when was the post posted
+         posted = datetime.datetime.now().strftime('%d %B %Y')
+
+         message = 'Success'
+         comment = Comment(post=post, user=user, content=input.content, posted=posted)
+         comment.save()
 
       return PostComment(message=message)
    

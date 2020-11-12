@@ -23,20 +23,30 @@ class ReplyComment(graphene.Mutation):
    class Arguments:
       input = ReplyAddInput(required=True)
 
-   reply = graphene.Field(ReplyType)
+   message = graphene.String()
 
    
    @staticmethod
    @ratelimit(key="ip", rate="2/m", block=True)
    def mutate(root, info, input=None):
+      message = ''
       comment = Comment.objects.get(id=input.id)
       user = CustomUser.objects.get(username=input.user)   
       posted = datetime.datetime.now().strftime('%d %B %Y')
+      today = datetime.datetime.now().strftime('%d %B %Y')
 
-      reply = Reply(comment=comment, user=user, content=input.content, posted=posted)
-      reply.save()
+      #filter replies that belongs to user and are posted today
+      replies_posted_today = Reply.objects.filter(user__username=input.user, posted=today)
 
-      return ReplyComment(reply=reply)
+      if replies_posted_today.count() >= 20:
+         message = 'You have reached your maximum replies per day!'
+
+      else:
+         message = 'Success'
+         reply = Reply(comment=comment, user=user, content=input.content, posted=posted)
+         reply.save()
+
+      return ReplyComment(message=message)
 
 
 #Delete reply
