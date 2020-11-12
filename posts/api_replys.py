@@ -27,7 +27,7 @@ class ReplyComment(graphene.Mutation):
 
    
    @staticmethod
-   @ratelimit(key="ip", rate="3/m", block=True)
+   @ratelimit(key="ip", rate="2/m", block=True)
    def mutate(root, info, input=None):
       comment = Comment.objects.get(id=input.id)
       user = CustomUser.objects.get(username=input.user)   

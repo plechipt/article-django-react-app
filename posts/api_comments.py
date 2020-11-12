@@ -2,6 +2,7 @@ import time
 import graphene
 import datetime
 from django.utils import timezone
+
 from graphene_django.types import DjangoObjectType
 from django_graphql_ratelimit import ratelimit
 
@@ -28,7 +29,7 @@ class PostComment(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
-   @ratelimit(key="ip", rate="3/m", block=True)
+   @ratelimit(key="ip", rate="2/m", block=True)
    def mutate(root, info, input=None):
       message = ''
       post = Post.objects.get(id=input.id)
@@ -37,7 +38,6 @@ class PostComment(graphene.Mutation):
 
       #create date when was the post posted
       posted = datetime.datetime.now().strftime('%d %B %Y')
-
 
       message = 'Success'
       comment = Comment(post=post, user=user, content=input.content, posted=posted)
