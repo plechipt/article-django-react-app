@@ -11,6 +11,7 @@ import { USER_REFRESH_TOKEN_MUTATION } from './components/Api/user'
 import Navbar from './components/Additional/Navbar/Navbar'
 import Users from './components/Additional/Users/Users'
 import Support from './components/Additional/Support/Support'
+import SupportSuccess from './components/Additional/Support/SupportSuccess'
 
 //Authentication
 import Login from './components/Authentication/Login/Login'
@@ -83,6 +84,7 @@ function App () {
                 <Route path="/posts" component={() => <Posts />} />
                 <Route path="/users" component={() => <Users />} />
                 <Route path="/support" component={() => <Support />} />
+                <Route path="/support-success" component={() => <SupportSuccess />} />
                 <Route path="/message/:chatUser" component={() => <MessagesContainer currentUser={currentUser} />} />
                 <Route path="/profile/:user" component={() => <Profile currentUser={currentUser} />} />
                 <Route path="/editPost/:id" component={() => <PostEdit currentUser={currentUser} />} />

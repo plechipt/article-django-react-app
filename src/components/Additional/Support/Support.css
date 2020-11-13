@@ -13,7 +13,7 @@
     font-size: 3rem !important;
 }
 
-.support-text {
+.support-text, .support-home {
     font-size: 1.5rem !important;
     font-weight: 600 !important;
 }
