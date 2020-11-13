@@ -3,12 +3,13 @@ import dj_database_url
 from graphql_django.files.basic import *
 from graphql_django.files.development import *
 from graphql_django.files.graphql import *
+from graphql_django.files.stripe import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
  
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback')
-DEBUG = False
+DEBUG = True
 
 #database
 DATABASES = {

@@ -1,3 +1,16 @@
 body {
     scrollbar-width: none !important;
 }
+
+.light-mode, .dark-mode {
+    min-height: 100vh;
+}
+
+.light-mode {
+    background-color: #fff !important;
+}
+
+.dark-mode {
+    background-color: #1a1919 !important;
+    color: #fff !important;
+}

@@ -31,10 +31,12 @@ function App () {
   const token = Cookies.get('token')
 
   //current logged in user
-  const [ loading, setLoading ] = useState(false)
   const [ currentUser, setCurrentUser ] = useState('')
   const [ dataToken, setDataToken ] = useState({})
+
+  const [ loading, setLoading ] = useState(false)
   const [ allowUserToEnter, setAllowUserToEnter ]= useState(false)
+  const [ darkMode, setDarkMode ] = useState(false)
 
   const [ verifyToken, { data: tokenData }] = useMutation(USER_REFRESH_TOKEN_MUTATION)
 
@@ -69,7 +71,7 @@ function App () {
   }, [tokenData])
 
   return (
-    <div className="App">
+    <div className="light-mode">
       <Navbar currentUser={currentUser} />
         <div>
         {(tokenData) ? (

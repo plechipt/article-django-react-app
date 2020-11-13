@@ -1,0 +1,4 @@
+import os
+
+STRIPE_PUBLIC_KEY = 'pk_live_51HmaY7FJBInLPu36iHG7lH0HqDSvngef74KBhndAFe5xAUg2PCamm76bsVdFKxsbWnmQEsvWCS1uJhTJhgJLg9uw006u4mHPlV'
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')

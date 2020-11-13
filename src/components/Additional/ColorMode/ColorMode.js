@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Welcome = () => {
+const ColorMode = () => {
     return (
         <div>
-           Hello! 
+            
         </div>
     )
 }
 
-export default Welcome
+export default ColorMode
