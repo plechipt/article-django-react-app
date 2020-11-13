@@ -64,6 +64,14 @@ const Navbar = ({ currentUser }) => {
                                     }}
                                 />
                                 <Menu.Item
+                                    name="support"
+                                    active={activeItem === "support"}
+                                    onClick={() => {
+                                        handleItemClick('support')
+                                        history.push(`/support`)
+                                    }}
+                                />
+                                <Menu.Item
                                     name="logout"
                                     active={activeItem === "logout"}
                                     onClick={() => {

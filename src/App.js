@@ -10,6 +10,7 @@ import { USER_REFRESH_TOKEN_MUTATION } from './components/Api/user'
 //import Welcome from './components/Additional/Welcome/Welcome'
 import Navbar from './components/Additional/Navbar/Navbar'
 import Users from './components/Additional/Users/Users'
+import Support from './components/Additional/Support/Support'
 
 //Authentication
 import Login from './components/Authentication/Login/Login'
@@ -81,11 +82,13 @@ function App () {
               <Switch>
                 <Route path="/posts" component={() => <Posts />} />
                 <Route path="/users" component={() => <Users />} />
+                <Route path="/support" component={() => <Support />} />
                 <Route path="/message/:chatUser" component={() => <MessagesContainer currentUser={currentUser} />} />
                 <Route path="/profile/:user" component={() => <Profile currentUser={currentUser} />} />
                 <Route path="/editPost/:id" component={() => <PostEdit currentUser={currentUser} />} />
                 <Route path="/createPost" component={() => <PostCreate currentUser={currentUser} />} />
                 <Route path="/:id" component={() => <PostDetail currentUser={currentUser} />} />
+
               </Switch>  
             ) : (
               <h1 align="center">Failed to connect</h1>
