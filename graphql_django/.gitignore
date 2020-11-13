@@ -1,5 +1,5 @@
 #to prevent debug setting on True
-#settings
+settings
 
 #to prevent GraphiQL setting on True
-#urls
+urls
