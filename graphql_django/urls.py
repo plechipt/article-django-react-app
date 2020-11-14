@@ -8,13 +8,13 @@ from django.views.generic import TemplateView
 
 from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
-from . import schema
+from .schema import schema
 
 
 ADMIN_PATH = os.environ.get('ADMIN_PATH')
 
 urlpatterns = [
     path(f'{ADMIN_PATH}/', admin.site.urls),
-    path(f'api/', csrf_exempt(GraphQLView.as_view(schema=schema, graphiql=False))),
+    path(f'api/', csrf_exempt(GraphQLView.as_view(schema=schema, graphiql=True))),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
