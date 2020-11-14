@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'django_filters',
     'django_extensions',
     'corsheaders',
+    'stripe',
 
     'graphene_django',
     'graphql_auth',
