@@ -20,7 +20,6 @@ def return_urls():
 
 
 class CheckoutSession(graphene.Mutation):
-
     message = graphene.String()
 
     @staticmethod
