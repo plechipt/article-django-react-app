@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 
 from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
-from api.schema import schema
+from . import schema
 
 
 ADMIN_PATH = os.environ.get('ADMIN_PATH')

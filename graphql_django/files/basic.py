@@ -11,7 +11,7 @@ INSTALLED_APPS = [
 
     'posts',
     'users',
-    'api',
+    'payments',
 
     'django_filters',
     'django_extensions',
