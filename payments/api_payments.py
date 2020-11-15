@@ -28,7 +28,7 @@ class CreateCheckoutSession(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, input=None):
-        stripe.api_key = STRIPE_TEST_SECRET_KEY
+        stripe.api_key = STRIPE_LIVE_SECRET_KEY
 
         #get urls
         urls = return_urls()
