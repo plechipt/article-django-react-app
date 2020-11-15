@@ -29,19 +29,23 @@ class CheckoutSession(graphene.Mutation):
 
         #get urls
         urls = return_urls()
-
+        
         session = stripe.checkout.Session.create(
-        payment_method_types=['card'],
-        line_items=[{
-            'price': 'price_1Hn5ncFJBInLPu362CpNESpw',
-            'quantity': 1,
-            'price_data': {
-                'currency': 'usd',
-            },
-        }],
-        mode='payment',
-        success_url=urls[0],
-        cancel_url=urls[1],
-  )
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {
+                        'name': 'Django Coffee',
+                    },
+                    'unit_amount': 2000,
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url=urls[0],
+            cancel_url=urls[1],
+        )
 
+        message = 'Success'
         return CheckoutSession(message=message)

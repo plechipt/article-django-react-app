@@ -2,6 +2,8 @@ import React from 'react'
 import { loadStripe } from '@stripe/stripe-js';
 import { Container, Header, Button } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks'
+import { CHECKOUT_SESSION_MUTATION } from '../../Api/payment'
 
 import './Support.css'
 
@@ -10,13 +12,14 @@ const stripePromise = loadStripe(STRIPE_PUBLIC_KEY)
 
 const Support = () => {
     const history = useHistory()
+    const [ createCheckoutSession, { data } ] = useMutation(CHECKOUT_SESSION_MUTATION);
 
     const handleOnClick = async (event) => {
     // Get Stripe.js instance
     const stripe = await stripePromise;
 
     // Call your backend to create the Checkout Session
-    const response = await fetch('/create-checkout-session', { method: 'POST' });
+    const response = await createCheckoutSession()
 
     const session = await response.json();
 
