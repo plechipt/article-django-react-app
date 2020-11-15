@@ -1,5 +1,0 @@
-#to prevent debug setting on True
-settings.py
-
-#to prevent GraphiQL setting on True
-urls.py
