@@ -29,7 +29,9 @@ Article app with decent features
 - Deleting Comments
 - Replying Comments
 - Deleting Replys
-#### Profile
+#### Profiles
 - Following Users
 - Messaging Users
 - Updating Profile
+#### Payments
+- Support website by buying coffee for 5$
