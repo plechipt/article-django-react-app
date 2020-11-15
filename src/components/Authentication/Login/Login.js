@@ -46,10 +46,10 @@ const Login = () => {
         }
     }, [loginData])
    
-    const handleOnSubmit = (event) => {
+    const handleOnSubmit = async (event) => {
         //if username and password are filled and user hit enter or create button
         if ((usernameInput !== '' && passwordInput !== '') && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
-            loginUser({ variables: {
+            await loginUser({ variables: {
                 username: usernameInput, password: passwordInput
             }})
         }

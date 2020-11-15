@@ -11,7 +11,7 @@ def return_urls():
     local_base_url = 'http://localhost:3000'
     heroku_base_url = 'https://article-django-react-app.herokuapp.com'
 
-    #if debug is on True -> return local urls, otherwise return urls on heroku
+    #if DEBUG is on True -> return local urls, otherwise return urls on heroku
     if settings.DEBUG == True:
         return [f'{local_base_url}/support-success', f'{local_base_url}/support']
     
