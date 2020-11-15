@@ -7,7 +7,6 @@ import MapUsers from './MapUsers'
 const Users = () => {
     const { data: users } = useQuery(USER_PROFILE_LIST_QUERY)
 
-
     return (
         <div className="users-paginator-container">
             {users ? (

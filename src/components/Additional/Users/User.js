@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 
 const PATH_TO_PICTURES = 'Profiles/media/profile_pictures'
 
-const User = ({ id, username, image }) => {
+const User = ({ username, image }) => {
     const history = useHistory()
 
     const handleOnClick = () => {

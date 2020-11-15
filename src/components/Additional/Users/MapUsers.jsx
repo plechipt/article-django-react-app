@@ -7,7 +7,7 @@ import './Users.css'
 
 const MapUsers = ({ users: { allProfiles: allUsers }}) => {
     const [ currentPage, setCurrentPage ] = useState(1)
-    const [ postsPerPage, setPostsPerPage ] = useState(6)
+    const [ postsPerPage ] = useState(6)
 
     //Get current posts
     const indexOfLastPost = currentPage * postsPerPage

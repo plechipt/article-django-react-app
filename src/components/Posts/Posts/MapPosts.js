@@ -8,7 +8,7 @@ const MapPosts = ({ filteredData, searchInput }) => {
     const { postFilter: { filteredPosts }} = filteredData
 
     const [ currentPage, setCurrentPage ] = useState(1)
-    const [ postsPerPage, setPostsPerPage ] = useState(5)
+    const [ postsPerPage ] = useState(5)
      
     //Get current posts
     const indexOfLastPost = currentPage * postsPerPage
