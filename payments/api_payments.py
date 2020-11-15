@@ -7,10 +7,9 @@ from graphene_django.types import DjangoObjectType
 from graphene_django.settings import *
 
 
-#get both stripe key from environment variables
+#get both stripe keys from environment variables
 STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY') 
 STRIPE_LIVE_SECRET_KEY = os.environ.get('STRIPE_LIVE_SECRET_KEY') 
-
 
 def return_urls():
     local_base_url = 'http://localhost:3000'
