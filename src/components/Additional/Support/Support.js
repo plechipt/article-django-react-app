@@ -10,7 +10,7 @@ import './Support.css'
 
 const STRIPE_TEST_PUBLIC_KEY = 'pk_test_51HmaY7FJBInLPu36NfIu5fFdctsFQ3QOjUanAwK9HcXDCimTLT6AjfDC7CbKEwTjP1T4iMO4PF50hHHyz5vzqXHE00YimLS7KJ'
 const STRIPE_LIVE_PUBLIC_KEY = 'pk_live_51HmaY7FJBInLPu36iHG7lH0HqDSvngef74KBhndAFe5xAUg2PCamm76bsVdFKxsbWnmQEsvWCS1uJhTJhgJLg9uw006u4mHPlV'
-const stripePromise = loadStripe(STRIPE_LIVE_PUBLIC_KEY)
+const stripePromise = loadStripe(STRIPE_TEST_PUBLIC_KEY)
 
 const Support = () => {
   const [ errorMessage, setErrorMessage ] = useState(false) 
