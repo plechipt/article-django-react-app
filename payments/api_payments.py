@@ -20,11 +20,10 @@ def return_urls():
 
 
 class CheckoutSession(graphene.Mutation):
-    message = graphene.String()
+    session = graphene.JSONString()
 
     @staticmethod
     def mutate(root, info, input=None):
-        message = ''
         stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
 
         #get urls
@@ -47,5 +46,4 @@ class CheckoutSession(graphene.Mutation):
             cancel_url=urls[1],
         )
 
-        message = 'Success'
-        return CheckoutSession(message=message)
+        return CheckoutSession(session=session)
