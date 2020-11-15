@@ -36,13 +36,7 @@ class CreateCheckoutSession(graphene.Mutation):
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[{
-                'price_data': {
-                    'currency': 'usd',
-                    'product_data': {
-                        'name': 'Coffee',
-                    },
-                    'unit_amount': 2000,
-                },
+                'price': 'price_1Hn5ncFJBInLPu362CpNESpw',
                 'quantity': 1,
             }],
             mode='payment',
