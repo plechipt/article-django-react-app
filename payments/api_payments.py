@@ -7,6 +7,11 @@ from graphene_django.types import DjangoObjectType
 from graphene_django.settings import *
 
 
+#get both stripe key from environment variables
+STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY') 
+STRIPE_LIVE_SECRET_KEY = os.environ.get('STRIPE_LIVE_SECRET_KEY') 
+
+
 def return_urls():
     local_base_url = 'http://localhost:3000'
     heroku_base_url = 'https://article-django-react-app.herokuapp.com'
@@ -19,12 +24,12 @@ def return_urls():
         return [f'{heroku_base_url}/support-success', f'{heroku_base_url}/support']
 
 
-class CheckoutSession(graphene.Mutation):
+class CreateCheckoutSession(graphene.Mutation):
     session = graphene.JSONString()
 
     @staticmethod
     def mutate(root, info, input=None):
-        stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
+        stripe.api_key = STRIPE_LIVE_SECRET_KEY
 
         #get urls
         urls = return_urls()
@@ -46,4 +51,4 @@ class CheckoutSession(graphene.Mutation):
             cancel_url=urls[1],
         )
 
-        return CheckoutSession(session=session)
+        return CreateCheckoutSession(session=session)

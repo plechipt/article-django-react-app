@@ -3,7 +3,7 @@ from graphql_auth.schema import UserQuery, MeQuery
 from graphql_auth import mutations
 
 from users.api_users import AuthMutation 
-from payments.api_payments import CheckoutSession
+from payments.api_payments import CreateCheckoutSession
 
 from users.api_messages import (
    CustomUserType, CustomUser, 
@@ -60,7 +60,7 @@ class Mutation(AuthMutation, graphene.ObjectType):
    query_user_messages = QueryUserMessages.Field()
 
    #payment 
-   checkout_session = CheckoutSession.Field()
+   create_checkout_session = CreateCheckoutSession.Field()
 
 
 

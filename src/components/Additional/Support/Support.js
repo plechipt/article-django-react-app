@@ -3,16 +3,18 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Container, Header, Button } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { Message } from 'semantic-ui-react'
-import { CHECKOUT_SESSION_MUTATION } from '../../Api/payment'
+import { CREATE_CHECKOUT_SESSION_MUTATION } from '../../Api/payment'
 
 import './Support.css'
 
-const STRIPE_PUBLIC_KEY = 'pk_test_51HmaY7FJBInLPu36NfIu5fFdctsFQ3QOjUanAwK9HcXDCimTLT6AjfDC7CbKEwTjP1T4iMO4PF50hHHyz5vzqXHE00YimLS7KJ'
-const stripePromise = loadStripe(STRIPE_PUBLIC_KEY)
+
+const STRIPE_TEST_PUBLIC_KEY = 'pk_test_51HmaY7FJBInLPu36NfIu5fFdctsFQ3QOjUanAwK9HcXDCimTLT6AjfDC7CbKEwTjP1T4iMO4PF50hHHyz5vzqXHE00YimLS7KJ'
+const STRIPE_LIVE_PUBLIC_KEY = 'pk_live_51HmaY7FJBInLPu36iHG7lH0HqDSvngef74KBhndAFe5xAUg2PCamm76bsVdFKxsbWnmQEsvWCS1uJhTJhgJLg9uw006u4mHPlV'
+const stripePromise = loadStripe(STRIPE_TEST_PUBLIC_KEY)
 
 const Support = () => {
   const [ errorMessage, setErrorMessage ] = useState(false) 
-  const [ createCheckoutSession ] = useMutation(CHECKOUT_SESSION_MUTATION);
+  const [ createCheckoutSession ] = useMutation(CREATE_CHECKOUT_SESSION_MUTATION);
 
   const handleOnClick = async (event) => {
     // Get Stripe.js instance
@@ -20,7 +22,7 @@ const Support = () => {
 
     // Call your backend to create the Checkout Session
     const response = await createCheckoutSession()
-    let { data: { checkoutSession: { session }}} = response 
+    let { data: { createCheckoutSession: { session }}} = response 
 
     //string to object
     session = JSON.parse(session)

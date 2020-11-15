@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const CHECKOUT_SESSION_MUTATION = gql`
+export const CREATE_CHECKOUT_SESSION_MUTATION = gql`
     mutation {
-        checkoutSession {
+        createCheckoutSession {
             session
         }
     }
