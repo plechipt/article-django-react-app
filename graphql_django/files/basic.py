@@ -17,6 +17,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'corsheaders',
     'stripe',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
 
     'graphene_django',
     'graphql_auth',
