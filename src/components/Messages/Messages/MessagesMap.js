@@ -9,6 +9,8 @@ const MessagesMap = ({ messagesData: { queryUserMessages: { messages }}, current
     return (
         <div className="messages-container">
             {messages.map(({ id, content, messaged, user: { username } }) => {
+                console.log(messaged)
+
                 return (
                     <Message 
                         key={id} 
