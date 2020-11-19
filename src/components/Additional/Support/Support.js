@@ -41,7 +41,7 @@ const Support = () => {
     <>
       {errorMessage ? (
         <Message
-          className=""
+          className="error-message-payment-container"
           error
           header="Payment was not successful"
         />

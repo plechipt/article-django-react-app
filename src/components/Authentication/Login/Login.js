@@ -32,7 +32,7 @@ const Login = () => {
     }, [loginData]) 
     
     //if login was successful
-    useEffect(() => {
+    useEffect(async () => {
         if (loginData) {
             
             if (loginData.tokenAuth.success === true) {
@@ -41,11 +41,10 @@ const Login = () => {
                 Cookies.set('token', token, { expires: THIRTY_DAYS })
 
                 //if user doesnt have profile -> create new one
-                checkUserProfile({ variables: { user: usernameInput }})
+                await checkUserProfile({ variables: { user: usernameInput }})
                 
                 history.push('/posts')
                 window.location.reload(false);
-                history.push('/posts')
             }
         }
     }, [loginData])

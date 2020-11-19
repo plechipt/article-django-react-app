@@ -13,8 +13,8 @@ const EditDeleteButtons = ({ id, detailData, currentUser }) => {
     const [ postDelete ] = useMutation(POST_DELETE_MUTATION)
     
     //delete post here
-    const handleOnDelete = () => {
-        postDelete({ variables: { id: id } })
+    const handleOnDelete = async () => {
+        await postDelete({ variables: { id: id } })
         history.push('/posts')
     }
 

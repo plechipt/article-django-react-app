@@ -50,12 +50,12 @@ const Register = () => {
     }
   }, [data])
   
-  const handleOnClick = (event) => {
+  const handleOnClick = async (event) => {
     //if username and email and password and confirm passwowrd are filled and user hit enter or create button
     if (
       (usernameInput !== '' && emailInput && passwordInput !== '' && passwordConfirmInput !== '')
       && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
-        registerUser({ variables: {
+        await registerUser({ variables: {
           username: usernameInput, email: emailInput,
           password1: passwordInput, password2: passwordConfirmInput
       }})
