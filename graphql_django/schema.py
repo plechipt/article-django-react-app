@@ -63,7 +63,6 @@ class Mutation(AuthMutation, graphene.ObjectType):
    create_checkout_session = CreateCheckoutSession.Field()
 
 
-
 #Query for users and posts
 class Query(UserQuery, MeQuery, graphene.ObjectType):
    all_posts = graphene.List(PostType)
