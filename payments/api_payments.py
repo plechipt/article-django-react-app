@@ -32,7 +32,7 @@ class CreateCheckoutSession(graphene.Mutation):
 
         #get urls
         urls = return_urls()
-        
+
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[{

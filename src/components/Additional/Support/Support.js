@@ -24,7 +24,7 @@ const Support = () => {
     const response = await createCheckoutSession()
     let { data: { createCheckoutSession: { session }}} = response 
 
-    //string to object
+    // String to object
     session = JSON.parse(session)
 
     // When the customer clicks on the button, redirect them to Checkout.
@@ -41,7 +41,7 @@ const Support = () => {
     <>
       {errorMessage ? (
         <Message
-          className="error-message-payment-container"
+          className=""
           error
           header="Payment was not successful"
         />

@@ -13,13 +13,13 @@ INSTALLED_APPS = [
     'users',
     'payments',
 
-    'django_filters',
     'django_extensions',
     'corsheaders',
     'stripe',
     'django_otp',
     'django_otp.plugins.otp_totp',
 
+    'django_filters',
     'graphene_django',
     'graphql_auth',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',

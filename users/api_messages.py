@@ -45,13 +45,7 @@ class CreateMessage(graphene.Mutation):
       if input.content == '':
          message = "Message must not be empty!"
          return CreateMessage(message=message)
-
-
-      messages = Message.objects.all()
-
-      for message in messages:
-         print(message.messaged)
-
+         
       #get the info
       user = CustomUser.objects.get(username=input.user)
       chat_user = CustomUser.objects.get(username=input.chat_user)

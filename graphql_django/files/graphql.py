@@ -1,3 +1,4 @@
+from datetime import timedelta
 
 GRAPHENE = {
     'MIDDLEWARE': [
@@ -12,10 +13,9 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 GRAPHQL_JWT = {
-
-    #it keeps expiring on frontend
-    #"JWT_VERIFY_EXPIRATION": True,
-    #"JWT_LONG_RUNNING_REFRESH_TOKEN": True, #tokens refresh
+    "JWT_VERIFY_EXPIRATION": True,
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=15),
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": False,
     
     "JWT_ALLOW_ANY_CLASSES": [
         "graphql_auth.mutations.Register",

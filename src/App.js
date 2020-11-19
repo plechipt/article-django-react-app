@@ -78,7 +78,7 @@ function App () {
         <div>
         {(tokenData) ? (
           <>
-            {/*check if verification was successfull and user from cookies is same from backend*/}
+            {/*check if verification was successsful and user from cookies is same from backend*/}
             {(loading === false && allowUserToEnter) ? (
               <Switch>
                 <Route path="/posts" component={() => <Posts />} />

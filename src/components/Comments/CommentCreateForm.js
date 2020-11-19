@@ -27,7 +27,6 @@ const CommentCreateForm = ({ id, currentUser }) => {
 
             else {
                 setErrorMessage(true)
-                console.log('You can post 3 posts per minute')
             }
 
         }

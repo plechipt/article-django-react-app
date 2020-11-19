@@ -29,3 +29,33 @@
     margin-top: 5rem !important;
     width: 25%;
 }
+
+@media all and (max-width: 1400px) {
+    .support-container {
+        width: 60% !important;
+    }
+}
+
+@media all and (max-width: 1300px) {
+    .support-container {
+        width: 70% !important;
+    }
+}
+
+@media all and (max-width: 1000px) {
+    .support-container {
+        width: 80% !important;
+    }
+}
+
+@media all and (max-width: 863px) {
+    .profile-message-button {
+        margin-top: 1rem !important;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .support-container {
+        width: 90% !important;
+    }
+}

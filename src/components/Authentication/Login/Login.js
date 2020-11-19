@@ -7,6 +7,9 @@ import Cookies from 'js-cookie'
 import { USER_LOGIN_MUTATION, USER_CHECK_PROFILE_MUTATION } from '../../Api/user'
 import './Login.css'
 
+
+const THIRTY_DAYS = 30
+
 const Login = () => {
     const history = useHistory('')
 
@@ -34,7 +37,8 @@ const Login = () => {
             
             if (loginData.tokenAuth.success === true) {
                 const token = loginData.tokenAuth.token
-                Cookies.set('token', token, { expires: 1 })
+
+                Cookies.set('token', token, { expires: THIRTY_DAYS })
 
                 //if user doesnt have profile -> create new one
                 checkUserProfile({ variables: { user: usernameInput }})
