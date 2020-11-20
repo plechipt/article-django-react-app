@@ -11,6 +11,7 @@ const API_PATH = process.env.REACT_APP_API_PATH
 
 const apiClient = new ApolloClient({
   uri: `https://article-django-react-app.herokuapp.com/${API_PATH}/`,
+  //credentials: "include"
 })
 
 ReactDOM.render(

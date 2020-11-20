@@ -93,7 +93,7 @@ const Register = () => {
           <input
             onChange={event => setUsernameInput(event.target.value)}
             value={usernameInput}
-            autocomplete="one-time-code"
+            autoComplete="one-time-code"
             placeholder='Username'
             maxLength="40"
             autoFocus 
@@ -104,7 +104,7 @@ const Register = () => {
           <input
             onChange={event => setEmailInput(event.target.value)}
             value={emailInput}
-            autocomplete="one-time-code"
+            autoComplete="one-time-code"
             maxLength="50"
             placeholder='Email' />
         </Form.Field>
@@ -113,7 +113,7 @@ const Register = () => {
           <input
             onChange={event => setPasswordInput(event.target.value)}
             value={passwordInput}
-            autocomplete="one-time-code"
+            autoComplete="one-time-code"
             type="password"
             maxLength="30"
             placeholder='Password' />
@@ -123,7 +123,7 @@ const Register = () => {
           <input
             onChange={event => setPasswordConfirmInput(event.target.value)}
             value={passwordConfirmInput}
-            autocomplete="one-time-code"
+            autoComplete="one-time-code"
             type="password"
             maxLength="30"
             placeholder='Confirm Password' />

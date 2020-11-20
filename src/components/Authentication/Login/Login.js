@@ -8,7 +8,7 @@ import { USER_LOGIN_MUTATION, USER_CHECK_PROFILE_MUTATION } from '../../Api/user
 import './Login.css'
 
 
-const THIRTY_DAYS = 30
+const SEVEN_DAYS = 7
 
 const Login = () => {
     const history = useHistory('')
@@ -32,21 +32,23 @@ const Login = () => {
     }, [loginData]) 
     
     //if login was successful
-    useEffect(async () => {
-        if (loginData) {
-            
-            if (loginData.tokenAuth.success === true) {
-                const token = loginData.tokenAuth.token
-
-                Cookies.set('token', token, { expires: THIRTY_DAYS })
-
-                //if user doesnt have profile -> create new one
-                await checkUserProfile({ variables: { user: usernameInput }})
-                
-                history.push('/posts')
-                window.location.reload(false);
+    useEffect(() => {
+        const afterSuccessfulLogin = async () => {
+            if (loginData) {
+                if (loginData.tokenAuth.success === true) {
+                    const token = loginData.tokenAuth.refreshToken
+    
+                    Cookies.set('refreshToken', token, { expires: SEVEN_DAYS  })
+    
+                    //if user doesnt have profile -> create new one
+                    await checkUserProfile({ variables: { user: usernameInput }})
+                    
+                    history.push('/posts')
+                    window.location.reload(false);
+                }
             }
         }
+        afterSuccessfulLogin()
     }, [loginData])
    
     const handleOnSubmit = async (event) => {

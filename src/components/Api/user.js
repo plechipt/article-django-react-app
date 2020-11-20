@@ -40,16 +40,27 @@ export const USER_LOGIN_MUTATION = gql`
             success
             errors
             token
+            refreshToken
         }   
     }
 `
 
-export const USER_REFRESH_TOKEN_MUTATION = gql`
+export const USER_VERIFY_TOKEN_MUTATION = gql`
     mutation verifyToken ($token: String!) {
         verifyToken(token: $token) {
             success
             errors
             payload 
+        }
+    }
+`
+
+export const USER_REFRESH_TOKEN_MUTATION = gql`
+    mutation refreshToken ($refreshToken: String!) {
+        refreshToken (refreshToken: $refreshToken) {
+            token
+            success
+            errors
         }
     }
 `

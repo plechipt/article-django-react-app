@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks'
 import Cookies from 'js-cookie'
 
 import './App.css'
-import { USER_REFRESH_TOKEN_MUTATION } from './components/Api/user'
+import { USER_VERIFY_TOKEN_MUTATION } from './components/Api/user'
 
 //Additional Components
 //import Welcome from './components/Additional/Welcome/Welcome'
@@ -40,7 +40,7 @@ function App () {
   const [ allowUserToEnter, setAllowUserToEnter ]= useState(false)
   const [ darkMode, setDarkMode ] = useState(false)
 
-  const [ verifyToken, { data: tokenData }] = useMutation(USER_REFRESH_TOKEN_MUTATION)
+  const [ verifyToken, { data: tokenData }] = useMutation(USER_VERIFY_TOKEN_MUTATION)
 
   //verify user's token from cookies
   useEffect(() => {
