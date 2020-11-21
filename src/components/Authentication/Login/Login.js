@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 import { USER_LOGIN_MUTATION, USER_CHECK_PROFILE_MUTATION } from '../../Api/user'
+import { setAccessToken } from '../../Additional/accessToken'
 import './Login.css'
 
 
@@ -36,15 +37,16 @@ const Login = () => {
         const afterSuccessfulLogin = async () => {
             if (loginData) {
                 if (loginData.tokenAuth.success === true) {
-                    const token = loginData.tokenAuth.refreshToken
-    
-                    Cookies.set('refreshToken', token, { expires: SEVEN_DAYS  })
-    
+                    const { tokenAuth: { token: accessToken, refreshToken }} = loginData
+
+                    //set token to httponly cookie
+                    Cookies.set('token', accessToken, { expires: SEVEN_DAYS })
+
                     //if user doesnt have profile -> create new one
                     await checkUserProfile({ variables: { user: usernameInput }})
                     
-                    history.push('/posts')
-                    window.location.reload(false);
+                    //history.push('/posts')
+                    //window.location.reload(false);
                 }
             }
         }

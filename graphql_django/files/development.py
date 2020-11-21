@@ -40,7 +40,6 @@ CORS_ORIGIN_WHITELIST = (
 #allow token to be included in header of response
 CORS_ALLOW_CREDENTIALS = True
 
-
 WSGI_APPLICATION = 'graphql_django.wsgi.application'
 ROOT_URLCONF = 'graphql_django.urls'
 

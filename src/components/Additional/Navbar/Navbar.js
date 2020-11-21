@@ -3,10 +3,11 @@ import { Menu, Segment } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
+import { getAccessToken } from '../accessToken'
 import './Navbar.css'
 
 const Navbar = ({ currentUser }) => {
-    const token = Cookies.get('token')
+    const token = getAccessToken()
 
     const history = useHistory()
     const [ activeItem, setActiveItem ] = useState()

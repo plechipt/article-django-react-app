@@ -12,6 +12,7 @@ import Navbar from './components/Additional/Navbar/Navbar'
 import Users from './components/Additional/Users/Users'
 import Support from './components/Additional/Support/Support'
 import SupportSuccess from './components/Additional/Support/SupportSuccess'
+import { getAccessToken } from './components/Additional/accessToken'
 
 //Authentication
 import Login from './components/Authentication/Login/Login'
@@ -30,7 +31,7 @@ import Profile from './components/Profiles/Profile'
 import MessagesContainer from './components/Messages/Messages/MessagesContainer'
 
 function App () {
-  const token = Cookies.get('token')
+  const token = getAccessToken()
 
   //current logged in user
   const [ currentUser, setCurrentUser ] = useState('')
@@ -42,44 +43,11 @@ function App () {
 
   const [ verifyToken, { data: tokenData }] = useMutation(USER_VERIFY_TOKEN_MUTATION)
 
-  //verify user's token from cookies
-  useEffect(() => {
-    const tokenVerifycation = () => {
-      if (token) {
-        setLoading(true)
-        verifyToken({ variables: { token: token } })
-      }
-    }
-    tokenVerifycation()
-  }, [token])
-  
-  useEffect(() => {
-    if (tokenData) {
-      const { verifyToken: { success, payload }} = tokenData
-
-      //if success is true and the user from backend is same in frontend
-      if (success === true) {
-        setLoading(false)
-        setDataToken(tokenData)
-        setCurrentUser(payload.username)
-        setAllowUserToEnter(true)
-      }
-
-      else {
-        setAllowUserToEnter(false)
-
-      }
-    }
-  }, [tokenData])
-
   return (
     <div className="light-mode">
       <Navbar currentUser={currentUser} />
         <div>
-        {(tokenData) ? (
           <>
-            {/*check if verification was successsful and user from cookies is same from backend*/}
-            {(loading === false && allowUserToEnter) ? (
               <Switch>
                 <Route path="/posts" component={() => <Posts />} />
                 <Route path="/users" component={() => <Users />} />
@@ -90,22 +58,10 @@ function App () {
                 <Route path="/editPost/:id" component={() => <PostEdit currentUser={currentUser} />} />
                 <Route path="/createPost" component={() => <PostCreate currentUser={currentUser} />} />
                 <Route path="/:id" component={() => <PostDetail currentUser={currentUser} />} />
-
-              </Switch>  
-            ) : (
-              <h1 align="center">Failed to connect</h1>
-            ) }
-          </>
-        ) : ( 
-          <>
-            {loading === false ? (
-              <Switch>
                 <Route path="/register" component={() => <Register />} />
                 <Route path="/" component={() => <Login />} />
-              </Switch>
-            ) : null}
+              </Switch>  
           </>
-        )}
       </div>
     </div>
   );
