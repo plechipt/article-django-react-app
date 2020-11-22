@@ -1,6 +1,6 @@
 import graphene
+import graphql_jwt
 from graphql_auth import mutations
-
 
 class AuthMutation(graphene.ObjectType):
    register = mutations.Register.Field()
@@ -21,3 +21,13 @@ class AuthMutation(graphene.ObjectType):
    verify_token = mutations.VerifyToken.Field()
    refresh_token = mutations.RefreshToken.Field()
    revoke_token = mutations.RevokeToken.Field() 
+
+   #delete JWT token
+   #delete_token_cookie = graphql_jwt.DeleteJSONWebTokenCookie.Field()
+   #delete_refresh_token_cookie = graphql_jwt.DeleteRefreshTokenCookie.Field()
+
+
+
+
+
+ 

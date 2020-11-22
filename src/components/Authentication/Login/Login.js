@@ -11,8 +11,6 @@ import './Login.css'
 const SEVEN_DAYS = 7
 
 const Login = () => {
-    const history = useHistory('')
-
     const [ failedToLogin, setFailedToLogin ] = useState('') 
     const [ allowButton, setAllowButton ] = useState(false)
     

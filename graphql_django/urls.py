@@ -12,13 +12,8 @@ from graphql_jwt.decorators import jwt_cookie
 from users.models import CustomUser
 from .schema import schema
 
-#from django_otp.admin import OTPAdminSite
-#admin.site.__class__ = OTPAdminSite
 
-
-#get ADMIN_PATH env variable
 ADMIN_PATH = os.environ.get('ADMIN_PATH')
-API_PATH = os.environ.get('REACT_APP_API_PATH')
 
 urlpatterns = [
     path(f'{ADMIN_PATH}/', admin.site.urls),

@@ -29,7 +29,6 @@ export const USER_REGISTER_MUTATION = gql`
         register (email: $email, username: $username, password1: $password1, password2: $password2) {
             success
             errors
-            token
         }
     }
 `
@@ -39,8 +38,6 @@ export const USER_LOGIN_MUTATION = gql`
         tokenAuth (username: $username, password: $password) {
             success
             errors
-            token
-            refreshToken
         }   
     }
 `

@@ -8,11 +8,11 @@ Article app with decent features
 
 ## Technologies used
 - On backend Django with GraphQL
-- On frontend React
+- On frontend React with Apollo
 
 ## Features
 #### Users
-- Authentication
+- JWT Authentication
 - Listing all users
 - Pagination
 #### Posts
