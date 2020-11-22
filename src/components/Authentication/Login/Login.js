@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 import { USER_LOGIN_MUTATION, USER_CHECK_PROFILE_MUTATION } from '../../Api/user'
-import { setAccessToken } from '../../Additional/accessToken'
 import './Login.css'
 
 
@@ -23,6 +22,7 @@ const Login = () => {
     const [ usernameInput, setUsernameInput ] = useState('')
     const [ passwordInput, setPasswordInput ] = useState('')
     
+    
     //if login wasn't successful
     useEffect(() => {
         if (loginData) {
@@ -37,10 +37,6 @@ const Login = () => {
         const afterSuccessfulLogin = async () => {
             if (loginData) {
                 if (loginData.tokenAuth.success === true) {
-                    const { tokenAuth: { token: accessToken, refreshToken }} = loginData
-
-                    //set token to httponly cookie
-                    Cookies.set('token', accessToken, { expires: SEVEN_DAYS })
 
                     //if user doesnt have profile -> create new one
                     await checkUserProfile({ variables: { user: usernameInput }})

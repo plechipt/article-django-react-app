@@ -3,12 +3,9 @@ import { Menu, Segment } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
-import { getAccessToken } from '../accessToken'
 import './Navbar.css'
 
 const Navbar = ({ currentUser }) => {
-    const token = getAccessToken()
-
     const history = useHistory()
     const [ activeItem, setActiveItem ] = useState()
 
@@ -28,7 +25,6 @@ const Navbar = ({ currentUser }) => {
         <div className="navbar-container">
             <Segment inverted>
                 <Menu inverted secondary>
-                    {token ? (
                         <>
                             <Menu.Item
                                 name="home"
@@ -82,26 +78,6 @@ const Navbar = ({ currentUser }) => {
                                 />
                             </Menu.Menu>
                         </>
-                    ) : (
-                        <Menu.Menu position="right">
-                            <Menu.Item
-                                name="login"
-                                active={activeItem === 'login'}
-                                onClick={() => {
-                                    handleItemClick('login')
-                                    history.push('/login')
-                                }}
-                            />
-                            <Menu.Item
-                                name="register"
-                                active={activeItem === 'register'}
-                                onClick={() => {
-                                    handleItemClick('register')
-                                    history.push('/register')
-                                }}
-                            />
-                        </Menu.Menu>
-                    )}
                 </Menu>
             </Segment>
         </div>

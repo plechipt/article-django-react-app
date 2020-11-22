@@ -20,7 +20,7 @@ const Support = () => {
     // Get Stripe.js instance
     const stripe = await stripePromise;
 
-    // Call your backend to create the Checkout Session
+    // Call backend to create the Checkout Session
     const response = await createCheckoutSession()
     let { data: { createCheckoutSession: { session }}} = response 
 

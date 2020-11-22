@@ -12,7 +12,6 @@ import Navbar from './components/Additional/Navbar/Navbar'
 import Users from './components/Additional/Users/Users'
 import Support from './components/Additional/Support/Support'
 import SupportSuccess from './components/Additional/Support/SupportSuccess'
-import { getAccessToken } from './components/Additional/accessToken'
 
 //Authentication
 import Login from './components/Authentication/Login/Login'
@@ -31,10 +30,8 @@ import Profile from './components/Profiles/Profile'
 import MessagesContainer from './components/Messages/Messages/MessagesContainer'
 
 function App () {
-  const token = getAccessToken()
-
   //current logged in user
-  const [ currentUser, setCurrentUser ] = useState('')
+  const [ currentUser, setCurrentUser ] = useState('admin')
   const [ dataToken, setDataToken ] = useState({})
 
   const [ loading, setLoading ] = useState(false)

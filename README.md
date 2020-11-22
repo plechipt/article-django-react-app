@@ -5,13 +5,10 @@ Article app with decent features
 
 #### **Link: https://article-django-react-app.herokuapp.com/**
 
-<br/>
 
 ## Technologies used
 - On backend Django with GraphQL
 - On frontend React
-
-<br/>
 
 ## Features
 #### Users
