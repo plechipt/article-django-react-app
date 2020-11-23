@@ -4,11 +4,14 @@ GRAPHENE = {
     'MIDDLEWARE': [
         'graphql_jwt.middleware.JSONWebTokenMiddleware',
     ],
-    "SUBSCRIPTION_PATH": "/ws/graphql"  # The path you configured in `routing.py`, including a leading slash.
 }
 
 AUTHENTICATION_BACKENDS = [
+<<<<<<< HEAD
     "graphql_auth.backends.GraphQLAuthBackend"
+=======
+    'graphql_jwt.backends.JSONWebTokenBackend',
+>>>>>>> b4b246cc3ab4610ce2f82bfb34f096ba9cab66ce
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -17,7 +20,7 @@ GRAPHQL_JWT = {
     "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
     'JWT_EXPIRATION_DELTA': timedelta(minutes=15),
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
-    
+
     "JWT_ALLOW_ANY_CLASSES": [
         "graphql_auth.mutations.Register",
         "graphql_auth.mutations.VerifyAccount",
@@ -29,7 +32,7 @@ GRAPHQL_JWT = {
         "graphql_auth.mutations.RefreshToken",
         "graphql_auth.mutations.RevokeToken",
         "graphql_auth.mutations.VerifySecondaryEmail",
-    ],
+    ]
 }
 
 #Subscriptions
