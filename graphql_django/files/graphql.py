@@ -8,8 +8,8 @@ GRAPHENE = {
 }
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
     "graphql_auth.backends.GraphQLAuthBackend"
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 GRAPHQL_JWT = {
