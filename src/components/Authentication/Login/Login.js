@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Button, Form, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
-import Cookies from 'js-cookie'
 
 import { USER_LOGIN_MUTATION, USER_CHECK_PROFILE_MUTATION } from '../../Api/user'
 import './Login.css'
 
 
-const SEVEN_DAYS = 7
-
 const Login = () => {
+    const history = useHistory()
     const [ failedToLogin, setFailedToLogin ] = useState('') 
     const [ allowButton, setAllowButton ] = useState(false)
     
@@ -19,7 +17,6 @@ const Login = () => {
 
     const [ usernameInput, setUsernameInput ] = useState('')
     const [ passwordInput, setPasswordInput ] = useState('')
-    
     
     //if login wasn't successful
     useEffect(() => {
@@ -35,12 +32,11 @@ const Login = () => {
         const afterSuccessfulLogin = async () => {
             if (loginData) {
                 if (loginData.tokenAuth.success === true) {
-
                     //if user doesnt have profile -> create new one
                     await checkUserProfile({ variables: { user: usernameInput }})
                     
-                    //history.push('/posts')
-                    //window.location.reload(false);
+                    history.push('/posts')
+                    window.location.reload(false);
                 }
             }
         }

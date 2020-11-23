@@ -2,6 +2,7 @@ import time
 import graphene
 import datetime
 from django.utils import timezone
+from graphql_jwt.decorators import login_required
 
 from graphene_django.types import DjangoObjectType
 from django_graphql_ratelimit import ratelimit
@@ -29,7 +30,8 @@ class PostComment(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
-   @ratelimit(key="ip", rate="2/m", block=True)
+   @login_required
+   @ratelimit(key="ip", rate="3/m", block=True)
    def mutate(root, info, input=None):
       message = ''
       post = Post.objects.get(id=input.id)
@@ -66,6 +68,7 @@ class DeleteComment(graphene.Mutation):
    comment = graphene.Field(CommentType)
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       comment = Comment.objects.get(id=input.id)
       comment.delete()
