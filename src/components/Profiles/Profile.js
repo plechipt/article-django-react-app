@@ -3,7 +3,6 @@ import { Button, Form, Message } from 'semantic-ui-react'
 import { useHistory, useParams } from 'react-router-dom'
 import { USER_PROFILE_INFO_MUTATION, USER_UPDATE_MUTATION } from '../Api/user'
 import { useMutation } from '@apollo/react-hooks'
-import Cookies from 'js-cookie'
 
 import ProfileImage from './ProfileImages'
 import ProfileBodyButtons from './ProfileBodyButtons'
@@ -54,7 +53,6 @@ const Profile = ({ currentUser }) => {
 
     useEffect(() => {
         if (updateData !== undefined && updateData.profileUpdate.message === 'Success') {
-            Cookies.remove('token')
             history.push('/login')
             window.location.reload(false)
         }

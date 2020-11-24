@@ -1,6 +1,15 @@
 import { gql } from "@apollo/client";
 
 //Query
+
+export const USER_ME_QUERY = gql`
+    query {
+        me {
+            username
+        }
+    }
+`
+
 export const USER_LIST_QUERY = gql`
     query {
         allUsers {
@@ -39,6 +48,22 @@ export const USER_LOGIN_MUTATION = gql`
             success
             errors
         }   
+    }
+`
+
+export const USER_DELETE_ACCESS_TOKEN_MUTATION = gql`
+    mutation {
+        deleteTokenCookie {
+            deleted
+        }
+    }
+`
+
+export const USER_DELETE_REFRESH_TOKEN_MUTATION = gql`
+    mutation {
+        deleteRefreshTokenCookie {
+            deleted
+        }
     }
 `
 

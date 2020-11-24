@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { useMutation } from '@apollo/react-hooks'
-import Cookies from 'js-cookie'
+import { useQuery } from '@apollo/react-hooks'
 
 import './App.css'
-import { USER_VERIFY_TOKEN_MUTATION } from './components/Api/user'
+import { USER_ME_QUERY } from './components/Api/user'
 
 //Additional Components
 //import Welcome from './components/Additional/Welcome/Welcome'
@@ -31,20 +30,24 @@ import MessagesContainer from './components/Messages/Messages/MessagesContainer'
 
 function App () {
   //current logged in user
-  const [ currentUser, setCurrentUser ] = useState('admin')
-  const [ dataToken, setDataToken ] = useState({})
+  const [ currentUser, setCurrentUser ] = useState('')
+  const { data: meQuery, loading } = useQuery(USER_ME_QUERY)
 
-  const [ loading, setLoading ] = useState(false)
-  const [ allowUserToEnter, setAllowUserToEnter ]= useState(false)
-  const [ darkMode, setDarkMode ] = useState(false)
 
-  const [ verifyToken, { data: tokenData }] = useMutation(USER_VERIFY_TOKEN_MUTATION)
+  useEffect(() => {
+    if (meQuery) {
+      setCurrentUser(meQuery.me.username)
+    }
+  }, [meQuery]) 
+
+  console.log(meQuery, loading, currentUser)
 
   return (
     <div className="light-mode">
       <Navbar currentUser={currentUser} />
         <div>
-          <>
+          {currentUser && loading == false ? (
+            <>
               <Switch>
                 <Route path="/posts" component={() => <Posts />} />
                 <Route path="/users" component={() => <Users />} />
@@ -55,10 +58,18 @@ function App () {
                 <Route path="/editPost/:id" component={() => <PostEdit currentUser={currentUser} />} />
                 <Route path="/createPost" component={() => <PostCreate currentUser={currentUser} />} />
                 <Route path="/:id" component={() => <PostDetail currentUser={currentUser} />} />
-                <Route path="/register" component={() => <Register />} />
-                <Route path="/" component={() => <Login />} />
               </Switch>  
-          </>
+            </>
+          ) : (
+            <>
+              {loading == false ? (
+                <Switch>
+                  <Route path="/register" component={() => <Register />} />
+                  <Route path="/" component={() => <Login />} />
+                </Switch>
+              ) : null }
+            </>
+          )}
       </div>
     </div>
   );

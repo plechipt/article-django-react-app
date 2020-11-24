@@ -1,22 +1,28 @@
 import React, { useState } from 'react'
 import { Menu, Segment } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
+import { useMutation } from '@apollo/client'
 import Cookies from 'js-cookie'
 
+import { USER_DELETE_ACCESS_TOKEN_MUTATION, USER_DELETE_REFRESH_TOKEN_MUTATION } from '../../Api/user'
 import './Navbar.css'
 
 const Navbar = ({ currentUser }) => {
     const history = useHistory()
     const [ activeItem, setActiveItem ] = useState()
 
+    const [ deleteAccessToken ] = useMutation(USER_DELETE_ACCESS_TOKEN_MUTATION)
+    const [ deleteRefreshToken ] = useMutation(USER_DELETE_REFRESH_TOKEN_MUTATION)
+
     const handleItemClick = (name) => {
         setActiveItem(name)
     }
 
     const handleOnLogout = () => {
-        Cookies.remove('token')
+        deleteAccessToken()
+        deleteRefreshToken()
+
         history.push('/login')
-        //reset site
         window.location.reload(false);
     }
 
@@ -25,6 +31,7 @@ const Navbar = ({ currentUser }) => {
         <div className="navbar-container">
             <Segment inverted>
                 <Menu inverted secondary>
+                    {currentUser !== '' ? (
                         <>
                             <Menu.Item
                                 name="home"
@@ -78,6 +85,26 @@ const Navbar = ({ currentUser }) => {
                                 />
                             </Menu.Menu>
                         </>
+                    ) : (
+                        <Menu.Menu position="right">
+                            <Menu.Item
+                                name="login"
+                                active={activeItem === 'login'}
+                                onClick={() => {
+                                    handleItemClick('login')
+                                    history.push('/login')
+                                }}
+                            />
+                            <Menu.Item
+                                name="register"
+                                active={activeItem === 'register'}
+                                onClick={() => {
+                                    handleItemClick('register')
+                                    history.push('/register')
+                                }}
+                            />
+                        </Menu.Menu>
+                    )}
                 </Menu>
             </Segment>
         </div>

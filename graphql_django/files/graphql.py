@@ -7,11 +7,7 @@ GRAPHENE = {
 }
 
 AUTHENTICATION_BACKENDS = [
-<<<<<<< HEAD
-    "graphql_auth.backends.GraphQLAuthBackend"
-=======
-    'graphql_jwt.backends.JSONWebTokenBackend',
->>>>>>> b4b246cc3ab4610ce2f82bfb34f096ba9cab66ce
+    "graphql_auth.backends.GraphQLAuthBackend",
     'django.contrib.auth.backends.ModelBackend',
 ]
 
