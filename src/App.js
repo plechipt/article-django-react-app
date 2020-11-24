@@ -30,23 +30,23 @@ import MessagesContainer from './components/Messages/Messages/MessagesContainer'
 
 function App () {
   //current logged in user
-  const [ currentUser, setCurrentUser ] = useState('')
-  const { data: meQuery, loading } = useQuery(USER_ME_QUERY)
+  const [ currentUser, setCurrentUser ] = useState(null)
+  const { data: meQuery, loading, client } = useQuery(USER_ME_QUERY)
 
 
   useEffect(() => {
-    if (meQuery) {
+    if (meQuery && meQuery.me) {
       setCurrentUser(meQuery.me.username)
     }
   }, [meQuery]) 
 
-  console.log(meQuery, loading, currentUser)
+  console.log(client)
 
   return (
     <div className="light-mode">
       <Navbar currentUser={currentUser} />
         <div>
-          {currentUser && loading == false ? (
+          {currentUser !== null && loading == false ? (
             <>
               <Switch>
                 <Route path="/posts" component={() => <Posts />} />

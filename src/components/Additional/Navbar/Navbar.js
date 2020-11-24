@@ -18,9 +18,9 @@ const Navbar = ({ currentUser }) => {
         setActiveItem(name)
     }
 
-    const handleOnLogout = () => {
-        deleteAccessToken()
-        deleteRefreshToken()
+    const handleOnLogout = async () => {
+        await deleteAccessToken()
+        await deleteRefreshToken()
 
         history.push('/login')
         window.location.reload(false);
@@ -31,7 +31,7 @@ const Navbar = ({ currentUser }) => {
         <div className="navbar-container">
             <Segment inverted>
                 <Menu inverted secondary>
-                    {currentUser !== '' ? (
+                    {currentUser !== null ? (
                         <>
                             <Menu.Item
                                 name="home"
