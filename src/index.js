@@ -11,7 +11,7 @@ import Cookies from 'js-cookie'
 
 
 const httpLink = createHttpLink({
-  uri: 'https://article-django-react-app.herokuapp.com',
+  uri: 'https://article-django-react-app.herokuapp.com/graphql/',
   credentials: 'include'
 })
 
