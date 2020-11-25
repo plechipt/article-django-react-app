@@ -28,7 +28,7 @@ stripe = "*"
 django-otp = "*"
 qrcode = "*"
 django-graphql-jwt = "==0.3.1"
-django-graphql-auth = "*"
+django-graphql-auth = "==0.3.1"
 
 [requires]
 python_version = "3.8"
