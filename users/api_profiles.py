@@ -1,5 +1,6 @@
 import graphene
 from graphene_django.types import DjangoObjectType
+from graphql_jwt.decorators import login_required
 
 from .models import CustomUser, Profile
 from .api_messages import CustomUserType
@@ -22,6 +23,7 @@ class ProfileInfo(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       message = ''
 
@@ -80,6 +82,7 @@ class UpdateUser(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       message = ''
 
@@ -153,6 +156,7 @@ class FollowProfile(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       message = ''
 
@@ -197,6 +201,7 @@ class UnfollowProfile(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       message = ''
       follower = CustomUser.objects.get(username=input.follower)

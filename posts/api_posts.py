@@ -1,6 +1,7 @@
 import graphene
 import datetime
 from graphene_django.types import DjangoObjectType
+from graphql_jwt.decorators import login_required
 
 from .models import Post 
 from users.models import CustomUser
@@ -24,6 +25,7 @@ class FindPost(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       message = ''
 
@@ -52,6 +54,7 @@ class AddPost(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       message = ''
       user = CustomUser.objects.get(username=input.user)
@@ -101,6 +104,7 @@ class DeletePost(graphene.Mutation):
    post = graphene.Field(PostType)
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       post = Post.objects.get(id=input.id)
       post.delete()
@@ -123,6 +127,7 @@ class EditPost(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       message = ''
 
@@ -166,6 +171,7 @@ class LikePost(graphene.Mutation):
    post = graphene.Field(PostType)
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       post = Post.objects.get(id=input.id)
       user = CustomUser.objects.get(username=input.user)
@@ -196,6 +202,7 @@ class UnlikePost(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       message = 'Success'
       post = Post.objects.get(id=input.id)
@@ -226,6 +233,7 @@ class FilterPost(graphene.Mutation):
    filtered_posts = graphene.List(PostType)
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       #filter post that starts with input in search bar
       filtered_posts = Post.objects.filter(title__startswith=input.title)

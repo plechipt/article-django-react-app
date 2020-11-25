@@ -13,7 +13,7 @@ STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY')
 STRIPE_LIVE_SECRET_KEY = os.environ.get('STRIPE_LIVE_SECRET_KEY') 
 
 def return_urls():
-    local_base_url = 'http://localhost:3000'
+    local_base_url = 'http://127.0.0.1:8000'
     heroku_base_url = 'https://article-django-react-app.herokuapp.com'
 
     #if DEBUG is on True -> return local urls, otherwise return urls on heroku

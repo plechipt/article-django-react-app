@@ -31,7 +31,7 @@ import MessagesContainer from './components/Messages/Messages/MessagesContainer'
 function App () {
   //current logged in user
   const [ currentUser, setCurrentUser ] = useState(null)
-  const { data: meQuery, loading, client } = useQuery(USER_ME_QUERY)
+  const { data: meQuery, loading } = useQuery(USER_ME_QUERY)
 
 
   useEffect(() => {
@@ -40,13 +40,12 @@ function App () {
     }
   }, [meQuery]) 
 
-  console.log(client)
 
   return (
     <div className="light-mode">
       <Navbar currentUser={currentUser} />
         <div>
-          {currentUser !== null && loading == false ? (
+          {currentUser && loading == false ? (
             <>
               <Switch>
                 <Route path="/posts" component={() => <Posts />} />

@@ -3,18 +3,6 @@ import graphql_jwt
 from graphql_auth import mutations
 
 
-class ObtainJSONWebToken(mutations.ObtainJSONWebToken):
-   class Arguments:
-      api_key = graphene.String()
-
-   @classmethod
-   def resolve(cls, root, info, **kwargs):
-      print(api_key)
-
-      return cls(user=info.context.user)
-
-
-
 class AuthMutation(graphene.ObjectType):
    register = mutations.Register.Field()
    verify_account = mutations.VerifyAccount.Field()

@@ -3,6 +3,7 @@ import datetime
 
 from graphql_auth import mutations
 from graphene_django.types import DjangoObjectType
+from graphql_jwt.decorators import login_required
 from django_graphql_ratelimit import ratelimit
 
 from .models import CustomUser, Profile, Message, ChatRoom
@@ -37,7 +38,8 @@ class CreateMessage(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
-   @ratelimit(key="ip", rate="20/m", block=True)
+   @login_required
+   @ratelimit(key="ip", rate="10/m", block=True)
    def mutate(root, info, input=None):
       #create date when message was messaged
       messaged = datetime.datetime.now().strftime('%d %B %Y, %H:%M')
@@ -78,6 +80,7 @@ class QueryUserMessages(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, input=None):
       message = ''
 

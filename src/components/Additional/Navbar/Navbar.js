@@ -4,7 +4,9 @@ import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import Cookies from 'js-cookie'
 
+
 import { USER_DELETE_ACCESS_TOKEN_MUTATION, USER_DELETE_REFRESH_TOKEN_MUTATION } from '../../Api/user'
+import { client } from '../../../index'
 import './Navbar.css'
 
 const Navbar = ({ currentUser }) => {
@@ -19,8 +21,12 @@ const Navbar = ({ currentUser }) => {
     }
 
     const handleOnLogout = async () => {
+        //delete JWT tokens
         await deleteAccessToken()
         await deleteRefreshToken()
+
+        //reset store
+        client.cache.reset()
 
         history.push('/login')
         window.location.reload(false);
@@ -31,7 +37,7 @@ const Navbar = ({ currentUser }) => {
         <div className="navbar-container">
             <Segment inverted>
                 <Menu inverted secondary>
-                    {currentUser !== null ? (
+                    {currentUser ? (
                         <>
                             <Menu.Item
                                 name="home"
