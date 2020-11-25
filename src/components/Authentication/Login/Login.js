@@ -97,7 +97,7 @@ const Login = () => {
                     />
                 </Form.Field>
                 <Form.Field>
-                    <p className="text-muted">Need an an account? <a href="/register" className="ml-2" >Sign up</a></p>
+                    <p className="text-muted">Need an account? <a href="/register" className="ml-2" >Sign up</a></p>
                 </Form.Field>
                 {/*If both fields were filled -> show undisabled button*/}
                 {(allowButton) ? (

@@ -24,7 +24,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      'X-CSRFToken': csrftoken
+      'X-CSRFToken': csrftoken,
     }
   }
 })
