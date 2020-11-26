@@ -26,6 +26,12 @@ ALLOWED_HOSTS = [
     'localhost:5000',
 ]
 
+
+#allow csrf token to be included in header of response
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+
 #allowed urls which can access api
 CORS_ORIGIN_WHITELIST = (
     'http://localhost',
@@ -37,8 +43,6 @@ CORS_ORIGIN_WHITELIST = (
     'https://article-django-react-app.herokuapp.com',
 )
 
-#allow csrf token to be included in header of response
-CORS_ALLOW_CREDENTIALS = True
 
 WSGI_APPLICATION = 'graphql_django.wsgi.application'
 ROOT_URLCONF = 'graphql_django.urls'
