@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "dee85c919e84ef5473ada76f9d54cc434ab44b6afc811d88c2405cb36561c658"
+            "sha256": "b3711e7d8308875c40a42285b8a9ac02c59c60e225f7e7fd9d4fe4739efcf47d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -288,11 +288,11 @@
         },
         "django-extensions": {
             "hashes": [
-                "sha256:6809c89ca952f0e08d4e0766bc0101dfaf508d7649aced1180c091d737046ea7",
-                "sha256:dc663652ac9460fd06580a973576820430c6d428720e874ae46b041fa63e0efa"
+                "sha256:7cd002495ff0a0e5eb6cdd6be759600905b4e4079232ea27618fc46bdd853651",
+                "sha256:c7f88625a53f631745d4f2bef9ec4dcb999ed59476393bdbbe99db8596778846"
             ],
             "index": "pypi",
-            "version": "==3.0.9"
+            "version": "==3.1.0"
         },
         "django-filter": {
             "hashes": [
@@ -304,19 +304,19 @@
         },
         "django-graphql-auth": {
             "hashes": [
-                "sha256:24824bd2affa67a2c65b3fd27995ccd612980b7cb6590bb69048bec0e7b7264a",
-                "sha256:51f03643de45569f54dde5cb54988e56fa3011c621f050086177cf5c2fe66938"
+                "sha256:88c8df2a65e1ac846ea9be65960353d853d34dfac8dee4222fdce008daa2080a",
+                "sha256:a4e1699053179c0567a060ed592cdd0883bf335a36a8968b97d910f6dde368d5"
             ],
             "index": "pypi",
-            "version": "==0.3.1"
+            "version": "==0.3.15"
         },
         "django-graphql-jwt": {
             "hashes": [
-                "sha256:2189f6d1a13b827d486780fa74a631a15e4f7f0235a3a87a487736b5b0dc4690",
-                "sha256:468e09b8ce67324fcba21dc33b7c1ea9d234bfc10df7cbfe9c5477be0302f933"
+                "sha256:bcf0882a492e2148cba7cba3c39cf57834f736a2c289b66852239faf9b59b61e",
+                "sha256:c9c611d98510b57146c21484478eae793249553af3766a593e8f25ce73d3255a"
             ],
             "index": "pypi",
-            "version": "==0.3.1"
+            "version": "==0.3.0"
         },
         "django-graphql-ratelimit": {
             "hashes": [

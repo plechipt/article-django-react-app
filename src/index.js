@@ -24,6 +24,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
+      'Host': 'domake.io',
       'X-CSRFToken': csrftoken,
     }
   }

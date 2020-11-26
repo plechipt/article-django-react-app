@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
 import { Menu, Segment } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
-import { useMutation } from '@apollo/client'
-import Cookies from 'js-cookie'
-
+import { useMutation, useApolloClient } from '@apollo/client'
 
 import { USER_DELETE_ACCESS_TOKEN_MUTATION, USER_DELETE_REFRESH_TOKEN_MUTATION } from '../../Api/user'
-import { client } from '../../../index'
 import './Navbar.css'
 
 const Navbar = ({ currentUser }) => {
     const history = useHistory()
     const [ activeItem, setActiveItem ] = useState()
-
+    
+    const client = useApolloClient()
     const [ deleteAccessToken ] = useMutation(USER_DELETE_ACCESS_TOKEN_MUTATION)
     const [ deleteRefreshToken ] = useMutation(USER_DELETE_REFRESH_TOKEN_MUTATION)
 
@@ -26,7 +24,7 @@ const Navbar = ({ currentUser }) => {
         await deleteRefreshToken()
 
         //reset store
-        client.cache.reset()
+        client.resetStore()
 
         history.push('/login')
         window.location.reload(false);
