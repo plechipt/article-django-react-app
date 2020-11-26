@@ -24,7 +24,7 @@ const PostEdit = ({ currentUser }) => {
         if (isNaN(id) === false) {
             postFind({variables: { id: id }})
         }
-    }, [id])
+    }, [id, postFind])
     
     //set title and textarea to set default value in forms
     useEffect(() => {

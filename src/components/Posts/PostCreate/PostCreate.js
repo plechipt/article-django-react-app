@@ -38,7 +38,7 @@ const PostCreate = ({ currentUser }) => {
                 setErrorMessage(message)
             }
         }
-    }, [postData])
+    }, [postData, history])
 
     //check if title and content were filled
     useEffect(() => {

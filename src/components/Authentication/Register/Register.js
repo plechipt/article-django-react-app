@@ -48,7 +48,7 @@ const Register = () => {
         history.push('/login')
       }
     }
-  }, [data])
+  }, [data, history])
   
   const handleOnClick = async (event) => {
     //if username and email and password and confirm passwowrd are filled and user hit enter or create button

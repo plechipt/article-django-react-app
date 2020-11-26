@@ -41,7 +41,7 @@ const Login = () => {
             }
         }
         afterSuccessfulLogin()
-    }, [loginData])
+    }, [loginData, checkUserProfile, history, usernameInput])
    
     const handleOnSubmit = async (event) => {
         //if username and password are filled and user hit enter or create button

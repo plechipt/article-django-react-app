@@ -45,7 +45,7 @@ function App () {
     <div className="light-mode">
       <Navbar currentUser={currentUser} />
         <div>
-          {currentUser && loading == false ? (
+          {currentUser && loading === false ? (
             <>
               <Switch>
                 <Route path="/posts" component={() => <Posts />} />
@@ -61,7 +61,7 @@ function App () {
             </>
           ) : (
             <>
-              {loading == false ? (
+              {loading === false ? (
                 <Switch>
                   <Route path="/register" component={() => <Register />} />
                   <Route path="/" component={() => <Login />} />

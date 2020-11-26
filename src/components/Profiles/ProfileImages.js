@@ -19,7 +19,7 @@ const ProfileImages = ({ userImage, onImageChange }) => {
 
     useEffect(() => {
         onImageChange(chosenImage)
-    }, [chosenImage])
+    }, [chosenImage, onImageChange])
 
     return (
         <div>

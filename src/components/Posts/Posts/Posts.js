@@ -15,7 +15,7 @@ const Posts = () => {
     //filter posts by user search bar input
     useEffect(() => {
         postFilter({ variables: { title: searchInput } })
-    }, [searchInput])
+    }, [searchInput, postFilter])
    
     return (
         <div>

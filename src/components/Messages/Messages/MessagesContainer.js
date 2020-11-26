@@ -14,7 +14,7 @@ const MessagesContainer = ({ currentUser }) => {
     //query all chat room messages
     useEffect(() => {
         queryUserMessages({ variables: {user: currentUser, chatUser: chatUser} })
-    }, [chatUser])
+    }, [chatUser, currentUser, queryUserMessages])
 
     
     return (

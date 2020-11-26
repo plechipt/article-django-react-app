@@ -32,7 +32,7 @@ const Profile = ({ currentUser }) => {
             }
         }
         getProfileInfo()
-    }, [user])
+    }, [user, profileInfo])
     
     useEffect(() => {
         if (profileData && profileData.profileInfo.message === 'Success') {
@@ -56,7 +56,7 @@ const Profile = ({ currentUser }) => {
             history.push('/login')
             window.location.reload(false)
         }
-    }, [updateData])
+    }, [updateData, history])
 
     const handleOnSubmit = (event) => {
         //if user hit enter or button
@@ -88,7 +88,7 @@ const Profile = ({ currentUser }) => {
                         />
                     ) : null}
                     <div className="media profile-media">
-                        <img className="rounded-circle profile-picture" src={require(`./${PATH_TO_PICTURES}/large/${profileData.profileInfo.profile.image}`)} />
+                        <img className="rounded-circle profile-picture" src={require(`./${PATH_TO_PICTURES}/large/${profileData.profileInfo.profile.image}`)} alt="" />
                         <div className="profile-body">
                         {user === currentUser ? (
                             <>

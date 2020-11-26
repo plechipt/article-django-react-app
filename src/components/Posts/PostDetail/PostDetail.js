@@ -32,7 +32,7 @@ const PostDetail = ({ currentUser }) => {
         if (isNaN(id) === false) {
             postFind({ variables: { id: id } })
         }
-    }, [id])
+    }, [id, postFind])
 
     
     return (
