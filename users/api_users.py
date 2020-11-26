@@ -1,7 +1,23 @@
 import graphene
 import graphql_jwt
 from graphql_auth import mutations
+from graphene.types.generic import GenericScalar
 
+
+class JSONWebTokenMixin:
+   payload = GenericScalar(required=False)
+   refresh_expires_in = graphene.Int(required=False)
+
+   @classmethod
+   def Field(cls, *args, **kwargs):
+      if not jwt_settings.JWT_HIDE_TOKEN_FIELDS:
+         cls._meta.fields["token"] = graphene.Field(graphene.String, required=False)
+         if jwt_settings.JWT_LONG_RUNNING_REFRESH_TOKEN:
+            cls._meta.fields["refresh_token"] = graphene.Field(
+               graphene.String, required=False,
+            )
+
+      return super().Field(*args, **kwargs)
 
 class AuthMutation(graphene.ObjectType):
    register = mutations.Register.Field()
