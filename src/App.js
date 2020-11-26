@@ -5,28 +5,11 @@ import { useQuery } from '@apollo/react-hooks'
 import './App.css'
 import { USER_ME_QUERY } from './components/Api/user'
 
-//Additional Components
-//import Welcome from './components/Additional/Welcome/Welcome'
-import Navbar from './components/Additional/Navbar/Navbar'
-import Users from './components/Additional/Users/Users'
-import Support from './components/Additional/Support/Support'
-import SupportSuccess from './components/Additional/Support/SupportSuccess'
-
-//Authentication
-import Login from './components/Authentication/Login/Login'
-import Register from './components/Authentication/Register/Register'
-
-//Posts
-import Posts from './components/Posts/Posts/Posts'
-import PostDetail from './components/Posts/PostDetail/PostDetail'
-import PostCreate from './components/Posts/PostCreate/PostCreate'
-import PostEdit from './components/Posts/PostEdit'
-
-//Profiles
-import Profile from './components/Profiles/Profile'
-
-//Messages 
-import MessagesContainer from './components/Messages/Messages/MessagesContainer'
+//import components from index.js
+import { 
+  Navbar, Users, Support, SupportSuccess, Login, Register,
+  Posts, PostDetail, PostCreate, PostEdit, Profile, MessagesContainer
+} from './components';
 
 function App () {
   //current logged in user
