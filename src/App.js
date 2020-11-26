@@ -5,14 +5,14 @@ import { useQuery } from '@apollo/react-hooks'
 import './App.css'
 import { USER_ME_QUERY } from './components/Api/user'
 
-//import components from index.js
+// Import components from index.js
 import { 
   Navbar, Users, Support, SupportSuccess, Login, Register,
   Posts, PostDetail, PostCreate, PostEdit, Profile, MessagesContainer
 } from './components';
 
 function App () {
-  //current logged in user
+  // Current logged in user
   const [ currentUser, setCurrentUser ] = useState(null)
   const { data: meQuery, loading } = useQuery(USER_ME_QUERY)
 
