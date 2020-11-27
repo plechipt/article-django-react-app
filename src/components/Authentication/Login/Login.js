@@ -4,6 +4,8 @@ import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 
 import { USER_LOGIN_MUTATION, USER_CHECK_PROFILE_MUTATION } from '../../Api/user'
+import { BASE_URL } from '../../url'
+import Cookies from 'js-cookie'
 import './Login.css'
 
 
@@ -12,8 +14,8 @@ const Login = () => {
     const [ failedToLogin, setFailedToLogin ] = useState('') 
     const [ allowButton, setAllowButton ] = useState(false)
     
-    const [ loginUser, { data: loginData } ] = useMutation(USER_LOGIN_MUTATION)
     const [ checkUserProfile ] = useMutation(USER_CHECK_PROFILE_MUTATION)
+    const [ loginUser, { data: loginData }] = useMutation(USER_LOGIN_MUTATION)
 
     const [ usernameInput, setUsernameInput ] = useState('')
     const [ passwordInput, setPasswordInput ] = useState('')
@@ -43,12 +45,19 @@ const Login = () => {
         afterSuccessfulLogin()
     }, [loginData, checkUserProfile, history, usernameInput])
    
-    const handleOnSubmit = async (event) => {
+    const handleOnSubmit = (event) => {
+        const csrftoken = Cookies.get('csrftoken')
+
         //if username and password are filled and user hit enter or create button
-        if ((usernameInput !== '' && passwordInput !== '') && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
-            await loginUser({ variables: {
-                username: usernameInput, password: passwordInput
-            }})
+        if ((usernameInput !== '' && passwordInput !== '')
+         && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
+            fetch(`${BASE_URL}/auth/token-get`, {
+                method:'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+            })
         }
     }
     

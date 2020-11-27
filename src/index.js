@@ -8,10 +8,11 @@ import { setContext } from '@apollo/client/link/context';
 import { ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/react-hooks';
 
 import Cookies from 'js-cookie'
+import { BASE_URL } from './components/url'
 
 
 const httpLink = createHttpLink({
-  uri: 'http://127.0.0.1:8000/graphql/',
+  uri: `${BASE_URL}/graphql/`,
   //uri: 'https://article-django-react-app.herokuapp.com/graphql/',
   credentials: 'include'
 })
