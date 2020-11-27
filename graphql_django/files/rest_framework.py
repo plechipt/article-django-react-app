@@ -1,4 +1,5 @@
 import os
+<<<<<<< HEAD
 from datetime import timedelta
 
 SECRET_KEY = os.environ.get('TOKEN_SECRET_KEY')
@@ -36,4 +37,17 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=15),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=7),
+=======
+
+ACCESS_TOKEN_SECRET = os.environ.get('REFRESH_TOKEN_SECRET')
+REFRESH_TOKEN_SECRET = os.environ.get('REFRESH_TOKEN_SECRET')
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'accounts.authentication.SafeJWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated', # make all endpoints private
+    )
+>>>>>>> refs/remotes/origin/ubuntu-2.0
 }
