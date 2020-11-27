@@ -29,8 +29,6 @@ ALLOWED_HOSTS = [
 
 #allow csrf token to be included in header of response
 CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
 
 #allowed urls which can access api
 CORS_ORIGIN_WHITELIST = (
