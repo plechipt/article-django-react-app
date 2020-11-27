@@ -45,18 +45,20 @@ const Login = () => {
         afterSuccessfulLogin()
     }, [loginData, checkUserProfile, history, usernameInput])
    
-    const handleOnSubmit = (event) => {
+    
+    const handleOnSubmit = async (event) => {
         const csrftoken = Cookies.get('csrftoken')
 
         //if username and password are filled and user hit enter or create button
         if ((usernameInput !== '' && passwordInput !== '')
          && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
-            fetch(`${BASE_URL}/auth/token-get`, {
+            await fetch(`${BASE_URL}/auth/token-get/`, {
                 method:'POST',
                 headers: {
                     'Content-type': 'application/json',
                     'X-CSRFToken': csrftoken,
                 },
+                body: JSON.stringify({ username: usernameInput, password: passwordInput })
             })
         }
     }
