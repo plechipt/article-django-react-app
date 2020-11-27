@@ -23,10 +23,3 @@ class AuthMutation(graphene.ObjectType):
    refresh_token = mutations.RefreshToken.Field()
    revoke_token = mutations.RevokeToken.Field() 
    
-
-
-
-
-
-
- 
