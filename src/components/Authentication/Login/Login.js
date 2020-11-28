@@ -9,6 +9,11 @@ import Cookies from 'js-cookie'
 import './Login.css'
 
 
+const ONE_DAY = 1
+const SEVEN_DAYS = 7
+const FIFTEEN_MINUTES = 15
+const MINUES_IN_ONE_DAY = 1440 
+
 const Login = () => {
     const history = useHistory()
     const [ failedToLogin, setFailedToLogin ] = useState('') 
@@ -20,25 +25,35 @@ const Login = () => {
     const [ usernameInput, setUsernameInput ] = useState('')
     const [ passwordInput, setPasswordInput ] = useState('')
     
-    //if login wasn't successful
+    // If login wasn't successful
     useEffect(() => {
-        //if response send error message
+        // If response send error message
         if (loginData.detail) {
             setFailedToLogin(true)
         }
     }, [loginData]) 
     
-    //if login was successful
+    // If login was successful
     useEffect(() => {
         const afterSuccessfulLogin = async () => {
 
-            //if response send access token and refresh token
+            // If response send access token and refresh token
             if (loginData.access) {
-                console.log(loginData)
-                //if user doesnt have profile -> create new one
+                const { access: accessToken, refresh: refreshToken } = loginData
+                
+                // Cookie expires in 15 minutes
+                Cookies.set('accessToken', accessToken, { 
+                    expires: (ONE_DAY / MINUES_IN_ONE_DAY) * FIFTEEN_MINUTES
+                })
+
+                // Cookie expired in 7 days
+                Cookies.set('refreshToken', refreshToken, { expires: SEVEN_DAYS })
+                
+
+                // If user doesnt have profile -> create new one
                 await checkUserProfile({ variables: { user: usernameInput }})
                 
-                //history.push('/posts')
+                // History.push('/posts')
                 //window.location.reload(false);
             }
         }
@@ -49,9 +64,11 @@ const Login = () => {
     const handleOnSubmit = async (event) => {
         const csrftoken = Cookies.get('csrftoken')
 
-        //if username and password are filled and user hit enter or create button
-        if ((usernameInput !== '' && passwordInput !== '')
-         && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
+        const username_and_password_are_filled = usernameInput !== '' && passwordInput !== ''
+        const user_pressed_enter_key = event.key === 'Enter'
+        const user_pressed_submit_button = event.target.tagName === 'FORM'
+
+        if (username_and_password_are_filled && user_pressed_enter_key || user_pressed_submit_button) {
             await fetch(`${BASE_URL}/auth/token-get/`, {
                 method:'POST',
                 headers: {
@@ -68,9 +85,11 @@ const Login = () => {
         }
     }
     
-    //Check if username and password was filled
+    // Check if username and password was filled
     useEffect(() => {
-        if (usernameInput !== '' && passwordInput !== '') {
+        const username_and_password_are_filled = usernameInput !== '' && passwordInput !== ''
+
+        if (username_and_password_are_filled) {
             setAllowButton(true)
         }
     
@@ -115,7 +134,7 @@ const Login = () => {
                 <Form.Field>
                     <p className="text-muted">Need an account? <a href="/register" className="ml-2" >Sign up</a></p>
                 </Form.Field>
-                {/*If both fields were filled -> show undisabled button*/}
+                {/* If both fields were filled -> show undisabled button */}
                 {(allowButton) ? (
                     <Button className="submit-button" type='submit' primary>Login</Button>
                 ) : (

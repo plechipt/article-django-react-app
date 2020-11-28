@@ -6,7 +6,6 @@ import { Button, Form, Message } from 'semantic-ui-react'
 import { USER_REGISTER_MUTATION } from '../../Api/user'
 import './Register.css'
 
-//const authenticationList = ['username', 'email', 'password', 'passwordConfirm']
 
 const Register = () => {
   const [ usernameInput, setUsernameInput ] = useState('') 
@@ -20,23 +19,21 @@ const Register = () => {
   const [ registerUser, { data } ] = useMutation(USER_REGISTER_MUTATION);
 
   useEffect(() => {
-    //Set default message
+    // Set default message
     setMessage({type: '', text: []}) //Reset previous state
     
     if (data) {
-      //set message to var
+      // Set message to var
       const messageBoolean = data.register.success
       
       if (messageBoolean === false) {
-        //set the errors messages to var
+        // Set the errors messages to var
         const errors = Object.entries(data.register.errors)
         
-        //loop all error messages
         errors.map(error => {
-          //get the error message
           const messageError = error[1][0].message
           
-          //set the message with previous message
+          // Set the message with previous message
           return setMessage((prevState) => ({
             type: 'error',
             text: [...prevState.text, messageError]
@@ -51,10 +48,14 @@ const Register = () => {
   }, [data, history])
   
   const handleOnClick = async (event) => {
-    //if username and email and password and confirm passwowrd are filled and user hit enter or create button
-    if (
-      (usernameInput !== '' && emailInput && passwordInput !== '' && passwordConfirmInput !== '')
-      && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
+
+    const user_pressed_enter_key = event.key === 'Enter'
+    const user_pressed_submit_button = event.target.tagName === 'FORM'
+    const all_fields_are_filled = (
+      usernameInput !== '' && emailInput !== '' && passwordInput !== '' && passwordConfirmInput !== ''
+    )
+
+    if (all_fields_are_filled && user_pressed_enter_key || user_pressed_submit_button) {
         await registerUser({ variables: {
           username: usernameInput, email: emailInput,
           password1: passwordInput, password2: passwordConfirmInput
@@ -64,10 +65,11 @@ const Register = () => {
   
   //check if username, email, password and 2nd password were filled
   useEffect(() => {
-    if (
-      usernameInput !== '' && emailInput !== '' &&
-      passwordInput !== '' && passwordConfirmInput !== ''
-    ) {
+    const all_fields_are_filled = (
+      usernameInput !== '' && emailInput !== '' && passwordInput !== '' && passwordConfirmInput !== ''
+    )
+
+    if (all_fields_are_filled) {
       setAllowButton(true)
     }
 
