@@ -3,7 +3,7 @@ import { Button, Form, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 
-import { USER_LOGIN_MUTATION, USER_CHECK_PROFILE_MUTATION } from '../../Api/user'
+import { USER_CHECK_PROFILE_MUTATION } from '../../Api/user'
 import { BASE_URL } from '../../url'
 import Cookies from 'js-cookie'
 import './Login.css'
