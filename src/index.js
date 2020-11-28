@@ -10,17 +10,20 @@ import { ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/react-hoo
 import Cookies from 'js-cookie'
 
 
+const BASE_URL = 'http://127.0.0.1:8000'
+//const BASE_URL = 'https://article-django-react-app.herokuapp.com'
+
 const httpLink = createHttpLink({
-  uri: 'https://article-django-react-app.herokuapp.com/graphql/',
+  uri: `${BASE_URL}/graphql/`,
   credentials: 'include'
 })
 
-// access token is send through httponly cookie
+// Access token is send through httponly cookie
 const authLink = setContext((_, { headers }) => {
-  // get csrftoken from Cookies
+  // Get csrftoken from Cookies
   const csrftoken = Cookies.get('csrftoken')
 
-  // return the headers to the context so httpLink can read them
+  // Return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,

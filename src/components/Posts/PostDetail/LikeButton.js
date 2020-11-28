@@ -20,7 +20,7 @@ const LikeButton = ({ id, likes, detailData, currentUser }) => {
         window.location.reload(false); //reset site
     }
 
-    //check if user has like this post
+    //check if user has liked this post
     const userHasLikedPost = usersLikes.some(({ username }) => {
         return username === currentUser
     })

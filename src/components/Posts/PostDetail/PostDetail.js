@@ -29,7 +29,9 @@ const PostDetail = ({ currentUser }) => {
 
     //if id is number -> fetch post
     useEffect(() => {
-        if (isNaN(id) === false) {
+        const id_is_number = !(isNaN(id))
+
+        if (id_is_number === true) {
             postFind({ variables: { id: id } })
         }
     }, [id, postFind])

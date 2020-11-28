@@ -13,12 +13,15 @@ const MessageCreate = ({ currentUser }) => {
 
 
     const handleOnSubmit = (event) => {
-        //if user click enter or click message button and enter something to textarea 
-        if ((event.key === 'Enter' && messageInput !== '') || event.target.tagName === 'I') {
+        const user_pressed_enter = event.key === 'Enter'
+        const form_is_filled = messageInput !== ''
+        const user_submited_button = event.target.tagName === 'FORM'
+
+        if ((user_pressed_enter && form_is_filled) || user_submited_button) {
             messageCreate({ variables: { user: currentUser, chatUser: chatUser, content: messageInput }})
             setMessageInput('')
             
-            //reset site
+            // Reset site
             window.location.reload(false)
         }
     }

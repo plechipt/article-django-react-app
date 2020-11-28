@@ -18,7 +18,7 @@ const Login = () => {
     const [ usernameInput, setUsernameInput ] = useState('')
     const [ passwordInput, setPasswordInput ] = useState('')
     
-    //if login wasn't successful
+    // If login wasn't successful
     useEffect(() => {
         if (loginData) {
             if (loginData.tokenAuth.success !== true) {
@@ -27,12 +27,12 @@ const Login = () => {
         }
     }, [loginData]) 
     
-    //if login was successful
+    // If login was successful
     useEffect(() => {
         const afterSuccessfulLogin = async () => {
             if (loginData) {
                 if (loginData.tokenAuth.success === true) {
-                    //if user doesnt have profile -> create new one
+                    // If user doesnt have profile -> create new one
                     await checkUserProfile({ variables: { user: usernameInput }})
                     
                     history.push('/posts')
@@ -44,17 +44,22 @@ const Login = () => {
     }, [loginData, checkUserProfile, history, usernameInput])
    
     const handleOnSubmit = async (event) => {
-        //if username and password are filled and user hit enter or create button
-        if ((usernameInput !== '' && passwordInput !== '') && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
+        const username_and_password_are_filled = usernameInput !== '' && passwordInput !== ''
+        const user_pressed_enter = event.key === 'Enter'
+        const user_submited_button = event.target.tagName === 'FORM'
+
+        if ((username_and_password_are_filled && user_pressed_enter) || user_submited_button) {
             await loginUser({ variables: {
                 username: usernameInput, password: passwordInput
             }})
         }
     }
     
-    //Check if username and password was filled
+    // Check if username and password was filled
     useEffect(() => {
-        if (usernameInput !== '' && passwordInput !== '') {
+        const username_and_password_are_filled = usernameInput !== '' && passwordInput !== ''
+
+        if (username_and_password_are_filled) {
             setAllowButton(true)
         }
     
@@ -99,7 +104,7 @@ const Login = () => {
                 <Form.Field>
                     <p className="text-muted">Need an account? <a href="/register" className="ml-2" >Sign up</a></p>
                 </Form.Field>
-                {/*If both fields were filled -> show undisabled button*/}
+                {/* If both fields were filled -> show undisabled button */}
                 {(allowButton) ? (
                     <Button className="submit-button" type='submit' primary>Login</Button>
                 ) : (

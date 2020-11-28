@@ -13,7 +13,7 @@ const CustomComment = ({ id, replys, content, posted, username, currentUser, ima
     const [ commentDelete ] = useMutation(COMMENT_DELETE_MUTATION)
     const [ showReplyForm, setShowReplyForm ] = useState(false)
 
-    //If user click on reply -> show the reply form and reverse
+    // If user click on reply -> show the reply form and reverse
     const handleOnReply = () => {
         setShowReplyForm(!showReplyForm)
     }
@@ -21,7 +21,7 @@ const CustomComment = ({ id, replys, content, posted, username, currentUser, ima
     const handleOnDelete = () => {
         commentDelete({ variables: { id: id } })
 
-        //reset site
+        // Reset site
         window.location.reload(false);
     }
 

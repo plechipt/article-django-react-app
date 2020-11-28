@@ -20,8 +20,9 @@ const PostEdit = ({ currentUser }) => {
 
    //everytime id changes -> find post info of that id 
     useEffect(() => {
-        //if id is number -> fetch post
-        if (isNaN(id) === false) {
+        const id_is_number = !(isNaN(id))
+
+        if (id_is_number === true) {
             postFind({variables: { id: id }})
         }
     }, [id, postFind])
@@ -36,7 +37,9 @@ const PostEdit = ({ currentUser }) => {
     
     //if title and textarea are filled -> undisable button
     useEffect(() => {
-        if (titleInput !== '' && textAreaInput !== '') {
+        const fields_are_filled = titleInput !== '' && textAreaInput !== ''
+        
+        if (fields_are_filled) {
             setAllowButton(true)
         }
         
@@ -46,8 +49,11 @@ const PostEdit = ({ currentUser }) => {
     }, [titleInput, textAreaInput])
 
     const handleOnSubmit = async (event) => {
-         //if title and textarea are filled and user hit enter or hit create button
-        if ((titleInput !== '' && textAreaInput !== '') && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
+        const fields_are_filled = titleInput !== '' && textAreaInput !== ''
+        const user_pressed_enter = event.key === 'Enter'
+        const user_submited_button = event.target.tagName === 'FORM'
+
+        if ((fields_are_filled && user_pressed_enter) || user_submited_button) {
             await postEdit({ variables: { id: id, title: titleInput, content: textAreaInput } })
             history.push('/posts')
         }

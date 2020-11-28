@@ -8,7 +8,6 @@ import '../Comments.css'
 const CommentsMap = ({ detailData, currentUser }) => {
     const { findPost: { post: { commentSet } } } = detailData
 
-    
     return (
         <div>
             <Comment.Group>

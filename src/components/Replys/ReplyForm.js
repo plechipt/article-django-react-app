@@ -6,7 +6,6 @@ import { REPLY_ADD_MUTATION } from '../Api/reply'
 import './Replys.css'
 
 const ReplyForm = ({ id, showReplyForm, currentUser }) => {
-
     const [ replyComment ] = useMutation(REPLY_ADD_MUTATION)
 
     const [ replyInput, setReplyInput ] = useState('')
@@ -21,7 +20,9 @@ const ReplyForm = ({ id, showReplyForm, currentUser }) => {
 
     //check if reply was filled
     useEffect(() => {
-        if (replyInput !== '') {
+        const form_is_filled = replyInput !== ''
+        
+        if (form_is_filled) {
             setAllowButton(true)
         }
 

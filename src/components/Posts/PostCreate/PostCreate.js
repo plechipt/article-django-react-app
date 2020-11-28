@@ -19,8 +19,11 @@ const PostCreate = ({ currentUser }) => {
     const [ createPost, { data: postData }] = useMutation(POST_CREATE_MUTATION)
     
     const handleOnSubmit = async (event) => {
-        //if title and textarea are filled and user hit enter or create button
-        if ((titleInput !== '' && textareaInput !== '') && (event.key === 'Enter' || event.target.tagName === 'FORM')) {
+        const forms_are_filled = titleInput !== '' && textareaInput !== ''
+        const user_pressed_enter = event.key === 'Enter'
+        const user_submited_button = event.target.tagName === 'FORM'
+
+        if ((forms_are_filled && user_pressed_enter) || user_submited_button) {
             await createPost({ variables: { title: titleInput, content: textareaInput, user: currentUser }})
         }
     }

@@ -59,8 +59,10 @@ const Profile = ({ currentUser }) => {
     }, [updateData, history])
 
     const handleOnSubmit = (event) => {
-        //if user hit enter or button
-        if (event.key === 'Enter' || event.target.tagName === 'FORM') {
+        const user_pressed_enter = event.key === 'Enter'
+        const user_submited_button = event.target.tagName === 'FORM'
+
+        if (user_pressed_enter || user_submited_button) {
             profileUpdate({ variables: { 
                 user: user, newUser: usernameInput,
                 newEmail: emailInput, image: profileImage }
@@ -69,7 +71,9 @@ const Profile = ({ currentUser }) => {
     }
 
     const onImageChange = (image) => {
-        if (image !== '') {
+        const user_has_picked_image = image !== ''
+        
+        if (user_has_picked_image) {
             setProfileImage(image)
         }
     }

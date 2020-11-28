@@ -34,7 +34,9 @@ const CommentCreateForm = ({ id, currentUser }) => {
 
     //if comment form was filled -> activate button
     useEffect(() => {
-        if (commentInput !== '') {
+        const form_is_filled = commentInput !== ''
+        
+        if (form_is_filled) {
             setAllowButton(true)
         }
     
