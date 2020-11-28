@@ -15,31 +15,31 @@ const Login = () => {
     const [ allowButton, setAllowButton ] = useState(false)
     
     const [ checkUserProfile ] = useMutation(USER_CHECK_PROFILE_MUTATION)
-    const [ loginUser, { data: loginData }] = useMutation(USER_LOGIN_MUTATION)
+    const [ loginData, setLoginData ] = useState({})
 
     const [ usernameInput, setUsernameInput ] = useState('')
     const [ passwordInput, setPasswordInput ] = useState('')
     
     //if login wasn't successful
     useEffect(() => {
-        if (loginData) {
-            if (loginData.tokenAuth.success !== true) {
-                setFailedToLogin(true)
-            }
+        //if response send error message
+        if (loginData.detail) {
+            setFailedToLogin(true)
         }
     }, [loginData]) 
     
     //if login was successful
     useEffect(() => {
         const afterSuccessfulLogin = async () => {
-            if (loginData) {
-                if (loginData.tokenAuth.success === true) {
-                    //if user doesnt have profile -> create new one
-                    await checkUserProfile({ variables: { user: usernameInput }})
-                    
-                    history.push('/posts')
-                    window.location.reload(false);
-                }
+
+            //if response send access token and refresh token
+            if (loginData.access) {
+                console.log(loginData)
+                //if user doesnt have profile -> create new one
+                await checkUserProfile({ variables: { user: usernameInput }})
+                
+                //history.push('/posts')
+                //window.location.reload(false);
             }
         }
         afterSuccessfulLogin()
@@ -60,6 +60,11 @@ const Login = () => {
                 },
                 body: JSON.stringify({ username: usernameInput, password: passwordInput })
             })
+            
+            .then(response => response.json())
+            .then(data => (
+                setLoginData(data)
+            ))
         }
     }
     
