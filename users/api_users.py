@@ -22,6 +22,7 @@ class AuthMutation(graphene.ObjectType):
    verify_token = mutations.VerifyToken.Field()
    refresh_token = mutations.RefreshToken.Field()
    revoke_token = mutations.RevokeToken.Field() 
+<<<<<<< HEAD
    
    #delete JWT token
    #delete_token_cookie = DeleteJSONWebTokenCookieMixin.Field()
@@ -35,3 +36,6 @@ class AuthMutation(graphene.ObjectType):
 
 
  
+=======
+   
+>>>>>>> a518fbf4af236b946a0b99e7033d0181a161468e

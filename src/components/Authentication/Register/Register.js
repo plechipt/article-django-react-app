@@ -6,7 +6,6 @@ import { Button, Form, Message } from 'semantic-ui-react'
 import { USER_REGISTER_MUTATION } from '../../Api/user'
 import './Register.css'
 
-//const authenticationList = ['username', 'email', 'password', 'passwordConfirm']
 
 const Register = () => {
   const [ usernameInput, setUsernameInput ] = useState('') 
@@ -20,7 +19,11 @@ const Register = () => {
   const [ registerUser, { data } ] = useMutation(USER_REGISTER_MUTATION);
 
   useEffect(() => {
+<<<<<<< HEAD
     // Set message TO DEFAULT
+=======
+    // Set default message
+>>>>>>> a518fbf4af236b946a0b99e7033d0181a161468e
     setMessage({type: '', text: []}) //Reset previous state
     
     if (data) {
@@ -49,13 +52,23 @@ const Register = () => {
   }, [data, history])
   
   const handleOnClick = async (event) => {
+<<<<<<< HEAD
     const user_pressed_enter = event.key === 'Enter'
     const user_submited_button = event.target.tagName === 'FORM'
+=======
+
+    const user_pressed_enter_key = event.key === 'Enter'
+    const user_pressed_submit_button = event.target.tagName === 'FORM'
+>>>>>>> a518fbf4af236b946a0b99e7033d0181a161468e
     const all_fields_are_filled = (
       usernameInput !== '' && emailInput !== '' && passwordInput !== '' && passwordConfirmInput !== ''
     )
 
+<<<<<<< HEAD
     if ((all_fields_are_filled && user_pressed_enter) || user_submited_button) {
+=======
+    if (all_fields_are_filled && user_pressed_enter_key || user_pressed_submit_button) {
+>>>>>>> a518fbf4af236b946a0b99e7033d0181a161468e
         await registerUser({ variables: {
           username: usernameInput, email: emailInput,
           password1: passwordInput, password2: passwordConfirmInput
@@ -65,10 +78,11 @@ const Register = () => {
   
   //check if username, email, password and 2nd password were filled
   useEffect(() => {
-    if (
-      usernameInput !== '' && emailInput !== '' &&
-      passwordInput !== '' && passwordConfirmInput !== ''
-    ) {
+    const all_fields_are_filled = (
+      usernameInput !== '' && emailInput !== '' && passwordInput !== '' && passwordConfirmInput !== ''
+    )
+
+    if (all_fields_are_filled) {
       setAllowButton(true)
     }
 
