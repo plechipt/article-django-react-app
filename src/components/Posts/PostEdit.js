@@ -18,7 +18,7 @@ const PostEdit = ({ currentUser }) => {
     const [ postFind, { data: detailData } ] = useMutation(POST_FIND_MUTATION)
 
 
-   //everytime id changes -> find post info of that id 
+   // Everytime id changes -> find post info of that id 
     useEffect(() => {
         const id_is_number = !(isNaN(id))
 
@@ -27,7 +27,7 @@ const PostEdit = ({ currentUser }) => {
         }
     }, [id, postFind])
     
-    //set title and textarea to set default value in forms
+    // Fill title and textarea
     useEffect(() => {
         if (detailData && detailData.findPost.message === 'Success') {
             setTitleInput(detailData.findPost.post.title)
@@ -35,7 +35,7 @@ const PostEdit = ({ currentUser }) => {
         }
     }, [detailData])
     
-    //if title and textarea are filled -> undisable button
+    // If title and textarea are filled -> undisable button
     useEffect(() => {
         const fields_are_filled = titleInput !== '' && textAreaInput !== ''
         

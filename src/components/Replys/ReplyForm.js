@@ -13,12 +13,10 @@ const ReplyForm = ({ id, showReplyForm, currentUser }) => {
     
     const handleOnAddReply = () => {
         replyComment({ variables: { id: id, user: currentUser, content: replyInput } })
-
-        //reset site
-        window.location.reload(false);
+        window.location.reload(false) // Reset site
     }
 
-    //check if reply was filled
+    // Check if reply was filled
     useEffect(() => {
         const form_is_filled = replyInput !== ''
         

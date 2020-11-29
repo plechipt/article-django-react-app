@@ -15,19 +15,19 @@ const DEFAULT_IMAGE = 'https://miro.medium.com/max/550/1*TxgjUE2uJuiRUVVmE_kU6g.
 const PostDetail = ({ currentUser }) => {
     const { id } = useParams()
     
-    //set likes temporarily on frontend
+    // Set likes temporarily on frontend
     const [ likes, setLikes ] = useState(0)
     const [ postFind, { data: detailData } ] = useMutation(POST_FIND_MUTATION)
 
 
-    //Fetch to set amount of likes to button
+    // Fetch to set amount of likes to button
     useEffect(() => {
         if (detailData && detailData.findPost.message === 'Success') {
             setLikes(detailData.findPost.post.totalLikes)
         }
     }, [detailData])
 
-    //if id is number -> fetch post
+    // If id is number -> fetch post
     useEffect(() => {
         const id_is_number = !(isNaN(id))
 

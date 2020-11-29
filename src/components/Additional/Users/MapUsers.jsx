@@ -9,12 +9,12 @@ const MapUsers = ({ users: { allProfiles: allUsers }}) => {
     const [ currentPage, setCurrentPage ] = useState(1)
     const [ postsPerPage ] = useState(6)
 
-    //Get current posts
+    // Get current posts
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirstPost = indexOfLastPost - postsPerPage
     const currentUsers = allUsers.slice(indexOfFirstPost, indexOfLastPost)
 
-    //Change page
+    // Change page
     const handlePaginationChange = (event, value) => {
         setCurrentPage(value.activePage)
     }

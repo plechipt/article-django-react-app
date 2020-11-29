@@ -11,7 +11,7 @@ const MessagesContainer = ({ currentUser }) => {
 
     const [ queryUserMessages, { data: messagesData }] = useMutation(MESSAGE_LIST_MUTATION)
 
-    //query all chat room messages
+    // Query all chat room messages
     useEffect(() => {
         queryUserMessages({ variables: {user: currentUser, chatUser: chatUser} })
     }, [chatUser, currentUser, queryUserMessages])

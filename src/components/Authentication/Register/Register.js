@@ -19,21 +19,19 @@ const Register = () => {
   const [ registerUser, { data } ] = useMutation(USER_REGISTER_MUTATION);
 
   useEffect(() => {
-    // Set message TO DEFAULT
-    setMessage({type: '', text: []}) //Reset previous state
+    // Reset previous state
+    setMessage({type: '', text: []}) 
     
     if (data) {
-      // Set message to var
       const messageBoolean = data.register.success
       
       if (messageBoolean === false) {
-        // Set the errors messages to var
         const errors = Object.entries(data.register.errors)
         
         errors.map(error => {
           const messageError = error[1][0].message
           
-          // Set the message with previous message
+          // Set the message with previous messages
           return setMessage((prevState) => ({
             type: 'error',
             text: [...prevState.text, messageError]
@@ -62,7 +60,7 @@ const Register = () => {
     }
   }
   
-  //check if username, email, password and 2nd password were filled
+  // Check if all fields are filled
   useEffect(() => {
     const all_fields_are_filled = (
       usernameInput !== '' && emailInput !== '' && passwordInput !== '' && passwordConfirmInput !== ''

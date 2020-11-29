@@ -20,9 +20,7 @@ const CustomComment = ({ id, replys, content, posted, username, currentUser, ima
 
     const handleOnDelete = () => {
         commentDelete({ variables: { id: id } })
-
-        // Reset site
-        window.location.reload(false);
+        window.location.reload(false) // Reset site
     }
 
 

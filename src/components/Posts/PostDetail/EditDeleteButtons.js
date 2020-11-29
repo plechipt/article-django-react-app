@@ -12,25 +12,23 @@ const EditDeleteButtons = ({ id, detailData, currentUser }) => {
     const [ open, setOpen ] = useState(false)
     const [ postDelete ] = useMutation(POST_DELETE_MUTATION)
     
-    //delete post here
     const handleOnDelete = async () => {
         await postDelete({ variables: { id: id } })
         history.push('/posts')
     }
 
-    //redirect to edit page
     const handleOnEdit = () => {
         history.push(`editPost/${id}`)
     }
 
-    //Handle boolean from child's component
+    // Handle boolean from child's component
     const handleAction = (boolean) => {
         setOpen(boolean)
     }
 
     return (
         <>  
-            {/*If post it is user's post -> show edit and delete button*/}
+            {/* If post it is user's post -> show edit and delete button */}
             {(currentUser === detailData.findPost.post.user.username) ? (
                 <>
                     <Button 

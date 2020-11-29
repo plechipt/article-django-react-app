@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
 
-//Query
+// Query
 
 
-//Mutation
+// Mutation
 export const MESSAGE_LIST_MUTATION = gql`
     mutation queryUserMessages ($user: String!, $chatUser: String!) {
         queryUserMessages(input: {user: $user, chatUser: $chatUser}) {

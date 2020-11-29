@@ -20,9 +20,7 @@ const CommentCreateForm = ({ id, currentUser }) => {
             
             if (message === 'Success') {
                 setErrorMessage('')
-
-                //reset site
-                window.location.reload(false);
+                window.location.reload(false) // Reset site
             }
 
             else {
@@ -32,7 +30,7 @@ const CommentCreateForm = ({ id, currentUser }) => {
         }
     }, [commentData])
 
-    //if comment form was filled -> activate button
+    // If comment form was filled -> activate button
     useEffect(() => {
         const form_is_filled = commentInput !== ''
         

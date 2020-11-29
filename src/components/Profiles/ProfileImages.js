@@ -9,10 +9,9 @@ let profileImages = [
 const PATH_TO_PICTURES = 'media/profile_pictures'
 
 const ProfileImages = ({ userImage, onImageChange }) => {
-    //Image that user clicked as new profile image
     const [ chosenImage, setChosenImage ] = useState('')
 
-    //Will not show user image
+    // Will not show user image
     profileImages = profileImages.filter(image => {
         return image !== userImage
     })

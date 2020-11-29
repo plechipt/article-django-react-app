@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-//Query
+// Query
 export const POST_LIST_QUERY = gql`
     query {
         allPosts {
@@ -14,7 +14,7 @@ export const POST_LIST_QUERY = gql`
     }
 `
 
-//Mutation
+// Mutation
 export const POST_FIND_MUTATION = gql`
     mutation ($id: ID!) {
         findPost (input: {id: $id}) {

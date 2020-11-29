@@ -12,15 +12,15 @@ const LikeButton = ({ id, likes, detailData, currentUser }) => {
 
     const handleOnLike = () => {
         postLike({ variables: { id: id, user: currentUser } })
-        window.location.reload(false); //reset site
+        window.location.reload(false); // Reset site
     }
 
     const handleOnUnlike = () => {
         unlikePost({ variables: { id: id, user: currentUser } })
-        window.location.reload(false); //reset site
+        window.location.reload(false); // Reset site
     }
 
-    //check if user has liked this post
+    // Check if user has liked this post
     const userHasLikedPost = usersLikes.some(({ username }) => {
         return username === currentUser
     })

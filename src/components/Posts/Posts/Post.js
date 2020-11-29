@@ -3,16 +3,13 @@ import { Item } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 
 //import styles from '../Posts.module.css'
-
 const DEFAULT_IMAGE = 'https://miro.medium.com/max/550/1*TxgjUE2uJuiRUVVmE_kU6g.png'
 
-
 const Post = ({ username, title, posted, id }) => {
-    //url of this post
     const urlOfPost = `/${id}`
     const history = useHistory()
 
-    //redirect to detail post
+    // Redirect to detail post
     const handleOnClick = () => {
         history.push(urlOfPost)
     }
