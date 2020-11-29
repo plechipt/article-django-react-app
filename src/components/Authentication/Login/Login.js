@@ -39,7 +39,7 @@ const Login = () => {
                     await checkUserProfile({ variables: { user: usernameInput }})
                     
                     history.push('/posts')
-                    window.location.reload(false);
+                    window.location.reload(false) // Reset site
                 }
             }
         }

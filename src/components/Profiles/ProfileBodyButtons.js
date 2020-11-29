@@ -8,7 +8,6 @@ import { USER_PROFILE_FOLLOW_MUTATION, USER_PROFILE_UNFOLLOW_MUTATION  } from '.
 const ProfileBodyButtons = ({ profileData: { profileInfo: { profile } }, currentUser }) => {
     const history = useHistory()
 
-    //destructuring users total followers and users username
     const { totalFollowers, user: { username: usersProfile }, followers } = profile
     const [ profileFollow ] = useMutation(USER_PROFILE_FOLLOW_MUTATION) 
     const [ profileUnfollow ] = useMutation(USER_PROFILE_UNFOLLOW_MUTATION)
@@ -16,24 +15,20 @@ const ProfileBodyButtons = ({ profileData: { profileInfo: { profile } }, current
 
     const handleOnFollow = () => {
         profileFollow({ variables: { follower: currentUser, following: usersProfile } })
-
-         //reset site
-        window.location.reload(false);
+        window.location.reload(false) // Reset site
     }
 
     const handleOnUnfollow = () => {
         profileUnfollow({ variables: { follower: currentUser, following: usersProfile } })
-        
-        //reset site
-        window.location.reload(false);
+        window.location.reload(false) // Reset site
     }
 
     const handleOnMessage = () => {
-        //redirect to chat room with users profile
+        // Redirect to chat room 
         history.push(`/message/${usersProfile}`)
     }
 
-    //check if user follow this profile
+    // Check if user follow this profile
     const userIsFollowingProfile = followers.some(follower => {
         return follower.username === currentUser
     })
@@ -41,7 +36,7 @@ const ProfileBodyButtons = ({ profileData: { profileInfo: { profile } }, current
 
     return (        
         <div className="profile-buttons-container">
-            {/*If this is not users profile*/}
+            {/* If this is not users profile */}
             {(currentUser !== usersProfile) ? (
                 <div className="profile-buttons">
                     <Button as='div' labelPosition='right'>

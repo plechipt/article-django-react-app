@@ -20,9 +20,7 @@ const MessageCreate = ({ currentUser }) => {
         if ((user_pressed_enter && form_is_filled) || user_submited_button) {
             messageCreate({ variables: { user: currentUser, chatUser: chatUser, content: messageInput }})
             setMessageInput('')
-            
-            // Reset site
-            window.location.reload(false)
+            window.location.reload(false) // Reset site
         }
     }
 

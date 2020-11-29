@@ -12,7 +12,7 @@ const Posts = () => {
     const [ postFilter, { data: filteredData }] = useMutation(POST_FILTER_MUTATION)
     const [ searchInput, setSearchInput ] = useState('')
    
-    //filter posts by user search bar input
+    // Filter posts by user search bar input
     useEffect(() => {
         postFilter({ variables: { title: searchInput } })
     }, [searchInput, postFilter])

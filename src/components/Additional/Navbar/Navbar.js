@@ -19,15 +19,15 @@ const Navbar = ({ currentUser }) => {
     }
 
     const handleOnLogout = async () => {
-        //delete JWT tokens
+        // Delete JWT tokens
         await deleteAccessToken()
         await deleteRefreshToken()
 
-        //reset store
+        // Reset store
         client.resetStore()
 
         history.push('/login')
-        window.location.reload(false);
+        window.location.reload(false) // Reset site
     }
 
     

@@ -2,7 +2,7 @@ import React from 'react'
 
 import CustomReply from './CustomReply'
 
-//map all replies
+// Map all replies
 const ReplysMap = ({ replys, currentUser }) => {
     return (
         <div>

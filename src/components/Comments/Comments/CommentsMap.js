@@ -4,7 +4,7 @@ import { Comment, Header } from 'semantic-ui-react'
 import CustomComment  from './CustomComment'
 import '../Comments.css'
 
-//map all comments
+// Map all comments
 const CommentsMap = ({ detailData, currentUser }) => {
     const { findPost: { post: { commentSet } } } = detailData
 

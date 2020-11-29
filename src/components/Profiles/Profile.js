@@ -44,7 +44,7 @@ const Profile = ({ currentUser }) => {
         }
     }, [profileData])
 
-    //Set message to user (including error and success messages)
+    // Set message to user (including error and success messages)
     useEffect(() => {
         if (updateData) {
             setErrorMessages(updateData.profileUpdate.message)
@@ -54,7 +54,7 @@ const Profile = ({ currentUser }) => {
     useEffect(() => {
         if (updateData !== undefined && updateData.profileUpdate.message === 'Success') {
             history.push('/login')
-            window.location.reload(false)
+            window.location.reload(false) // Reset site
         }
     }, [updateData, history])
 

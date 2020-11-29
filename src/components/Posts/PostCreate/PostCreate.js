@@ -28,7 +28,7 @@ const PostCreate = ({ currentUser }) => {
         }
     }
 
-    //check if post was successfully created
+    // Check if post was successfully created
     useEffect(() => {
         if (postData) {
             const message = postData.addPost.message
@@ -43,7 +43,7 @@ const PostCreate = ({ currentUser }) => {
         }
     }, [postData, history])
 
-    //check if title and content were filled
+    // If title and content are filled -> undisable button
     useEffect(() => {
         if (titleInput !== '' && textareaInput !== '') {
             setAllowButton(true)

@@ -10,9 +10,7 @@ const CustomReply = ({ id, content, posted, username, image, currentUser }) => {
 
     const handleOnDelete = () => {
         replyDelete({ variables: { id: id } })
-
-        // Reset site
-        window.location.reload(false)
+        window.location.reload(false) // Reset site
     }
 
 
