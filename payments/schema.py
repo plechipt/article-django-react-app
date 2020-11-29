@@ -45,3 +45,8 @@ class CreateCheckoutSession(graphene.Mutation):
         )
 
         return CreateCheckoutSession(session=session)
+
+
+
+class PaymentMutation():
+    create_checkout_session = CreateCheckoutSession.Field()

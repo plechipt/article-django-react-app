@@ -1,65 +1,24 @@
 import graphene
 from graphql_auth.schema import UserQuery, MeQuery
 from graphql_auth import mutations
+from users.models import CustomUser
 
-from users.api_users import AuthMutation 
-from payments.api_payments import CreateCheckoutSession
-
-from users.api_messages import (
-   CustomUserType, CustomUser, 
-   CreateMessage, QueryUserMessages
-)
-
-from users.api_profiles import (
-   Profile, ProfileType, ProfileInfo,
-   CheckUserProfile, UpdateUser,
-   FollowProfile, UnfollowProfile
-)
-
-from posts.api_posts import (
-   FindPost, AddPost, DeletePost, EditPost,
-   LikePost, UnlikePost, FilterPost,
-   Post, PostType, 
-)
-
-from posts.api_comments import (
-   PostComment, DeleteComment,
-   Comment, CommentType
-) 
-
-from posts.api_replys import (
-   ReplyComment, DeleteReply,
-   Reply, ReplyType
-)
+from users.schema_users import AuthMutation 
+from payments.schema import PaymentMutation
+from users.schema_messages import MessageMutation, CustomUserType
+from users.schema_profiles import ProfileMutation, Profile, ProfileType
+from posts.schema_posts import PostMutation, Post, PostType
+from posts.schema_comments import CommentMutation, Comment, CommentType
+from posts.schema_replys import ReplyMutation, Reply, ReplyType
 
 
-class Mutation(AuthMutation, graphene.ObjectType):
-   # Post
-   find_post = FindPost.Field()
-   add_post = AddPost.Field()
-   delete_post = DeletePost.Field()
-   edit_post = EditPost.Field()
-   like_post = LikePost.Field()
-   unlike_post = UnlikePost.Field()
-   post_filter = FilterPost.Field()
-   comment_post = PostComment.Field()
-   comment_delete = DeleteComment.Field()
-   reply_comment = ReplyComment.Field()
-   reply_delete = DeleteReply.Field()
 
-   # Profile
-   profile_info = ProfileInfo.Field()
-   check_user_profile = CheckUserProfile.Field()
-   profile_update = UpdateUser.Field()
-   profile_follow = FollowProfile.Field()
-   profile_unfollow = UnfollowProfile.Field()
-
-   # Message
-   message_create = CreateMessage.Field()
-   query_user_messages = QueryUserMessages.Field()
-
-   # Payment 
-   create_checkout_session = CreateCheckoutSession.Field()
+class Mutation(
+   AuthMutation, ProfileMutation, PaymentMutation, 
+   MessageMutation, PostMutation, CommentMutation,
+   ReplyMutation, graphene.ObjectType
+):
+   pass
 
 
 class Query(UserQuery, MeQuery, graphene.ObjectType):
