@@ -24,7 +24,7 @@ class ChatRoomType(DjangoObjectType):
       model = ChatRoom 
 
 
-#Send user a message
+# Send user a message
 class CreateMessageInput(graphene.InputObjectType):
    user = graphene.String()
    chat_user = graphene.String()
@@ -41,7 +41,7 @@ class CreateMessage(graphene.Mutation):
    @login_required
    @ratelimit(key="ip", rate="10/m", block=True)
    def mutate(root, info, input=None):
-      #create date when message was messaged
+      # Create date when message was messaged
       messaged = datetime.datetime.now().strftime('%d %B %Y, %H:%M')
 
       message_is_empty = input.content == ''
@@ -50,25 +50,26 @@ class CreateMessage(graphene.Mutation):
          message = "Message must not be empty!"
          return CreateMessage(message=message)
          
-      #get the info
+      # Get the info
       user = CustomUser.objects.get(username=input.user)
       chat_user = CustomUser.objects.get(username=input.chat_user)
       chat_rooms = ChatRoom.objects.all()
 
-      #get the chat_room
+      # Get the chat_room
       chat_room_with_user = chat_rooms.filter(users__username=user)
       chat_room = chat_room_with_user.get(users__username=chat_user)
       
-      #create message
+      # Create message
       users_message = Message.objects.create(user=user, content=input.content, messaged=messaged)
-      #add the message to chat_room messages
+
+      # Add the message to chat_room messages
       chat_room.messages.add(users_message)
       message = 'Success'
 
       return CreateMessage(message=message)
 
 
-#Query all messages that have user with another user
+# Query all messages that have user with another user
 class QueryUserMessagesInput(graphene.InputObjectType):
    user = graphene.String()
    chat_user = graphene.String()
@@ -95,14 +96,14 @@ class QueryUserMessages(graphene.Mutation):
          message = "This user doesn't exist"
          return QueryUserMessages(message=message)
 
-      #else success 
+      # Else success 
       else:
          chat_user = CustomUser.objects.get(username=input.chat_user)
 
          users_chatrooms = chat_rooms.filter(users__username=user)
          user_and_chatuser_chatroom = users_chatrooms.filter(users__username=chat_user)
 
-         #if chatroom doesnt exist -> create new one
+         # If chatroom doesnt exist -> create new one
          if user_and_chatuser_chatroom.count() == 0:
             user_and_chatuser_chatroom = ChatRoom.objects.create()
             user_and_chatuser_chatroom.users.add(user, chat_user)

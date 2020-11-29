@@ -31,7 +31,7 @@ GRAPHQL_JWT = {
     ]
 }
 
-#Subscriptions
+# Subscriptions
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer"

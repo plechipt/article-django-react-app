@@ -28,10 +28,6 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-id']
 
-    #how many seconds ago was the comment published in seconds
-    def how_many_seconds_ago(self):
-        return (timezone.now() - self.date).seconds
-
     def __str__(self):
         return self.user.username + ' - ' + self.content
 

@@ -19,8 +19,7 @@ const Login = () => {
     const [ usernameInput, setUsernameInput ] = useState('')
     const [ passwordInput, setPasswordInput ] = useState('')
     
-    console.log(allowButton)
-
+    
     // If login wasn't successful
     useEffect(() => {
         if (loginData) {

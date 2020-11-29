@@ -27,10 +27,10 @@ ALLOWED_HOSTS = [
 ]
 
 
-#allow csrf token to be included in header of response
+# Allow values to be send through header
 CORS_ALLOW_CREDENTIALS = True
 
-#allowed urls which can access api
+# Allowed urls which can access API
 CORS_ORIGIN_WHITELIST = (
     'http://localhost',
     'http://localhost:3000',
@@ -45,11 +45,10 @@ CORS_ORIGIN_WHITELIST = (
 WSGI_APPLICATION = 'graphql_django.wsgi.application'
 ROOT_URLCONF = 'graphql_django.urls'
 
-#define few things
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 AUTH_USER_MODEL = 'users.CustomUser'
 
-#Internationalization
+# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True

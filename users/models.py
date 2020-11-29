@@ -5,8 +5,8 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     email = models.EmailField(blank=False, max_length=150, verbose_name="email address") 
 
-    USERNAME_FIELD = "username"   # e.g: "username", "email"
-    EMAIL_FIELD = "email"         # e.g: "email", "primary_email"
+    USERNAME_FIELD = "username"   
+    EMAIL_FIELD = "email"        
 
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)

@@ -12,7 +12,7 @@ class PostType(DjangoObjectType):
       model = Post 
 
 
-#Find post
+# Find post
 class PostDetailInput(graphene.InputObjectType):
    id = graphene.ID()
 
@@ -41,7 +41,7 @@ class FindPost(graphene.Mutation):
          return FindPost(message=message)
       
 
-#Create post
+# Create post
 class PostCreateInput(graphene.InputObjectType):
    user = graphene.String()
    title = graphene.String()
@@ -62,30 +62,30 @@ class AddPost(graphene.Mutation):
       user = CustomUser.objects.get(username=input.user)
       today = datetime.datetime.now().strftime('%d %B %Y')
 
-      #filter posts that belongs to user and are posted today
+      # Filter posts that belongs to user and are posted today
       filtered_posts = Post.objects.filter(user__username=input.user, posted=today)
 
-      #if boths title is over 100 chars and user has reached more than 5 posts
-      if len(input.title) > 100 and filtered_posts.count() >= 5:
+      title_has_reached_limit_of_chars = len(input.title) > 100
+      user_posted_maximum_posts = filtered_posts.count() >= 5
+      content_has_reached_limit_of_chars = len(input.content) > 10000
+
+      if title_has_reached_limit_of_chars and user_posted_maximum_posts:
          message += 'Title has more than 100 characters and you have reached your maximum posts per day!'
          return AddPost(message=message)
 
-      #check if title is over 100 chars
-      elif len(input.title) > 100:
+      elif title_has_reached_limit_of_chars:
          message = 'Title has more than 100 characters!'
          return AddPost(message=message)
 
-      #check if user hasn't reached more than 5 posts per day
-      elif filtered_posts.count() >= 5:
+      elif user_posted_maximum_posts:
          message += 'You have reached your maximum posts per day!'
          return AddPost(message=message)
 
-      #if content is over 10K chars
-      elif len(input.content) > 10000:
+      elif content_has_reached_limit_of_chars:
          message = 'Content is over 10,000 characters!'
          return EditPost(message=message)
 
-      #create date when was the post posted
+      # Create date when was the post posted
       posted = datetime.datetime.now().strftime('%d %B %Y')
       post = Post(title=input.title, content=input.content, user=user, posted=posted)
       post.save()
@@ -94,7 +94,7 @@ class AddPost(graphene.Mutation):
       return AddPost(post=post, message="Success")
 
 
-#Delete post
+# Delete post
 class PostDeleteInput(graphene.InputObjectType):
    id = graphene.ID()
 
@@ -114,7 +114,7 @@ class DeletePost(graphene.Mutation):
       return DeletePost(post=post)
 
 
-#Edit post
+# Edit post
 class PostEditInput(graphene.InputObjectType):
    id = graphene.ID()
    title = graphene.String()
@@ -133,18 +133,20 @@ class EditPost(graphene.Mutation):
    def mutate(root, info, input=None):
       message = ''
 
-      #if title is over 100 chars
-      if len(input.title) > 100:
+      title_has_reached_limit_of_chars = len(input.title) > 100
+      content_has_reached_limit_of_chars = len(input.content) > 10000
+      post_doesnt_exist = Post.objects.filter(id=input.id).count() != 0
+
+      if title_has_reached_limit_of_chars:
          message = 'Title has more than 100 characters!'
          return EditPost(message=message)
 
-      #if content is over 10K chars
-      elif len(input.content) > 10000:
+      elif content_has_reached_limit_of_chars:
          message = 'Content is over 10,000 characters!'
          return EditPost(message=message)
 
-      #success
-      elif Post.objects.filter(id=input.id).count() != 0:
+      # Success
+      elif post_doesnt_exist:
          message = 'Success'
          post = Post.objects.get(id=input.id)
 
@@ -154,13 +156,13 @@ class EditPost(graphene.Mutation):
 
          return EditPost(message=message, post=post)
 
-      #id doesnt match with post      
+      # Id doesnt match with post      
       else:
          message = "ID doesn't match with post"
          return EditPost(message=message)
 
 
-#Like post
+# Like post
 class LikePostInput(graphene.InputObjectType):
    id = graphene.ID()
    user = graphene.String()
@@ -178,20 +180,20 @@ class LikePost(graphene.Mutation):
       post = Post.objects.get(id=input.id)
       user = CustomUser.objects.get(username=input.user)
       
-      #add user to the post likes
+      # Add user to the post likes
       post.likes.add(user)
 
-      #count the post all likes
+      # Count amount of likes in post
       total_likes = post.likes.all().count()
 
-      #save the new total_likes to post
+      # Save the new total_likes to post
       post.total_likes = total_likes
       post.save()
 
       return LikePost(post=post)
 
 
-#Unlike post
+# Unlike post
 class UnlikePostInput(graphene.InputObjectType):
    id = graphene.ID()
    user = graphene.String()
@@ -210,20 +212,20 @@ class UnlikePost(graphene.Mutation):
       post = Post.objects.get(id=input.id)
       user = CustomUser.objects.get(username=input.user)
       
-      #remove user from likes
+      # Remove user from likes
       post.likes.remove(user)
 
-      #count the post all likes
+      # Count the post all likes
       total_likes = post.likes.all().count()
 
-      #save the new total_likes to post
+      # Save the new total_likes to post
       post.total_likes = total_likes
       post.save()
 
       return UnlikePost(message=message)
 
 
-#Filter post (filter by search bar)
+# Filter post (filter by search bar)
 class PostFilterInput(graphene.InputObjectType):
    title = graphene.String()
 
@@ -237,7 +239,7 @@ class FilterPost(graphene.Mutation):
    @staticmethod
    @login_required
    def mutate(root, info, input=None):
-      #filter post that starts with input in search bar
+      # Filter post that starts with input in search bar
       filtered_posts = Post.objects.filter(title__startswith=input.title)
-
+      
       return FilterPost(filtered_posts=filtered_posts)

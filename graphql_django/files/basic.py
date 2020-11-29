@@ -13,21 +13,21 @@ INSTALLED_APPS = [
     'users',
     'payments',
 
-    #Pip packages
+    # Pip packages
     'django_extensions',
     'corsheaders',
     'stripe',
     'django_otp',
     'django_otp.plugins.otp_totp',
 
-    #GraphQL
+    # GraphQL
     'django_filters',
     'graphene_django',
     'graphql_auth',
     'graphql_jwt',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 
-    #Django REST framework 
+    # Django REST framework 
     'rest_framework',
 ]
 
@@ -39,9 +39,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'corsheaders.middleware.CorsMiddleware', #users can fetch api
-    'django.contrib.auth.middleware.AuthenticationMiddleware', #user authentication
-    'whitenoise.middleware.WhiteNoiseMiddleware', #whitenoise
-    "django_graphql_ratelimit.middleware.ParseClientIpMiddleware", #django graphql ratelimit
-    'django_otp.middleware.OTPMiddleware', #two factor auth on django admin
+    'corsheaders.middleware.CorsMiddleware', # Users can fetch api
+    'django.contrib.auth.middleware.AuthenticationMiddleware', # User authentication
+    'whitenoise.middleware.WhiteNoiseMiddleware', # Whitenoise
+    "django_graphql_ratelimit.middleware.ParseClientIpMiddleware", # Django graphql ratelimit
+    'django_otp.middleware.OTPMiddleware', # Two factor auth on django admin
 ]

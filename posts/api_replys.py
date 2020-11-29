@@ -14,7 +14,7 @@ class ReplyType(DjangoObjectType):
       model = Reply
 
 
-#Create reply
+# Create reply
 class ReplyAddInput(graphene.InputObjectType):
    id = graphene.ID()
    user = graphene.String()
@@ -38,7 +38,7 @@ class ReplyComment(graphene.Mutation):
       posted = datetime.datetime.now().strftime('%d %B %Y')
       today = datetime.datetime.now().strftime('%d %B %Y')
 
-      #filter replies that belongs to user and are posted today
+      # Filter replies that belongs to user and are posted today
       replies_posted_today = Reply.objects.filter(user__username=input.user, posted=today)
 
       if replies_posted_today.count() >= 20:
@@ -52,7 +52,7 @@ class ReplyComment(graphene.Mutation):
       return ReplyComment(message=message)
 
 
-#Delete reply
+# Delete reply
 class ReplyDeleteInput(graphene.InputObjectType):
    id = graphene.ID()
 

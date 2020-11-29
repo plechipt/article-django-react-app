@@ -17,12 +17,12 @@ class AuthMutation(graphene.ObjectType):
    verify_secondary_email = mutations.VerifySecondaryEmail.Field()
    swap_emails = mutations.SwapEmails.Field()
 
-   # django-graphql-jwt inheritances
+   # Django-graphql-jwt inheritances
    token_auth = mutations.ObtainJSONWebToken.Field()
    verify_token = mutations.VerifyToken.Field()
    refresh_token = mutations.RefreshToken.Field()
    revoke_token = mutations.RevokeToken.Field() 
    
-   #delete JWT token
-   #delete_token_cookie = graphql_jwt.Delete.Field()
+   # Delete JWT tokens
+   delete_token_cookie = graphql_jwt.DeleteRefreshTokenCookie.Field()
    delete_refresh_token_cookie = graphql_jwt.DeleteRefreshTokenCookie.Field() 

@@ -10,7 +10,7 @@ class ProfileType(DjangoObjectType):
       model = Profile
 
 
-#Get profile info 
+# Get profile info 
 class ProfileInfoInput(graphene.InputObjectType):
    user = graphene.String()
 
@@ -33,6 +33,7 @@ class ProfileInfo(graphene.Mutation):
          message = 'Success'
          user = CustomUser.objects.get(username=input.user)
          profile = Profile.objects.get(user=user)
+
          return ProfileInfo(profile=profile, message=message)
       
       else: 
@@ -41,7 +42,7 @@ class ProfileInfo(graphene.Mutation):
 
 
 
-#Check if user has already profile
+# Check if user has already profile
 class CheckUserProfileInput(graphene.InputObjectType):
    user = graphene.String()
 
@@ -56,19 +57,19 @@ class CheckUserProfile(graphene.Mutation):
    def mutate(root, info, input=None):
       user = CustomUser.objects.get(username=input.user)
 
-      #try if users profile exists
+      # Try if users profile exists
       try:
-        Profile.objects.get(user=user)
+         Profile.objects.get(user=user)
         
-      #except to create new profile
+      # Except to create new profile
       except:
-        profile = Profile.objects.create(user=user)
-        profile.save()
+         profile = Profile.objects.create(user=user)
+         profile.save()
 
-        return CheckUserProfile(profile=profile)
+         return CheckUserProfile(profile=profile)
 
 
-#Update the profile by given inputs on frontend
+# Update the profile by given inputs on frontend
 class UpdateUserInput(graphene.InputObjectType):
    user = graphene.String()
    new_user = graphene.String()
@@ -83,11 +84,11 @@ class UpdateUser(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
-   #@login_required
+   @login_required
    def mutate(root, info, input=None):
       message = ''
 
-      #new_user and new_email combined
+      # New_user and new_email combined
       new_user_and_new_email = input.new_user + input.new_email
       forbidden_chars = [
          '!','#','$','%','^','&','*','(',')','`','/',',',';','[',']',
@@ -121,11 +122,11 @@ class UpdateUser(graphene.Mutation):
       email_include_only_one_at_sign or fields_doesnt_include_special_characters):
          message = 'Name or email must not include special characters!'
 
-      #if new_user has reached more than 40 chars
+      # If new_user has reached more than 40 chars
       elif len(input.new_user) >= 40:
          message = 'Your new name has reached maximum of characters! (40 characters)'
 
-      #if new_email has reached more than 50 chars
+      # If new_email has reached more than 50 chars
       elif len(input.new_email) >= 50:
          message = 'Your new email has reached maximum of characters! (50 characters)'
 
@@ -146,7 +147,7 @@ class UpdateUser(graphene.Mutation):
       return UpdateUser(message=message)
 
 
-#follow user profile
+# Follow user profile
 class FollowProfileInput(graphene.InputObjectType):
    follower = graphene.String()
    following = graphene.String()
@@ -163,10 +164,10 @@ class FollowProfile(graphene.Mutation):
    def mutate(root, info, input=None):
       message = ''
 
-      #follower 
+      # Follower 
       follower = CustomUser.objects.get(username=input.follower)
 
-      #following
+      # Following
       following = CustomUser.objects.get(username=input.following)
       following_profile = Profile.objects.get(user=following)
 
@@ -176,22 +177,22 @@ class FollowProfile(graphene.Mutation):
       else:
          message = 'Success!'
 
-         #add the user to profile followers
+         # Add the user to profile followers
          following_profile.followers.add(follower)
 
-         #count how many followers has the following user
+         # Count how many followers has the following user
          total_followers = following_profile.followers.all().count()
 
-         #set the followers to followers total_followers
+         # Set the followers to followers total_followers
          following_profile.total_followers = total_followers
          
-         #save the following users profile 
+         # Save the following users profile 
          following_profile.save()
 
       return FollowProfile(message=message)
 
 
-#unfollow user profile
+# Unfollow user profile
 class UnfollowProfileInput(graphene.InputObjectType):
    follower = graphene.String()
    following = graphene.String()
@@ -212,13 +213,13 @@ class UnfollowProfile(graphene.Mutation):
       following = CustomUser.objects.get(username=input.following)
       following_profile = Profile.objects.get(user=following)
 
-      #remove follower from followers
+      # Remove follower from followers
       following_profile.followers.remove(follower)
 
-      #count the total_followers of follower
+      # Count the total_followers of follower
       total_followers = following_profile.followers.all().count()
 
-      #save it to total_followers
+      # Save it to total_followers
       following_profile.total_followers = total_followers
       following_profile.save()
 

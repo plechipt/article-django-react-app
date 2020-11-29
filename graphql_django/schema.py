@@ -33,9 +33,8 @@ from posts.api_replys import (
 )
 
 
-#Mutation for users and posts
 class Mutation(AuthMutation, graphene.ObjectType):
-   #post
+   # Post
    find_post = FindPost.Field()
    add_post = AddPost.Field()
    delete_post = DeletePost.Field()
@@ -48,22 +47,21 @@ class Mutation(AuthMutation, graphene.ObjectType):
    reply_comment = ReplyComment.Field()
    reply_delete = DeleteReply.Field()
 
-   #profile
+   # Profile
    profile_info = ProfileInfo.Field()
    check_user_profile = CheckUserProfile.Field()
    profile_update = UpdateUser.Field()
    profile_follow = FollowProfile.Field()
    profile_unfollow = UnfollowProfile.Field()
 
-   #message
+   # Message
    message_create = CreateMessage.Field()
    query_user_messages = QueryUserMessages.Field()
 
-   #payment 
+   # Payment 
    create_checkout_session = CreateCheckoutSession.Field()
 
 
-#Query for users and posts
 class Query(UserQuery, MeQuery, graphene.ObjectType):
    all_posts = graphene.List(PostType)
    all_users = graphene.List(CustomUserType)
