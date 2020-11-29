@@ -6,9 +6,6 @@ from graphql_auth import mutations
 from graphene_django.types import DjangoObjectType
 from graphene_django.settings import *
 
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view, permission_classes
-
 
 #get both stripe keys from environment variables
 STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY') 

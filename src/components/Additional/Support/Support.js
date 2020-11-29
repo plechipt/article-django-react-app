@@ -50,7 +50,15 @@ const Support = () => {
         <Container className="container">
           <Header className="support-header">Support Us</Header>
           <p className="text-muted support-text">By buying coffee for only 5$</p>
-          <Button onClick={handleOnClick} className="support-button" role="link" size="big" primary>Support</Button>
+          <Button 
+            onClick={handleOnClick} 
+            className="support-button"
+            role="link" 
+            size="big" 
+            primary
+          >
+            Support
+          </Button>
         </Container>
       </div>
     </>

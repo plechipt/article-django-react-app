@@ -24,7 +24,10 @@ const MessagesContainer = ({ currentUser }) => {
             {(messagesData && messagesData.queryUserMessages.message === 'Success') ? (
                 <>
                     {messagesData && messagesData.queryUserMessages.messages.length !== 0 ? (
-                        <MessagesMap messagesData={messagesData} currentUser={currentUser} />
+                        <MessagesMap
+                            messagesData={messagesData}
+                            currentUser={currentUser} 
+                        />
                     ) : null }
                     <MessageCreate currentUser={currentUser} />
                 </>

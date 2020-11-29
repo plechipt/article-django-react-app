@@ -130,14 +130,11 @@ const Register = () => {
             placeholder='Confirm Password' />
         </Form.Field>
         <Form.Field>
-          <p className="text-muted">Already have an account? <a href="/login" className="ml-2" >Sign in</a></p>
+          <p className="text-muted">
+            Already have an account? <a href="/login" className="ml-2" >Sign in</a>
+          </p>
         </Form.Field>
-        {/* If both fields were filled -> show undisabled button */}
-        {(allowButton) ? (
-          <Button className="submit-button" type='submit' primary>Register</Button>
-        ) : (
-          <Button disabled className="submit-button" type='submit' primary>Register</Button>
-        )}
+        <Button disabled className="submit-button" type='submit' primary>Register</Button>
       </Form>
     </div>
   )

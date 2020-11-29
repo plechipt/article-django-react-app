@@ -67,11 +67,22 @@ const PostEdit = ({ currentUser }) => {
                 <Form onKeyPress={handleOnSubmit} onSubmit={handleOnSubmit}>
                     <Form.Field>
                         <label>Title</label>
-                        <input onChange={event => setTitleInput(event.target.value)} value={titleInput} placeholder="Title" maxLength="100" autoFocus />
+                        <input 
+                            onChange={event => setTitleInput(event.target.value)} 
+                            value={titleInput} 
+                            placeholder="Title" 
+                            maxLength="100" 
+                            autoFocus 
+                        />
                     </Form.Field>
                     <Form.Field>
                         <label>Content</label>
-                        <textarea onChange={event => setTextAreaInput(event.target.value)} value={textAreaInput} maxLength="10000" placeholder='Enter something...' />
+                        <textarea 
+                            onChange={event => setTextAreaInput(event.target.value)} 
+                            value={textAreaInput} 
+                            maxLength="10000" 
+                            placeholder='Enter something...'
+                        />
                     </Form.Field>
                     {(allowButton) ? (
                         <Button className="submit-button" type='submit' primary>Edit</Button>

@@ -36,7 +36,10 @@ const Posts = () => {
                     {(filteredData) ? (
                         <>
                             {/*If user has fillen search bar -> shows filteredPosts*/}
-                            <MapPosts filteredData={filteredData} searchInput={searchInput} />
+                            <MapPosts 
+                                filteredData={filteredData} 
+                                searchInput={searchInput} 
+                            />
                         </>
                     ) : null}
                 </div>

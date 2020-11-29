@@ -62,9 +62,24 @@ const CommentCreateForm = ({ id, currentUser }) => {
                     maxLength="100"
                 />
                 {(allowButton) ? (
-                    <Button onClick={handleOnComment} className="comment-create-button" content='Comment' labelPosition='left' icon='edit' primary />
+                    <Button 
+                        onClick={handleOnComment} 
+                        className="comment-create-button" 
+                        content='Comment' 
+                        labelPosition='left' 
+                        icon='edit'
+                        primary 
+                    />
                 ) : (
-                    <Button disabled onClick={handleOnComment} className="comment-create-button" content='Comment' labelPosition='left' icon='edit' primary />
+                    <Button 
+                        disabled 
+                        onClick={handleOnComment} 
+                        className="comment-create-button" 
+                        content='Comment' 
+                        labelPosition='left'
+                        icon='edit' 
+                        primary 
+                    />
                 )}
             </Form>
         </div>

@@ -33,9 +33,25 @@ const EditDeleteButtons = ({ id, detailData, currentUser }) => {
             {/*If post it is user's post -> show edit and delete button*/}
             {(currentUser === detailData.findPost.post.user.username) ? (
                 <>
-                    <Button onClick={handleOnEdit} className="post-detail-edit-button" color="teal">Edit</Button>
-                    <Button onClick={() => handleAction(true)} className="post-detail-delete-button" color="red">Delete</Button>
-                    <DeleteModal open={open} handleAction={handleAction} handleOnDelete={handleOnDelete} />
+                    <Button 
+                        onClick={handleOnEdit} 
+                        className="post-detail-edit-button" 
+                        color="teal"
+                    >
+                        Edit
+                    </Button>
+                    <Button 
+                        onClick={() => handleAction(true)} 
+                        className="post-detail-delete-button" 
+                        color="red"
+                    >
+                        Delete
+                    </Button>
+                    <DeleteModal 
+                        open={open} 
+                        handleAction={handleAction} 
+                        handleOnDelete={handleOnDelete} 
+                    />
                 </>
             ) : null }
         </>

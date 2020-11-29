@@ -43,7 +43,14 @@ const ReplyForm = ({ id, showReplyForm, currentUser }) => {
                             placeholder='Enter something...' 
                         />
                         {(allowButton) ? (
-                            <Button onClick={handleOnAddReply} className="comment-create-button" content='Reply' labelPosition='left' icon='edit' primary />
+                            <Button 
+                                onClick={handleOnAddReply} 
+                                className="comment-create-button" 
+                                content='Reply'
+                                labelPosition='left' 
+                                icon='edit' 
+                                primary 
+                            />
                         ) : (
                             <Button disabled onClick={handleOnAddReply} className="comment-create-button" content='Reply' labelPosition='left' icon='edit' primary />
                         )}

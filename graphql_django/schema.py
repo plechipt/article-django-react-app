@@ -5,10 +5,6 @@ from graphql_auth import mutations
 from users.api_users import AuthMutation 
 from payments.api_payments import CreateCheckoutSession
 
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view, permission_classes
-
-
 from users.api_messages import (
    CustomUserType, CustomUser, 
    CreateMessage, QueryUserMessages
@@ -75,7 +71,6 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
    all_comments = graphene.List(CommentType)
    all_replys = graphene.List(ReplyType) 
 
-   @permission_classes((IsAuthenticated, ))
    def resolve_all_posts(self, info, **kwargs):
       return Post.objects.all()
 

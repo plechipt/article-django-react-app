@@ -60,7 +60,11 @@ const ProfileBodyButtons = ({ profileData: { profileInfo: { profile } }, current
                             {totalFollowers}
                         </Label>
                     </Button>
-                    <Button onClick={handleOnMessage} className="profile-message-button" color='blue'>
+                    <Button 
+                        onClick={handleOnMessage} 
+                        className="profile-message-button" 
+                        color='blue'
+                    >
                         <Icon name='comment' /> Message
                     </Button>
                 </div>

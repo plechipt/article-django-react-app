@@ -44,19 +44,39 @@ const PostDetail = ({ currentUser }) => {
                 <Item>
                     <Item.Image size='small' src={DEFAULT_IMAGE} />
                     <Item.Content className="post-content">
-                        <Item.Header className="post-title">{detailData.findPost.post.title}</Item.Header>
+                        <Item.Header 
+                            className="post-title"
+                        >
+                            {detailData.findPost.post.title}
+                        </Item.Header>
                         <Item.Meta className="post-user">
                             <Link to={`profile/${detailData.findPost.post.user.username}`}>
                                 {detailData.findPost.post.user.username}
                             </Link>
                         </Item.Meta>
-                        <Item.Meta className="post-date">{detailData.findPost.post.posted}</Item.Meta>
-                        <Item.Description className="post-textfield">{detailData.findPost.post.content}</Item.Description>
+                        <Item.Meta 
+                            className="post-date"
+                        >
+                            {detailData.findPost.post.posted}
+                        </Item.Meta>
+                        <Item.Description 
+                            className="post-textfield"
+                        >
+                            {detailData.findPost.post.content}
+                        </Item.Description>
 
                         {/*Includes like, edit and delete buttons*/}
                         <div className="post-detail-buttons-container">
-                            <LikeButton id={id} likes={likes} detailData={detailData} currentUser={currentUser} />
-                            <EditDeleteButtons id={id} detailData={detailData} currentUser={currentUser} />
+                            <LikeButton 
+                                id={id} likes={likes} 
+                                detailData={detailData} 
+                                currentUser={currentUser}            
+                            />
+                            <EditDeleteButtons 
+                                id={id} 
+                                detailData={detailData} 
+                                currentUser={currentUser} 
+                            />
                         </div>
                         
                         <div className="comments-container">

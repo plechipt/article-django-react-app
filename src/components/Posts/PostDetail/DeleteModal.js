@@ -20,10 +20,18 @@ const DeleteModal = ({ open, handleAction, handleOnDelete }) => {
                     <h4>Are you sure you want to delete this post</h4>
                 </Modal.Content>
                 <Modal.Actions className="d-flex justify-content-center">
-                    <Button basic color='red' inverted onClick={() => handleAction(false)} button="submit">
+                    <Button 
+                        basic color='red' 
+                        inverted onClick={() => handleAction(false)} 
+                        button="submit"
+                    >
                         <Icon name='remove' /> No
                     </Button>
-                    <Button color='green' inverted onClick={() => handleOnDelete()} button="submit">
+                    <Button 
+                        color='green' 
+                        inverted onClick={() => handleOnDelete()} 
+                        button="submit"
+                    >
                         <Icon name='checkmark' /> Yes
                     </Button>
                     </Modal.Actions>
