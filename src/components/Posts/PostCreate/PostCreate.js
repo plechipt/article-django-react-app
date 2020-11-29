@@ -84,11 +84,14 @@ const PostCreate = ({ currentUser }) => {
                         maxLength="10000"
                     />
                 </Form.Field>
-                {(allowButton) ? (
-                    <Button className="submit-button" type="submit" primary>Create</Button>
-                ) : (
-                    <Button disabled className="submit-button" type="submit" primary>Create</Button>
-                ) }
+                <Button 
+                    disabled={!allowButton}
+                    className="submit-button" 
+                    type="submit" 
+                    primary
+                >
+                    Create
+                </Button>
             </Form>
         </div>
     )

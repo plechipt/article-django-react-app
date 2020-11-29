@@ -134,7 +134,14 @@ const Register = () => {
             Already have an account? <a href="/login" className="ml-2" >Sign in</a>
           </p>
         </Form.Field>
-        <Button disabled className="submit-button" type='submit' primary>Register</Button>
+        <Button 
+          disabled={!allowButton} 
+          className="submit-button"
+          type='submit' 
+          primary
+        >
+          Register
+        </Button>
       </Form>
     </div>
   )

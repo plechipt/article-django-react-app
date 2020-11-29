@@ -84,11 +84,14 @@ const PostEdit = ({ currentUser }) => {
                             placeholder='Enter something...'
                         />
                     </Form.Field>
-                    {(allowButton) ? (
-                        <Button className="submit-button" type='submit' primary>Edit</Button>
-                    ) : (
-                        <Button disabled className="submit-button" type='submit' primary>Edit</Button>
-                    )}
+                        <Button 
+                            disabled={!allowButton}
+                            className="submit-button" 
+                            type='submit' 
+                            primary
+                        >
+                            Edit
+                        </Button>
                 </Form>
             ) : null }
         </div> 
