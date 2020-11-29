@@ -13,7 +13,7 @@ const ProfileImages = ({ userImage, onImageChange }) => {
     const [ chosenImage, setChosenImage ] = useState('')
 
     //Will not show user image
-    let profileImages = profileImages.filter(image => {
+    profileImages = profileImages.filter(image => {
         return image !== userImage
     })
 
