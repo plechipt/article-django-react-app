@@ -44,7 +44,9 @@ class CreateMessage(graphene.Mutation):
       #create date when message was messaged
       messaged = datetime.datetime.now().strftime('%d %B %Y, %H:%M')
 
-      if input.content == '':
+      message_is_empty = input.content == ''
+
+      if message_is_empty:
          message = "Message must not be empty!"
          return CreateMessage(message=message)
          
@@ -87,8 +89,9 @@ class QueryUserMessages(graphene.Mutation):
       user = CustomUser.objects.get(username=input.user)
       chat_rooms = ChatRoom.objects.all()
       
-      #if chat_user doesnt exist
-      if CustomUser.objects.filter(username=input.chat_user).count() == 0:
+      user_doesnt_exist = CustomUser.objects.filter(username=input.chat_user).count() == 0
+
+      if user_doesnt_exist:
          message = "This user doesn't exist"
          return QueryUserMessages(message=message)
 
@@ -96,20 +99,15 @@ class QueryUserMessages(graphene.Mutation):
       else:
          chat_user = CustomUser.objects.get(username=input.chat_user)
 
-         #if chat room exists -> get it
-         if chat_rooms.filter(users__username=user).filter(users__username=chat_user).count() != 0:
-            #filter where is user
-            chat_room_with_user = chat_rooms.filter(users__username=user)
-            #filter where is user and chat_user
-            chat_room = chat_room_with_user.get(users__username=chat_user)
+         users_chatrooms = chat_rooms.filter(users__username=user)
+         user_and_chatuser_chatroom = users_chatrooms.filter(users__username=chat_user)
 
-         #else to create chat_room and add the users to chat_room
-         else:
-            chat_room = ChatRoom.objects.create()
-            chat_room.users.add(user, chat_user)
+         #if chatroom doesnt exist -> create new one
+         if user_and_chatuser_chatroom.count() == 0:
+            user_and_chatuser_chatroom = ChatRoom.objects.create()
+            user_and_chatuser_chatroom.users.add(user, chat_user)
 
-
-      messages = chat_room.messages.all()
+      messages = user_and_chatuser_chatroom.messages.all()
 
       message = 'Success'
       return QueryUserMessages(messages=messages, message=message)

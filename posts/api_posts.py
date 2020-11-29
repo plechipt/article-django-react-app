@@ -29,7 +29,9 @@ class FindPost(graphene.Mutation):
    def mutate(root, info, input=None):
       message = ''
 
-      if Post.objects.filter(id=input.id).count() != 0:
+      post_exist = Post.objects.filter(id=input.id).count() != 0
+
+      if post_exist:
          message = 'Success'
          post = Post.objects.get(id=input.id)
          return FindPost(post=post, message=message)
