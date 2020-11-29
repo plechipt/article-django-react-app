@@ -1,8 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f583fe1083fa339c913f528b0d6c378b9d11d9f99d6b5f7b6d2ef0fb74e21dd7"
-
+            "sha256": "b46212480e75d4c64a959eda16c99671c1c5293cbc913bba2adc436c914a3b74"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -344,6 +343,13 @@
             "index": "pypi",
             "version": "==0.3.0"
         },
+        "django-graphql-playground": {
+            "hashes": [
+                "sha256:5dcbe83b53b3d9fd7a63f0db011396ecadb3d0480666a6b5c6d8c90c9ac3da7b"
+            ],
+            "index": "pypi",
+            "version": "==1.0"
+        },
         "django-graphql-ratelimit": {
             "hashes": [
                 "sha256:6fb207a81d9e6e792c3e8750d6d1dca5744cb2d16b79cef6cea40a5548dab27f",
@@ -374,6 +380,21 @@
             ],
             "index": "pypi",
             "version": "==3.0.1"
+        },
+        "djangorestframework": {
+            "hashes": [
+                "sha256:0209bafcb7b5010fdfec784034f059d512256424de2a0f084cb82b096d6dd6a7"
+            ],
+            "index": "pypi",
+            "version": "==3.12.2"
+        },
+        "djangorestframework-simplejwt": {
+            "hashes": [
+                "sha256:7adc913ba0d2ed7f46e0b9bf6e86f9bd9248f1c4201722b732b8213e0ea66f9f",
+                "sha256:bd587700b6ab34a6c6b12d426cce4fa580d57ef1952ad4ba3b79707784619ed3"
+            ],
+            "index": "pypi",
+            "version": "==4.6.0"
         },
         "filelock": {
             "hashes": [

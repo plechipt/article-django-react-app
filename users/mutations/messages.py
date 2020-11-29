@@ -6,7 +6,7 @@ from graphene_django.types import DjangoObjectType
 from graphql_jwt.decorators import login_required
 from django_graphql_ratelimit import ratelimit
 
-from .models import CustomUser, Profile, Message, ChatRoom
+from users.models import CustomUser, Profile, Message, ChatRoom
 
 
 class CustomUserType(DjangoObjectType):
@@ -113,9 +113,3 @@ class QueryUserMessages(graphene.Mutation):
 
       message = 'Success'
       return QueryUserMessages(messages=messages, message=message)
-
-
-
-class MessageMutation():
-   message_create = CreateMessage.Field()
-   query_user_messages = QueryUserMessages.Field()

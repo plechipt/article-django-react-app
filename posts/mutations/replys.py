@@ -5,7 +5,7 @@ from django_graphql_ratelimit import ratelimit
 from graphene_django.types import DjangoObjectType
 from graphql_jwt.decorators import login_required
 
-from .models import Comment, Reply 
+from posts.models import Comment, Reply 
 from users.models import CustomUser
 
 
@@ -70,9 +70,3 @@ class DeleteReply(graphene.Mutation):
       reply.delete()
 
       return DeleteReply(reply=reply)
-
-   
-
-class ReplyMutation():
-   reply_comment = ReplyComment.Field()
-   reply_delete = DeleteReply.Field()

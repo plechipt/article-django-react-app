@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'graphql_auth',
     'graphql_jwt',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
+    'graphql_playground',
 
     # Django REST framework 
     'rest_framework',

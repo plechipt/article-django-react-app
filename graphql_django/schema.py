@@ -3,30 +3,23 @@ from graphql_auth.schema import UserQuery, MeQuery
 from graphql_auth import mutations
 from users.models import CustomUser
 
-from users.schema_users import AuthMutation 
+from users.schema import UserMutation 
+from posts.schema import PostMutation 
 from payments.schema import PaymentMutation
-from users.schema_messages import MessageMutation, CustomUserType
-from users.schema_profiles import ProfileMutation, Profile, ProfileType
-from posts.schema_posts import PostMutation, Post, PostType
-from posts.schema_comments import CommentMutation, Comment, CommentType
-from posts.schema_replys import ReplyMutation, Reply, ReplyType
+
+from .types import *
 
 
-
-class Mutation(
-   AuthMutation, ProfileMutation, PaymentMutation, 
-   MessageMutation, PostMutation, CommentMutation,
-   ReplyMutation, graphene.ObjectType
-):
+class Mutation(UserMutation, PostMutation, PaymentMutation):
    pass
 
 
 class Query(UserQuery, MeQuery, graphene.ObjectType):
-   all_posts = graphene.List(PostType)
+   all_posts = graphene.List(CustomPostType)
    all_users = graphene.List(CustomUserType)
-   all_profiles = graphene.List(ProfileType)
-   all_comments = graphene.List(CommentType)
-   all_replys = graphene.List(ReplyType) 
+   all_profiles = graphene.List(CustomProfileType)
+   all_comments = graphene.List(CustomCommentType)
+   all_replys = graphene.List(CustomReplyType) 
 
    def resolve_all_posts(self, info, **kwargs):
       return Post.objects.all()

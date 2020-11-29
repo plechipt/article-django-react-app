@@ -2,8 +2,8 @@ import graphene
 from graphene_django.types import DjangoObjectType
 from graphql_jwt.decorators import login_required
 
-from .models import CustomUser, Profile
-from .schema_messages import CustomUserType
+from users.models import CustomUser, Profile
+from .messages import CustomUserType
 
 
 class ProfileType(DjangoObjectType):
@@ -225,12 +225,3 @@ class UnfollowProfile(graphene.Mutation):
       following_profile.save()
 
       return UnfollowProfile(message=message)
-
-   
-   
-class ProfileMutation():
-   profile_info = ProfileInfo.Field()
-   check_user_profile = CheckUserProfile.Field()
-   profile_update = UpdateUser.Field()
-   profile_follow = FollowProfile.Field()
-   profile_unfollow = UnfollowProfile.Field()

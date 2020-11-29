@@ -3,7 +3,7 @@ import datetime
 from graphene_django.types import DjangoObjectType
 from graphql_jwt.decorators import login_required
 
-from .models import Post 
+from posts.models import Post 
 from users.models import CustomUser
 
 
@@ -243,14 +243,3 @@ class FilterPost(graphene.Mutation):
       filtered_posts = Post.objects.filter(title__startswith=input.title)
       
       return FilterPost(filtered_posts=filtered_posts)
-
-
-
-class PostMutation():
-   find_post = FindPost.Field()
-   add_post = AddPost.Field()
-   delete_post = DeletePost.Field()
-   edit_post = EditPost.Field()
-   like_post = LikePost.Field()
-   unlike_post = UnlikePost.Field()
-   post_filter = FilterPost.Field()

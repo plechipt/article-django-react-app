@@ -7,8 +7,8 @@ from graphql_jwt.decorators import login_required
 from graphene_django.types import DjangoObjectType
 from django_graphql_ratelimit import ratelimit
 
-from .models import Comment, Post 
 from users.models import CustomUser
+from posts.models import Comment, Post
 
 
 class CommentType(DjangoObjectType):
@@ -74,9 +74,3 @@ class DeleteComment(graphene.Mutation):
       comment.delete()
 
       return DeleteComment(comment=comment)
-
-
-
-class CommentMutation():
-   comment_post = PostComment.Field()
-   comment_delete = DeleteComment.Field()

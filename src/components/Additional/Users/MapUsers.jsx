@@ -24,7 +24,6 @@ const MapUsers = ({ users: { allProfiles: allUsers }}) => {
             <div className="users-container">
                 <Item.Group link>
                     {currentUsers.map(({ user: { username }, id, image }) => {
-                        console.log(image)
                         return (
                             <User
                                 key={id}
