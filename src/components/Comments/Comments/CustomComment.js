@@ -14,12 +14,12 @@ const CustomComment = ({ id, replys, content, posted, username, currentUser, ima
     const [ showReplyForm, setShowReplyForm ] = useState(false)
 
     // If user click on reply -> show the reply form and reverse
-    const handleOnReply = () => {
+    const handleOnReply = async () => {
         setShowReplyForm(!showReplyForm)
     }
 
-    const handleOnDelete = () => {
-        commentDelete({ variables: { id: id } })
+    const handleOnDelete = async () => {
+        await commentDelete({ variables: { id: id } })
         window.location.reload(false) // Reset site
     }
 

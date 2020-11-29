@@ -16,7 +16,7 @@ const Support = () => {
   const [ errorMessage, setErrorMessage ] = useState(false) 
   const [ createCheckoutSession ] = useMutation(CREATE_CHECKOUT_SESSION_MUTATION);
 
-  const handleOnClick = async (event) => {
+  const handleOnClick = async () => {
     // Get Stripe.js instance
     const stripe = await stripePromise;
 

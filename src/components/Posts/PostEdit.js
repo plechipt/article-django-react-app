@@ -18,13 +18,16 @@ const PostEdit = ({ currentUser }) => {
     const [ postFind, { data: detailData } ] = useMutation(POST_FIND_MUTATION)
 
 
-   // Everytime id changes -> find post info of that id 
+    // Everytime id changes -> find post info of that id 
     useEffect(() => {
-        const id_is_number = !(isNaN(id))
-
-        if (id_is_number === true) {
-            postFind({variables: { id: id }})
+        const findPost = async () => {
+            const id_is_number = !(isNaN(id))
+    
+            if (id_is_number === true) {
+                await postFind({variables: { id: id }})
+            }
         }
+        findPost()
     }, [id, postFind])
     
     // Fill title and textarea

@@ -26,9 +26,9 @@ const Profile = ({ currentUser }) => {
 
 
     useEffect(() => {
-        const getProfileInfo = () => {
+        const getProfileInfo = async () => {
             if (user) {
-                profileInfo({ variables: { user: user } })
+                await profileInfo({ variables: { user: user } })
             }
         }
         getProfileInfo()
@@ -58,12 +58,12 @@ const Profile = ({ currentUser }) => {
         }
     }, [updateData, history])
 
-    const handleOnSubmit = (event) => {
+    const handleOnSubmit = async (event) => {
         const user_pressed_enter = event.key === 'Enter'
         const user_submited_button = event.target.tagName === 'FORM'
 
         if (user_pressed_enter || user_submited_button) {
-            profileUpdate({ variables: { 
+            await profileUpdate({ variables: { 
                 user: user, newUser: usernameInput,
                 newEmail: emailInput, image: profileImage }
             })

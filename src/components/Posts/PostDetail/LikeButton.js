@@ -10,13 +10,13 @@ const LikeButton = ({ id, likes, detailData, currentUser }) => {
     const [ postLike ] = useMutation(POST_LIKE_MUTATION)
     const [ unlikePost ] = useMutation(POST_UNLIKE_MUTATION)
 
-    const handleOnLike = () => {
-        postLike({ variables: { id: id, user: currentUser } })
+    const handleOnLike = async () => {
+        await postLike({ variables: { id: id, user: currentUser } })
         window.location.reload(false); // Reset site
     }
 
-    const handleOnUnlike = () => {
-        unlikePost({ variables: { id: id, user: currentUser } })
+    const handleOnUnlike = async () => {
+        await unlikePost({ variables: { id: id, user: currentUser } })
         window.location.reload(false); // Reset site
     }
 

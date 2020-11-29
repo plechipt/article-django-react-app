@@ -45,7 +45,9 @@ const PostCreate = ({ currentUser }) => {
 
     // If title and content are filled -> undisable button
     useEffect(() => {
-        if (titleInput !== '' && textareaInput !== '') {
+        const fields_are_filled = titleInput !== '' && textareaInput !== ''
+
+        if (fields_are_filled) {
             setAllowButton(true)
         }
 

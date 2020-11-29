@@ -11,8 +11,8 @@ const ReplyForm = ({ id, showReplyForm, currentUser }) => {
     const [ replyInput, setReplyInput ] = useState('')
     const [ allowButton, setAllowButton ] = useState(false)
     
-    const handleOnAddReply = () => {
-        replyComment({ variables: { id: id, user: currentUser, content: replyInput } })
+    const handleOnAddReply = async () => {
+        await replyComment({ variables: { id: id, user: currentUser, content: replyInput } })
         window.location.reload(false) // Reset site
     }
 

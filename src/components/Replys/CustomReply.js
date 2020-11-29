@@ -8,8 +8,8 @@ const PATH_TO_PICTURES = 'Profiles/media/profile_pictures'
 const CustomReply = ({ id, content, posted, username, image, currentUser }) => {
     const [ replyDelete ] = useMutation(REPLY_DELETE_MUTATION)
 
-    const handleOnDelete = () => {
-        replyDelete({ variables: { id: id } })
+    const handleOnDelete = async () => {
+        await replyDelete({ variables: { id: id } })
         window.location.reload(false) // Reset site
     }
 

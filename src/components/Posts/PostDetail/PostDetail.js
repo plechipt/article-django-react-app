@@ -29,11 +29,14 @@ const PostDetail = ({ currentUser }) => {
 
     // If id is number -> fetch post
     useEffect(() => {
-        const id_is_number = !(isNaN(id))
-
-        if (id_is_number === true) {
-            postFind({ variables: { id: id } })
+        const findPost = async () => {
+            const id_is_number = !(isNaN(id))
+    
+            if (id_is_number === true) {
+                await postFind({ variables: { id: id } })
+            }
         }
+        findPost()
     }, [id, postFind])
 
     

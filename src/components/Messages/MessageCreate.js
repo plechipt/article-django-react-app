@@ -12,13 +12,13 @@ const MessageCreate = ({ currentUser }) => {
     const [ messageCreate ] = useMutation(MESSAGE_CREATE_MUTATION)
 
 
-    const handleOnSubmit = (event) => {
+    const handleOnSubmit = async (event) => {
         const user_pressed_enter = event.key === 'Enter'
         const form_is_filled = messageInput !== ''
         const user_submited_button = event.target.tagName === 'FORM'
 
         if ((user_pressed_enter && form_is_filled) || user_submited_button) {
-            messageCreate({ variables: { user: currentUser, chatUser: chatUser, content: messageInput }})
+            await messageCreate({ variables: { user: currentUser, chatUser: chatUser, content: messageInput }})
             setMessageInput('')
             window.location.reload(false) // Reset site
         }

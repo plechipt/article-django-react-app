@@ -13,13 +13,13 @@ const ProfileBodyButtons = ({ profileData: { profileInfo: { profile } }, current
     const [ profileUnfollow ] = useMutation(USER_PROFILE_UNFOLLOW_MUTATION)
 
 
-    const handleOnFollow = () => {
-        profileFollow({ variables: { follower: currentUser, following: usersProfile } })
+    const handleOnFollow = async () => {
+        await profileFollow({ variables: { follower: currentUser, following: usersProfile } })
         window.location.reload(false) // Reset site
     }
 
-    const handleOnUnfollow = () => {
-        profileUnfollow({ variables: { follower: currentUser, following: usersProfile } })
+    const handleOnUnfollow = async () => {
+        await profileUnfollow({ variables: { follower: currentUser, following: usersProfile } })
         window.location.reload(false) // Reset site
     }
 
