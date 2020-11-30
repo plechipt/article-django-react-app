@@ -1,7 +1,6 @@
 import { gql } from "@apollo/client";
 
 // Query
-
 export const USER_ME_QUERY = gql`
     query {
         me {
@@ -89,7 +88,7 @@ export const USER_REFRESH_TOKEN_MUTATION = gql`
 
 export const USER_PROFILE_INFO_MUTATION = gql`
     mutation profileInfo ($user: String!) {
-        profileInfo(input: {user: $user}) {
+        profileInfo(user: $user) {
             profile {
                 image
                 totalFollowers
@@ -108,7 +107,7 @@ export const USER_PROFILE_INFO_MUTATION = gql`
 
 export const USER_CHECK_PROFILE_MUTATION = gql`
     mutation checkUserProfile ($user: String!) {
-        checkUserProfile(input: {user: $user}) {
+        checkUserProfile(user: $user) {
             profile {
                 id
             }
@@ -118,7 +117,7 @@ export const USER_CHECK_PROFILE_MUTATION = gql`
 
 export const USER_UPDATE_MUTATION = gql`
     mutation profileUpdate ($user: String!, $newUser: String!, $newEmail: String!, $image: String!){
-        profileUpdate(input: {user: $user, newUser: $newUser, newEmail: $newEmail, image: $image}) {
+        profileUpdate(user: $user, newUser: $newUser, newEmail: $newEmail, image: $image) {
             message
         }
     }
@@ -126,7 +125,7 @@ export const USER_UPDATE_MUTATION = gql`
 
 export const USER_PROFILE_FOLLOW_MUTATION = gql`
     mutation profileFollow ($follower: String!, $following: String!) {
-        profileFollow(input: {follower: $follower, following: $following}) {
+        profileFollow(follower: $follower, following: $following) {
             message
         }
     } 
@@ -134,7 +133,7 @@ export const USER_PROFILE_FOLLOW_MUTATION = gql`
 
 export const USER_PROFILE_UNFOLLOW_MUTATION = gql`
     mutation profileUnfollow ($follower: String!, $following: String!) {
-        profileUnfollow(input: {follower: $follower, following: $following}) {
+        profileUnfollow(follower: $follower, following: $following) {
             message
         }
     }
