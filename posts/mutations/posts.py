@@ -12,31 +12,6 @@ class PostType(DjangoObjectType):
       model = Post 
 
 
-# Find post
-class FindPost(graphene.Mutation):
-   class Arguments:
-      id = graphene.ID(required=True)
-   
-   post = graphene.Field(PostType)
-   message = graphene.String()
-
-   @staticmethod
-   @login_required
-   def mutate(root, info, id):
-      message = ''
-
-      post_exist = Post.objects.filter(id=id).count() != 0
-
-      if post_exist:
-         message = 'Success'
-         post = Post.objects.get(id=id)
-         return FindPost(post=post, message=message)
-
-      else:
-         message = "ID doesn't match with post"
-         return FindPost(message=message)
-      
-
 # Create post
 class AddPost(graphene.Mutation):
    class Arguments:
@@ -199,19 +174,3 @@ class UnlikePost(graphene.Mutation):
       post.save()
 
       return UnlikePost(message=message)
-
-
-# Filter post (filter by search bar)
-class FilterPost(graphene.Mutation):
-   class Arguments:
-      title = graphene.String(required=True)
-
-   filtered_posts = graphene.List(PostType)
-
-   @staticmethod
-   @login_required
-   def mutate(root, info, title):
-      # Filter post that starts with input in search bar
-      filtered_posts = Post.objects.filter(title__startswith=title)
-      
-      return FilterPost(filtered_posts=filtered_posts)
