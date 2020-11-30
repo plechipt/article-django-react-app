@@ -23,7 +23,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'graphql_auth',
     'graphql_jwt',
-    'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
+    #'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 
     # Django REST framework 
 ]

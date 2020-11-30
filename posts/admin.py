@@ -1,7 +1,11 @@
 from django.contrib import admin
-from .models import Post, Comment, Reply
+from django.apps import apps
 
-models = [Post, Comment, Reply]
+models = apps.get_models()
 
 for model in models:
-    admin.site.register(model)
+    try:
+        admin.site.register(model)
+        
+    except admin.sites.AlreadyRegistered:
+        pass

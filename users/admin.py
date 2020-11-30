@@ -1,8 +1,11 @@
 from django.contrib import admin
-from .models import CustomUser, Profile, Message, ChatRoom
+from django.apps import apps
 
-
-models = [CustomUser, Profile, Message, ChatRoom]
+models = apps.get_models()
 
 for model in models:
-    admin.site.register(model)
+    try:
+        admin.site.register(model)
+        
+    except admin.sites.AlreadyRegistered:
+        pass
