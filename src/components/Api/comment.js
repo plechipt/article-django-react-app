@@ -17,7 +17,7 @@ export const COMMENT_LIST_QUERY = gql`
 // Mutation
 export const COMMENT_ADD_MUTATION = gql`
     mutation postComment ($id: ID!, $user: String!, $content: String!) {
-       commentPost (input: { id: $id, user: $user, content: $content}) {
+       commentPost (id: $id, user: $user, content: $content) {
            message  
         }
     }
@@ -25,7 +25,7 @@ export const COMMENT_ADD_MUTATION = gql`
 
 export const COMMENT_DELETE_MUTATION = gql`
     mutation commentDelete ($id: ID!) {
-        commentDelete(input: {id: $id}) {
+        commentDelete(id: $id) {
             comment {
                 content
             }

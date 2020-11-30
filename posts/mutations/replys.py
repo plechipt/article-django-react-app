@@ -15,58 +15,49 @@ class ReplyType(DjangoObjectType):
 
 
 # Create reply
-class ReplyAddInput(graphene.InputObjectType):
-   id = graphene.ID()
-   user = graphene.String()
-   content = graphene.String()
-
-
 class ReplyComment(graphene.Mutation):
    class Arguments:
-      input = ReplyAddInput(required=True)
+      id = graphene.ID(required=True)
+      user = graphene.String(required=True)
+      content = graphene.String(required=True)
 
    message = graphene.String()
 
-   
    @staticmethod
    @login_required
    @ratelimit(key="ip", rate="3/m", block=True)
-   def mutate(root, info, input=None):
+   def mutate(root, info, id, user, content):
       message = ''
-      comment = Comment.objects.get(id=input.id)
-      user = CustomUser.objects.get(username=input.user)   
+      comment = Comment.objects.get(id=id)
+      user = CustomUser.objects.get(username=user)   
       posted = datetime.datetime.now().strftime('%d %B %Y')
       today = datetime.datetime.now().strftime('%d %B %Y')
 
       # Filter replies that belongs to user and are posted today
-      replies_posted_today = Reply.objects.filter(user__username=input.user, posted=today)
+      replies_posted_today = Reply.objects.filter(user__username=user, posted=today)
 
       if replies_posted_today.count() >= 20:
          message = 'You have reached your maximum replies per day!'
 
       else:
          message = 'Success'
-         reply = Reply(comment=comment, user=user, content=input.content, posted=posted)
+         reply = Reply(comment=comment, user=user, content=content, posted=posted)
          reply.save()
 
       return ReplyComment(message=message)
 
 
 # Delete reply
-class ReplyDeleteInput(graphene.InputObjectType):
-   id = graphene.ID()
-
-
 class DeleteReply(graphene.Mutation):
    class Arguments:
-      input = ReplyDeleteInput(required=True)
+      id = graphene.ID(required=True)
 
    reply = graphene.Field(ReplyType)
 
    @staticmethod
    @login_required
-   def mutate(root, info, input=None):
-      reply = Reply.objects.get(id=input.id)
+   def mutate(root, info, id):
+      reply = Reply.objects.get(id=id)
       reply.delete()
 
       return DeleteReply(reply=reply)

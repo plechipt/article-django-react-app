@@ -15,9 +15,10 @@ export const POST_LIST_QUERY = gql`
 `
 
 // Mutation
+//Need to fix this shit with fragments
 export const POST_FIND_MUTATION = gql`
     mutation ($id: ID!) {
-        findPost (input: {id: $id}) {
+        findPost (id: $id) {
             message
             post {
                 user {
@@ -60,7 +61,7 @@ export const POST_FIND_MUTATION = gql`
 
 export const POST_DELETE_MUTATION = gql`
     mutation postDelete ($id: ID!) {
-        deletePost(input: {id: $id}) {
+        deletePost(id: $id) {
             post {
                 title
             }
@@ -70,7 +71,7 @@ export const POST_DELETE_MUTATION = gql`
 
 export const POST_EDIT_MUTATION = gql`
     mutation postEdit ($id: ID!, $title: String!, $content: String!) {
-        editPost(input: {id: $id, title: $title, content: $content}) {
+        editPost(id: $id, title: $title, content: $content) {
             post {
                 content
             }
@@ -80,7 +81,7 @@ export const POST_EDIT_MUTATION = gql`
 
 export const POST_CREATE_MUTATION = gql`
     mutation createPost ($title: String!, $content: String!, $user: String!) {
-        addPost(input: {title: $title, content: $content, user: $user}) {
+        addPost(title: $title, content: $content, user: $user) {
             message
             post {
                 title
@@ -93,7 +94,7 @@ export const POST_CREATE_MUTATION = gql`
 
 export const POST_LIKE_MUTATION = gql`
     mutation postLike ($id: ID!, $user: String!) {
-        likePost (input: { id: $id, user: $user }) {
+        likePost (id: $id, user: $user) {
             post {
                 title
                 totalLikes
@@ -104,7 +105,7 @@ export const POST_LIKE_MUTATION = gql`
 
 export const POST_UNLIKE_MUTATION = gql`
     mutation unlikePost ($id: ID!, $user: String!) {
-        unlikePost(input: {id: $id, user: $user}) {
+        unlikePost(id: $id, user: $user) {
             message
         }
     }
@@ -112,7 +113,7 @@ export const POST_UNLIKE_MUTATION = gql`
 
 export const POST_FILTER_MUTATION = gql`
     mutation postFilter ($title: String!) {
-        postFilter(input: {title: $title}) {
+        postFilter(title: $title) {
             filteredPosts {
                 user {
                     username

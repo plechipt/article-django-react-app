@@ -13,27 +13,23 @@ class PostType(DjangoObjectType):
 
 
 # Find post
-class PostDetailInput(graphene.InputObjectType):
-   id = graphene.ID()
-
-
 class FindPost(graphene.Mutation):
    class Arguments:
-      input = PostDetailInput(required=True)
+      id = graphene.ID(required=True)
    
    post = graphene.Field(PostType)
    message = graphene.String()
 
    @staticmethod
    @login_required
-   def mutate(root, info, input=None):
+   def mutate(root, info, id):
       message = ''
 
-      post_exist = Post.objects.filter(id=input.id).count() != 0
+      post_exist = Post.objects.filter(id=id).count() != 0
 
       if post_exist:
          message = 'Success'
-         post = Post.objects.get(id=input.id)
+         post = Post.objects.get(id=id)
          return FindPost(post=post, message=message)
 
       else:
@@ -42,32 +38,28 @@ class FindPost(graphene.Mutation):
       
 
 # Create post
-class PostCreateInput(graphene.InputObjectType):
-   user = graphene.String()
-   title = graphene.String()
-   content = graphene.String()
-
-
 class AddPost(graphene.Mutation):
    class Arguments:
-      input = PostCreateInput(required=True)
+      user = graphene.String(required=True)
+      title = graphene.String(required=True)
+      content = graphene.String(required=True)
    
    post = graphene.Field(PostType)
    message = graphene.String()
 
    @staticmethod
    @login_required
-   def mutate(root, info, input=None):
+   def mutate(root, info, user, title, content):
       message = ''
-      user = CustomUser.objects.get(username=input.user)
+      user = CustomUser.objects.get(username=user)
       today = datetime.datetime.now().strftime('%d %B %Y')
 
       # Filter posts that belongs to user and are posted today
-      filtered_posts = Post.objects.filter(user__username=input.user, posted=today)
+      filtered_posts = Post.objects.filter(user__username=user, posted=today)
 
-      title_has_reached_limit_of_chars = len(input.title) > 100
+      title_has_reached_limit_of_chars = len(title) > 100
       user_posted_maximum_posts = filtered_posts.count() >= 5
-      content_has_reached_limit_of_chars = len(input.content) > 10000
+      content_has_reached_limit_of_chars = len(content) > 10000
 
       if title_has_reached_limit_of_chars and user_posted_maximum_posts:
          message += 'Title has more than 100 characters and you have reached your maximum posts per day!'
@@ -87,7 +79,7 @@ class AddPost(graphene.Mutation):
 
       # Create date when was the post posted
       posted = datetime.datetime.now().strftime('%d %B %Y')
-      post = Post(title=input.title, content=input.content, user=user, posted=posted)
+      post = Post(title=title, content=content, user=user, posted=posted)
       post.save()
 
       message = 'Success'
@@ -95,47 +87,39 @@ class AddPost(graphene.Mutation):
 
 
 # Delete post
-class PostDeleteInput(graphene.InputObjectType):
-   id = graphene.ID()
-
-
 class DeletePost(graphene.Mutation):
    class Arguments:
-      input = PostDeleteInput(required=True)
+      id = graphene.ID(required=True)
 
    post = graphene.Field(PostType)
 
    @staticmethod
    @login_required
-   def mutate(root, info, input=None):
-      post = Post.objects.get(id=input.id)
+   def mutate(root, info, id):
+      post = Post.objects.get(id=id)
       post.delete()
 
       return DeletePost(post=post)
 
 
 # Edit post
-class PostEditInput(graphene.InputObjectType):
-   id = graphene.ID()
-   title = graphene.String()
-   content = graphene.String()
-
-
 class EditPost(graphene.Mutation):
    class Arguments:
-      input = PostEditInput(required=True)
+      id = graphene.ID(required=True)
+      title = graphene.String(required=True)
+      content = graphene.String(required=True)
 
    post = graphene.Field(PostType)
    message = graphene.String()
 
    @staticmethod
    @login_required
-   def mutate(root, info, input=None):
+   def mutate(root, info, id, title, content):
       message = ''
 
-      title_has_reached_limit_of_chars = len(input.title) > 100
-      content_has_reached_limit_of_chars = len(input.content) > 10000
-      post_doesnt_exist = Post.objects.filter(id=input.id).count() != 0
+      title_has_reached_limit_of_chars = len(title) > 100
+      content_has_reached_limit_of_chars = len(content) > 10000
+      post_doesnt_exist = Post.objects.filter(id=id).count() != 0
 
       if title_has_reached_limit_of_chars:
          message = 'Title has more than 100 characters!'
@@ -148,10 +132,10 @@ class EditPost(graphene.Mutation):
       # Success
       elif post_doesnt_exist:
          message = 'Success'
-         post = Post.objects.get(id=input.id)
+         post = Post.objects.get(id=id)
 
-         post.title = input.title
-         post.content = input.content
+         post.title = title
+         post.content = content
          post.save()
 
          return EditPost(message=message, post=post)
@@ -163,22 +147,18 @@ class EditPost(graphene.Mutation):
 
 
 # Like post
-class LikePostInput(graphene.InputObjectType):
-   id = graphene.ID()
-   user = graphene.String()
-
-
 class LikePost(graphene.Mutation):
    class Arguments:
-      input = LikePostInput(required=True)
+      id = graphene.ID(required=True)
+      user = graphene.String(required=True)
 
    post = graphene.Field(PostType)
 
    @staticmethod
    @login_required
-   def mutate(root, info, input=None):
-      post = Post.objects.get(id=input.id)
-      user = CustomUser.objects.get(username=input.user)
+   def mutate(root, info, id, user):
+      post = Post.objects.get(id=id)
+      user = CustomUser.objects.get(username=user)
       
       # Add user to the post likes
       post.likes.add(user)
@@ -194,23 +174,19 @@ class LikePost(graphene.Mutation):
 
 
 # Unlike post
-class UnlikePostInput(graphene.InputObjectType):
-   id = graphene.ID()
-   user = graphene.String()
-
-
 class UnlikePost(graphene.Mutation):
    class Arguments:
-      input = UnlikePostInput(required=True)
+      id = graphene.ID(required=True)
+      user = graphene.String(required=True)
 
    message = graphene.String()
 
    @staticmethod
    @login_required
-   def mutate(root, info, input=None):
+   def mutate(root, info, id, user):
       message = 'Success'
-      post = Post.objects.get(id=input.id)
-      user = CustomUser.objects.get(username=input.user)
+      post = Post.objects.get(id=id)
+      user = CustomUser.objects.get(username=user)
       
       # Remove user from likes
       post.likes.remove(user)
@@ -226,20 +202,16 @@ class UnlikePost(graphene.Mutation):
 
 
 # Filter post (filter by search bar)
-class PostFilterInput(graphene.InputObjectType):
-   title = graphene.String()
-
-
 class FilterPost(graphene.Mutation):
    class Arguments:
-      input = PostFilterInput(required=True)
+      title = graphene.String(required=True)
 
    filtered_posts = graphene.List(PostType)
 
    @staticmethod
    @login_required
-   def mutate(root, info, input=None):
+   def mutate(root, info, title):
       # Filter post that starts with input in search bar
-      filtered_posts = Post.objects.filter(title__startswith=input.title)
+      filtered_posts = Post.objects.filter(title__startswith=title)
       
       return FilterPost(filtered_posts=filtered_posts)

@@ -6,7 +6,7 @@ import { gql } from "@apollo/client";
 // Mutation
 export const MESSAGE_LIST_MUTATION = gql`
     mutation queryUserMessages ($user: String!, $chatUser: String!) {
-        queryUserMessages(input: {user: $user, chatUser: $chatUser}) {
+        queryUserMessages(user: $user, chatUser: $chatUser) {
             message
             messages {
                 id
@@ -22,7 +22,7 @@ export const MESSAGE_LIST_MUTATION = gql`
 
 export const MESSAGE_CREATE_MUTATION = gql`
     mutation messageCreate ($user: String!, $chatUser: String!, $content: String!) {
-        messageCreate (input: {user: $user, chatUser: $chatUser, content: $content}) {
+        messageCreate (user: $user, chatUser: $chatUser, content: $content) {
             message
         }
     }
