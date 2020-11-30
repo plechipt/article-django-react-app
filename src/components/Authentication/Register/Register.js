@@ -23,9 +23,9 @@ const Register = () => {
     setMessage({type: '', text: []}) 
     
     if (data) {
-      const messageBoolean = data.register.success
+      const registrationWasSuccessful = data.register.success
       
-      if (messageBoolean === false) {
+      if (registrationWasSuccessful === false) {
         const errors = Object.entries(data.register.errors)
         
         errors.map(error => {

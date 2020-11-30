@@ -17,8 +17,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'corsheaders',
     'stripe',
-    'django_otp',
-    'django_otp.plugins.otp_totp',
 
     # GraphQL
     'django_filters',
@@ -26,10 +24,8 @@ INSTALLED_APPS = [
     'graphql_auth',
     'graphql_jwt',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
-    'graphql_playground',
 
     # Django REST framework 
-    'rest_framework',
 ]
 
 MIDDLEWARE = [

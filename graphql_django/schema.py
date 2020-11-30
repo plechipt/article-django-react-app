@@ -7,7 +7,7 @@ from users.schema import UserMutation
 from posts.schema import PostMutation 
 from payments.schema import PaymentMutation
 
-from .types import *
+from .graphql_types import *
 
 
 class Mutation(UserMutation, PostMutation, PaymentMutation):
