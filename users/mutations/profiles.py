@@ -3,7 +3,6 @@ from graphene_django.types import DjangoObjectType
 from graphql_jwt.decorators import login_required
 
 from users.models import CustomUser, Profile
-from .messages import CustomUserType
 
 
 class ProfileType(DjangoObjectType):

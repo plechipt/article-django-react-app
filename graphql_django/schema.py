@@ -60,7 +60,7 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
       chat_user_doesnt_exist = CustomUser.objects.filter(username=chat_user).count() == 0
 
       if user_doesnt_exist or chat_user_doesnt_exist:
-         return Exception("This user doesn't exist")
+         raise Exception("User or chat user doesn't exist!")
 
       # Get users
       user = CustomUser.objects.get(username=user)

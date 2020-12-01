@@ -2,10 +2,12 @@ from .mutations.messages import *
 from .mutations.profiles import *
 from .mutations.users import *
 
+
+
 class UserMutation(AuthMutation):
     # Messages
     message_create = CreateMessage.Field()
-    query_user_messages = QueryUserMessages.Field()
+    create_chat_room = CreateChatRoom.Field()
 
     # Profiles
     profile_info = ProfileInfo.Field()
