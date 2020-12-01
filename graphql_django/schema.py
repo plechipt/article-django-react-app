@@ -32,11 +32,17 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
       title=graphene.String(required=True)
    )
 
+   chat_room_messages = graphene.List(
+      CustomMessageType,
+      user=graphene.String(required=True),
+      chat_user=graphene.String(required=True)
+   )
+
    @login_required
    def resolve_find_post(self, root, id):
-      post_exist = Post.objects.filter(id=id).count() != 0
+      post_doesnt_exist = Post.objects.filter(id=id).count() == 0
 
-      if post_exist == False:
+      if post_doesnt_exist == True:
          raise Exception("Post doesn't exist")
 
       return Post.objects.get(id=id)
@@ -45,6 +51,27 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
    def resolve_filter_post(self, root, title):
       # Filter post that starts with input in search bar
       return Post.objects.filter(title__startswith=title)
+
+   @login_required
+   def resolve_chat_room_messages(self, root, user, chat_user):
+      chat_rooms = ChatRoom.objects.all()
+
+      user_doesnt_exist = CustomUser.objects.filter(username=user).count() == 0
+      chat_user_doesnt_exist = CustomUser.objects.filter(username=chat_user).count() == 0
+
+      if user_doesnt_exist or chat_user_doesnt_exist:
+         return Exception("This user doesn't exist")
+
+      # Get users
+      user = CustomUser.objects.get(username=user)
+      chat_user = CustomUser.objects.get(username=chat_user)
+
+      # Get messages
+      user_chatrooms = chat_rooms.filter(users__username=user)
+      user_and_chatuser_chatroom = user_chatrooms.filter(users__username=chat_user)
+      chat_room = user_and_chatuser_chatroom.first()
+
+      return chat_room.messages.all()
 
    def resolve_all_posts(self, root, info, **kwargs):
       return Post.objects.all()

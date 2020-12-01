@@ -1,5 +1,5 @@
 from posts.models import Post, Comment, Reply
-from users.models import CustomUser, Profile
+from users.models import CustomUser, Profile, Message, ChatRoom
 from graphene_django.types import DjangoObjectType
 
 
@@ -22,3 +22,7 @@ class CustomCommentType(DjangoObjectType):
 class CustomReplyType(DjangoObjectType):
    class Meta:
       model = Reply
+
+class CustomMessageType(DjangoObjectType):
+   class Meta:
+      model = Message

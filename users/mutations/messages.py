@@ -18,12 +18,6 @@ class MessageType(DjangoObjectType):
    class Meta:
       model = Message
 
-
-class ChatRoomType(DjangoObjectType):
-   class Meta:
-      model = ChatRoom 
-
-
 # Send user a message
 class CreateMessage(graphene.Mutation):
    class Arguments:
