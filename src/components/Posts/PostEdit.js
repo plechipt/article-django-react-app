@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom'
 
 import { POST_EDIT_MUTATION, POST_FIND_QUERY } from '../Api/post' 
 
-const PostEdit = ({ currentUser }) => {  
+const EditPost = ({ currentUser }) => {  
     const { id } = useParams()
     const history = useHistory()
 
@@ -13,7 +13,7 @@ const PostEdit = ({ currentUser }) => {
     const [ titleInput, setTitleInput ] = useState('')
     const [ textAreaInput, setTextAreaInput ] = useState('')
     
-    const [ postEdit ] = useMutation(POST_EDIT_MUTATION) 
+    const [ editPost ] = useMutation(POST_EDIT_MUTATION) 
     const [ findPost, { loading, data: detailData }] = useLazyQuery(POST_FIND_QUERY)
 
     // Everytime id changes -> find post info of that id 
@@ -53,7 +53,7 @@ const PostEdit = ({ currentUser }) => {
         const user_submited_button = event.target.tagName === 'FORM'
 
         if ((fields_are_filled && user_pressed_enter) || user_submited_button) {
-            await postEdit({ variables: { id: id, title: titleInput, content: textAreaInput } })
+            await editPost({ variables: { id: id, title: titleInput, content: textAreaInput } })
             history.push('/posts')
         }
     }
@@ -96,4 +96,4 @@ const PostEdit = ({ currentUser }) => {
     )
 }
 
-export default PostEdit
+export default EditPost

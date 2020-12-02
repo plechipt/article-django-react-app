@@ -10,10 +10,10 @@ const EditDeleteButtons = ({ id, detailData, currentUser }) => {
     const history = useHistory()
 
     const [ open, setOpen ] = useState(false)
-    const [ postDelete ] = useMutation(POST_DELETE_MUTATION)
+    const [ deletePost ] = useMutation(POST_DELETE_MUTATION)
     
     const handleOnDelete = async () => {
-        await postDelete({ variables: { id: id } })
+        await deletePost({ variables: { id: id } })
         history.push('/posts')
     }
 

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import { MESSAGE_LIST_QUERY, MESSAGE_CREATE_CHATROOM_MUTATION } from '../../Api/message'
 import MessagesMap from './MessagesMap'
-import MessageCreate from '../MessageCreate'
+import CreateMessage from '../CreateMessage'
 
 const MessagesContainer = ({ currentUser }) => {
     const { chatUser } = useParams()
@@ -33,7 +33,7 @@ const MessagesContainer = ({ currentUser }) => {
                             currentUser={currentUser} 
                         />
                     ) : null }
-                    <MessageCreate currentUser={currentUser} />
+                    <CreateMessage currentUser={currentUser} />
                 </>
             ) : null}
             </div>

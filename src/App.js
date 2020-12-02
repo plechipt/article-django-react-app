@@ -8,7 +8,7 @@ import { USER_ME_QUERY } from './components/Api/user'
 // Import components from index.js
 import { 
   Navbar, Users, Support, SupportSuccess, Login, Register,
-  Posts, PostDetail, PostCreate, PostEdit, Profile, MessagesContainer
+  Posts, PostDetail, PostCreate, EditPost, Profile, MessagesContainer
 } from './components';
 
 function App () {
@@ -37,7 +37,7 @@ function App () {
                 <Route path="/support-success" component={() => <SupportSuccess />} />
                 <Route path="/message/:chatUser" component={() => <MessagesContainer currentUser={currentUser} />} />
                 <Route path="/profile/:user" component={() => <Profile currentUser={currentUser} />} />
-                <Route path="/editPost/:id" component={() => <PostEdit currentUser={currentUser} />} />
+                <Route path="/editPost/:id" component={() => <EditPost currentUser={currentUser} />} />
                 <Route path="/createPost" component={() => <PostCreate currentUser={currentUser} />} />
                 <Route path="/:id" component={() => <PostDetail currentUser={currentUser} />} />
               </Switch>  

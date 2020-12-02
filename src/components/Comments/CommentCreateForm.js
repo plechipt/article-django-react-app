@@ -8,10 +8,10 @@ const CommentCreateForm = ({ id, currentUser }) => {
     const [ errorMessage, setErrorMessage ] = useState('')
     
     const [ commentInput, setCommentInput ] = useState('')
-    const [ commentAdd, { data: commentData } ] = useMutation(COMMENT_ADD_MUTATION)
+    const [ createComment, { data: commentData } ] = useMutation(COMMENT_ADD_MUTATION)
 
     const handleOnComment = async () => {
-        await commentAdd({ variables: { id: id, user: currentUser, content: commentInput }})
+        await createComment({ variables: { id: id, user: currentUser, content: commentInput }})
     }
     
     useEffect(() => {

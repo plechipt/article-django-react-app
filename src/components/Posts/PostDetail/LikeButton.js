@@ -7,11 +7,11 @@ import { POST_LIKE_MUTATION, POST_UNLIKE_MUTATION } from '../../Api/post'
 const LikeButton = ({ id, likes, detailData, currentUser }) => {
     const { findPost: { likes: usersLikes }} = detailData
 
-    const [ postLike ] = useMutation(POST_LIKE_MUTATION)
+    const [ likePost ] = useMutation(POST_LIKE_MUTATION)
     const [ unlikePost ] = useMutation(POST_UNLIKE_MUTATION)
 
     const handleOnLike = async () => {
-        await postLike({ variables: { id: id, user: currentUser } })
+        await likePost({ variables: { id: id, user: currentUser } })
         window.location.reload(false); // Reset site
     }
 

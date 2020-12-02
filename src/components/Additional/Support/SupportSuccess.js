@@ -4,6 +4,7 @@ import { Container, Header } from 'semantic-ui-react'
 import './Support.css'
 
 const SupportSuccess = () => {
+    
     return (
         <div className="support-container">
             <Container className="">

@@ -16,7 +16,7 @@ const PostDetail = ({ currentUser }) => {
     
     // Set likes temporarily on frontend
     const [ likes, setLikes ] = useState(0)
-    const [ postFind, { errors, data: detailData }] = useLazyQuery(POST_FIND_QUERY)
+    const [ findPost, { errors, data: detailData }] = useLazyQuery(POST_FIND_QUERY)
 
     // Fetch to set amount of likes to button
     useEffect(() => {
@@ -30,7 +30,7 @@ const PostDetail = ({ currentUser }) => {
         const id_is_number = !(isNaN(id))
 
         if (id_is_number === true) {
-            postFind({ variables: { id: id } })
+            findPost({ variables: { id: id } })
         }
     }, [id])
 

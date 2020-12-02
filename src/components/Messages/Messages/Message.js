@@ -4,7 +4,6 @@ import { Popup } from 'semantic-ui-react'
 
 const Message = ({ content, messaged, username }) => {
     const { chatUser } = useParams()
-
     
     return (
         <>

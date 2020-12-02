@@ -10,7 +10,7 @@ import ReplysMap from '../../Replys/ReplysMap'
 const PATH_TO_PICTURES = 'Profiles/media/profile_pictures'
 
 const CustomComment = ({ id, replys, content, posted, username, currentUser, image }) => {
-    const [ commentDelete ] = useMutation(COMMENT_DELETE_MUTATION)
+    const [ deleteComment ] = useMutation(COMMENT_DELETE_MUTATION)
     const [ showReplyForm, setShowReplyForm ] = useState(false)
 
     // If user click on reply -> show the reply form and reverse
@@ -19,7 +19,7 @@ const CustomComment = ({ id, replys, content, posted, username, currentUser, ima
     }
 
     const handleOnDelete = async () => {
-        await commentDelete({ variables: { id: id } })
+        await deleteComment({ variables: { id: id } })
         window.location.reload(false) // Reset site
     }
 

@@ -4,6 +4,7 @@ import CustomReply from './CustomReply'
 
 // Map all replies
 const ReplysMap = ({ replys, currentUser }) => {
+    
     return (
         <div>
             {(replys.map(({ id, content, posted, user: { username, profile: { image } } }) => {

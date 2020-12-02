@@ -6,10 +6,10 @@ import { REPLY_DELETE_MUTATION } from '../Api/reply'
 const PATH_TO_PICTURES = 'Profiles/media/profile_pictures'
 
 const CustomReply = ({ id, content, posted, username, image, currentUser }) => {
-    const [ replyDelete ] = useMutation(REPLY_DELETE_MUTATION)
+    const [ deleteReply ] = useMutation(REPLY_DELETE_MUTATION)
 
     const handleOnDelete = async () => {
-        await replyDelete({ variables: { id: id } })
+        await deleteReply({ variables: { id: id } })
         window.location.reload(false) // Reset site
     }
 
