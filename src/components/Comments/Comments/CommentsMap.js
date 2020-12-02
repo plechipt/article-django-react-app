@@ -6,7 +6,7 @@ import '../Comments.css'
 
 // Map all comments
 const CommentsMap = ({ detailData, currentUser }) => {
-    const { findPost: { post: { commentSet } } } = detailData
+    const { findPost: { commentSet }} = detailData
 
     return (
         <div>

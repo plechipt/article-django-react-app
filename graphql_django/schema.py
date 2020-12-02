@@ -38,7 +38,6 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
       chat_user=graphene.String(required=True)
    )
 
-   @login_required
    def resolve_find_post(self, root, id):
       post_doesnt_exist = Post.objects.filter(id=id).count() == 0
 
@@ -47,12 +46,10 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
 
       return Post.objects.get(id=id)
 
-   @login_required
    def resolve_filter_post(self, root, title):
       # Filter post that starts with input in search bar
       return Post.objects.filter(title__startswith=title)
 
-   @login_required
    def resolve_chat_room_messages(self, root, user, chat_user):
       chat_rooms = ChatRoom.objects.all()
 
@@ -73,19 +70,19 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
 
       return chat_room.messages.all()
 
-   def resolve_all_posts(self, root, info, **kwargs):
+   def resolve_all_posts(self, root, **kwargs):
       return Post.objects.all()
 
-   def resolve_all_users(self, root, info, **kwargs):
+   def resolve_all_users(self, root, **kwargs):
       return CustomUser.objects.all()
 
-   def resolve_all_profiles(self, root, info, **kwargs):
+   def resolve_all_profiles(self, root, **kwargs):
       return Profile.objects.all()
 
-   def resolve_all_comments(self, root, info, **kwargs):
+   def resolve_all_comments(self, root, **kwargs):
       return Comment.objects.all()
 
-   def resolve_all_replys(self, root, info, **kwargs):
+   def resolve_all_replys(self, root, **kwargs):
       return Reply.objects.all()
 
 

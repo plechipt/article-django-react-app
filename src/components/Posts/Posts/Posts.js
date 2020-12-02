@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import { Form } from 'semantic-ui-react'
 
-import { POST_FILTER_MUTATION  } from '../../Api/post'
+import { POST_FILTER_QUERY } from '../../Api/post'
 import '../Posts.css'
 
 import MapPosts from './MapPosts'
 
 
 const Posts = () => {
-    const [ postFilter, { data: filteredData }] = useMutation(POST_FILTER_MUTATION)
     const [ searchInput, setSearchInput ] = useState('')
-   
+    const [ filterPost, { data: filteredData }] = useLazyQuery(POST_FILTER_QUERY)
+    
     // Filter posts by user search bar input
     useEffect(() => {
-        const filterPost = async () => {
-            await postFilter({ variables: { title: searchInput } })
-        }
-        filterPost()
-    }, [searchInput, postFilter])
+        filterPost({ variables: { title: searchInput } })
+    }, [searchInput])
    
     return (
         <div>
@@ -35,17 +32,13 @@ const Posts = () => {
                 </Form>
             </div>
             {(filteredData) ? (
-                <div>
-                    {(filteredData) ? (
-                        <>
-                            {/*If user has fillen search bar -> shows filteredPosts*/}
-                            <MapPosts 
-                                filteredData={filteredData} 
-                                searchInput={searchInput} 
-                            />
-                        </>
-                    ) : null}
-                </div>
+                <>
+                    {/*If user has fillen search bar -> shows filteredPosts*/}
+                    <MapPosts 
+                        filteredData={filteredData} 
+                        searchInput={searchInput} 
+                    />
+                </>
             ) : null}
         </div>
     )

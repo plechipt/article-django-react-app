@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Card } from 'semantic-ui-react'
+import { v4 as uuidv4 } from 'uuid';
 
 let profileImages = [
     'default.jpg', 'christian.jpg', 'daniel.jpg', 'elliot.jpg',
@@ -20,6 +21,7 @@ const ProfileImages = ({ userImage, onImageChange }) => {
         onImageChange(chosenImage)
     }, [chosenImage, onImageChange])
 
+
     return (
         <div>
             <Card.Group itemsPerRow={10} className="profile-update-images">
@@ -27,6 +29,7 @@ const ProfileImages = ({ userImage, onImageChange }) => {
                     if (chosenImage === image) {
                         return(
                             <Card
+                                key={uuidv4()}
                                 className="profile-clicked-update-image"
                                 onClick={() => setChosenImage(image)}
                                 raised
@@ -37,6 +40,7 @@ const ProfileImages = ({ userImage, onImageChange }) => {
                     else {
                         return (
                             <Card
+                                key={uuidv4()}
                                 className="profile-update-image"
                                 onClick={() => setChosenImage(image)}
                                 raised

@@ -19,7 +19,6 @@ class ProfileInfo(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
-   @login_required
    def mutate(root, info, user):
       message = ''
 
@@ -46,15 +45,7 @@ class CheckUserProfile(graphene.Mutation):
    @staticmethod
    def mutate(root, info, user):
       user = CustomUser.objects.get(username=user)
-
-      # Try if users profile exists
-      try:
-         Profile.objects.get(user=user)
-        
-      # Except to create new profile
-      except:
-         profile = Profile.objects.create(user=user)
-         profile.save()
+      profile, created = Profile.objects.get_or_create(user=user)
 
       return CheckUserProfile(profile=profile)
 
@@ -70,7 +61,6 @@ class UpdateUser(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
-   @login_required
    def mutate(root, info, user, new_user, new_email, image):
       message = ''
 
@@ -143,7 +133,6 @@ class FollowProfile(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
-   @login_required
    def mutate(root, info, follower, following):
       message = ''
 
@@ -184,7 +173,6 @@ class UnfollowProfile(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
-   @login_required
    def mutate(root, info, follower, following):
       message = ''
       follower = CustomUser.objects.get(username=follower)

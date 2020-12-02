@@ -5,8 +5,9 @@ import CustomPagination from './Pagination'
 
 // Map all filtered posts
 const MapPosts = ({ filteredData, searchInput }) => {
-    const { postFilter: { filteredPosts }} = filteredData
+    const { filterPost: filteredPosts } = filteredData
 
+    // Define pages
     const [ currentPage, setCurrentPage ] = useState(1)
     const [ postsPerPage ] = useState(5)
      

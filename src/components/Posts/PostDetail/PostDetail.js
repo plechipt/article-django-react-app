@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Item } from 'semantic-ui-react'
-import { useMutation } from '@apollo/react-hooks'
+import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import { useParams, Link } from 'react-router-dom'
 
-import { POST_FIND_MUTATION } from '../../Api/post'
-
+import { POST_FIND_QUERY } from '../../Api/post'
 import CommentsMap from '../../Comments/Comments/CommentsMap'
 import CommentCreateForm from '../../Comments/CommentCreateForm'
 import LikeButton from './LikeButton'
@@ -17,32 +16,28 @@ const PostDetail = ({ currentUser }) => {
     
     // Set likes temporarily on frontend
     const [ likes, setLikes ] = useState(0)
-    const [ postFind, { data: detailData } ] = useMutation(POST_FIND_MUTATION)
-
+    const [ postFind, { errors, data: detailData }] = useLazyQuery(POST_FIND_QUERY)
 
     // Fetch to set amount of likes to button
     useEffect(() => {
-        if (detailData && detailData.findPost.message === 'Success') {
-            setLikes(detailData.findPost.post.totalLikes)
+        if (detailData && detailData.findPost) {
+            setLikes(detailData.findPost.totalLikes)
         }
     }, [detailData])
 
     // If id is number -> fetch post
     useEffect(() => {
-        const findPost = async () => {
-            const id_is_number = !(isNaN(id))
-    
-            if (id_is_number === true) {
-                await postFind({ variables: { id: id } })
-            }
+        const id_is_number = !(isNaN(id))
+
+        if (id_is_number === true) {
+            postFind({ variables: { id: id } })
         }
-        findPost()
-    }, [id, postFind])
+    }, [id])
 
     
     return (
         <div>
-            {(detailData && detailData.findPost.message === 'Success') ? (
+            {(detailData && detailData.findPost.title) ? (
                 <Item.Group>
                 <Item>
                     <Item.Image size='small' src={DEFAULT_IMAGE} />
@@ -50,28 +45,29 @@ const PostDetail = ({ currentUser }) => {
                         <Item.Header 
                             className="post-title"
                         >
-                            {detailData.findPost.post.title}
+                            {detailData.findPost.title}
                         </Item.Header>
                         <Item.Meta className="post-user">
-                            <Link to={`profile/${detailData.findPost.post.user.username}`}>
-                                {detailData.findPost.post.user.username}
+                            <Link to={`profile/${detailData.findPost.user.username}`}>
+                                {detailData.findPost.user.username}
                             </Link>
                         </Item.Meta>
                         <Item.Meta 
                             className="post-date"
                         >
-                            {detailData.findPost.post.posted}
+                            {detailData.findPost.posted}
                         </Item.Meta>
                         <Item.Description 
                             className="post-textfield"
                         >
-                            {detailData.findPost.post.content}
+                            {detailData.findPost.content}
                         </Item.Description>
 
                         {/*Includes like, edit and delete buttons*/}
                         <div className="post-detail-buttons-container">
                             <LikeButton 
-                                id={id} likes={likes} 
+                                id={id} 
+                                likes={likes} 
                                 detailData={detailData} 
                                 currentUser={currentUser}            
                             />

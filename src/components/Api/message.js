@@ -1,29 +1,36 @@
 import { gql } from "@apollo/client";
 
 // Query
-
-
-// Mutation
-export const MESSAGE_LIST_MUTATION = gql`
-    mutation queryUserMessages ($user: String!, $chatUser: String!) {
-        queryUserMessages(user: $user, chatUser: $chatUser) {
-            message
-            messages {
-                id
-                content
-                messaged
-                user {
-                    username
+export const MESSAGE_LIST_QUERY = gql`
+    query ($user: String!, $chatUser: String!) {
+        chatRoomMessages (user: $user, chatUser: $chatUser) {
+            chatroomSet {
+                messages {
+                    id
+                    content
+                    messaged
+                    user {
+                        username
+                    }
                 }
             }
         }
     }
 `
-
+// Mutation
 export const MESSAGE_CREATE_MUTATION = gql`
     mutation messageCreate ($user: String!, $chatUser: String!, $content: String!) {
         messageCreate (user: $user, chatUser: $chatUser, content: $content) {
             message
+        }
+    }
+`
+export const MESSAGE_CREATE_CHATROOM_MUTATION = gql`
+    mutation ($user: String!, $chatUser: String!) {
+        createChatRoom (user: $user, chatUser: $chatUser) {
+            chatRoom {
+                id
+            }
         }
     }
 `

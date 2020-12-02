@@ -26,7 +26,6 @@ class PostComment(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
-   @login_required
    @ratelimit(key="ip", rate="3/m", block=True)
    def mutate(root, info, id, user, content):
       message = ''
@@ -60,7 +59,6 @@ class DeleteComment(graphene.Mutation):
    comment = graphene.Field(CommentType)
 
    @staticmethod
-   @login_required
    def mutate(root, info, id):
       comment = Comment.objects.get(id=id)
       comment.delete()

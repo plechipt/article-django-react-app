@@ -1,32 +1,33 @@
 import React, { useEffect } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+import { useLazyQuery, useMutation } from '@apollo/react-hooks'
 import { useParams } from 'react-router-dom'
 
-import { MESSAGE_LIST_MUTATION } from '../../Api/message'
+import { MESSAGE_LIST_QUERY, MESSAGE_CREATE_CHATROOM_MUTATION } from '../../Api/message'
 import MessagesMap from './MessagesMap'
 import MessageCreate from '../MessageCreate'
 
 const MessagesContainer = ({ currentUser }) => {
     const { chatUser } = useParams()
 
-    const [ queryUserMessages, { data: messagesData }] = useMutation(MESSAGE_LIST_MUTATION)
+    const [ createChatRoom ] = useMutation(MESSAGE_CREATE_CHATROOM_MUTATION)
+    const [ chatRoomMessages, { data: messagesData }] = useLazyQuery(MESSAGE_LIST_QUERY)
 
     // Query all chat room messages
     useEffect(() => {
-        const queryUserMessagesFunction = async () => {
-            queryUserMessages({ variables: {user: currentUser, chatUser: chatUser} })
+        const getMessages = async () => {
+            await createChatRoom({ variables: { user: currentUser, chatUser: chatUser }})
+            chatRoomMessages({ variables: { user: currentUser, chatUser: chatUser }})
         }
-        queryUserMessagesFunction()
-    }, [chatUser, currentUser, queryUserMessages])
+        getMessages()
+    }, [currentUser])
 
-    
+
     return (
         <div className="chat-room-container">
-            {/*If messagesData and user and chat_user messages*/}
             <div className="messages-and-create-form-container">
-            {(messagesData && messagesData.queryUserMessages.message === 'Success') ? (
+            {(messagesData && messagesData.chatRoomMessages) ? (
                 <>
-                    {messagesData && messagesData.queryUserMessages.messages.length !== 0 ? (
+                    {messagesData && messagesData.chatRoomMessages.length !== 0 ? (
                         <MessagesMap
                             messagesData={messagesData}
                             currentUser={currentUser} 

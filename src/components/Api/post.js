@@ -13,26 +13,31 @@ export const POST_LIST_QUERY = gql`
         }
     }
 `
-
-// Mutation
 //Need to fix this shit with fragments
-export const POST_FIND_MUTATION = gql`
-    mutation ($id: ID!) {
+export const POST_FIND_QUERY = gql`
+    query ($id: ID!) {
         findPost (id: $id) {
-            message
-            post {
+            user {
+                username
+            }
+            title
+            content
+            totalLikes
+            likes {
+                username
+            }
+            posted
+            commentSet {
+                id
+                content
+                posted
                 user {
                     username
-                    
+                    profile {
+                        image
+                    }
                 }
-                title
-                content
-                totalLikes
-                likes {
-                    username
-                }
-                posted
-                commentSet {
+                replySet {
                     id
                     content
                     posted
@@ -42,23 +47,27 @@ export const POST_FIND_MUTATION = gql`
                             image
                         }
                     }
-                    replySet {
-                        id
-                        content
-                        posted
-                        user {
-                            username
-                            profile {
-                                image
-                            }
-                        }
-                    }
                 }
             }
         }
     }
 `
 
+export const POST_FILTER_QUERY = gql`
+    query ($title: String!){
+        filterPost(title: $title) {
+            user {
+                username
+            }
+            title
+            id
+            posted
+        }
+    }   
+` 
+
+
+// Mutation
 export const POST_DELETE_MUTATION = gql`
     mutation postDelete ($id: ID!) {
         deletePost(id: $id) {
@@ -107,21 +116,6 @@ export const POST_UNLIKE_MUTATION = gql`
     mutation unlikePost ($id: ID!, $user: String!) {
         unlikePost(id: $id, user: $user) {
             message
-        }
-    }
-`
-
-export const POST_FILTER_MUTATION = gql`
-    mutation postFilter ($title: String!) {
-        postFilter(title: $title) {
-            filteredPosts {
-                user {
-                    username
-                } 
-                title
-                id
-                posted
-            }
         }
     }
 `

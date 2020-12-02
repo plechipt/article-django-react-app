@@ -13,18 +13,6 @@ import Cookies from 'js-cookie'
 const BASE_URL = 'http://127.0.0.1:8000'
 //const BASE_URL = 'https://article-django-react-app.herokuapp.com'
 
-// Disable caching
-const defaultOptions = {
-  watchQuery: {
-    fetchPolicy: 'no-cache',
-    errorPolicy: 'ignore',
-  },
-  query: {
-    fetchPolicy: 'no-cache',
-    errorPolicy: 'all',
-  },
-}
-
 const httpLink = createHttpLink({
   uri: `${BASE_URL}/graphql/`,
   credentials: 'include'
@@ -48,7 +36,6 @@ const authLink = setContext((_, { headers }) => {
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-  defaultOptions: defaultOptions
 })
 
 ReactDOM.render(

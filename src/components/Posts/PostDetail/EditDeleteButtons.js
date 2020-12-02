@@ -29,7 +29,7 @@ const EditDeleteButtons = ({ id, detailData, currentUser }) => {
     return (
         <>  
             {/* If post it is user's post -> show edit and delete button */}
-            {(currentUser === detailData.findPost.post.user.username) ? (
+            {(currentUser === detailData.findPost.user.username) ? (
                 <>
                     <Button 
                         onClick={handleOnEdit} 

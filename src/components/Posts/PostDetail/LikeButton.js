@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { POST_LIKE_MUTATION, POST_UNLIKE_MUTATION } from '../../Api/post'
 
 const LikeButton = ({ id, likes, detailData, currentUser }) => {
-    const { findPost: { post: { likes: usersLikes }}} = detailData
+    const { findPost: { likes: usersLikes }} = detailData
 
     const [ postLike ] = useMutation(POST_LIKE_MUTATION)
     const [ unlikePost ] = useMutation(POST_UNLIKE_MUTATION)

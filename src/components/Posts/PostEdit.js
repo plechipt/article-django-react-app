@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form } from 'semantic-ui-react'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useLazyQuery } from '@apollo/react-hooks'
 import { useHistory, useParams } from 'react-router-dom'
 
-import { POST_EDIT_MUTATION, POST_FIND_MUTATION } from '../Api/post' 
+import { POST_EDIT_MUTATION, POST_FIND_QUERY } from '../Api/post' 
 
 const PostEdit = ({ currentUser }) => {  
-    
     const { id } = useParams()
     const history = useHistory()
 
@@ -15,26 +14,23 @@ const PostEdit = ({ currentUser }) => {
     const [ textAreaInput, setTextAreaInput ] = useState('')
     
     const [ postEdit ] = useMutation(POST_EDIT_MUTATION) 
-    const [ postFind, { data: detailData } ] = useMutation(POST_FIND_MUTATION)
-
+    const [ findPost, { loading, data: detailData }] = useLazyQuery(POST_FIND_QUERY)
 
     // Everytime id changes -> find post info of that id 
     useEffect(() => {
-        const findPost = async () => {
-            const id_is_number = !(isNaN(id))
-    
-            if (id_is_number === true) {
-                await postFind({variables: { id: id }})
-            }
+        const id_is_number = !(isNaN(id))
+
+        if (id_is_number === true) {
+            findPost({variables: { id: id }})
         }
-        findPost()
-    }, [id, postFind])
+    }, [findPost])
+
     
     // Fill title and textarea
     useEffect(() => {
-        if (detailData && detailData.findPost.message === 'Success') {
-            setTitleInput(detailData.findPost.post.title)
-            setTextAreaInput(detailData.findPost.post.content)
+        if (detailData && detailData.findPost.title) {
+            setTitleInput(detailData.findPost.title)
+            setTextAreaInput(detailData.findPost.content)
         }
     }, [detailData])
     
@@ -65,8 +61,7 @@ const PostEdit = ({ currentUser }) => {
     
     return (
         <div className="post-create-container">
-            {(detailData && detailData.findPost.message === 'Success' &&
-              detailData.findPost.post.user.username === currentUser) ? (
+            {(detailData && detailData.findPost.user.username === currentUser) ? (
                 <Form onKeyPress={handleOnSubmit} onSubmit={handleOnSubmit}>
                     <Form.Field>
                         <label>Title</label>
