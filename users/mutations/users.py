@@ -24,5 +24,5 @@ class AuthMutation(graphene.ObjectType):
    revoke_token = mutations.RevokeToken.Field() 
    
    # Delete JWT tokens
-   delete_token_cookie = graphql_jwt.DeleteRefreshTokenCookie.Field()
+   delete_token_cookie = graphql_jwt.DeleteJSONWebTokenCookie.Field()
    delete_refresh_token_cookie = graphql_jwt.DeleteRefreshTokenCookie.Field() 
