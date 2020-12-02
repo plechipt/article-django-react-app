@@ -15,7 +15,7 @@ export const COMMENT_LIST_QUERY = gql`
 `
 
 // Mutation
-export const COMMENT_ADD_MUTATION = gql`
+export const COMMENT_POST_MUTATION = gql`
     mutation ($id: ID!, $user: String!, $content: String!) {
        commentPost (id: $id, user: $user, content: $content) {
            message  

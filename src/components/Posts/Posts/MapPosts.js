@@ -28,10 +28,10 @@ const MapPosts = ({ filteredData, searchInput }) => {
                 return (
                     <Post 
                         key={id} 
+                        id={id}
                         username={username}
                         title={title}
                         posted={posted}
-                        id={id}
                     />
                     )})}
                 {searchInput === '' ? (

@@ -3,14 +3,17 @@ import { Button, Icon, Label } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 
-import { USER_PROFILE_FOLLOW_MUTATION, USER_PROFILE_UNFOLLOW_MUTATION  } from '../Api/user'
+import {
+    PROFILE_FOLLOW_MUTATION, 
+    PROFILE_UNFOLLOW_MUTATION 
+} from '../Api/profile'
 
 const ProfileBodyButtons = ({ profileData: { getProfileInfo: { profile } }, currentUser }) => {
     const history = useHistory()
 
     const { totalFollowers, user: { username: usersProfile }, followers } = profile
-    const [ followProfile ] = useMutation(USER_PROFILE_FOLLOW_MUTATION) 
-    const [ unfollowProfile ] = useMutation(USER_PROFILE_UNFOLLOW_MUTATION)
+    const [ followProfile ] = useMutation(PROFILE_FOLLOW_MUTATION) 
+    const [ unfollowProfile ] = useMutation(PROFILE_UNFOLLOW_MUTATION)
 
 
     const handleOnFollow = async () => {

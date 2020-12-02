@@ -3,7 +3,8 @@ import { Button, Form, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 
-import { USER_LOGIN_MUTATION, USER_CHECK_PROFILE_MUTATION } from '../../Api/user'
+import { USER_LOGIN_MUTATION } from '../../Api/user'
+import { PROFILE_CHECK_USER_MUTATION } from '../../Api/profile'
 import './Login.css'
 
 const Login = () => {
@@ -11,7 +12,7 @@ const Login = () => {
     const [ failedToLogin, setFailedToLogin ] = useState('') 
     const [ allowButton, setAllowButton ] = useState(false)
 
-    const [ checkUserProfile ] = useMutation(USER_CHECK_PROFILE_MUTATION)
+    const [ checkUserProfile ] = useMutation(PROFILE_CHECK_USER_MUTATION)
     const [ loginUser, { data: loginData }] = useMutation(USER_LOGIN_MUTATION)
 
     const [ usernameInput, setUsernameInput ] = useState('')

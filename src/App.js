@@ -13,7 +13,7 @@ import {
 
 function App () {
   // Current logged in user
-  const [ currentUser, setCurrentUser ] = useState('admin')
+  const [ currentUser, setCurrentUser ] = useState('admin1')
   const { data: meQuery, loading } = useQuery(USER_ME_QUERY)
 
 

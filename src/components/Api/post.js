@@ -66,7 +66,6 @@ export const POST_FILTER_QUERY = gql`
     }   
 ` 
 
-
 // Mutation
 export const POST_DELETE_MUTATION = gql`
     mutation ($id: ID!) {

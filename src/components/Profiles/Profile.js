@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, Message } from 'semantic-ui-react'
 import { useHistory, useParams } from 'react-router-dom'
-import { USER_PROFILE_INFO_MUTATION, USER_UPDATE_MUTATION, USER_DELETE_JWT_TOKENS_MUTATION } from '../Api/user'
+import { USER_DELETE_JWT_TOKENS_MUTATION } from '../Api/user'
 import { useMutation } from '@apollo/react-hooks'
 
 import ProfileImage from './ProfileImages'
 import ProfileBodyButtons from './ProfileBodyButtons'
 import './Profile.css'
+import { 
+    PROFILE_GET_INFO_MUTATION,
+    PROFILE_UPDATE_MUTATION 
+} from '../Api/profile'
 
 const PATH_TO_PICTURES = 'media/profile_pictures'
 
@@ -14,8 +18,8 @@ const Profile = ({ currentUser }) => {
     const { user } = useParams()
     const history = useHistory()
 
-    const [ getProfileInfo, { data: profileData }] = useMutation(USER_PROFILE_INFO_MUTATION)
-    const [ updateProfile, { data: updateData }] = useMutation(USER_UPDATE_MUTATION)
+    const [ getProfileInfo, { data: profileData }] = useMutation(PROFILE_GET_INFO_MUTATION)
+    const [ updateProfile, { data: updateData }] = useMutation(PROFILE_UPDATE_MUTATION)
     const [ deleteTokens ] = useMutation(USER_DELETE_JWT_TOKENS_MUTATION)
 
     const [ imageName, setImageName ] = useState()
