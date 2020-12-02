@@ -17,7 +17,7 @@ class CommentType(DjangoObjectType):
 
 
 # Comment post
-class PostComment(graphene.Mutation):
+class CommentPost(graphene.Mutation):
    class Arguments:
       id = graphene.ID(required=True)
       user = graphene.String(required=True)
@@ -48,7 +48,7 @@ class PostComment(graphene.Mutation):
          comment = Comment(post=post, user=user, content=content, posted=posted)
          comment.save()
 
-      return PostComment(message=message)
+      return CommentPost(message=message)
    
 
 # Delete Comment

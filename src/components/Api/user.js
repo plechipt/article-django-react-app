@@ -55,6 +55,7 @@ export const USER_DELETE_JWT_TOKENS_MUTATION = gql`
         deleteTokenCookie {
             deleted
         }
+
         deleteRefreshTokenCookie {
             deleted
         }
@@ -79,7 +80,7 @@ export const USER_DELETE_REFRESH_TOKEN_MUTATION = gql`
 
 export const USER_VERIFY_TOKEN_MUTATION = gql`
     mutation ($token: String!) {
-        verifyToken(token: $token) {
+        verifyToken (token: $token) {
             success
             errors
             payload 
@@ -99,7 +100,7 @@ export const USER_REFRESH_TOKEN_MUTATION = gql`
 
 export const USER_PROFILE_INFO_MUTATION = gql`
     mutation ($user: String!) {
-        profileInfo(user: $user) {
+        getProfileInfo (user: $user) {
             profile {
                 image
                 totalFollowers
@@ -118,7 +119,7 @@ export const USER_PROFILE_INFO_MUTATION = gql`
 
 export const USER_CHECK_PROFILE_MUTATION = gql`
     mutation ($user: String!) {
-        checkUserProfile(user: $user) {
+        checkUserProfile (user: $user) {
             profile {
                 id
             }
@@ -128,7 +129,7 @@ export const USER_CHECK_PROFILE_MUTATION = gql`
 
 export const USER_UPDATE_MUTATION = gql`
     mutation ($user: String!, $newUser: String!, $newEmail: String!, $image: String!){
-        profileUpdate(user: $user, newUser: $newUser, newEmail: $newEmail, image: $image) {
+        updateProfile (user: $user, newUser: $newUser, newEmail: $newEmail, image: $image) {
             message
         }
     }
@@ -136,7 +137,7 @@ export const USER_UPDATE_MUTATION = gql`
 
 export const USER_PROFILE_FOLLOW_MUTATION = gql`
     mutation ($follower: String!, $following: String!) {
-        profileFollow(follower: $follower, following: $following) {
+        followProfile (follower: $follower, following: $following) {
             message
         }
     } 
@@ -144,7 +145,7 @@ export const USER_PROFILE_FOLLOW_MUTATION = gql`
 
 export const USER_PROFILE_UNFOLLOW_MUTATION = gql`
     mutation ($follower: String!, $following: String!) {
-        profileUnfollow(follower: $follower, following: $following) {
+        unfollowProfile (follower: $follower, following: $following) {
             message
         }
     }

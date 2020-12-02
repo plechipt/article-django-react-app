@@ -11,7 +11,7 @@ class ProfileType(DjangoObjectType):
 
 
 # Get profile info 
-class ProfileInfo(graphene.Mutation):
+class GetProfileInfo(graphene.Mutation):
    class Arguments:
       user = graphene.String(required=True)
       
@@ -29,11 +29,11 @@ class ProfileInfo(graphene.Mutation):
          user = CustomUser.objects.get(username=user)
          profile = Profile.objects.get(user=user)
 
-         return ProfileInfo(profile=profile, message=message)
+         return GetProfileInfo(profile=profile, message=message)
       
       else: 
          message = "This profile doesn't exist"
-         return ProfileInfo(message=message)
+         return GetProfileInfo(message=message)
 
 # Check if user has already profile
 class CheckUserProfile(graphene.Mutation):
@@ -51,7 +51,7 @@ class CheckUserProfile(graphene.Mutation):
 
 
 # Update the profile by given inputs on frontend
-class UpdateUser(graphene.Mutation):
+class UpdateProfile(graphene.Mutation):
    class Arguments:
       user = graphene.String(required=True)
       new_user = graphene.String(required=True)
@@ -121,7 +121,7 @@ class UpdateUser(graphene.Mutation):
          profile.save()
          message = 'Success'
 
-      return UpdateUser(message=message)
+      return UpdateProfile(message=message)
 
 
 # Follow user profile

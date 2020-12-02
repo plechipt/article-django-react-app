@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const REPLY_ADD_MUTATION = gql`
     mutation ($id: ID!, $user: String!, $content: String!) {
-        replyComment(id: $id, user: $user, content: $content) {
+        replyComment (id: $id, user: $user, content: $content) {
            message 
         }
     }
@@ -10,7 +10,7 @@ export const REPLY_ADD_MUTATION = gql`
 
 export const REPLY_DELETE_MUTATION = gql`
     mutation ($id: ID!) {
-        replyDelete(id: $id) {
+        deleteReply (id: $id) {
             reply {
                 content
             }

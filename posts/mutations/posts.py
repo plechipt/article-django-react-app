@@ -13,7 +13,7 @@ class PostType(DjangoObjectType):
 
 
 # Create post
-class AddPost(graphene.Mutation):
+class CreatePost(graphene.Mutation):
    class Arguments:
       user = graphene.String(required=True)
       title = graphene.String(required=True)
@@ -37,15 +37,15 @@ class AddPost(graphene.Mutation):
 
       if title_has_reached_limit_of_chars and user_posted_maximum_posts:
          message += 'Title has more than 100 characters and you have reached your maximum posts per day!'
-         return AddPost(message=message)
+         return CreatePost(message=message)
 
       elif title_has_reached_limit_of_chars:
          message = 'Title has more than 100 characters!'
-         return AddPost(message=message)
+         return CreatePost(message=message)
 
       elif user_posted_maximum_posts:
          message += 'You have reached your maximum posts per day!'
-         return AddPost(message=message)
+         return CreatePost(message=message)
 
       elif content_has_reached_limit_of_chars:
          message = 'Content is over 10,000 characters!'
@@ -57,7 +57,7 @@ class AddPost(graphene.Mutation):
       post.save()
 
       message = 'Success'
-      return AddPost(post=post, message="Success")
+      return CreatePost(post=post, message="Success")
 
 
 # Delete post

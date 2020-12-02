@@ -31,7 +31,7 @@ const PostCreate = ({ currentUser }) => {
     // Check if post was successfully created
     useEffect(() => {
         if (postData) {
-            const message = postData.addPost.message
+            const message = postData.createPost.message
 
             if (message === 'Success') {
                 history.push('/posts')

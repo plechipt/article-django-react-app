@@ -4,15 +4,13 @@ import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 
 import { USER_LOGIN_MUTATION, USER_CHECK_PROFILE_MUTATION } from '../../Api/user'
-//import Cookies from 'js-cookie'
 import './Login.css'
-
 
 const Login = () => {
     const history = useHistory()
     const [ failedToLogin, setFailedToLogin ] = useState('') 
     const [ allowButton, setAllowButton ] = useState(false)
-    
+
     const [ checkUserProfile ] = useMutation(USER_CHECK_PROFILE_MUTATION)
     const [ loginUser, { data: loginData }] = useMutation(USER_LOGIN_MUTATION)
 
@@ -36,7 +34,7 @@ const Login = () => {
                 if (loginData.tokenAuth.success === true) {
                     // If user doesnt have profile -> create new one
                     await checkUserProfile({ variables: { user: usernameInput }})
-                    
+
                     history.push('/posts')
                     window.location.reload(false) // Reset site
                 }

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 
 import { USER_PROFILE_FOLLOW_MUTATION, USER_PROFILE_UNFOLLOW_MUTATION  } from '../Api/user'
 
-const ProfileBodyButtons = ({ profileData: { profileInfo: { profile } }, currentUser }) => {
+const ProfileBodyButtons = ({ profileData: { getProfileInfo: { profile } }, currentUser }) => {
     const history = useHistory()
 
     const { totalFollowers, user: { username: usersProfile }, followers } = profile

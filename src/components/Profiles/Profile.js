@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, Message } from 'semantic-ui-react'
 import { useHistory, useParams } from 'react-router-dom'
-import { USER_PROFILE_INFO_MUTATION, USER_UPDATE_MUTATION } from '../Api/user'
+import { USER_PROFILE_INFO_MUTATION, USER_UPDATE_MUTATION, USER_DELETE_JWT_TOKENS_MUTATION } from '../Api/user'
 import { useMutation } from '@apollo/react-hooks'
 
 import ProfileImage from './ProfileImages'
@@ -14,8 +14,9 @@ const Profile = ({ currentUser }) => {
     const { user } = useParams()
     const history = useHistory()
 
-    const [ profileInfo, { data: profileData } ] = useMutation(USER_PROFILE_INFO_MUTATION)
-    const [ profileUpdate, { data: updateData } ] = useMutation(USER_UPDATE_MUTATION)
+    const [ getProfileInfo, { data: profileData }] = useMutation(USER_PROFILE_INFO_MUTATION)
+    const [ updateProfile, { data: updateData }] = useMutation(USER_UPDATE_MUTATION)
+    const [ deleteTokens ] = useMutation(USER_DELETE_JWT_TOKENS_MUTATION)
 
     const [ imageName, setImageName ] = useState()
     const [ errorMessages, setErrorMessages ] = useState()
@@ -26,36 +27,42 @@ const Profile = ({ currentUser }) => {
 
 
     useEffect(() => {
-        const getProfileInfo = async () => {
+        const getProfileInfoFunction = async () => {
             if (user) {
-                await profileInfo({ variables: { user: user } })
+                await getProfileInfo({ variables: { user: user } })
             }
         }
-        getProfileInfo()
-    }, [user, profileInfo])
+        getProfileInfoFunction()
+    }, [user, getProfileInfo])
     
     useEffect(() => {
-        if (profileData && profileData.profileInfo.message === 'Success') {
-            let imagePath = profileData.profileInfo.profile.image
+        if (profileData && profileData.getProfileInfo.message === 'Success') {
+            let imagePath = profileData.getProfileInfo.profile.image
 
-            setUsernameInput(profileData.profileInfo.profile.user.username)
-            setEmailInput(profileData.profileInfo.profile.user.email)
+            setUsernameInput(profileData.getProfileInfo.profile.user.username)
+            setEmailInput(profileData.getProfileInfo.profile.user.email)
             setImageName(imagePath)
         }
     }, [profileData])
 
     // Set message to user (including error and success messages)
     useEffect(() => {
-        if (updateData && updateData.profileUpdate.message !== 'Success') {
-            setErrorMessages(updateData.profileUpdate.message)
+        if (updateData && updateData.updateProfile.message !== 'Success') {
+            setErrorMessages(updateData.updateProfile.message)
         }
     }, [updateData])
 
     useEffect(() => {
-        if (updateData !== undefined && updateData.profileUpdate.message === 'Success') {
-            history.push('/login')
-            window.location.reload(false) // Reset site
+        const updateProfile = async () => {
+            if (updateData !== undefined && updateData.updateProfile.message === 'Success') {
+                // Delete JWT tokens
+                await deleteTokens()
+
+                history.push('/login')
+                window.location.reload(false) // Reset site
+            }
         }
+        updateProfile()
     }, [updateData, history])
 
     const handleOnSubmit = async (event) => {
@@ -63,7 +70,7 @@ const Profile = ({ currentUser }) => {
         const user_submited_button = event.target.tagName === 'FORM'
 
         if (user_pressed_enter || user_submited_button) {
-            await profileUpdate({ variables: { 
+            await updateProfile({ variables: { 
                 user: user, newUser: usernameInput,
                 newEmail: emailInput, image: profileImage }
             })
@@ -81,7 +88,7 @@ const Profile = ({ currentUser }) => {
 
     return (
         <div className="profile-container">
-            {(profileData && imageName && profileData.profileInfo.message === 'Success') ?(
+            {(profileData && imageName && profileData.getProfileInfo.message === 'Success') ?(
                 <div>
                     {(errorMessages) ? (
                         <Message
@@ -94,18 +101,18 @@ const Profile = ({ currentUser }) => {
                     <div className="media profile-media">
                         <img 
                             className="rounded-circle profile-picture" 
-                            src={require(`./${PATH_TO_PICTURES}/large/${profileData.profileInfo.profile.image}`)} 
+                            src={require(`./${PATH_TO_PICTURES}/large/${profileData.getProfileInfo.profile.image}`)} 
                             alt="" 
                         />
                         <div className="profile-body">
                         {user === currentUser ? (
                             <>
-                                <h2 className="account-heading">{profileData.profileInfo.profile.user.username}</h2>
-                                <p className="text-secondary">{profileData.profileInfo.profile.user.email}</p>
+                                <h2 className="account-heading">{profileData.getProfileInfo.profile.user.username}</h2>
+                                <p className="text-secondary">{profileData.getProfileInfo.profile.user.email}</p>
                             </>
                         ) : (
                            <>
-                                <h2 className="account-heading">{profileData.profileInfo.profile.user.username}</h2>
+                                <h2 className="account-heading">{profileData.getProfileInfo.profile.user.username}</h2>
                            </> 
                         )}
                         </div>
@@ -138,7 +145,7 @@ const Profile = ({ currentUser }) => {
                                     <label>Image</label>
                                     {/*User can choose between images*/}
                                     <ProfileImage 
-                                        userImage={profileData.profileInfo.profile.image} 
+                                        userImage={profileData.getProfileInfo.profile.image} 
                                         onImageChange={onImageChange} 
                                     />
                                 </Form.Field>

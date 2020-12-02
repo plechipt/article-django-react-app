@@ -55,7 +55,7 @@ export const POST_FIND_QUERY = gql`
 
 export const POST_FILTER_QUERY = gql`
     query ($title: String!){
-        filterPost(title: $title) {
+        filterPost (title: $title) {
             user {
                 username
             }
@@ -70,7 +70,7 @@ export const POST_FILTER_QUERY = gql`
 // Mutation
 export const POST_DELETE_MUTATION = gql`
     mutation ($id: ID!) {
-        deletePost(id: $id) {
+        deletePost (id: $id) {
             post {
                 title
             }
@@ -80,7 +80,7 @@ export const POST_DELETE_MUTATION = gql`
 
 export const POST_EDIT_MUTATION = gql`
     mutation ($id: ID!, $title: String!, $content: String!) {
-        editPost(id: $id, title: $title, content: $content) {
+        editPost (id: $id, title: $title, content: $content) {
             post {
                 content
             }
@@ -90,7 +90,7 @@ export const POST_EDIT_MUTATION = gql`
 
 export const POST_CREATE_MUTATION = gql`
     mutation ($title: String!, $content: String!, $user: String!) {
-        addPost(title: $title, content: $content, user: $user) {
+        createPost (title: $title, content: $content, user: $user) {
             message
             post {
                 title
@@ -114,7 +114,7 @@ export const POST_LIKE_MUTATION = gql`
 
 export const POST_UNLIKE_MUTATION = gql`
     mutation ($id: ID!, $user: String!) {
-        unlikePost(id: $id, user: $user) {
+        unlikePost (id: $id, user: $user) {
             message
         }
     }
