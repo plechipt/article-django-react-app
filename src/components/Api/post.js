@@ -69,7 +69,7 @@ export const POST_FILTER_QUERY = gql`
 
 // Mutation
 export const POST_DELETE_MUTATION = gql`
-    mutation postDelete ($id: ID!) {
+    mutation ($id: ID!) {
         deletePost(id: $id) {
             post {
                 title
@@ -79,7 +79,7 @@ export const POST_DELETE_MUTATION = gql`
 `
 
 export const POST_EDIT_MUTATION = gql`
-    mutation postEdit ($id: ID!, $title: String!, $content: String!) {
+    mutation ($id: ID!, $title: String!, $content: String!) {
         editPost(id: $id, title: $title, content: $content) {
             post {
                 content
@@ -89,7 +89,7 @@ export const POST_EDIT_MUTATION = gql`
 `
 
 export const POST_CREATE_MUTATION = gql`
-    mutation createPost ($title: String!, $content: String!, $user: String!) {
+    mutation ($title: String!, $content: String!, $user: String!) {
         addPost(title: $title, content: $content, user: $user) {
             message
             post {
@@ -102,7 +102,7 @@ export const POST_CREATE_MUTATION = gql`
 `
 
 export const POST_LIKE_MUTATION = gql`
-    mutation postLike ($id: ID!, $user: String!) {
+    mutation ($id: ID!, $user: String!) {
         likePost (id: $id, user: $user) {
             post {
                 title
@@ -113,7 +113,7 @@ export const POST_LIKE_MUTATION = gql`
 `
 
 export const POST_UNLIKE_MUTATION = gql`
-    mutation unlikePost ($id: ID!, $user: String!) {
+    mutation ($id: ID!, $user: String!) {
         unlikePost(id: $id, user: $user) {
             message
         }

@@ -46,7 +46,7 @@ const Profile = ({ currentUser }) => {
 
     // Set message to user (including error and success messages)
     useEffect(() => {
-        if (updateData) {
+        if (updateData && updateData.profileUpdate.message !== 'Success') {
             setErrorMessages(updateData.profileUpdate.message)
         }
     }, [updateData])

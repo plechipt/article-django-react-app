@@ -19,7 +19,7 @@ export const MESSAGE_LIST_QUERY = gql`
 `
 // Mutation
 export const MESSAGE_CREATE_MUTATION = gql`
-    mutation messageCreate ($user: String!, $chatUser: String!, $content: String!) {
+    mutation ($user: String!, $chatUser: String!, $content: String!) {
         messageCreate (user: $user, chatUser: $chatUser, content: $content) {
             message
         }

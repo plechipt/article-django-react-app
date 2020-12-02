@@ -82,7 +82,7 @@ class UpdateUser(graphene.Mutation):
       this_email_already_exists = email_already_exists == True and user.email != new_email
 
       fields_include_forbidden_characters = not [char for char in forbidden_chars if char in new_user_and_new_email] == []
-      email_include_multiple_at_signs = new_email.count('@') > 1
+      email_include_multiple_at_signs = new_email.count('@') > 1 or new_email.count('.') > 1
       fields_include_special_characters = '@' in new_user or '.' in new_user
 
       if nothing_was_changed:

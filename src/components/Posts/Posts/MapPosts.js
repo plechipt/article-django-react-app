@@ -33,7 +33,6 @@ const MapPosts = ({ filteredData, searchInput }) => {
                         posted={posted}
                         id={id}
                     />
-
                     )})}
                 {searchInput === '' ? (
                     <CustomPagination
