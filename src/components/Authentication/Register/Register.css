@@ -1,25 +1,25 @@
 .register-container {
-    margin-top: 5rem !important;
-    width: 40% !important;
-    margin: auto;
+  margin-top: 5rem !important;
+  width: 40% !important;
+  margin: auto;
 }
 
 .error-message-container {
-    margin-bottom: 2rem !important;
+  margin-bottom: 2rem !important;
 }
 
 .submit-button {
-    margin-top: 0.25rem !important;
+  margin-top: 0.25rem !important;
 }
 
 @media all and (max-width: 1400px) {
-    .register-container {
-        width: 60% !important;
-    }
+  .register-container {
+    width: 60% !important;
+  }
 }
 
 @media all and (max-width: 767px) {
-    .register-container {
-        width: 80% !important;
-    }
+  .register-container {
+    width: 80% !important;
+  }
 }

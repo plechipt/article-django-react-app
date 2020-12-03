@@ -1,61 +1,62 @@
 .support-container {
-    margin: auto;
-    margin-top: 3rem;
-    text-align: center;
-    background-color: #E8EBF0;
-    width: 50%;
-    padding: 5rem;
-    border-radius: 20px;
-    box-shadow: 0px 3px 4px 3px rgba(0, 0, 0, 0.2);
+  margin: auto;
+  margin-top: 3rem;
+  text-align: center;
+  background-color: #e8ebf0;
+  width: 50%;
+  padding: 5rem;
+  border-radius: 20px;
+  box-shadow: 0px 3px 4px 3px rgba(0, 0, 0, 0.2);
 }
 
 .support-header {
-    font-size: 3rem !important;
+  font-size: 3rem !important;
 }
 
-.support-text, .support-home {
-    font-size: 1.5rem !important;
-    font-weight: 600 !important;
+.support-text,
+.support-home {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
 }
 
 .support-button {
-    margin-top: 1rem !important;
+  margin-top: 1rem !important;
 }
 
 .error-message-payment-container {
-    display: flex;
-    justify-content: center;
-    margin: auto !important;
-    margin-top: 5rem !important;
-    width: 25%;
+  display: flex;
+  justify-content: center;
+  margin: auto !important;
+  margin-top: 5rem !important;
+  width: 25%;
 }
 
 @media all and (max-width: 1400px) {
-    .support-container {
-        width: 60% !important;
-    }
+  .support-container {
+    width: 60% !important;
+  }
 }
 
 @media all and (max-width: 1300px) {
-    .support-container {
-        width: 70% !important;
-    }
+  .support-container {
+    width: 70% !important;
+  }
 }
 
 @media all and (max-width: 1000px) {
-    .support-container {
-        width: 80% !important;
-    }
+  .support-container {
+    width: 80% !important;
+  }
 }
 
 @media all and (max-width: 863px) {
-    .profile-message-button {
-        margin-top: 1rem !important;
-    }
+  .profile-message-button {
+    margin-top: 1rem !important;
+  }
 }
 
 @media all and (max-width: 767px) {
-    .support-container {
-        width: 90% !important;
-    }
+  .support-container {
+    width: 90% !important;
+  }
 }

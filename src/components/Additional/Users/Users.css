@@ -1,33 +1,33 @@
 .users-container {
-    width: 85% !important;
-    margin: auto !important;
+  width: 85% !important;
+  margin: auto !important;
 }
 
 .user-container {
-    color: red !important;
-    margin-bottom: 3.5rem !important;
+  color: red !important;
+  margin-bottom: 3.5rem !important;
 }
 
 .paginate-container {
-    display: flex !important;
-    justify-content: center;
-    bottom: 40px;
-    width: 100%;
-    position: fixed !important;
+  display: flex !important;
+  justify-content: center;
+  bottom: 40px;
+  width: 100%;
+  position: fixed !important;
 }
 
 @media all and (max-width: 767px) {
-    .user-container {
-        margin-bottom: 15% !important;
-    }
-    
-    .user-content-container {
-        display: flex !important;
-        flex-direction: column;
-        align-items: center !important;
-    }
+  .user-container {
+    margin-bottom: 15% !important;
+  }
 
-    .user-container {
-        margin-bottom: 7rem !important;
-    }
+  .user-content-container {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center !important;
+  }
+
+  .user-container {
+    margin-bottom: 7rem !important;
+  }
 }

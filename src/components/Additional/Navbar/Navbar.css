@@ -1,6 +1,6 @@
 .navbar-container {
-    margin-bottom: 1.25rem;
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 100 !important;
+  margin-bottom: 1.25rem;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
 }
