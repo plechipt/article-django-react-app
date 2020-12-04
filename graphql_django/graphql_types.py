@@ -1,6 +1,6 @@
-from posts.models import Post, Comment, Reply
-from users.models import CustomUser, Profile, Message, ChatRoom
 from graphene_django.types import DjangoObjectType
+from posts.models import Comment, Post, Reply
+from users.models import ChatRoom, CustomUser, Message, Profile
 
 
 class CustomUserType(DjangoObjectType):

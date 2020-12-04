@@ -1,8 +1,7 @@
-import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
-
 import { MESSAGE_CREATE_MUTATION } from "../Api/message";
 
 const CreateMessage = ({ currentUser }) => {

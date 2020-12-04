@@ -1,8 +1,7 @@
+import { useApolloClient, useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { Menu, Segment } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
-import { useMutation, useApolloClient } from "@apollo/client";
-
+import { Menu, Segment } from "semantic-ui-react";
 import { USER_DELETE_JWT_TOKENS_MUTATION } from "../../Api/user";
 import "./Navbar.css";
 

@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
-
+import React, { useEffect, useState } from "react";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import { USER_ME_QUERY } from "./components/Api/user";
-
 // Import components from index.js
 import {
+  EditPost,
+  Login,
+  MessagesContainer,
   Navbar,
-  Users,
+  PostCreate,
+  PostDetail,
+  Posts,
+  Profile,
+  Register,
   Support,
   SupportSuccess,
-  Login,
-  Register,
-  Posts,
-  PostDetail,
-  PostCreate,
-  EditPost,
-  Profile,
-  MessagesContainer,
+  Users,
 } from "./components";
+import { USER_ME_QUERY } from "./components/Api/user";
 
 function App() {
   // Current logged in user
