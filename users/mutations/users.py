@@ -1,6 +1,14 @@
 import graphene
 import graphql_jwt
+from graphene_django.types import DjangoObjectType
 from graphql_auth import mutations
+
+from users.models import CustomUser
+
+
+class CustomUserType(DjangoObjectType):
+   class Meta:
+      model = CustomUser
 
 
 class AuthMutation(graphene.ObjectType):

@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form, Message } from "semantic-ui-react";
-import { POST_CREATE_MUTATION, POST_LIST_QUERY } from "../../Api/post";
+import { POST_CREATE_MUTATION } from "../../Api/post";
 
 //import styles from './Posts.module.css'
 
@@ -29,7 +29,6 @@ const PostCreate = ({ currentUser }) => {
           content: textareaInput,
           user: currentUser,
         },
-        refetchQueries: POST_LIST_QUERY,
       });
     }
   };
