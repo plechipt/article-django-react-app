@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Item } from "semantic-ui-react";
-
-import User from "./User";
 import CustomPagination from "../../Posts/Posts/Pagination";
+import User from "./User";
 import "./Users.css";
 
 const MapUsers = ({ users: { allProfiles: allUsers } }) => {

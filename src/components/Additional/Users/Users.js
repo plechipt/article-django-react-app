@@ -1,11 +1,12 @@
-import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-
+import React from "react";
 import { PROFILE_LIST_QUERY } from "../../Api/profile";
 import MapUsers from "./MapUsers";
 
 const Users = () => {
   const { data: users } = useQuery(PROFILE_LIST_QUERY);
+
+  console.log(users);
 
   return (
     <div className="users-paginator-container">

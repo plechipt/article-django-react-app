@@ -1,10 +1,12 @@
-import graphene
 import datetime
-from graphene_django.types import DjangoObjectType
-from graphql_jwt.decorators import login_required
 
-from posts.models import Post 
+import graphene
+from graphene_django.types import DjangoObjectType
+from graphql import GraphQLError
+from graphql_jwt.decorators import login_required
 from users.models import CustomUser
+
+from posts.models import Post
 
 
 class PostType(DjangoObjectType):
@@ -36,12 +38,11 @@ class CreatePost(graphene.Mutation):
       content_has_reached_limit_of_chars = len(content) > 10000
 
       if title_has_reached_limit_of_chars and user_posted_maximum_posts:
-         message += 'Title has more than 100 characters and you have reached your maximum posts per day!'
+         message = 'Title has more than 100 characters and you have reached your maximum posts per day!'
          return CreatePost(message=message)
 
       elif title_has_reached_limit_of_chars:
-         message = 'Title has more than 100 characters!'
-         return CreatePost(message=message)
+         raise GraphQLError('Title has more than 100 characters!')
 
       elif user_posted_maximum_posts:
          message += 'You have reached your maximum posts per day!'

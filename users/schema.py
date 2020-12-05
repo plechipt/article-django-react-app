@@ -16,7 +16,7 @@ class UserMutation(AuthMutation):
     unfollow_profile = UnfollowProfile.Field()
 
 
-class UserQuery:
+class MyUserQuery:
     all_users = graphene.List(CustomUserType)
     all_profiles = graphene.List(ProfileType)
 
@@ -52,4 +52,5 @@ class UserQuery:
             return CustomUser.objects.all()
 
         def resolve_all_profiles(self, root, **kwargs):
+            print('ez')
             return Profile.objects.all()
