@@ -1,11 +1,12 @@
 import graphene
+from graphene_django.types import DjangoObjectType
 from graphql_auth import mutations
 from graphql_auth.schema import MeQuery, UserQuery
-from graphql_jwt.decorators import login_required
 from payments.schema import PaymentMutation
 from posts.schema import PostMutation, PostQuery
 from users.models import CustomUser
-from users.schema import MyUserQuery, UserMutation
+from users.schema import UserMutation
+from users.schema import UserQuery as MyUserQuery
 
 
 class Mutation(UserMutation, PostMutation, PaymentMutation):
