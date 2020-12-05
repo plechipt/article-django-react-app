@@ -32,7 +32,7 @@ class CreatePost(graphene.Mutation):
 
       # Filter posts that belongs to user and are posted today
       filtered_posts = Post.objects.filter(user__username=user, posted=today)
-
+   
       title_has_reached_limit_of_chars = len(title) > 100
       user_posted_maximum_posts = filtered_posts.count() >= 5
       content_has_reached_limit_of_chars = len(content) > 10000
@@ -108,8 +108,6 @@ class EditPost(graphene.Mutation):
          message = 'Success'
 
       return EditPost(message=message)
-
-  
 
 
 # Like post

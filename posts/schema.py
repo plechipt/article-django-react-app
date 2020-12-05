@@ -1,4 +1,5 @@
 import graphene
+from graphql import GraphQLError
 
 from .mutations.comments import *
 from .mutations.posts import *
@@ -41,7 +42,7 @@ class PostQuery:
         post_doesnt_exist = Post.objects.filter(id=id).count() == 0
 
         if post_doesnt_exist == True:
-            raise Exception("Post doesn't exist")
+            raise GraphQLError("Post doesn't exist")
 
         return Post.objects.get(id=id)
 
