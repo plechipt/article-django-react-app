@@ -15,7 +15,9 @@ const PostCreate = ({ currentUser }) => {
   const [titleInput, setTitleInput] = useState("");
   const [textareaInput, setTextareaInput] = useState("");
 
-  const [createPost, { data: postData }] = useMutation(POST_CREATE_MUTATION);
+  const [createPost, { data: postData, error }] = useMutation(
+    POST_CREATE_MUTATION
+  );
 
   const handleOnSubmit = async (event) => {
     const forms_are_filled = titleInput !== "" && textareaInput !== "";
@@ -36,6 +38,7 @@ const PostCreate = ({ currentUser }) => {
   // Check if post was successfully created
   useEffect(() => {
     if (postData) {
+      console.log(error);
       const message = postData.createPost.message;
 
       if (message === "Success") {

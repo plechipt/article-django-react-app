@@ -39,26 +39,25 @@ class CreatePost(graphene.Mutation):
 
       if title_has_reached_limit_of_chars and user_posted_maximum_posts:
          message = 'Title has more than 100 characters and you have reached your maximum posts per day!'
-         return CreatePost(message=message)
 
       elif title_has_reached_limit_of_chars:
-         raise GraphQLError('Title has more than 100 characters!')
+         message = 'Title has more than 100 characters!'
 
       elif user_posted_maximum_posts:
-         message += 'You have reached your maximum posts per day!'
-         return CreatePost(message=message)
+         message = 'You have reached your maximum posts per day!'
 
       elif content_has_reached_limit_of_chars:
          message = 'Content is over 10,000 characters!'
-         return EditPost(message=message)
 
-      # Create date when was the post posted
-      posted = datetime.datetime.now().strftime('%d %B %Y')
-      post = Post(title=title, content=content, user=user, posted=posted)
-      post.save()
+      else:
+         # Create date when was the post posted
+         posted = datetime.datetime.now().strftime('%d %B %Y')
+         post = Post(title=title, content=content, user=user, posted=posted)
+         post.save()
 
-      message = 'Success'
-      return CreatePost(post=post, message="Success")
+         message = 'Success'
+
+      return CreatePost(message=message)
 
 
 # Delete post
