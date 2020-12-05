@@ -1,12 +1,13 @@
-import graphene
 import datetime
 
-from graphql_auth import mutations
-from graphene_django.types import DjangoObjectType
-from graphql_jwt.decorators import login_required
+import graphene
 from django_graphql_ratelimit import ratelimit
+from graphene_django.types import DjangoObjectType
+from graphql import GraphQLError
+from graphql_auth import mutations
+from graphql_jwt.decorators import login_required
 
-from users.models import CustomUser, Profile, Message, ChatRoom
+from users.models import ChatRoom, CustomUser, Message, Profile
 
 
 class MessageType(DjangoObjectType):
@@ -32,12 +33,10 @@ class CreateMessage(graphene.Mutation):
    def mutate(root, info, user, chat_user, content):
       # Create date when message was messaged
       messaged = datetime.datetime.now().strftime('%d %B %Y, %H:%M')
-
       message_is_empty = content == ''
    
       if message_is_empty:
-         message = "Message must not be empty!"
-         return CreateMessage(message=message)
+         raise GraphQLError("Message must not be empty!")
          
       # Get the info
       user = CustomUser.objects.get(username=user)

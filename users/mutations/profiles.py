@@ -1,5 +1,6 @@
 import graphene
 from graphene_django.types import DjangoObjectType
+from graphql import GraphQLError
 from graphql_jwt.decorators import login_required
 
 from users.models import CustomUser, Profile
@@ -144,10 +145,10 @@ class FollowProfile(graphene.Mutation):
       following_profile = Profile.objects.get(user=following)
 
       if follower == following:
-         message = 'You cannot follow yourself!'
+         raise GraphQLError('You cannot follow yourself!')
 
       else:
-         message = 'Success!'
+         message = 'Success'
 
          # Add the user to profile followers
          following_profile.followers.add(follower)

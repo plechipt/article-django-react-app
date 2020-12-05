@@ -1,13 +1,13 @@
-import time
-import graphene
 import datetime
+import time
+
+import graphene
 from django.utils import timezone
-from graphql_jwt.decorators import login_required
-
-from graphene_django.types import DjangoObjectType
 from django_graphql_ratelimit import ratelimit
-
+from graphene_django.types import DjangoObjectType
+from graphql_jwt.decorators import login_required
 from users.models import CustomUser
+
 from posts.models import Comment, Post
 
 
@@ -44,9 +44,9 @@ class CommentPost(graphene.Mutation):
          # Create date when was the post posted
          posted = datetime.datetime.now().strftime('%d %B %Y')
 
-         message = 'Success'
          comment = Comment(post=post, user=user, content=content, posted=posted)
          comment.save()
+         message = 'Success'
 
       return CommentPost(message=message)
    

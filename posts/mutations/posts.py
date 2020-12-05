@@ -54,7 +54,6 @@ class CreatePost(graphene.Mutation):
          posted = datetime.datetime.now().strftime('%d %B %Y')
          post = Post(title=title, content=content, user=user, posted=posted)
          post.save()
-
          message = 'Success'
 
       return CreatePost(message=message)
@@ -95,14 +94,12 @@ class EditPost(graphene.Mutation):
 
       if title_has_reached_limit_of_chars:
          message = 'Title has more than 100 characters!'
-         return EditPost(message=message)
 
       elif content_has_reached_limit_of_chars:
          message = 'Content is over 10,000 characters!'
-         return EditPost(message=message)
 
       # Success
-      elif post_doesnt_exist:
+      else:
          message = 'Success'
          post = Post.objects.get(id=id)
 
@@ -110,12 +107,9 @@ class EditPost(graphene.Mutation):
          post.content = content
          post.save()
 
-         return EditPost(message=message, post=post)
+      return EditPost(message=message)
 
-      # Id doesnt match with post      
-      else:
-         message = "ID doesn't match with post"
-         return EditPost(message=message)
+  
 
 
 # Like post
