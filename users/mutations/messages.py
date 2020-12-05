@@ -71,7 +71,7 @@ class CreateChatRoom(graphene.Mutation):
       chat_rooms = ChatRoom.objects.all()
 
       if user_doesnt_exist or chat_user_doesnt_exist:
-         raise Exception("User or chat user doesn't exist!")
+         raise GraphQLError("User or chat user doesn't exist!")
 
       # Get users
       user = CustomUser.objects.get(username=user)

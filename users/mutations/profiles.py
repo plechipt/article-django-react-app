@@ -33,8 +33,7 @@ class GetProfileInfo(graphene.Mutation):
          return GetProfileInfo(profile=profile, message=message)
       
       else: 
-         message = "This profile doesn't exist"
-         return GetProfileInfo(message=message)
+         raise GraphQLError("This profile doesn't exist")
 
 # Check if user has already profile
 class CheckUserProfile(graphene.Mutation):

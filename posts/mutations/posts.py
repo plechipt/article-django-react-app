@@ -93,10 +93,10 @@ class EditPost(graphene.Mutation):
       post_doesnt_exist = Post.objects.filter(id=id).count() != 0
 
       if title_has_reached_limit_of_chars:
-         message = 'Title has more than 100 characters!'
+         raise GraphQLError('Title has more than 100 characters!')
 
       elif content_has_reached_limit_of_chars:
-         message = 'Content is over 10,000 characters!'
+         raise GraphQLError('Content is over 10,000 characters!')
 
       # Success
       else:
