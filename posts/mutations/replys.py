@@ -1,12 +1,12 @@
-import graphene
 import datetime
 
+import graphene
 from django_graphql_ratelimit import ratelimit
 from graphene_django.types import DjangoObjectType
 from graphql_jwt.decorators import login_required
-
-from posts.models import Comment, Reply 
 from users.models import CustomUser
+
+from posts.models import Comment, Reply
 
 
 class ReplyType(DjangoObjectType):
@@ -38,10 +38,11 @@ class ReplyComment(graphene.Mutation):
       if replies_posted_today.count() >= 20:
          message = 'You have reached your maximum replies per day!'
 
+      # Success
       else:
-         message = 'Success'
          reply = Reply(comment=comment, user=user, content=content, posted=posted)
          reply.save()
+         message = 'Success'
 
       return ReplyComment(message=message)
 

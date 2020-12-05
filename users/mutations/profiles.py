@@ -23,17 +23,18 @@ class GetProfileInfo(graphene.Mutation):
    def mutate(root, info, user):
       message = ''
 
-      users_profile_exists = CustomUser.objects.filter(username=user).count() != 0
+      user_profile_doesnt_exist = CustomUser.objects.filter(username=user).count() == 0
 
-      if users_profile_exists:
-         message = 'Success'
+      if user_profile_doesnt_exist:
+         raise GraphQLError("This profile doesn't exist")
+
+      # Success
+      else: 
          user = CustomUser.objects.get(username=user)
          profile = Profile.objects.get(user=user)
+         message = 'Success'
 
          return GetProfileInfo(profile=profile, message=message)
-      
-      else: 
-         raise GraphQLError("This profile doesn't exist")
 
 # Check if user has already profile
 class CheckUserProfile(graphene.Mutation):
@@ -108,6 +109,7 @@ class UpdateProfile(graphene.Mutation):
       elif len(new_email) >= 50:
          message = 'Your new email has reached maximum of characters! (50 characters)'
 
+      #Success
       else:
          user_selected_image = image != 'none' 
 
@@ -146,9 +148,8 @@ class FollowProfile(graphene.Mutation):
       if follower == following:
          raise GraphQLError('You cannot follow yourself!')
 
+      # Success
       else:
-         message = 'Success'
-
          # Add the user to profile followers
          following_profile.followers.add(follower)
 
@@ -160,6 +161,7 @@ class FollowProfile(graphene.Mutation):
          
          # Save the following users profile 
          following_profile.save()
+         message = 'Success'
 
       return FollowProfile(message=message)
 
@@ -189,5 +191,6 @@ class UnfollowProfile(graphene.Mutation):
       # Save it to total_followers
       following_profile.total_followers = total_followers
       following_profile.save()
+      message = 'Success'
 
       return UnfollowProfile(message=message)

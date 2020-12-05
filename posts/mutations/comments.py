@@ -38,8 +38,9 @@ class CommentPost(graphene.Mutation):
       
       # If user has posted 20 or more comments
       if comments_posted_today.count() >= 20:
-         message = 'You have reached your maximum comments per day!'
+         message = 'You have reached your maximum comments per day! (20)'
 
+      # Sucess
       else:
          # Create date when was the post posted
          posted = datetime.datetime.now().strftime('%d %B %Y')

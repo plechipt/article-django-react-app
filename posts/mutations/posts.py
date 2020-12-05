@@ -100,12 +100,12 @@ class EditPost(graphene.Mutation):
 
       # Success
       else:
-         message = 'Success'
          post = Post.objects.get(id=id)
 
          post.title = title
          post.content = content
          post.save()
+         message = 'Success'
 
       return EditPost(message=message)
 
@@ -148,7 +148,6 @@ class UnlikePost(graphene.Mutation):
 
    @staticmethod
    def mutate(root, info, id, user):
-      message = 'Success'
       post = Post.objects.get(id=id)
       user = CustomUser.objects.get(username=user)
       
@@ -161,5 +160,6 @@ class UnlikePost(graphene.Mutation):
       # Save the new total_likes to post
       post.total_likes = total_likes
       post.save()
+      message = 'Success'
 
       return UnlikePost(message=message)
