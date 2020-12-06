@@ -11,29 +11,6 @@ class ProfileType(DjangoObjectType):
       model = Profile
 
 
-# Get profile info 
-class GetProfileInfo(graphene.Mutation):
-   class Arguments:
-      user = graphene.String(required=True)
-      
-   profile = graphene.Field(ProfileType)
-   message = graphene.String()
-
-   @staticmethod
-   def mutate(root, info, user):
-      message = ''
-
-      user_profile_doesnt_exist = CustomUser.objects.filter(username=user).count() == 0
-
-      if user_profile_doesnt_exist:
-         raise GraphQLError("This profile doesn't exist")
-
-      user = CustomUser.objects.get(username=user)
-      profile = Profile.objects.get(user=user)
-      message = 'Success'
-
-      return GetProfileInfo(profile=profile, message=message)
-
 # Check if user has already profile
 class CheckUserProfile(graphene.Mutation):
    class Arguments:

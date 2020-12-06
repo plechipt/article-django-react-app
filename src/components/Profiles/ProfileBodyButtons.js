@@ -1,17 +1,14 @@
-import React from "react";
-import { Button, Icon, Label } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
+import React from "react";
 import { useHistory } from "react-router-dom";
-
+import { Button, Icon, Label } from "semantic-ui-react";
 import {
   PROFILE_FOLLOW_MUTATION,
   PROFILE_UNFOLLOW_MUTATION,
 } from "../Api/profile";
 
 const ProfileBodyButtons = ({
-  profileData: {
-    getProfileInfo: { profile },
-  },
+  profileData: { getProfileInfo },
   currentUser,
 }) => {
   const history = useHistory();
@@ -20,7 +17,7 @@ const ProfileBodyButtons = ({
     totalFollowers,
     user: { username: usersProfile },
     followers,
-  } = profile;
+  } = getProfileInfo;
   const [followProfile] = useMutation(PROFILE_FOLLOW_MUTATION);
   const [unfollowProfile] = useMutation(PROFILE_UNFOLLOW_MUTATION);
 
@@ -84,7 +81,7 @@ const ProfileBodyButtons = ({
             Followers
           </Button>
           <Label as="a" basic color="blue" pointing="left">
-            {profile.totalFollowers}
+            {totalFollowers}
           </Label>
         </Button>
       )}

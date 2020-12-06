@@ -14,26 +14,23 @@ export const PROFILE_LIST_QUERY = gql`
   }
 `;
 
-// Mutation
-export const PROFILE_GET_INFO_MUTATION = gql`
-  mutation($user: String!) {
+export const PROFILE_GET_INFO_QUERY = gql`
+  query($user: String!) {
     getProfileInfo(user: $user) {
-      profile {
-        image
-        totalFollowers
-        followers {
-          username
-        }
-        user {
-          username
-          email
-        }
+      user {
+        username
+        email
       }
-      message
+      followers {
+        username
+      }
+      image
+      totalFollowers
     }
   }
 `;
 
+// Mutation
 export const PROFILE_CHECK_USER_MUTATION = gql`
   mutation($user: String!) {
     checkUserProfile(user: $user) {

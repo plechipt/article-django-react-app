@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Button, Form, Message } from "semantic-ui-react";
+import { useLazyQuery, useMutation } from "@apollo/react-hooks";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { USER_DELETE_JWT_TOKENS_MUTATION } from "../Api/user";
-import { useMutation } from "@apollo/react-hooks";
-
-import ProfileImage from "./ProfileImages";
-import ProfileBodyButtons from "./ProfileBodyButtons";
-import "./Profile.css";
+import { Button, Form, Message } from "semantic-ui-react";
 import {
-  PROFILE_GET_INFO_MUTATION,
+  PROFILE_GET_INFO_QUERY,
   PROFILE_UPDATE_MUTATION,
 } from "../Api/profile";
+import { USER_DELETE_JWT_TOKENS_MUTATION } from "../Api/user";
+import "./Profile.css";
+import ProfileBodyButtons from "./ProfileBodyButtons";
+import ProfileImage from "./ProfileImages";
 
 const PATH_TO_PICTURES = "media/profile_pictures";
 
@@ -18,8 +17,8 @@ const Profile = ({ currentUser }) => {
   const { user } = useParams();
   const history = useHistory();
 
-  const [getProfileInfo, { data: profileData }] = useMutation(
-    PROFILE_GET_INFO_MUTATION
+  const [getProfileInfo, { data: profileData }] = useLazyQuery(
+    PROFILE_GET_INFO_QUERY
   );
   const [updateProfile, { data: updateData }] = useMutation(
     PROFILE_UPDATE_MUTATION
@@ -34,20 +33,17 @@ const Profile = ({ currentUser }) => {
   const [profileImage, setProfileImage] = useState("none");
 
   useEffect(() => {
-    const getProfileInfoFunction = async () => {
-      if (user) {
-        await getProfileInfo({ variables: { user: user } });
-      }
-    };
-    getProfileInfoFunction();
+    if (user) {
+      getProfileInfo({ variables: { user: user } });
+    }
   }, [user, getProfileInfo]);
 
   useEffect(() => {
-    if (profileData && profileData.getProfileInfo.message === "Success") {
-      let imagePath = profileData.getProfileInfo.profile.image;
+    if (profileData) {
+      let imagePath = profileData.getProfileInfo.image;
 
-      setUsernameInput(profileData.getProfileInfo.profile.user.username);
-      setEmailInput(profileData.getProfileInfo.profile.user.email);
+      setUsernameInput(profileData.getProfileInfo.user.username);
+      setEmailInput(profileData.getProfileInfo.user.email);
       setImageName(imagePath);
     }
   }, [profileData]);
@@ -101,9 +97,7 @@ const Profile = ({ currentUser }) => {
 
   return (
     <div className="profile-container">
-      {profileData &&
-      imageName &&
-      profileData.getProfileInfo.message === "Success" ? (
+      {profileData && imageName ? (
         <div>
           {errorMessages ? (
             <Message
@@ -116,23 +110,23 @@ const Profile = ({ currentUser }) => {
           <div className="media profile-media">
             <img
               className="rounded-circle profile-picture"
-              src={require(`./${PATH_TO_PICTURES}/large/${profileData.getProfileInfo.profile.image}`)}
+              src={require(`./${PATH_TO_PICTURES}/large/${profileData.getProfileInfo.image}`)}
               alt=""
             />
             <div className="profile-body">
               {user === currentUser ? (
                 <>
                   <h2 className="account-heading">
-                    {profileData.getProfileInfo.profile.user.username}
+                    {profileData.getProfileInfo.user.username}
                   </h2>
                   <p className="text-secondary">
-                    {profileData.getProfileInfo.profile.user.email}
+                    {profileData.getProfileInfo.user.email}
                   </p>
                 </>
               ) : (
                 <>
                   <h2 className="account-heading">
-                    {profileData.getProfileInfo.profile.user.username}
+                    {profileData.getProfileInfo.user.username}
                   </h2>
                 </>
               )}
@@ -169,7 +163,7 @@ const Profile = ({ currentUser }) => {
                   <label>Image</label>
                   {/*User can choose between images*/}
                   <ProfileImage
-                    userImage={profileData.getProfileInfo.profile.image}
+                    userImage={profileData.getProfileInfo.image}
                     onImageChange={onImageChange}
                   />
                 </Form.Field>

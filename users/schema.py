@@ -11,7 +11,6 @@ class UserMutation(AuthMutation):
     create_chat_room = CreateChatRoom.Field()
 
     # Profiles
-    get_profile_info = GetProfileInfo.Field()
     check_user_profile = CheckUserProfile.Field()
     update_profile = UpdateProfile.Field()
     follow_profile = FollowProfile.Field()
@@ -26,6 +25,11 @@ class UserQuery:
         MessageType,
         user=graphene.String(required=True),
         chat_user=graphene.String(required=True)
+    )
+
+    get_profile_info = graphene.Field(
+        ProfileType,
+        user = graphene.String(required=True)
     )
 
 
@@ -48,6 +52,17 @@ class UserQuery:
         chat_room = user_and_chatuser_chatroom.first()
 
         return chat_room.messages.all()
+    
+
+    def resolve_get_profile_info(self, root, user):
+        user_doesnt_exist = CustomUser.objects.filter(username=user).count() == 0
+
+        if user_doesnt_exist:
+            raise GraphQLError("This profile doesn't exist!")
+
+        # Get user object
+        user = CustomUser.objects.get(username=user)
+        return Profile.objects.get(user=user)
 
 
     def resolve_all_users(self, root, **kwargs):

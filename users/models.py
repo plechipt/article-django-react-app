@@ -36,5 +36,4 @@ class ChatRoom(models.Model):
 
     def __str__(self):
         both_users = self.users.all()
-        print(both_users)
         return f'{both_users[0]} and {both_users[1]} ChatRoom'
