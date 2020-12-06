@@ -72,10 +72,11 @@ const Profile = ({ currentUser }) => {
   }, [updateData, history, deleteTokens]);
 
   const handleOnSubmit = async (event) => {
-    const user_pressed_enter = event.key === "Enter";
     const user_submited_button = event.target.tagName === "FORM";
+    const forms_are_filled =
+      usernameInput !== "" && emailInput !== "" && emailInput !== "";
 
-    if (user_pressed_enter || user_submited_button) {
+    if (forms_are_filled && user_submited_button) {
       await updateProfile({
         variables: {
           user: user,

@@ -41,7 +41,7 @@ class PostQuery:
     def resolve_find_post(self, root, id):
         post_doesnt_exist = Post.objects.filter(id=id).count() == 0
 
-        if post_doesnt_exist == True:
+        if post_doesnt_exist:
             raise GraphQLError("Post doesn't exist")
 
         return Post.objects.get(id=id)

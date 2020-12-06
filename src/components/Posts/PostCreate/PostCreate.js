@@ -18,11 +18,9 @@ const PostCreate = ({ currentUser }) => {
   const [createPost, { data: postData }] = useMutation(POST_CREATE_MUTATION);
 
   const handleOnSubmit = async (event) => {
-    const forms_are_filled = titleInput !== "" && textareaInput !== "";
-    const user_pressed_enter = event.key === "Enter";
-    const user_submited_button = event.target.tagName === "FORM";
+    const user_submited_button = event.target.tagName === "BUTTON";
 
-    if ((forms_are_filled && user_pressed_enter) || user_submited_button) {
+    if (user_submited_button) {
       await createPost({
         variables: {
           title: titleInput,
@@ -66,7 +64,7 @@ const PostCreate = ({ currentUser }) => {
           header={errorMessage}
         />
       ) : null}
-      <Form onKeyPress={handleOnSubmit} onSubmit={handleOnSubmit}>
+      <Form>
         <Form.Field>
           <label>Title</label>
           <input
@@ -88,6 +86,7 @@ const PostCreate = ({ currentUser }) => {
         </Form.Field>
         <Button
           disabled={!allowButton}
+          onClick={handleOnSubmit}
           className="submit-button"
           type="submit"
           primary

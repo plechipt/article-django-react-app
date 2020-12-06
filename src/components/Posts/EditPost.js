@@ -45,10 +45,9 @@ const EditPost = ({ currentUser }) => {
 
   const handleOnSubmit = async (event) => {
     const fields_are_filled = titleInput !== "" && textAreaInput !== "";
-    const user_pressed_enter = event.key === "Enter";
     const user_submited_button = event.target.tagName === "FORM";
 
-    if ((fields_are_filled && user_pressed_enter) || user_submited_button) {
+    if (fields_are_filled && user_submited_button) {
       await editPost({
         variables: { id: id, title: titleInput, content: textAreaInput },
       });

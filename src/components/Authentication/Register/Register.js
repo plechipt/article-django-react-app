@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form, Message } from "semantic-ui-react";
-
 import { USER_REGISTER_MUTATION } from "../../Api/user";
 import "./Register.css";
 
@@ -51,7 +50,7 @@ const Register = () => {
       passwordInput !== "" &&
       passwordConfirmInput !== "";
 
-    if ((all_fields_are_filled && user_pressed_enter) || user_submited_button) {
+    if (all_fields_are_filled && (user_pressed_enter || user_submited_button)) {
       await registerUser({
         variables: {
           username: usernameInput,

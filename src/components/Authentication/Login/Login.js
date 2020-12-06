@@ -49,8 +49,8 @@ const Login = () => {
     const user_submited_button = event.target.tagName === "FORM";
 
     if (
-      (username_and_password_are_filled && user_pressed_enter) ||
-      user_submited_button
+      username_and_password_are_filled &&
+      (user_pressed_enter || user_submited_button)
     ) {
       await loginUser({
         variables: {
