@@ -27,6 +27,7 @@ const Profile = ({ currentUser }) => {
 
   const [imageName, setImageName] = useState();
   const [errorMessages, setErrorMessages] = useState();
+  const [allowButton, setAllowButton] = useState(false);
 
   const [usernameInput, setUsernameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
@@ -70,6 +71,17 @@ const Profile = ({ currentUser }) => {
     };
     updateProfile();
   }, [updateData, history, deleteTokens]);
+
+  // If fields are filled -> undisable button
+  useEffect(() => {
+    const fields_are_filled = usernameInput !== "" && emailInput !== "";
+
+    if (fields_are_filled) {
+      setAllowButton(true);
+    } else {
+      setAllowButton(false);
+    }
+  }, [usernameInput, emailInput]);
 
   const handleOnSubmit = async (event) => {
     const user_submited_button = event.target.tagName === "BUTTON";
@@ -167,6 +179,7 @@ const Profile = ({ currentUser }) => {
                   />
                 </Form.Field>
                 <Button
+                  disabled={!allowButton}
                   onClick={handleOnSubmit}
                   className="submit-button"
                   type="submit"
