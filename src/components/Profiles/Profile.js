@@ -72,11 +72,9 @@ const Profile = ({ currentUser }) => {
   }, [updateData, history, deleteTokens]);
 
   const handleOnSubmit = async (event) => {
-    const user_submited_button = event.target.tagName === "FORM";
-    const forms_are_filled =
-      usernameInput !== "" && emailInput !== "" && emailInput !== "";
+    const user_submited_button = event.target.tagName === "BUTTON";
 
-    if (forms_are_filled && user_submited_button) {
+    if (user_submited_button) {
       await updateProfile({
         variables: {
           user: user,
@@ -141,7 +139,7 @@ const Profile = ({ currentUser }) => {
             <div className="form-group">
               <p className="profile-info-text">Profile Info</p>
               <hr className="mb-4" />
-              <Form onKeyPress={handleOnSubmit} onSubmit={handleOnSubmit}>
+              <Form>
                 <Form.Field>
                   <label>Username</label>
                   <input
@@ -168,7 +166,12 @@ const Profile = ({ currentUser }) => {
                     onImageChange={onImageChange}
                   />
                 </Form.Field>
-                <Button className="submit-button" type="submit" primary>
+                <Button
+                  onClick={handleOnSubmit}
+                  className="submit-button"
+                  type="submit"
+                  primary
+                >
                   Update
                 </Button>
               </Form>

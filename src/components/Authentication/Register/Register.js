@@ -44,13 +44,9 @@ const Register = () => {
   const handleOnClick = async (event) => {
     const user_pressed_enter = event.key === "Enter";
     const user_submited_button = event.target.tagName === "FORM";
-    const all_fields_are_filled =
-      usernameInput !== "" &&
-      emailInput !== "" &&
-      passwordInput !== "" &&
-      passwordConfirmInput !== "";
+    const canSubmit = allowButton;
 
-    if (all_fields_are_filled && (user_pressed_enter || user_submited_button)) {
+    if (canSubmit && (user_pressed_enter || user_submited_button)) {
       await registerUser({
         variables: {
           username: usernameInput,

@@ -33,7 +33,6 @@ const CreateMessage = ({ currentUser }) => {
         <div className="form-group message-create-form-container">
           <textarea
             onChange={(event) => setMessageInput(event.target.value)}
-            onKeyPress={handleOnSubmit}
             value={messageInput}
             className="form-control form-control-lg text-area-container"
             placeholder="Enter a message..."

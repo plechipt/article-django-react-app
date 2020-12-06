@@ -43,15 +43,11 @@ const Login = () => {
   }, [loginData, checkUserProfile, history, usernameInput]);
 
   const handleOnSubmit = async (event) => {
-    const username_and_password_are_filled =
-      usernameInput !== "" && passwordInput !== "";
     const user_pressed_enter = event.key === "Enter";
     const user_submited_button = event.target.tagName === "FORM";
+    const canSubmit = allowButton;
 
-    if (
-      username_and_password_are_filled &&
-      (user_pressed_enter || user_submited_button)
-    ) {
+    if ((canSubmit && user_pressed_enter) || user_submited_button) {
       await loginUser({
         variables: {
           username: usernameInput,

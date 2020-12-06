@@ -44,10 +44,9 @@ const EditPost = ({ currentUser }) => {
   }, [titleInput, textAreaInput]);
 
   const handleOnSubmit = async (event) => {
-    const fields_are_filled = titleInput !== "" && textAreaInput !== "";
-    const user_submited_button = event.target.tagName === "FORM";
+    const user_submited_button = event.target.tagName === "BUTTON";
 
-    if (fields_are_filled && user_submited_button) {
+    if (user_submited_button) {
       await editPost({
         variables: { id: id, title: titleInput, content: textAreaInput },
       });
@@ -58,7 +57,7 @@ const EditPost = ({ currentUser }) => {
   return (
     <div className="post-create-container">
       {detailData && detailData.findPost.user.username === currentUser ? (
-        <Form onKeyPress={handleOnSubmit} onSubmit={handleOnSubmit}>
+        <Form>
           <Form.Field>
             <label>Title</label>
             <input
@@ -80,6 +79,7 @@ const EditPost = ({ currentUser }) => {
           </Form.Field>
           <Button
             disabled={!allowButton}
+            onClick={handleOnSubmit}
             className="submit-button"
             type="submit"
             primary
