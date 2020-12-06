@@ -28,7 +28,7 @@ const MessagesContainer = ({ currentUser }) => {
       });
     };
     getMessages();
-  }, [currentUser]);
+  }, [currentUser, chatUser, chatRoomMessages, createChatRoom]);
 
   return (
     <div className="chat-room-container">

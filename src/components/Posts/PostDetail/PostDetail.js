@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useLazyQuery } from "@apollo/react-hooks";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Item } from "semantic-ui-react";
-import { useLazyQuery, useQuery } from "@apollo/react-hooks";
-import { useParams, Link } from "react-router-dom";
-
 import { POST_FIND_QUERY } from "../../Api/post";
-import CommentsMap from "../../Comments/Comments/CommentsMap";
 import CommentCreateForm from "../../Comments/CommentCreateForm";
-import LikeButton from "./LikeButton";
+import CommentsMap from "../../Comments/Comments/CommentsMap";
 import EditDeleteButtons from "./EditDeleteButtons";
+import LikeButton from "./LikeButton";
 
 const DEFAULT_IMAGE =
   "https://miro.medium.com/max/550/1*TxgjUE2uJuiRUVVmE_kU6g.png";
@@ -17,9 +16,7 @@ const PostDetail = ({ currentUser }) => {
 
   // Set likes temporarily on frontend
   const [likes, setLikes] = useState(0);
-  const [findPost, { errors, data: detailData }] = useLazyQuery(
-    POST_FIND_QUERY
-  );
+  const [findPost, { data: detailData }] = useLazyQuery(POST_FIND_QUERY);
 
   // Fetch to set amount of likes to button
   useEffect(() => {
@@ -35,7 +32,7 @@ const PostDetail = ({ currentUser }) => {
     if (id_is_number === true) {
       findPost({ variables: { id: id } });
     }
-  }, [id]);
+  }, [id, findPost]);
 
   return (
     <div>

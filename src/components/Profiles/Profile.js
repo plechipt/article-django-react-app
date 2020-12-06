@@ -69,7 +69,7 @@ const Profile = ({ currentUser }) => {
       }
     };
     updateProfile();
-  }, [updateData, history]);
+  }, [updateData, history, deleteTokens]);
 
   const handleOnSubmit = async (event) => {
     const user_pressed_enter = event.key === "Enter";

@@ -22,7 +22,7 @@ const EditPost = ({ currentUser }) => {
     if (id_is_number === true) {
       findPost({ variables: { id: id } });
     }
-  }, [findPost]);
+  }, [findPost, id]);
 
   // Fill title and textarea
   useEffect(() => {
