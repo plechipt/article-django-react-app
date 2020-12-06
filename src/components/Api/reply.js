@@ -12,9 +12,7 @@ export const REPLY_ADD_MUTATION = gql`
 export const REPLY_DELETE_MUTATION = gql`
   mutation($id: ID!) {
     deleteReply(id: $id) {
-      reply {
-        content
-      }
+      message
     }
   }
 `;

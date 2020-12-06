@@ -143,7 +143,7 @@ class LikePost(graphene.Mutation):
       post.save()
       message = 'Success'
 
-      return LikePost(post=post)
+      return LikePost(message=message)
 
 
 # Unlike post

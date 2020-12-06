@@ -26,9 +26,7 @@ export const COMMENT_POST_MUTATION = gql`
 export const COMMENT_DELETE_MUTATION = gql`
   mutation($id: ID!) {
     deleteComment(id: $id) {
-      comment {
-        content
-      }
+      message
     }
   }
 `;

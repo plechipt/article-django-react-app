@@ -71,9 +71,7 @@ export const POST_FILTER_QUERY = gql`
 export const POST_DELETE_MUTATION = gql`
   mutation($id: ID!) {
     deletePost(id: $id) {
-      post {
-        title
-      }
+      message
     }
   }
 `;
@@ -81,9 +79,7 @@ export const POST_DELETE_MUTATION = gql`
 export const POST_EDIT_MUTATION = gql`
   mutation($id: ID!, $title: String!, $content: String!) {
     editPost(id: $id, title: $title, content: $content) {
-      post {
-        content
-      }
+      message
     }
   }
 `;
@@ -92,11 +88,6 @@ export const POST_CREATE_MUTATION = gql`
   mutation($title: String!, $content: String!, $user: String!) {
     createPost(title: $title, content: $content, user: $user) {
       message
-      post {
-        title
-        content
-        posted
-      }
     }
   }
 `;
@@ -104,10 +95,7 @@ export const POST_CREATE_MUTATION = gql`
 export const POST_LIKE_MUTATION = gql`
   mutation($id: ID!, $user: String!) {
     likePost(id: $id, user: $user) {
-      post {
-        title
-        totalLikes
-      }
+      message
     }
   }
 `;

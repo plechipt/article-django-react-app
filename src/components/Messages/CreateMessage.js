@@ -12,10 +12,9 @@ const CreateMessage = ({ currentUser }) => {
 
   const handleOnSubmit = async (event) => {
     const form_is_filled = messageInput !== "";
-    const user_pressed_enter = event.key === "Enter";
     const user_submited_button = event.target.tagName === "I";
 
-    if ((user_pressed_enter && form_is_filled) || user_submited_button) {
+    if (form_is_filled && user_submited_button) {
       await createMessage({
         variables: {
           user: currentUser,

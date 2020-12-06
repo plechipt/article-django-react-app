@@ -16,6 +16,7 @@ class GetProfileInfo(graphene.Mutation):
    class Arguments:
       user = graphene.String(required=True)
       
+   profile = graphene.Field(ProfileType)
    message = graphene.String()
 
    @staticmethod
@@ -31,7 +32,7 @@ class GetProfileInfo(graphene.Mutation):
       profile = Profile.objects.get(user=user)
       message = 'Success'
 
-      return GetProfileInfo(message=message)
+      return GetProfileInfo(profile=profile, message=message)
 
 # Check if user has already profile
 class CheckUserProfile(graphene.Mutation):

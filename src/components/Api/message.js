@@ -29,9 +29,7 @@ export const MESSAGE_CREATE_MUTATION = gql`
 export const MESSAGE_CREATE_CHATROOM_MUTATION = gql`
   mutation($user: String!, $chatUser: String!) {
     createChatRoom(user: $user, chatUser: $chatUser) {
-      chatRoom {
-        id
-      }
+      message
     }
   }
 `;

@@ -54,5 +54,4 @@ class UserQuery:
         return CustomUser.objects.all()
 
     def resolve_all_profiles(self, root, **kwargs):
-        print('ez')
         return Profile.objects.all()

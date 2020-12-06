@@ -37,9 +37,7 @@ export const PROFILE_GET_INFO_MUTATION = gql`
 export const PROFILE_CHECK_USER_MUTATION = gql`
   mutation($user: String!) {
     checkUserProfile(user: $user) {
-      profile {
-        id
-      }
+      message
     }
   }
 `;
