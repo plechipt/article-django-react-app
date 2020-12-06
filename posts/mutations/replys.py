@@ -3,6 +3,7 @@ import datetime
 import graphene
 from django_graphql_ratelimit import ratelimit
 from graphene_django.types import DjangoObjectType
+from graphql import GraphQLError
 from graphql_jwt.decorators import login_required
 from users.models import CustomUser
 
@@ -34,8 +35,11 @@ class ReplyComment(graphene.Mutation):
 
       # Filter replies that belongs to user and are posted today
       replies_posted_today = Reply.objects.filter(user__username=user, posted=today)
+      
+      if content == '':
+         raise GraphQLError('Content is not filled')
 
-      if replies_posted_today.count() >= 20:
+      elif replies_posted_today.count() >= 20:
          message = 'You have reached your maximum replies per day!'
 
       # Success

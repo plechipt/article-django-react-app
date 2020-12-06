@@ -5,6 +5,7 @@ import graphene
 from django.utils import timezone
 from django_graphql_ratelimit import ratelimit
 from graphene_django.types import DjangoObjectType
+from graphql import GraphQLError
 from graphql_jwt.decorators import login_required
 from users.models import CustomUser
 
@@ -35,6 +36,9 @@ class CommentPost(graphene.Mutation):
 
       # Filter comments that belongs to user and are posted today
       comments_posted_today = Comment.objects.filter(user__username=user, posted=today)
+
+      if content == '':
+         raise GraphQLError('Content is not filled!')
       
       # If user has posted 20 or more comments
       if comments_posted_today.count() >= 20:

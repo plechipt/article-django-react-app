@@ -28,13 +28,11 @@ class GetProfileInfo(graphene.Mutation):
       if user_profile_doesnt_exist:
          raise GraphQLError("This profile doesn't exist")
 
-      # Success
-      else: 
-         user = CustomUser.objects.get(username=user)
-         profile = Profile.objects.get(user=user)
-         message = 'Success'
+      user = CustomUser.objects.get(username=user)
+      profile = Profile.objects.get(user=user)
+      message = 'Success'
 
-         return GetProfileInfo(profile=profile, message=message)
+      return GetProfileInfo(profile=profile, message=message)
 
 # Check if user has already profile
 class CheckUserProfile(graphene.Mutation):
@@ -81,12 +79,16 @@ class UpdateProfile(graphene.Mutation):
       nothing_was_changed = user.username == new_user and user.email == new_email and image == 'none'
       this_name_already_exists = user_already_exists == True and user.username != new_user
       this_email_already_exists = email_already_exists == True and user.email != new_email
+      fields_are_not_filled = new_user == '' or new_email == '' or image == ''
 
       fields_include_forbidden_characters = not [char for char in forbidden_chars if char in new_user_and_new_email] == []
       email_include_multiple_at_signs = new_email.count('@') > 1 or new_email.count('.') > 1
       fields_include_special_characters = '@' in new_user or '.' in new_user
 
-      if nothing_was_changed:
+      if fields_are_not_filled:
+         raise GraphQLError('Fields are not filled')
+
+      elif nothing_was_changed:
          message = 'You need to change your username, email or image in order to update your profile!'
 
       elif this_name_already_exists:
@@ -148,20 +150,18 @@ class FollowProfile(graphene.Mutation):
       if follower == following:
          raise GraphQLError('You cannot follow yourself!')
 
-      # Success
-      else:
-         # Add the user to profile followers
-         following_profile.followers.add(follower)
+      # Add the user to profile followers
+      following_profile.followers.add(follower)
 
-         # Count how many followers has the following user
-         total_followers = following_profile.followers.all().count()
+      # Count how many followers has the following user
+      total_followers = following_profile.followers.all().count()
 
-         # Set the followers to followers total_followers
-         following_profile.total_followers = total_followers
-         
-         # Save the following users profile 
-         following_profile.save()
-         message = 'Success'
+      # Set the followers to followers total_followers
+      following_profile.total_followers = total_followers
+      
+      # Save the following users profile 
+      following_profile.save()
+      message = 'Success'
 
       return FollowProfile(message=message)
 
@@ -181,6 +181,9 @@ class UnfollowProfile(graphene.Mutation):
 
       following = CustomUser.objects.get(username=following)
       following_profile = Profile.objects.get(user=following)
+
+      if follower == following:
+         raise GraphQLError('You cannot follow yourself!')
 
       # Remove follower from followers
       following_profile.followers.remove(follower)

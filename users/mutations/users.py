@@ -1,6 +1,8 @@
 import graphene
 import graphql_jwt
+from django_graphql_ratelimit import ratelimit
 from graphene_django.types import DjangoObjectType
+from graphql import GraphQLError
 from graphql_auth import mutations
 
 from users.models import CustomUser

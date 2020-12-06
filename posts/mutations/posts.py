@@ -32,12 +32,16 @@ class CreatePost(graphene.Mutation):
 
       # Filter posts that belongs to user and are posted today
       filtered_posts = Post.objects.filter(user__username=user, posted=today)
-   
+
+      fields_are_not_filled = title == '' or content == ''
       title_has_reached_limit_of_chars = len(title) > 100
       user_posted_maximum_posts = filtered_posts.count() >= 5
       content_has_reached_limit_of_chars = len(content) > 10000
 
-      if title_has_reached_limit_of_chars and user_posted_maximum_posts:
+      if fields_are_not_filled:
+         raise GraphQLError('Fields are not filled!')
+
+      elif title_has_reached_limit_of_chars and user_posted_maximum_posts:
          message = 'Title has more than 100 characters and you have reached your maximum posts per day!'
 
       elif title_has_reached_limit_of_chars:
@@ -88,11 +92,15 @@ class EditPost(graphene.Mutation):
    def mutate(root, info, id, title, content):
       message = ''
 
+      fields_are_not_filled = title == '' or content == ''
       title_has_reached_limit_of_chars = len(title) > 100
       content_has_reached_limit_of_chars = len(content) > 10000
       post_doesnt_exist = Post.objects.filter(id=id).count() != 0
 
-      if title_has_reached_limit_of_chars:
+      if fields_are_not_filled:
+         raise GraphQLError('Fields are not filled')
+
+      elif title_has_reached_limit_of_chars:
          raise GraphQLError('Title has more than 100 characters!')
 
       elif content_has_reached_limit_of_chars:
