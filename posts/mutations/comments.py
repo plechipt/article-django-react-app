@@ -61,11 +61,13 @@ class DeleteComment(graphene.Mutation):
    class Arguments:
       id = graphene.ID(required=True)
 
-   comment = graphene.Field(CommentType)
+   message = graphene.String()
 
    @staticmethod
    def mutate(root, info, id):
+      message = ''
       comment = Comment.objects.get(id=id)
       comment.delete()
+      message = 'Success'
 
-      return DeleteComment(comment=comment)
+      return DeleteComment(message=message)

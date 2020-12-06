@@ -13,6 +13,7 @@ export const POST_LIST_QUERY = gql`
     }
   }
 `;
+
 //Need to fix this shit with fragments
 export const POST_FIND_QUERY = gql`
   query($id: ID!) {

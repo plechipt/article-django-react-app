@@ -21,7 +21,6 @@ class CreatePost(graphene.Mutation):
       title = graphene.String(required=True)
       content = graphene.String(required=True)
    
-   post = graphene.Field(PostType)
    message = graphene.String()
 
    @staticmethod
@@ -68,14 +67,16 @@ class DeletePost(graphene.Mutation):
    class Arguments:
       id = graphene.ID(required=True)
 
-   post = graphene.Field(PostType)
+   message = graphene.String()
 
    @staticmethod
    def mutate(root, info, id):
+      message = ''
       post = Post.objects.get(id=id)
       post.delete()
+      message = 'Success'
 
-      return DeletePost(post=post)
+      return DeletePost(message=message)
 
 
 # Edit post
@@ -85,7 +86,6 @@ class EditPost(graphene.Mutation):
       title = graphene.String(required=True)
       content = graphene.String(required=True)
 
-   post = graphene.Field(PostType)
    message = graphene.String()
 
    @staticmethod
@@ -124,10 +124,11 @@ class LikePost(graphene.Mutation):
       id = graphene.ID(required=True)
       user = graphene.String(required=True)
 
-   post = graphene.Field(PostType)
+   message = graphene.String()
 
    @staticmethod
    def mutate(root, info, id, user):
+      message = ''
       post = Post.objects.get(id=id)
       user = CustomUser.objects.get(username=user)
       
@@ -140,6 +141,7 @@ class LikePost(graphene.Mutation):
       # Save the new total_likes to post
       post.total_likes = total_likes
       post.save()
+      message = 'Success'
 
       return LikePost(post=post)
 
@@ -154,6 +156,7 @@ class UnlikePost(graphene.Mutation):
 
    @staticmethod
    def mutate(root, info, id, user):
+      message = ''
       post = Post.objects.get(id=id)
       user = CustomUser.objects.get(username=user)
       

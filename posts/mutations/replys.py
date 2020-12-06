@@ -56,11 +56,13 @@ class DeleteReply(graphene.Mutation):
    class Arguments:
       id = graphene.ID(required=True)
 
-   reply = graphene.Field(ReplyType)
+   message = graphene.String()
 
    @staticmethod
    def mutate(root, info, id):
+      message = ''
       reply = Reply.objects.get(id=id)
       reply.delete()
+      message = 'Success'
 
-      return DeleteReply(reply=reply)
+      return DeleteReply(message=message)

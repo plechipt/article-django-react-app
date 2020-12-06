@@ -31,6 +31,8 @@ class CreateMessage(graphene.Mutation):
    @staticmethod
    @ratelimit(key="ip", rate="10/m", block=True)
    def mutate(root, info, user, chat_user, content):
+      message = ''
+      
       # Create date when message was messaged
       messaged = datetime.datetime.now().strftime('%d %B %Y, %H:%M')
       message_is_empty = content == ''
@@ -63,9 +65,10 @@ class CreateChatRoom(graphene.Mutation):
       user = graphene.String(required=True)
       chat_user = graphene.String(required=True)
    
-   chat_room = graphene.Field(ChatRoomType)
+   message = graphene.String()
    
    def mutate(root, info, user, chat_user):
+      message = ''
       user_doesnt_exist = CustomUser.objects.filter(username=user).count() == 0
       chat_user_doesnt_exist = CustomUser.objects.filter(username=chat_user).count() == 0
       chat_rooms = ChatRoom.objects.all()
@@ -78,6 +81,7 @@ class CreateChatRoom(graphene.Mutation):
       chat_user = CustomUser.objects.get(username=chat_user)
 
       chat_room_doesnt_exist = chat_rooms.filter(users__username=user).filter(users__username=chat_user).count() == 0
+      message = 'Success'
 
       if chat_room_doesnt_exist == True:
          # Create chatroom and add users to it
@@ -89,4 +93,4 @@ class CreateChatRoom(graphene.Mutation):
          chat_room_with_user = chat_rooms.filter(users__username=user)
          chat_room = chat_room_with_user.get(users__username=chat_user)
 
-      return chat_room
+      return CreateChatRoom(message=message)
