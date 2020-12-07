@@ -80,46 +80,46 @@
   }
 }
 
-@media all and (max-width: 863px) {
-  .profile-message-button {
-    margin-top: 1rem !important;
-  }
-}
-
 @media all and (max-width: 767px) {
-  .profile-container {
-    width: 90% !important;
-  }
-
-  .profile-picture {
-    display: none;
-  }
-
-  .profile-media {
-    margin-bottom: 4rem;
-  }
-}
-
-@media all and (max-width: 420px) {
-  .profile-buttons,
-  .profile-body,
   .profile-media {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
     align-items: center !important;
   }
 
+  .profile-buttons,
   .profile-buttons-container {
     margin-top: 2rem !important;
   }
 
-  .profile-buttons-container,
-  .profile-body {
+  .profile-body,
+  .profile-buttons-container {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
     margin-left: 0rem !important;
   }
 
+  .profile-picture {
+    margin-right: 0px !important;
+  }
+
+  .profile-container {
+    width: 90% !important;
+  }
+}
+
+@media all and (max-width: 420px) {
   .profile-container {
     padding: 2rem !important;
+  }
+  .profile-buttons {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .profile-message-button {
+    margin: auto !important;
+    margin-top: 15px !important;
   }
 }
