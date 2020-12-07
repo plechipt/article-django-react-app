@@ -1,12 +1,11 @@
+import { useMutation } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { Button, Comment, Form } from "semantic-ui-react";
-import { useMutation } from "@apollo/react-hooks";
-
 import { REPLY_ADD_MUTATION } from "../Api/reply";
 import "./Replys.css";
 
 const ReplyForm = ({ id, showReplyForm, currentUser }) => {
-  const [replyComment] = useMutation(REPLY_ADD_MUTATION);
+  const [replyComment, { loading }] = useMutation(REPLY_ADD_MUTATION);
 
   const [replyInput, setReplyInput] = useState("");
   const [allowButton, setAllowButton] = useState(false);
@@ -40,7 +39,7 @@ const ReplyForm = ({ id, showReplyForm, currentUser }) => {
               placeholder="Enter something..."
             />
             <Button
-              disabled={!allowButton}
+              disabled={!allowButton || loading}
               onClick={handleOnAddReply}
               className="comment-create-button"
               content="Reply"

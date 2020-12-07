@@ -12,7 +12,9 @@ const Login = () => {
   const [allowButton, setAllowButton] = useState(false);
 
   const [checkUserProfile] = useMutation(PROFILE_CHECK_USER_MUTATION);
-  const [loginUser, { data: loginData }] = useMutation(USER_LOGIN_MUTATION);
+  const [loginUser, { data: loginData, loading }] = useMutation(
+    USER_LOGIN_MUTATION
+  );
 
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -110,7 +112,7 @@ const Login = () => {
           </p>
         </Form.Field>
         <Button
-          disabled={!allowButton}
+          disabled={!allowButton || loading}
           className="submit-button"
           type="submit"
           primary

@@ -50,7 +50,7 @@ class UserQuery:
         user_chatrooms = chat_rooms.filter(users__username=user)
         user_and_chatuser_chatroom = user_chatrooms.filter(users__username=chat_user)
         chat_room = user_and_chatuser_chatroom.first()
-
+        
         return chat_room.messages.all()
     
 

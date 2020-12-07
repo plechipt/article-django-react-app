@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { Comment } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { Comment } from "semantic-ui-react";
 import { COMMENT_DELETE_MUTATION } from "../../Api/comment";
 import ReplyForm from "../../Replys/ReplyForm";
 import ReplysMap from "../../Replys/ReplysMap";

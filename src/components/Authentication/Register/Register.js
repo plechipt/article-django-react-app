@@ -14,7 +14,7 @@ const Register = () => {
   const history = useHistory();
   const [allowButton, setAllowButton] = useState(false);
   const [message, setMessage] = useState({ type: "", text: [] });
-  const [registerUser, { data }] = useMutation(USER_REGISTER_MUTATION);
+  const [registerUser, { data, loading }] = useMutation(USER_REGISTER_MUTATION);
 
   useEffect(() => {
     // Reset previous state
@@ -136,7 +136,7 @@ const Register = () => {
           </p>
         </Form.Field>
         <Button
-          disabled={!allowButton}
+          disabled={!allowButton || loading}
           className="submit-button"
           type="submit"
           primary

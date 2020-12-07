@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Message } from "semantic-ui-react";
 import { COMMENT_POST_MUTATION } from "../Api/comment";
 
@@ -8,7 +8,7 @@ const CommentCreateForm = ({ id, currentUser }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [commentInput, setCommentInput] = useState("");
-  const [commentPost, { data: commentData }] = useMutation(
+  const [commentPost, { data: commentData, loading }] = useMutation(
     COMMENT_POST_MUTATION
   );
 
@@ -60,7 +60,7 @@ const CommentCreateForm = ({ id, currentUser }) => {
           maxLength="100"
         />
         <Button
-          disabled={!allowButton}
+          disabled={!allowButton || loading}
           onClick={handleOnComment}
           className="comment-create-button"
           content="Comment"

@@ -20,7 +20,7 @@ const Profile = ({ currentUser }) => {
   const [getProfileInfo, { data: profileData }] = useLazyQuery(
     PROFILE_GET_INFO_QUERY
   );
-  const [updateProfile, { data: updateData }] = useMutation(
+  const [updateProfile, { data: updateData, loading }] = useMutation(
     PROFILE_UPDATE_MUTATION
   );
   const [deleteTokens] = useMutation(USER_DELETE_JWT_TOKENS_MUTATION);
@@ -179,7 +179,7 @@ const Profile = ({ currentUser }) => {
                   />
                 </Form.Field>
                 <Button
-                  disabled={!allowButton}
+                  disabled={!allowButton || loading}
                   onClick={handleOnSubmit}
                   className="submit-button"
                   type="submit"

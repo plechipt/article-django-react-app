@@ -12,7 +12,7 @@ const EditPost = ({ currentUser }) => {
   const [titleInput, setTitleInput] = useState("");
   const [textAreaInput, setTextAreaInput] = useState("");
 
-  const [editPost] = useMutation(POST_EDIT_MUTATION);
+  const [editPost, { loading }] = useMutation(POST_EDIT_MUTATION);
   const [findPost, { data: detailData }] = useLazyQuery(POST_FIND_QUERY);
 
   // Everytime id changes -> find post info of that id
@@ -78,7 +78,7 @@ const EditPost = ({ currentUser }) => {
             />
           </Form.Field>
           <Button
-            disabled={!allowButton}
+            disabled={!allowButton || loading}
             onClick={handleOnSubmit}
             className="submit-button"
             type="submit"

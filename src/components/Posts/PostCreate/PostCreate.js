@@ -15,7 +15,9 @@ const PostCreate = ({ currentUser }) => {
   const [titleInput, setTitleInput] = useState("");
   const [textareaInput, setTextareaInput] = useState("");
 
-  const [createPost, { data: postData }] = useMutation(POST_CREATE_MUTATION);
+  const [createPost, { data: postData, loading }] = useMutation(
+    POST_CREATE_MUTATION
+  );
 
   const handleOnSubmit = async (event) => {
     const user_submited_button = event.target.tagName === "BUTTON";
@@ -85,7 +87,7 @@ const PostCreate = ({ currentUser }) => {
           />
         </Form.Field>
         <Button
-          disabled={!allowButton}
+          disabled={!allowButton || loading}
           onClick={handleOnSubmit}
           className="submit-button"
           type="submit"
