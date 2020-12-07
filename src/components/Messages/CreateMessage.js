@@ -34,7 +34,8 @@ const CreateMessage = ({ currentUser }) => {
           <textarea
             onChange={(event) => setMessageInput(event.target.value)}
             value={messageInput}
-            className="form-control form-control-lg text-area-container"
+            className="form-control form-control-lg"
+            rows="1"
             placeholder="Enter a message..."
             maxLength="565"
             autoFocus
