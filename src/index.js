@@ -1,17 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-
-import ApolloClient from "apollo-client";
-import { BrowserRouter as Router } from "react-router-dom";
 import { setContext } from "@apollo/client/link/context";
 import {
   ApolloProvider,
   createHttpLink,
   InMemoryCache,
 } from "@apollo/react-hooks";
-
+import ApolloClient from "apollo-client";
 import Cookies from "js-cookie";
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "./App";
 
 const BASE_URL = "http://127.0.0.1:8000";
 //const BASE_URL = 'https://article-django-react-app.herokuapp.com'
@@ -38,7 +36,17 @@ const authLink = setContext((_, { headers }) => {
 
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          filterPost: {
+            merge: false,
+          },
+        },
+      },
+    },
+  }),
 });
 
 ReactDOM.render(

@@ -60,8 +60,8 @@ export const POST_FILTER_QUERY = gql`
       user {
         username
       }
-      title
       id
+      title
       posted
     }
   }
