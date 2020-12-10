@@ -1,17 +1,15 @@
 import { useLazyQuery, useMutation } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { Button, Form, Message } from "semantic-ui-react";
+import { Button, Form } from "semantic-ui-react";
 import {
   PROFILE_GET_INFO_QUERY,
   PROFILE_UPDATE_MUTATION,
 } from "../Api/profile";
 import { USER_DELETE_JWT_TOKENS_MUTATION } from "../Api/user";
 import "./Profile.css";
-import ProfileBodyButtons from "./ProfileBodyButtons";
+import ProfileHeader from "./ProfileHeader";
 import ProfileImage from "./ProfileImages";
-
-const PATH_TO_PICTURES = "media/profile_pictures";
 
 const Profile = ({ currentUser }) => {
   const { user } = useParams();
@@ -109,44 +107,13 @@ const Profile = ({ currentUser }) => {
   return (
     <div className="profile-container">
       {profileData && imageName ? (
-        <div>
-          {errorMessages ? (
-            <Message
-              className="error-message-container"
-              error
-              header="There was some errors with your submission"
-              list={[errorMessages]}
-            />
-          ) : null}
-          <div className="media profile-media">
-            <img
-              className="rounded-circle profile-picture"
-              src={require(`./${PATH_TO_PICTURES}/large/${profileData.getProfileInfo.image}`)}
-              alt=""
-            />
-            <div className="profile-body">
-              {user === currentUser ? (
-                <>
-                  <h2 className="account-heading">
-                    {profileData.getProfileInfo.user.username}
-                  </h2>
-                  <p className="text-secondary">
-                    {profileData.getProfileInfo.user.email}
-                  </p>
-                </>
-              ) : (
-                <>
-                  <h2 className="account-heading">
-                    {profileData.getProfileInfo.user.username}
-                  </h2>
-                </>
-              )}
-            </div>
-            <ProfileBodyButtons
-              profileData={profileData}
-              currentUser={currentUser}
-            />
-          </div>
+        <>
+          <ProfileHeader
+            profileData={profileData}
+            currentUser={currentUser}
+            user={user}
+            errorMessages={errorMessages}
+          />
           {user === currentUser ? (
             <div className="form-group">
               <p className="profile-info-text">Profile Info</p>
@@ -190,7 +157,7 @@ const Profile = ({ currentUser }) => {
               </Form>
             </div>
           ) : null}
-        </div>
+        </>
       ) : null}
     </div>
   );
