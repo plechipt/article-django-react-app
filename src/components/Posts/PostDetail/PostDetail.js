@@ -35,7 +35,7 @@ const PostDetail = ({ currentUser }) => {
   }, [id, findPost]);
 
   return (
-    <div>
+    <div className="post-detail">
       {detailData && detailData.findPost.title ? (
         <Item.Group>
           <Item>

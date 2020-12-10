@@ -8,7 +8,7 @@ const CommentCreateForm = ({ id, currentUser }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [commentInput, setCommentInput] = useState("");
-  const [commentPost, { data: commentData, loading }] = useMutation(
+  const [commentPost, { data: commentData, loading, error }] = useMutation(
     COMMENT_POST_MUTATION
   );
 
@@ -25,13 +25,17 @@ const CommentCreateForm = ({ id, currentUser }) => {
       } = commentData;
 
       if (message === "Success") {
-        setErrorMessage("");
         window.location.reload(false); // Reset site
-      } else {
-        setErrorMessage(true);
       }
     }
   }, [commentData]);
+
+  // If rate limit
+  useEffect(() => {
+    if (error) {
+      setErrorMessage("You are commentng too much!");
+    }
+  }, [error]);
 
   // If comment form was filled -> activate button
   useEffect(() => {

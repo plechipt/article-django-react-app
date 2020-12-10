@@ -24,6 +24,11 @@
   cursor: pointer;
 }
 
+.post-detail {
+  margin-top: 2rem !important;
+  margin-left: 1rem !important;
+}
+
 .post-title {
   display: flex !important;
   flex-wrap: wrap !important;

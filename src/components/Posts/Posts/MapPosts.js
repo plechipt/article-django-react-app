@@ -1,48 +1,47 @@
-import React, { useState } from 'react'
-
-import Post from './Post'
-import CustomPagination from './Pagination'
+import React, { useState } from "react";
+import CustomPagination from "./Pagination";
+import Post from "./Post";
 
 // Map all filtered posts
 const MapPosts = ({ filteredData, searchInput }) => {
-    const { filterPost: filteredPosts } = filteredData
+  const { filterPost: filteredPosts } = filteredData;
 
-    // Define pages
-    const [ currentPage, setCurrentPage ] = useState(1)
-    const [ postsPerPage ] = useState(5)
-     
-    // Get current posts
-    const indexOfLastPost = currentPage * postsPerPage
-    const indexOfFirstPost = indexOfLastPost - postsPerPage
-    const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost)
+  // Define pages
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
 
-    // Change page
-    const handlePaginationChange = (event, value) => {
-        setCurrentPage(value.activePage)
-    }
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
-    
-    return (
-        <div>
-            {currentPosts.map(({ user: { username }, title, posted, id }) => {
-                return (
-                    <Post 
-                        key={id} 
-                        id={id}
-                        username={username}
-                        title={title}
-                        posted={posted}
-                    />
-                    )})}
-                {searchInput === '' ? (
-                    <CustomPagination
-                        postsPerPage={postsPerPage}
-                        totalPosts={filteredPosts.length}
-                        handlePaginationChange={handlePaginationChange} 
-                    /> 
-                ) : null}
-        </div>
-    )
-}
+  // Change page
+  const handlePaginationChange = (event, value) => {
+    setCurrentPage(value.activePage);
+  };
 
-export default MapPosts
+  return (
+    <>
+      {currentPosts.map(({ user: { username }, title, posted, id }) => {
+        return (
+          <Post
+            key={id}
+            id={id}
+            username={username}
+            title={title}
+            posted={posted}
+          />
+        );
+      })}
+      {searchInput === "" ? (
+        <CustomPagination
+          postsPerPage={postsPerPage}
+          totalPosts={filteredPosts.length}
+          handlePaginationChange={handlePaginationChange}
+        />
+      ) : null}
+    </>
+  );
+};
+
+export default MapPosts;
