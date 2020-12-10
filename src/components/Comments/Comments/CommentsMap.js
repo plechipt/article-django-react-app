@@ -1,22 +1,17 @@
 import React from "react";
 import { Comment, Header } from "semantic-ui-react";
-
-import CustomComment from "./CustomComment";
 import "../Comments.css";
+import CustomComment from "./CustomComment";
 
 // Map all comments
-const CommentsMap = ({ detailData, currentUser }) => {
-  const {
-    findPost: { commentSet },
-  } = detailData;
-
+const CommentsMap = ({ comments, currentUser }) => {
   return (
     <div>
       <Comment.Group>
         <Header as="h3" dividing>
           Comments
         </Header>
-        {commentSet.map(
+        {comments.map(
           ({
             id,
             content,

@@ -1,14 +1,9 @@
+import { useMutation } from "@apollo/react-hooks";
 import React from "react";
 import { Button, Icon, Label } from "semantic-ui-react";
-import { useMutation } from "@apollo/react-hooks";
-
 import { POST_LIKE_MUTATION, POST_UNLIKE_MUTATION } from "../../Api/post";
 
-const LikeButton = ({ id, likes, detailData, currentUser }) => {
-  const {
-    findPost: { likes: usersLikes },
-  } = detailData;
-
+const LikeButton = ({ id, likes, usersLikes, currentUser }) => {
   const [likePost] = useMutation(POST_LIKE_MUTATION);
   const [unlikePost] = useMutation(POST_UNLIKE_MUTATION);
 
