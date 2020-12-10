@@ -1,10 +1,9 @@
 import React from "react";
-
-import Message from "./Message";
 import "../Messages.css";
+import Message from "./Message";
 
 const MessagesMap = ({ messagesData, currentUser }) => {
-  const messages = messagesData.chatRoomMessages[0].chatroomSet[0].messages;
+  const { chatRoomMessages: messages } = messagesData;
 
   return (
     <div className="messages-container">
