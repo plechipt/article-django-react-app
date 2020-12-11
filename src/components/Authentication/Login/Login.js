@@ -44,9 +44,9 @@ const Login = () => {
     afterSuccessfulLogin();
   }, [loginData, checkUserProfile, history, usernameInput]);
 
-  const handleOnSubmit = async (event) => {
-    const user_pressed_enter = event.key === "Enter";
-    const user_submited_button = event.target.tagName === "FORM";
+  const handleOnSubmit = async (e) => {
+    const user_pressed_enter = e.key === "Enter";
+    const user_submited_button = e.target.tagName === "FORM";
     const canSubmit = allowButton;
 
     if ((canSubmit && user_pressed_enter) || user_submited_button) {
@@ -84,7 +84,7 @@ const Login = () => {
         <Form.Field>
           <label>Username</label>
           <input
-            onChange={(event) => setUsernameInput(event.target.value)}
+            onChange={(e) => setUsernameInput(e.target.value)}
             value={usernameInput}
             autoComplete="one-time-code"
             placeholder="Username"
@@ -95,7 +95,7 @@ const Login = () => {
         <Form.Field>
           <label>Password</label>
           <input
-            onChange={(event) => setPasswordInput(event.target.value)}
+            onChange={(e) => setPasswordInput(e.target.value)}
             value={passwordInput}
             autoComplete="one-time-code"
             type="password"

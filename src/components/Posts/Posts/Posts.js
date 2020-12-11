@@ -22,7 +22,7 @@ const Posts = () => {
         <Form>
           <Form.Field>
             <input
-              onChange={(event) => setSearchInput(event.target.value)}
+              onChange={(e) => setSearchInput(e.target.value)}
               value={searchInput}
               placeholder="Search..."
               maxLength="100"

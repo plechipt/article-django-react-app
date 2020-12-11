@@ -19,8 +19,8 @@ const PostCreate = ({ currentUser }) => {
     POST_CREATE_MUTATION
   );
 
-  const handleOnSubmit = async (event) => {
-    const user_submited_button = event.target.tagName === "BUTTON";
+  const handleOnSubmit = async (e) => {
+    const user_submited_button = e.target.tagName === "BUTTON";
 
     if (user_submited_button) {
       await createPost({
@@ -72,7 +72,7 @@ const PostCreate = ({ currentUser }) => {
         <Form.Field>
           <label>Title</label>
           <input
-            onChange={(event) => setTitleInput(event.target.value)}
+            onChange={(e) => setTitleInput(e.target.value)}
             value={titleInput}
             placeholder="Title"
             autoFocus
@@ -82,7 +82,7 @@ const PostCreate = ({ currentUser }) => {
         <Form.Field>
           <label>Content</label>
           <textarea
-            onChange={(event) => setTextareaInput(event.target.value)}
+            onChange={(e) => setTextareaInput(e.target.value)}
             value={textareaInput}
             placeholder="Enter something..."
             maxLength="10000"

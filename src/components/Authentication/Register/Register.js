@@ -43,9 +43,9 @@ const Register = () => {
     }
   }, [data, history]);
 
-  const handleOnClick = async (event) => {
-    const user_pressed_enter = event.key === "Enter";
-    const user_submited_button = event.target.tagName === "FORM";
+  const handleOnClick = async (e) => {
+    const user_pressed_enter = e.key === "Enter";
+    const user_submited_button = e.target.tagName === "FORM";
     const canSubmit = allowButton;
 
     if (canSubmit && (user_pressed_enter || user_submited_button)) {
@@ -89,7 +89,7 @@ const Register = () => {
         <Form.Field>
           <label>Username</label>
           <input
-            onChange={(event) => setUsernameInput(event.target.value)}
+            onChange={(e) => setUsernameInput(e.target.value)}
             value={usernameInput}
             autoComplete="one-time-code"
             placeholder="Username"
@@ -100,7 +100,7 @@ const Register = () => {
         <Form.Field>
           <label>Email</label>
           <input
-            onChange={(event) => setEmailInput(event.target.value)}
+            onChange={(e) => setEmailInput(e.target.value)}
             value={emailInput}
             autoComplete="one-time-code"
             maxLength="50"
@@ -110,7 +110,7 @@ const Register = () => {
         <Form.Field>
           <label>Password</label>
           <input
-            onChange={(event) => setPasswordInput(event.target.value)}
+            onChange={(e) => setPasswordInput(e.target.value)}
             value={passwordInput}
             autoComplete="one-time-code"
             type="password"
@@ -121,7 +121,7 @@ const Register = () => {
         <Form.Field>
           <label>Confirm Password</label>
           <input
-            onChange={(event) => setPasswordConfirmInput(event.target.value)}
+            onChange={(e) => setPasswordConfirmInput(e.target.value)}
             value={passwordConfirmInput}
             autoComplete="one-time-code"
             type="password"

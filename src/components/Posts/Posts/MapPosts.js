@@ -16,7 +16,7 @@ const MapPosts = ({ filteredData, searchInput }) => {
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
   // Change page
-  const handlePaginationChange = (event, value) => {
+  const handlePaginationChange = (e, value) => {
     setCurrentPage(value.activePage);
   };
 

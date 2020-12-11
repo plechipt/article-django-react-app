@@ -34,7 +34,7 @@ const ReplyForm = ({ id, showReplyForm, currentUser }) => {
         <Comment.Group>
           <Form reply>
             <textarea
-              onChange={(event) => setReplyInput(event.target.value)}
+              onChange={(e) => setReplyInput(e.target.value)}
               value={replyInput}
               placeholder="Enter something..."
             />

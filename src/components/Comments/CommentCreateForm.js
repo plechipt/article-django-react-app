@@ -59,7 +59,7 @@ const CommentCreateForm = ({ id, currentUser }) => {
       ) : null}
       <Form reply>
         <textarea
-          onChange={(event) => setCommentInput(event.target.value)}
+          onChange={(e) => setCommentInput(e.target.value)}
           placeholder="Enter something..."
           maxLength="100"
         />

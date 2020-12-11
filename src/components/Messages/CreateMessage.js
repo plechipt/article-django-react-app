@@ -10,9 +10,9 @@ const CreateMessage = ({ currentUser }) => {
   const [messageInput, setMessageInput] = useState("");
   const [createMessage] = useMutation(MESSAGE_CREATE_MUTATION);
 
-  const handleOnSubmit = async (event) => {
+  const handleOnSubmit = async (e) => {
     const form_is_filled = messageInput !== "";
-    const user_submited_button = event.target.tagName === "I";
+    const user_submited_button = e.target.tagName === "I";
 
     if (form_is_filled && user_submited_button) {
       await createMessage({
@@ -32,7 +32,7 @@ const CreateMessage = ({ currentUser }) => {
       <div className="message-create-form-container">
         <div className="form-group message-create-form-container">
           <textarea
-            onChange={(event) => setMessageInput(event.target.value)}
+            onChange={(e) => setMessageInput(e.target.value)}
             value={messageInput}
             className="form-control form-control-lg"
             rows="1"

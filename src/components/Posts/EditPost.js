@@ -47,8 +47,8 @@ const EditPost = ({ currentUser }) => {
     }
   }, [titleInput, textAreaInput]);
 
-  const handleOnSubmit = async (event) => {
-    const user_submited_button = event.target.tagName === "BUTTON";
+  const handleOnSubmit = async (e) => {
+    const user_submited_button = e.target.tagName === "BUTTON";
 
     if (user_submited_button) {
       await editPost({
@@ -65,7 +65,7 @@ const EditPost = ({ currentUser }) => {
           <Form.Field>
             <label>Title</label>
             <input
-              onChange={(event) => setTitleInput(event.target.value)}
+              onChange={(e) => setTitleInput(e.target.value)}
               value={titleInput}
               placeholder="Title"
               maxLength="100"
@@ -75,7 +75,7 @@ const EditPost = ({ currentUser }) => {
           <Form.Field>
             <label>Content</label>
             <textarea
-              onChange={(event) => setTextAreaInput(event.target.value)}
+              onChange={(e) => setTextAreaInput(e.target.value)}
               value={textAreaInput}
               maxLength="10000"
               placeholder="Enter something..."

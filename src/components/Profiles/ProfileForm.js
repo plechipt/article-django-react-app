@@ -59,8 +59,8 @@ const ProfileForm = ({
     setEmailInputFunction(email);
   };
 
-  const handleOnSubmit = async (event) => {
-    const user_submited_button = event.target.tagName === "BUTTON";
+  const handleOnSubmit = async (e) => {
+    const user_submited_button = e.target.tagName === "BUTTON";
 
     if (user_submited_button) {
       await updateProfile({
@@ -91,7 +91,7 @@ const ProfileForm = ({
           <Form.Field>
             <label>Username</label>
             <input
-              onChange={(event) => setUsernameInput(event.target.value)}
+              onChange={(e) => setUsernameInput(e.target.value)}
               value={usernameInput}
               placeholder="Username"
               maxLength="39"
@@ -100,7 +100,7 @@ const ProfileForm = ({
           <Form.Field>
             <label>Email</label>
             <input
-              onChange={(event) => setEmailInput(event.target.value)}
+              onChange={(e) => setEmailInput(e.target.value)}
               value={emailInput}
               placeholder="Email"
               maxLength="49"

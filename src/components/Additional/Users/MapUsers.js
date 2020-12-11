@@ -14,7 +14,7 @@ const MapUsers = ({ users: { allProfiles: allUsers } }) => {
   const currentUsers = allUsers.slice(indexOfFirstPost, indexOfLastPost);
 
   // Change page
-  const handlePaginationChange = (event, value) => {
+  const handlePaginationChange = (e, value) => {
     setCurrentPage(value.activePage);
   };
 
