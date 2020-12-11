@@ -4,12 +4,12 @@ import { gql } from "@apollo/client";
 export const COMMENT_LIST_QUERY = gql`
   query {
     allComments {
-      id
-      content
-      posted
       user {
         username
       }
+      id
+      content
+      posted
     }
   }
 `;

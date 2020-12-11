@@ -1,7 +1,7 @@
 import { useLazyQuery } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { PROFILE_GET_INFO_QUERY } from "../Api/profile";
+import { PROFILE_GET_INFO_QUERY } from "../Api/profile/profile";
 import "./Profile.css";
 import ProfileForm from "./ProfileForm";
 import ProfileHeader from "./ProfileHeader";

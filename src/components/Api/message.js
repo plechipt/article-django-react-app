@@ -4,12 +4,12 @@ import { gql } from "@apollo/client";
 export const MESSAGE_LIST_QUERY = gql`
   query($user: String!, $chatUser: String!) {
     chatRoomMessages(user: $user, chatUser: $chatUser) {
-      id
-      content
-      messaged
       user {
         username
       }
+      id
+      content
+      messaged
     }
   }
 `;

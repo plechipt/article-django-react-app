@@ -1,33 +1,27 @@
 import { gql } from "@apollo/client";
+import { PROFILE_BASIC_ATTRIBUTES_FRAGMENT } from "./fragment";
 
 // Query
 export const PROFILE_LIST_QUERY = gql`
   query {
     allProfiles {
-      user {
-        username
-        email
-      }
-      id
-      image
+      ...ProfileAttributes
     }
   }
+  ${PROFILE_BASIC_ATTRIBUTES_FRAGMENT}
 `;
 
 export const PROFILE_GET_INFO_QUERY = gql`
   query($user: String!) {
     getProfileInfo(user: $user) {
-      user {
-        username
-        email
-      }
+      ...ProfileAttributes
       followers {
         username
       }
-      image
       totalFollowers
     }
   }
+  ${PROFILE_BASIC_ATTRIBUTES_FRAGMENT}
 `;
 
 // Mutation

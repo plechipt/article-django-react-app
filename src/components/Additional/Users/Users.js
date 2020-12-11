@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import React from "react";
-import { PROFILE_LIST_QUERY } from "../../Api/profile";
+import { PROFILE_LIST_QUERY } from "../../Api/profile/profile";
 import MapUsers from "./MapUsers";
 
 const Users = () => {

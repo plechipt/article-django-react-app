@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
-import { PROFILE_UPDATE_MUTATION } from "../Api/profile";
+import { PROFILE_UPDATE_MUTATION } from "../Api/profile/profile";
 import { USER_DELETE_JWT_TOKENS_MUTATION } from "../Api/user";
 import ProfileImage from "./ProfileImages";
 

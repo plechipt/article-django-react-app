@@ -1,7 +1,7 @@
 import { useLazyQuery } from "@apollo/react-hooks";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { POST_FIND_QUERY } from "../../Api/post";
+import { POST_FIND_QUERY } from "../../Api/post/post";
 import SubPostDetail from "./SubPostDetail";
 
 const PostDetail = ({ currentUser }) => {

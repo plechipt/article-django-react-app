@@ -5,7 +5,7 @@ import { Button, Icon, Label } from "semantic-ui-react";
 import {
   PROFILE_FOLLOW_MUTATION,
   PROFILE_UNFOLLOW_MUTATION,
-} from "../Api/profile";
+} from "../Api/profile/profile";
 
 const ProfileBodyButtons = ({
   profileData: { getProfileInfo },

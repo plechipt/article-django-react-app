@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "semantic-ui-react";
-import { POST_DELETE_MUTATION } from "../../Api/post";
+import { POST_DELETE_MUTATION } from "../../Api/post/post";
 import DeleteModal from "./DeleteModal";
 
 const EditDeleteButtons = ({ id, username, currentUser }) => {

@@ -1,7 +1,7 @@
 import { useLazyQuery } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { Form } from "semantic-ui-react";
-import { POST_FILTER_QUERY } from "../../Api/post";
+import { POST_FILTER_QUERY } from "../../Api/post/post";
 import "../Posts.css";
 import MapPosts from "./MapPosts";
 
