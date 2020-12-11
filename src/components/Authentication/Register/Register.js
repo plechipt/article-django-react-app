@@ -21,18 +21,20 @@ const Register = () => {
     setMessage({ type: "", text: [] });
 
     if (data) {
-      const registrationWasSuccessful = data.register.success;
+      const {
+        register: { success, errors },
+      } = data;
 
-      if (registrationWasSuccessful === false) {
-        const errors = Object.entries(data.register.errors);
+      if (success === false) {
+        const errorValues = Object.entries(errors);
 
-        errors.map((error) => {
-          const messageError = error[1][0].message;
+        errorValues.map(([, errorArray]) => {
+          const [errors] = errorArray;
 
           // Set the message with previous messages
           return setMessage((prevState) => ({
             type: "error",
-            text: [...prevState.text, messageError],
+            text: [...prevState.text, errors.message],
           }));
         });
       } else {
