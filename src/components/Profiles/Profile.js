@@ -12,7 +12,6 @@ const Profile = ({ currentUser }) => {
   const [getProfileInfo, { data: profileData }] = useLazyQuery(
     PROFILE_GET_INFO_QUERY
   );
-
   const [imageName, setImageName] = useState();
   const [allowButton, setAllowButton] = useState(false);
   const [errorMessages, setErrorMessages] = useState();
@@ -28,11 +27,16 @@ const Profile = ({ currentUser }) => {
 
   useEffect(() => {
     if (profileData) {
-      let imagePath = profileData.getProfileInfo.image;
+      let {
+        getProfileInfo: {
+          image,
+          user: { username, email },
+        },
+      } = profileData;
 
-      setUsernameInput(profileData.getProfileInfo.user.username);
-      setEmailInput(profileData.getProfileInfo.user.email);
-      setImageName(imagePath);
+      setUsernameInput(username);
+      setEmailInput(email);
+      setImageName(image);
     }
   }, [profileData]);
 

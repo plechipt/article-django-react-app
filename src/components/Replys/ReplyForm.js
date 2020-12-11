@@ -17,7 +17,7 @@ const ReplyForm = ({ id, showReplyForm, currentUser }) => {
     window.location.reload(false); // Reset site
   };
 
-  // Check if reply was filled
+  // Check if reply is filled
   useEffect(() => {
     const form_is_filled = replyInput !== "";
 

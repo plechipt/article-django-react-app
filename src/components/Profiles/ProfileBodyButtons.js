@@ -11,13 +11,13 @@ const ProfileBodyButtons = ({
   profileData: { getProfileInfo },
   currentUser,
 }) => {
-  const history = useHistory();
-
   const {
     totalFollowers,
     user: { username: usersProfile },
     followers,
   } = getProfileInfo;
+
+  const history = useHistory();
   const [followProfile] = useMutation(PROFILE_FOLLOW_MUTATION);
   const [unfollowProfile] = useMutation(PROFILE_UNFOLLOW_MUTATION);
 

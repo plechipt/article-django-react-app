@@ -9,7 +9,7 @@ import Routes from "./Routes";
 
 function App() {
   // Current logged in user
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState("admin");
   const { data: meQuery, loading } = useQuery(USER_ME_QUERY, {
     fetchPolicy: "no-cache",
   });

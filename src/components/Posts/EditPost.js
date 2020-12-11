@@ -27,8 +27,12 @@ const EditPost = ({ currentUser }) => {
   // Fill title and textarea
   useEffect(() => {
     if (detailData && detailData.findPost.title) {
-      setTitleInput(detailData.findPost.title);
-      setTextAreaInput(detailData.findPost.content);
+      const {
+        findPost: { title, content },
+      } = detailData;
+
+      setTitleInput(title);
+      setTextAreaInput(content);
     }
   }, [detailData]);
 
