@@ -3,21 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 // Import components from index.js
-import {
-  EditPost,
-  Login,
-  MessagesContainer,
-  Navbar,
-  PostCreate,
-  PostDetail,
-  Posts,
-  Profile,
-  Register,
-  Support,
-  SupportSuccess,
-  Users,
-} from "./components";
+import { Login, Navbar, Register } from "./components";
 import { USER_ME_QUERY } from "./components/Api/user";
+import Routes from "./Routes";
 
 function App() {
   // Current logged in user
@@ -39,35 +27,7 @@ function App() {
         {currentUser && loading === false ? (
           <>
             <Switch>
-              <Route path="/posts" component={() => <Posts />} />
-              <Route path="/users" component={() => <Users />} />
-              <Route path="/support" component={() => <Support />} />
-              <Route
-                path="/support-success"
-                component={() => <SupportSuccess />}
-              />
-              <Route
-                path="/message/:chatUser"
-                component={() => (
-                  <MessagesContainer currentUser={currentUser} />
-                )}
-              />
-              <Route
-                path="/profile/:user"
-                component={() => <Profile currentUser={currentUser} />}
-              />
-              <Route
-                path="/editPost/:id"
-                component={() => <EditPost currentUser={currentUser} />}
-              />
-              <Route
-                path="/createPost"
-                component={() => <PostCreate currentUser={currentUser} />}
-              />
-              <Route
-                path="/:id"
-                component={() => <PostDetail currentUser={currentUser} />}
-              />
+              <Routes currentUser={currentUser} />
             </Switch>
           </>
         ) : (
