@@ -13,7 +13,7 @@ const ProfileHeader = ({ profileData, currentUser, user, errorMessages }) => {
   } = profileData;
 
   return (
-    <div>
+    <div className="profile-header">
       {errorMessages ? (
         <Message
           className="error-message-container"
