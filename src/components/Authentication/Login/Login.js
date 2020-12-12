@@ -17,27 +17,16 @@ const Login = () => {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
-  // If login wasn't successful
+  // After a submit
   useEffect(() => {
     if (loginData) {
-      if (loginData.tokenAuth.success === false) {
+      if (loginData.tokenAuth.success === true) {
+        history.push("/posts");
+        window.location.reload(false); // Reset site
+      } else {
         setFailedToLogin(true);
       }
     }
-  }, [loginData]);
-
-  // If login was successful
-  useEffect(() => {
-    const afterSuccessfulLogin = async () => {
-      if (loginData) {
-        if (loginData.tokenAuth.success === true) {
-          // If user doesnt have profile -> create new one
-          history.push("/posts");
-          window.location.reload(false); // Reset site
-        }
-      }
-    };
-    afterSuccessfulLogin();
   }, [loginData, history, usernameInput]);
 
   const handleOnSubmit = async (e) => {

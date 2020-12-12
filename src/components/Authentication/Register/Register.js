@@ -19,6 +19,7 @@ const Register = () => {
   const [createProfile] = useMutation(PROFILE_CREATE_MUTATION);
   const [registerUser, { data, loading }] = useMutation(USER_REGISTER_MUTATION);
 
+  // After a submit
   useEffect(() => {
     const handleLogin = async () => {
       // Reset previous state
