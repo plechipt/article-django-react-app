@@ -2,7 +2,6 @@ import { useMutation } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form, Message } from "semantic-ui-react";
-import { PROFILE_CHECK_USER_MUTATION } from "../../Api/profile/profile";
 import { USER_LOGIN_MUTATION } from "../../Api/user";
 import "./Login.css";
 
@@ -11,7 +10,6 @@ const Login = () => {
   const [failedToLogin, setFailedToLogin] = useState("");
   const [allowButton, setAllowButton] = useState(false);
 
-  const [checkUserProfile] = useMutation(PROFILE_CHECK_USER_MUTATION);
   const [loginUser, { data: loginData, loading }] = useMutation(
     USER_LOGIN_MUTATION
   );
@@ -34,15 +32,13 @@ const Login = () => {
       if (loginData) {
         if (loginData.tokenAuth.success === true) {
           // If user doesnt have profile -> create new one
-          await checkUserProfile({ variables: { user: usernameInput } });
-
           history.push("/posts");
           window.location.reload(false); // Reset site
         }
       }
     };
     afterSuccessfulLogin();
-  }, [loginData, checkUserProfile, history, usernameInput]);
+  }, [loginData, history, usernameInput]);
 
   const handleOnSubmit = async (e) => {
     const user_pressed_enter = e.key === "Enter";

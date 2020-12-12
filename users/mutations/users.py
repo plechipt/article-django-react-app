@@ -19,16 +19,16 @@ class Logout(graphene.Mutation):
 
    def mutate(self, info, input=None):
       request = info.context
+      user = info.context.user
 
-      if request:
+      if request.user.is_authenticated:
          message = 'Success'
          logout(request)
       
       else:
-         message = 'Failure'
+         message = 'User is not authenticated!'
 
       return Logout(message)
-
 
 
 class AuthMutation(graphene.ObjectType):

@@ -11,7 +11,7 @@ class UserMutation(AuthMutation):
     create_chat_room = CreateChatRoom.Field()
 
     # Profiles
-    check_user_profile = CheckUserProfile.Field()
+    create_user_profile = CreateUserProfile.Field()
     update_profile = UpdateProfile.Field()
     follow_profile = FollowProfile.Field()
     unfollow_profile = UnfollowProfile.Field()
@@ -20,7 +20,6 @@ class UserMutation(AuthMutation):
 class UserQuery:
     all_users = graphene.List(CustomUserType)
     all_profiles = graphene.List(ProfileType)
-    me = graphene.Field(CustomUserType)
 
     chat_room_messages = graphene.List(
         MessageType,
@@ -32,10 +31,7 @@ class UserQuery:
         ProfileType,
         user = graphene.String(required=True)
     )
-
-    def resolve_me(self, info):
-        print(info.context.user)
-
+    
     def resolve_chat_room_messages(self, root, user, chat_user):
         chat_rooms = ChatRoom.objects.all()
 

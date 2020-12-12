@@ -25,10 +25,12 @@ export const PROFILE_GET_INFO_QUERY = gql`
 `;
 
 // Mutation
-export const PROFILE_CHECK_USER_MUTATION = gql`
+export const PROFILE_CREATE_MUTATION = gql`
   mutation($user: String!) {
-    checkUserProfile(user: $user) {
-      message
+    createUserProfile(user: $user) {
+      profile {
+        id
+      }
     }
   }
 `;

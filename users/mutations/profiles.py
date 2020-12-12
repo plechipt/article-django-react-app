@@ -12,7 +12,7 @@ class ProfileType(DjangoObjectType):
 
 
 # Check if user has already profile
-class CheckUserProfile(graphene.Mutation):
+class CreateUserProfile(graphene.Mutation):
    class Arguments:
       user = graphene.String(required=True)
       
@@ -23,7 +23,7 @@ class CheckUserProfile(graphene.Mutation):
       user = CustomUser.objects.get(username=user)
       profile, created = Profile.objects.get_or_create(user=user)
 
-      return CheckUserProfile(profile=profile)
+      return CreateUserProfile(profile=profile)
 
 
 # Update the profile by given inputs on frontend

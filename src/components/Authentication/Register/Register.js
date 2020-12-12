@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form, Message } from "semantic-ui-react";
+import { PROFILE_CREATE_MUTATION } from "../../Api/profile/profile";
 import { USER_REGISTER_MUTATION } from "../../Api/user";
 import "./Register.css";
 
@@ -14,34 +15,40 @@ const Register = () => {
   const history = useHistory();
   const [allowButton, setAllowButton] = useState(false);
   const [message, setMessage] = useState({ type: "", text: [] });
+
+  const [createProfile] = useMutation(PROFILE_CREATE_MUTATION);
   const [registerUser, { data, loading }] = useMutation(USER_REGISTER_MUTATION);
 
   useEffect(() => {
-    // Reset previous state
-    setMessage({ type: "", text: [] });
+    const handleLogin = async () => {
+      // Reset previous state
+      setMessage({ type: "", text: [] });
 
-    if (data) {
-      const {
-        register: { success, errors },
-      } = data;
+      if (data) {
+        const {
+          register: { success, errors },
+        } = data;
 
-      if (success === false) {
-        const errorValues = Object.entries(errors);
+        if (success === false) {
+          const errorValues = Object.entries(errors);
 
-        errorValues.map(([, errorArray]) => {
-          const [errors] = errorArray;
+          errorValues.map(([, errorArray]) => {
+            const [errors] = errorArray;
 
-          // Set the message with previous messages
-          return setMessage((prevState) => ({
-            type: "error",
-            text: [...prevState.text, errors.message],
-          }));
-        });
-      } else {
-        history.push("/login");
+            // Set the message with previous messages
+            return setMessage((prevState) => ({
+              type: "error",
+              text: [...prevState.text, errors.message],
+            }));
+          });
+        } else {
+          await createProfile({ variables: { user: usernameInput } });
+          history.push("/login");
+        }
       }
-    }
-  }, [data, history]);
+    };
+    handleLogin();
+  }, [data, history, usernameInput, createProfile]);
 
   const handleOnClick = async (e) => {
     const user_pressed_enter = e.key === "Enter";
