@@ -13,7 +13,7 @@ class Mutation(UserMutation, PostMutation, PaymentMutation):
    pass
 
 
-class Query(UserQuery, MeQuery, MyUserQuery, PostQuery, graphene.ObjectType):
+class Query(UserQuery, MyUserQuery, PostQuery, graphene.ObjectType):
    pass
 
 

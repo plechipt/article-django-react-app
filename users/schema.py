@@ -20,6 +20,7 @@ class UserMutation(AuthMutation):
 class UserQuery:
     all_users = graphene.List(CustomUserType)
     all_profiles = graphene.List(ProfileType)
+    me = graphene.Field(CustomUserType)
 
     chat_room_messages = graphene.List(
         MessageType,
@@ -32,6 +33,8 @@ class UserQuery:
         user = graphene.String(required=True)
     )
 
+    def resolve_me(self, info):
+        print(info.context.user)
 
     def resolve_chat_room_messages(self, root, user, chat_user):
         chat_rooms = ChatRoom.objects.all()

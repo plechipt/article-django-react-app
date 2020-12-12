@@ -1,5 +1,6 @@
 import graphene
 import graphql_jwt
+from django.contrib.auth import logout
 from django_graphql_ratelimit import ratelimit
 from graphene_django.types import DjangoObjectType
 from graphql import GraphQLError
@@ -13,8 +14,26 @@ class CustomUserType(DjangoObjectType):
       model = CustomUser
 
 
+class Logout(graphene.Mutation):
+   message = graphene.String()
+
+   def mutate(self, info, input=None):
+      request = info.context
+
+      if request:
+         message = 'Success'
+         logout(request)
+      
+      else:
+         message = 'Failure'
+
+      return Logout(message)
+
+
+
 class AuthMutation(graphene.ObjectType):
    register = mutations.Register.Field()
+   logout = Logout.Field()
    verify_account = mutations.VerifyAccount.Field()
    resend_activation_email = mutations.ResendActivationEmail.Field()
    send_password_reset_email = mutations.SendPasswordResetEmail.Field()
