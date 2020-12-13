@@ -14,8 +14,12 @@ AUTHENTICATION_BACKENDS = [
 GRAPHQL_JWT = {
     "JWT_VERIFY_EXPIRATION": True,
     "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
-    'JWT_EXPIRATION_DELTA': timedelta(minutes=5),
+    'JWT_EXPIRATION_DELTA': timedelta(seconds=5),
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
+
+    # Rename JWT cookie tokens
+    'JWT_COOKIE_NAME': 'accessToken',
+    'JWT_REFRESH_TOKEN_COOKIE_NAME': 'refreshToken',
 
     "JWT_ALLOW_ANY_CLASSES": [
         "graphql_auth.mutations.Register",

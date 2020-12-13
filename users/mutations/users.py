@@ -1,10 +1,12 @@
 import graphene
 import graphql_jwt
 from django.contrib.auth import logout
+from django.dispatch import receiver
 from django_graphql_ratelimit import ratelimit
 from graphene_django.types import DjangoObjectType
 from graphql import GraphQLError
 from graphql_auth import mutations
+from graphql_jwt.refresh_token.signals import refresh_token_rotated
 
 from users.models import CustomUser
 
@@ -12,6 +14,12 @@ from users.models import CustomUser
 class CustomUserType(DjangoObjectType):
    class Meta:
       model = CustomUser
+
+
+# Revoke refresh token after it has been used
+@receiver(refresh_token_rotated)
+def revoke_refresh_token(sender, request, refresh_token, **kwargs):
+   refresh_token.revoke(request)
 
 
 class Logout(graphene.Mutation):

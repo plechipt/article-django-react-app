@@ -27,7 +27,6 @@ const authLink = setContext((_, { headers }) => {
   const csrftoken = Cookies.get("csrftoken");
 
   // Return the headers to the context so httpLink can read them
-  console.log(_);
   return {
     headers: {
       ...headers,
