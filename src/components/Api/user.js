@@ -59,18 +59,11 @@ export const USER_DELETE_JWT_TOKENS_MUTATION = gql`
   }
 `;
 
-export const USER_DELETE_ACCESS_TOKEN_MUTATION = gql`
+export const USER_REFRESH_TOKEN_SILENTLY_MUTATION = gql`
   mutation {
-    deleteTokenCookie {
-      deleted
-    }
-  }
-`;
-
-export const USER_DELETE_REFRESH_TOKEN_MUTATION = gql`
-  mutation {
-    deleteRefreshTokenCookie {
-      deleted
+    refreshToken {
+      success
+      errors
     }
   }
 `;
@@ -78,25 +71,6 @@ export const USER_DELETE_REFRESH_TOKEN_MUTATION = gql`
 export const USER_VERIFY_TOKEN_MUTATION = gql`
   mutation($token: String!) {
     verifyToken(token: $token) {
-      success
-      errors
-      payload
-    }
-  }
-`;
-
-export const USER_REFRESH_TOKEN_MUTATION = gql`
-  mutation($refreshToken: String!) {
-    refreshToken(refreshToken: $refreshToken) {
-      success
-      errors
-    }
-  }
-`;
-
-export const USER_REFRESH_TOKEN_SILENTLY_MUTATION = gql`
-  mutation {
-    refreshToken {
       success
       errors
     }
