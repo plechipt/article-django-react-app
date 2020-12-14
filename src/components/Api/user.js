@@ -88,7 +88,15 @@ export const USER_VERIFY_TOKEN_MUTATION = gql`
 export const USER_REFRESH_TOKEN_MUTATION = gql`
   mutation($refreshToken: String!) {
     refreshToken(refreshToken: $refreshToken) {
-      token
+      success
+      errors
+    }
+  }
+`;
+
+export const USER_REFRESH_TOKEN_SILENTLY_MUTATION = gql`
+  mutation {
+    refreshToken {
       success
       errors
     }

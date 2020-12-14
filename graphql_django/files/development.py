@@ -27,7 +27,6 @@ ALLOWED_HOSTS = [
 ]
 
 
-# Allow values to be send through header
 CORS_ALLOW_CREDENTIALS = True
 
 # Allowed urls which can access API

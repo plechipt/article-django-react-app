@@ -29,7 +29,7 @@ class Logout(graphene.Mutation):
       request = info.context
       user = info.context.user
 
-      if request.user.is_authenticated:
+      if user.is_authenticated:
          message = 'Success'
          logout(request)
       

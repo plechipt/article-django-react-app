@@ -2,7 +2,10 @@ import { useApolloClient, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Menu, Segment } from "semantic-ui-react";
-import { USER_DELETE_JWT_TOKENS_MUTATION } from "../../Api/user";
+import {
+  USER_DELETE_JWT_TOKENS_MUTATION,
+  USER_REFRESH_TOKEN_SILENTLY_MUTATION,
+} from "../../Api/user";
 import "./Navbar.css";
 
 const Navbar = ({ currentUser }) => {
@@ -11,9 +14,16 @@ const Navbar = ({ currentUser }) => {
 
   const client = useApolloClient();
   const [deleteTokens] = useMutation(USER_DELETE_JWT_TOKENS_MUTATION);
+  const [refreshToken, { data: refreshData }] = useMutation(
+    USER_REFRESH_TOKEN_SILENTLY_MUTATION
+  );
 
   const handleItemClick = (name) => {
     setActiveItem(name);
+  };
+
+  const handleOnToken = async () => {
+    await refreshToken();
   };
 
   const handleOnLogout = async () => {
@@ -39,6 +49,14 @@ const Navbar = ({ currentUser }) => {
                 onClick={() => {
                   handleItemClick("home");
                   history.push("/posts");
+                }}
+              />
+              <Menu.Item
+                name="token"
+                active={activeItem === "token"}
+                onClick={() => {
+                  handleItemClick("token");
+                  handleOnToken();
                 }}
               />
               <Menu.Item

@@ -1,4 +1,8 @@
+import json
+from http.cookies import SimpleCookie
+
 from graphql import GraphQLError
+from graphql_jwt.decorators import login_required
 
 from .mutations.messages import *
 from .mutations.profiles import *
@@ -32,6 +36,7 @@ class UserQuery:
         user = graphene.String(required=True)
     )
     
+
     def resolve_chat_room_messages(self, root, user, chat_user):
         chat_rooms = ChatRoom.objects.all()
 
@@ -64,7 +69,7 @@ class UserQuery:
         return Profile.objects.get(user=user)
 
 
-    def resolve_all_users(self, root, **kwargs):
+    def resolve_all_users(self, info, **kwargs):
         return CustomUser.objects.all()
 
     def resolve_all_profiles(self, root, **kwargs):

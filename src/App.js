@@ -11,7 +11,7 @@ function App() {
   // Current logged in user
   const [currentUser, setCurrentUser] = useState(null);
   const { data: meQuery, loading } = useQuery(USER_ME_QUERY, {
-    fetchPolicy: "no-cache",
+    fetchPolicy: "network-only",
   });
 
   useEffect(() => {
