@@ -1,26 +1,40 @@
 import { useMutation } from "@apollo/react-hooks";
+import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form, Message } from "semantic-ui-react";
 import { USER_LOGIN_MUTATION } from "../../Api/user";
 import "./Login.css";
 
+const MINUTES_IN_DAY = 1440;
+const THIRTY_MINUTES = (1 / MINUTES_IN_DAY) * 30;
+
 const Login = () => {
   const history = useHistory();
   const [failedToLogin, setFailedToLogin] = useState("");
   const [allowButton, setAllowButton] = useState(false);
 
+  const [usernameInput, setUsernameInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+
   const [loginUser, { data: loginData, loading }] = useMutation(
     USER_LOGIN_MUTATION
   );
 
-  const [usernameInput, setUsernameInput] = useState("");
-  const [passwordInput, setPasswordInput] = useState("");
-
   // After a submit
   useEffect(() => {
-    if (loginData) {
-      if (loginData.tokenAuth.success === true) {
+    if (loginData && loginData.tokenAuth) {
+      const {
+        tokenAuth: { success, payload },
+      } = loginData;
+
+      if (success === true) {
+        // Set expiration date
+        const expirationDate = payload.exp * 1000;
+        Cookies.set("tokenExpiration", expirationDate, {
+          expires: THIRTY_MINUTES,
+        });
+
         history.push("/posts");
         window.location.reload(false); // Reset site
       } else {

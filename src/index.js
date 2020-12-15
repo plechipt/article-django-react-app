@@ -14,9 +14,40 @@ import App from "./App";
 const BASE_URL = "http://127.0.0.1:8000";
 //const BASE_URL = 'https://article-django-react-app.herokuapp.com'
 
+// Refresh access token if it expired
+const customFetch = async (uri, options) => {
+  const date = new Date();
+  const tokenExpiration = Cookies.get("tokenExpiration");
+  const csrftoken = Cookies.get("csrftoken");
+
+  if (tokenExpiration < date.getTime()) {
+    // Cannot use useMutation, because its not in component
+    await fetch(`${BASE_URL}/graphql/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({
+        query: `
+          mutation {
+            refreshToken {
+              success
+              errors
+            }
+          }
+        `,
+      }),
+    });
+  }
+
+  return fetch(uri, options);
+};
+
 const httpLink = createHttpLink({
   uri: `${BASE_URL}/graphql/`,
   credentials: "include",
+  fetch: customFetch,
 });
 
 // Access token is send through httponly cookie
@@ -33,7 +64,7 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-export const client = new ApolloClient({
+const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache({
     typePolicies: {
