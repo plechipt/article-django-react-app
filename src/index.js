@@ -11,6 +11,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 
+const MINUTES_IN_DAY = 1440;
+const EXPIRATION_DATE = (1 / MINUTES_IN_DAY) * 10;
 const BASE_URL = "http://127.0.0.1:8000";
 //const BASE_URL = 'https://article-django-react-app.herokuapp.com'
 
@@ -42,7 +44,12 @@ const customFetch = async (uri, options) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data) {
+          const expirationDate = data.payload.exp * 1000;
+          Cookies.set("tokenExpiration", expirationDate, {
+            expires: EXPIRATION_DATE,
+          });
+        }
       });
   }
 

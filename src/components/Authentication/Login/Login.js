@@ -7,7 +7,7 @@ import { USER_LOGIN_MUTATION } from "../../Api/user";
 import "./Login.css";
 
 const MINUTES_IN_DAY = 1440;
-const THIRTY_MINUTES = (1 / MINUTES_IN_DAY) * 30;
+const EXPIRATION_DATE = (1 / MINUTES_IN_DAY) * 10;
 
 const Login = () => {
   const history = useHistory();
@@ -32,9 +32,8 @@ const Login = () => {
         // Set expiration date
         const expirationDate = payload.exp * 1000;
         Cookies.set("tokenExpiration", expirationDate, {
-          expires: THIRTY_MINUTES,
+          expires: EXPIRATION_DATE,
         });
-
         history.push("/posts");
         window.location.reload(false); // Reset site
       } else {
