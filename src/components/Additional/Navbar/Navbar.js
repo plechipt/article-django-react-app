@@ -1,8 +1,9 @@
 import { useApolloClient, useMutation } from "@apollo/client";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Menu, Segment } from "semantic-ui-react";
-import { USER_DELETE_JWT_TOKENS_MUTATION } from "../../Api/user";
+import { USER_DELETE_TOKENS_MUTATION } from "../../Api/user";
 import "./Navbar.css";
 
 const Navbar = ({ currentUser }) => {
@@ -10,7 +11,7 @@ const Navbar = ({ currentUser }) => {
   const [activeItem, setActiveItem] = useState();
 
   const client = useApolloClient();
-  const [deleteTokens] = useMutation(USER_DELETE_JWT_TOKENS_MUTATION);
+  const [deleteTokens] = useMutation(USER_DELETE_TOKENS_MUTATION);
 
   const handleItemClick = (name) => {
     setActiveItem(name);
@@ -19,6 +20,7 @@ const Navbar = ({ currentUser }) => {
   const handleOnLogout = async () => {
     // Delete JWT tokens
     await deleteTokens();
+    Cookies.remove("tokenExpiration");
 
     // Reset store
     client.resetStore();

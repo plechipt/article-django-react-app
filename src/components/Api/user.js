@@ -48,7 +48,7 @@ export const USER_LOGIN_MUTATION = gql`
   }
 `;
 
-export const USER_DELETE_JWT_TOKENS_MUTATION = gql`
+export const USER_DELETE_TOKENS_MUTATION = gql`
   mutation {
     deleteTokenCookie {
       deleted
@@ -63,6 +63,7 @@ export const USER_DELETE_JWT_TOKENS_MUTATION = gql`
 export const USER_REFRESH_TOKEN_SILENTLY_MUTATION = gql`
   mutation {
     refreshToken {
+      payload
       success
       errors
     }

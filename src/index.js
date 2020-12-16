@@ -30,15 +30,20 @@ const customFetch = async (uri, options) => {
       },
       body: JSON.stringify({
         query: `
-          mutation {
+          mutation refreshTokenSilently {
             refreshToken {
+              payload
               success
               errors
             }
           }
         `,
       }),
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   }
 
   return fetch(uri, options);
