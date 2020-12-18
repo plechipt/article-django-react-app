@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "semantic-ui-react";
 import { v4 as uuidv4 } from "uuid";
+
 let profileImages = [
   "default.jpg",
   "christian.jpg",

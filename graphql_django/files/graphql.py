@@ -1,4 +1,7 @@
+import os
 from datetime import timedelta
+
+secret_key = os.environ.get('TOKEN_SECRET_KEY')
 
 GRAPHENE = {
     'MIDDLEWARE': [
@@ -12,6 +15,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 GRAPHQL_JWT = {
+    'JWT_SECRET_KEY': secret_key,
     "JWT_VERIFY_EXPIRATION": True,
     "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
     'JWT_EXPIRATION_DELTA': timedelta(seconds=10),
