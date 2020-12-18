@@ -37,8 +37,6 @@ export const checkIfUserIsLoggedIn = async () => {
   return userIsLoggedIn;
 };
 
-checkIfUserIsLoggedIn();
-
 export const refreshTokenSilently = async () => {
   const csrftoken = Cookies.get("csrftoken");
 
@@ -62,11 +60,13 @@ export const refreshTokenSilently = async () => {
     },
   });
 
-  console.log(res);
-
   const {
     data: {
-      payload: { exp },
+      data: {
+        refreshToken: {
+          payload: { exp },
+        },
+      },
     },
   } = res;
   const expirationDate = exp * 1000;

@@ -1,5 +1,6 @@
 import graphene
 from graphql import GraphQLError
+from graphql_jwt.decorators import login_required
 
 from .mutations.comments import *
 from .mutations.posts import *

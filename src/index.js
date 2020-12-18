@@ -10,10 +10,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
-import {
-  checkIfUserIsLoggedIn,
-  refreshTokenSilently,
-} from "./components/fetchEndpoint";
+import { refreshTokenSilently } from "./components/fetchEndpoint";
 
 const BASE_URL = "http://127.0.0.1:8000";
 //const BASE_URL = 'https://article-django-react-app.herokuapp.com'
@@ -22,14 +19,10 @@ const BASE_URL = "http://127.0.0.1:8000";
 const customFetch = async (uri, options) => {
   const date = new Date();
   const tokenExpiration = Cookies.get("tokenExpiration");
-
   const tokenExpired = tokenExpiration < date.getTime();
-  const userIsLoggedIn = await checkIfUserIsLoggedIn();
 
-  console.log(tokenExpired, userIsLoggedIn);
-
-  if (tokenExpired && userIsLoggedIn) {
-    Cookies.remove("tokenExpiration");
+  if (tokenExpired) {
+    //Cookies.remove("tokenExpiration");
     await refreshTokenSilently();
   }
 
