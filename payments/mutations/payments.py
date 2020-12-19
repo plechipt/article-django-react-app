@@ -5,6 +5,7 @@ import stripe
 from graphene_django.settings import *
 from graphene_django.types import DjangoObjectType
 from graphql_auth import mutations
+from graphql_jwt.decorators import login_required
 
 # Get both stripe keys from environment variables
 STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY') 
@@ -26,6 +27,7 @@ class CreateCheckoutSession(graphene.Mutation):
     session = graphene.JSONString()
 
     @staticmethod
+    @login_required
     def mutate(root, info, input=None):
         stripe.api_key = STRIPE_LIVE_SECRET_KEY
 

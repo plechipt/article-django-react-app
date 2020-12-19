@@ -37,6 +37,7 @@ class UpdateProfile(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, user, new_user, new_email, image):
       message = ''
 
@@ -114,6 +115,7 @@ class FollowProfile(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, follower, following):
       message = ''
 
@@ -152,6 +154,7 @@ class UnfollowProfile(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, follower, following):
       message = ''
       follower = CustomUser.objects.get(username=follower)

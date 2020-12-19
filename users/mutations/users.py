@@ -6,6 +6,7 @@ from django_graphql_ratelimit import ratelimit
 from graphene_django.types import DjangoObjectType
 from graphql import GraphQLError
 from graphql_auth import mutations
+from graphql_jwt.decorators import login_required
 from graphql_jwt.refresh_token.signals import refresh_token_rotated
 
 from users.models import CustomUser
@@ -25,6 +26,7 @@ def revoke_refresh_token(sender, request, refresh_token, **kwargs):
 class Logout(graphene.Mutation):
    message = graphene.String()
 
+   @login_required
    def mutate(self, info, input=None):
       request = info.context
       user = info.context.user

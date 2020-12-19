@@ -37,6 +37,7 @@ class UserQuery:
     )
     
 
+    @login_required
     def resolve_chat_room_messages(self, root, user, chat_user):
         chat_rooms = ChatRoom.objects.all()
 
@@ -58,6 +59,7 @@ class UserQuery:
         return chat_room.messages.all()
     
 
+    @login_required
     def resolve_get_profile_info(self, root, user):
         user_doesnt_exist = CustomUser.objects.filter(username=user).count() == 0
 
@@ -69,8 +71,10 @@ class UserQuery:
         return Profile.objects.get(user=user)
 
 
+    @login_required
     def resolve_all_users(self, info, **kwargs):
         return CustomUser.objects.all()
 
+    @login_required
     def resolve_all_profiles(self, root, **kwargs):
         return Profile.objects.all()

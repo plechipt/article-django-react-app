@@ -25,6 +25,7 @@ class ReplyComment(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    @ratelimit(key="ip", rate="3/m", block=True)
    def mutate(root, info, id, user, content):
       message = ''
@@ -59,6 +60,7 @@ class DeleteReply(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, id):
       message = ''
       reply = Reply.objects.get(id=id)
