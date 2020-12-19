@@ -2,7 +2,7 @@ import React from "react";
 import CustomReply from "./CustomReply";
 
 // Map all replies
-const ReplysMap = ({ replys, currentUser }) => {
+const ReplysMap = ({ replys }) => {
   return (
     <div>
       {replys.map(
@@ -22,7 +22,6 @@ const ReplysMap = ({ replys, currentUser }) => {
               content={content}
               posted={posted}
               username={username}
-              currentUser={currentUser}
               image={image}
             />
           );

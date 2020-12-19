@@ -1,16 +1,15 @@
 import { useMutation } from "@apollo/react-hooks";
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Icon, Label } from "semantic-ui-react";
 import {
   PROFILE_FOLLOW_MUTATION,
   PROFILE_UNFOLLOW_MUTATION,
 } from "../Api/profile/profile";
+import { UserContext } from "../UserContext";
 
-const ProfileBodyButtons = ({
-  profileData: { getProfileInfo },
-  currentUser,
-}) => {
+const ProfileBodyButtons = ({ profileData: { getProfileInfo } }) => {
+  const { user } = useContext(UserContext);
   const {
     totalFollowers,
     user: { username: usersProfile },
@@ -23,14 +22,14 @@ const ProfileBodyButtons = ({
 
   const handleOnFollow = async () => {
     await followProfile({
-      variables: { follower: currentUser, following: usersProfile },
+      variables: { follower: user, following: usersProfile },
     });
     window.location.reload(false); // Reset site
   };
 
   const handleOnUnfollow = async () => {
     await unfollowProfile({
-      variables: { follower: currentUser, following: usersProfile },
+      variables: { follower: user, following: usersProfile },
     });
     window.location.reload(false); // Reset site
   };
@@ -42,13 +41,13 @@ const ProfileBodyButtons = ({
 
   // Check if user follow this profile
   const userIsFollowingProfile = followers.some((follower) => {
-    return follower.username === currentUser;
+    return follower.username === user;
   });
 
   return (
     <div className="profile-buttons-container">
       {/* If this is not users profile */}
-      {currentUser !== usersProfile ? (
+      {user !== usersProfile ? (
         <div className="profile-buttons">
           <Button as="div" labelPosition="right">
             {userIsFollowingProfile ? (

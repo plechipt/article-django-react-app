@@ -2,7 +2,7 @@ import React from "react";
 import "../Messages.css";
 import Message from "./Message";
 
-const MessagesMap = ({ messagesData, currentUser }) => {
+const MessagesMap = ({ messagesData }) => {
   const { chatRoomMessages: messages } = messagesData;
 
   return (
@@ -15,7 +15,6 @@ const MessagesMap = ({ messagesData, currentUser }) => {
                 key={id}
                 id={id}
                 username={username}
-                currentUser={currentUser}
                 content={content}
                 messaged={messaged}
               />

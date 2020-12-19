@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Message } from "semantic-ui-react";
+import { UserContext } from "../UserContext";
 import ProfileBodyButtons from "./ProfileBodyButtons";
 
 const PATH_TO_PICTURES = "media/profile_pictures";
 
-const ProfileHeader = ({ profileData, currentUser, user, errorMessages }) => {
+const ProfileHeader = ({ profileData, user, errorMessages }) => {
+  const { user: currentUser } = useContext(UserContext);
   const {
     getProfileInfo: {
       image,
@@ -40,10 +42,7 @@ const ProfileHeader = ({ profileData, currentUser, user, errorMessages }) => {
             </>
           )}
         </div>
-        <ProfileBodyButtons
-          profileData={profileData}
-          currentUser={currentUser}
-        />
+        <ProfileBodyButtons profileData={profileData} />
       </div>
     </div>
   );

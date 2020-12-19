@@ -1,25 +1,27 @@
 import { useMutation } from "@apollo/react-hooks";
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Icon, Label } from "semantic-ui-react";
 import { POST_LIKE_MUTATION, POST_UNLIKE_MUTATION } from "../../Api/post/post";
+import { UserContext } from "../../UserContext";
 
-const LikeButton = ({ id, likes, usersLikes, currentUser }) => {
+const LikeButton = ({ id, likes, usersLikes }) => {
+  const { user } = useContext(UserContext);
   const [likePost] = useMutation(POST_LIKE_MUTATION);
   const [unlikePost] = useMutation(POST_UNLIKE_MUTATION);
 
   const handleOnLike = async () => {
-    await likePost({ variables: { id: id, user: currentUser } });
+    await likePost({ variables: { id: id, user: user } });
     window.location.reload(false); // Reset site
   };
 
   const handleOnUnlike = async () => {
-    await unlikePost({ variables: { id: id, user: currentUser } });
+    await unlikePost({ variables: { id: id, user: user } });
     window.location.reload(false); // Reset site
   };
 
   // Check if user has liked this post
   const userHasLikedPost = usersLikes.some(({ username }) => {
-    return username === currentUser;
+    return username === user;
   });
 
   return (

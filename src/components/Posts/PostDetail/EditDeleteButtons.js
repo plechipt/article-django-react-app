@@ -1,11 +1,13 @@
 import { useMutation } from "@apollo/react-hooks";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import { POST_DELETE_MUTATION } from "../../Api/post/post";
+import { UserContext } from "../../UserContext";
 import DeleteModal from "./DeleteModal";
 
-const EditDeleteButtons = ({ id, username, currentUser }) => {
+const EditDeleteButtons = ({ id, username }) => {
+  const { user } = useContext(UserContext);
   const history = useHistory();
 
   const [open, setOpen] = useState(false);
@@ -28,7 +30,7 @@ const EditDeleteButtons = ({ id, username, currentUser }) => {
   return (
     <>
       {/* If post it is user's post -> show edit and delete button */}
-      {currentUser === username ? (
+      {user === username ? (
         <>
           <Button
             onClick={handleOnEdit}

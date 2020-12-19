@@ -1,9 +1,12 @@
 import { useMutation } from "@apollo/react-hooks";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, Message } from "semantic-ui-react";
 import { COMMENT_POST_MUTATION } from "../Api/comment";
+import { UserContext } from "../UserContext";
 
-const CommentCreateForm = ({ id, currentUser }) => {
+const CommentCreateForm = ({ id }) => {
+  const { user } = useContext(UserContext);
+
   const [allowButton, setAllowButton] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -14,7 +17,7 @@ const CommentCreateForm = ({ id, currentUser }) => {
 
   const handleOnComment = async () => {
     await commentPost({
-      variables: { id: id, user: currentUser, content: commentInput },
+      variables: { id: id, user: user, content: commentInput },
     });
   };
 

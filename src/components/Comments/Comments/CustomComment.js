@@ -1,22 +1,16 @@
 import { useMutation } from "@apollo/react-hooks";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Comment } from "semantic-ui-react";
 import { COMMENT_DELETE_MUTATION } from "../../Api/comment";
 import ReplyForm from "../../Replys/ReplyForm";
 import ReplysMap from "../../Replys/ReplysMap";
+import { UserContext } from "../../UserContext";
 
 const PATH_TO_PICTURES = "Profiles/media/profile_pictures";
 
-const CustomComment = ({
-  id,
-  replys,
-  content,
-  posted,
-  username,
-  currentUser,
-  image,
-}) => {
+const CustomComment = ({ id, replys, content, posted, username, image }) => {
+  const { user } = useContext(UserContext);
   const [deleteComment] = useMutation(COMMENT_DELETE_MUTATION);
   const [showReplyForm, setShowReplyForm] = useState(false);
 
@@ -46,23 +40,17 @@ const CustomComment = ({
           <Comment.Text>{content}</Comment.Text>
           <Comment.Actions>
             <Comment.Action onClick={handleOnReply}>Reply</Comment.Action>
-            {currentUser === username ? (
+            {user === username ? (
               <Comment.Action onClick={handleOnDelete}>Delete</Comment.Action>
             ) : null}
           </Comment.Actions>
         </Comment.Content>
 
         {/*Reply form when reply button is clicked*/}
-        <ReplyForm
-          id={id}
-          showReplyForm={showReplyForm}
-          currentUser={currentUser}
-        />
+        <ReplyForm id={id} showReplyForm={showReplyForm} />
 
         {/*Mapping all replys of comment*/}
-        {replys ? (
-          <ReplysMap replys={replys} currentUser={currentUser} />
-        ) : null}
+        {replys ? <ReplysMap replys={replys} /> : null}
       </Comment>
     </div>
   );

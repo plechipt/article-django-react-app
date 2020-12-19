@@ -1,14 +1,16 @@
 import { useLazyQuery, useMutation } from "@apollo/react-hooks";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   MESSAGE_CREATE_CHATROOM_MUTATION,
   MESSAGE_LIST_QUERY,
 } from "../../Api/message";
+import { UserContext } from "../../UserContext";
 import CreateMessage from "../CreateMessage";
 import MessagesMap from "./MessagesMap";
 
-const MessagesContainer = ({ currentUser }) => {
+const MessagesContainer = () => {
+  const { user } = useContext(UserContext);
   const { chatUser } = useParams();
 
   const [createChatRoom] = useMutation(MESSAGE_CREATE_CHATROOM_MUTATION);
@@ -21,14 +23,14 @@ const MessagesContainer = ({ currentUser }) => {
   useEffect(() => {
     const getMessages = async () => {
       await createChatRoom({
-        variables: { user: currentUser, chatUser: chatUser },
+        variables: { user: user, chatUser: chatUser },
       });
       chatRoomMessages({
-        variables: { user: currentUser, chatUser: chatUser },
+        variables: { user: user, chatUser: chatUser },
       });
     };
     getMessages();
-  }, [currentUser, chatUser, chatRoomMessages, createChatRoom]);
+  }, [user, chatUser, chatRoomMessages, createChatRoom]);
 
   return (
     <div className="chat-room-container">
@@ -36,12 +38,9 @@ const MessagesContainer = ({ currentUser }) => {
         {messagesData && messagesData.chatRoomMessages ? (
           <>
             {messagesData && messagesData.chatRoomMessages.length !== 0 ? (
-              <MessagesMap
-                messagesData={messagesData}
-                currentUser={currentUser}
-              />
+              <MessagesMap messagesData={messagesData} />
             ) : null}
-            <CreateMessage currentUser={currentUser} />
+            <CreateMessage />
           </>
         ) : null}
       </div>

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { POST_FIND_QUERY } from "../../Api/post/post";
 import SubPostDetail from "./SubPostDetail";
 
-const PostDetail = ({ currentUser }) => {
+const PostDetail = () => {
   const { id } = useParams();
 
   const [findPost, { data: detailData }] = useLazyQuery(POST_FIND_QUERY);
@@ -21,11 +21,7 @@ const PostDetail = ({ currentUser }) => {
   return (
     <div className="post-detail">
       {detailData && detailData.findPost.title ? (
-        <SubPostDetail
-          id={id}
-          detailData={detailData}
-          currentUser={currentUser}
-        />
+        <SubPostDetail id={id} detailData={detailData} />
       ) : null}
     </div>
   );

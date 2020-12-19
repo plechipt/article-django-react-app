@@ -1,13 +1,15 @@
 import { useLazyQuery } from "@apollo/react-hooks";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PROFILE_GET_INFO_QUERY } from "../Api/profile/profile";
+import { UserContext } from "../UserContext";
 import "./Profile.css";
 import ProfileForm from "./ProfileForm";
 import ProfileHeader from "./ProfileHeader";
 
-const Profile = ({ currentUser }) => {
+const Profile = () => {
   const { user } = useParams();
+  const { user: currentUser } = useContext(UserContext);
 
   const [getProfileInfo, { data: profileData }] = useLazyQuery(
     PROFILE_GET_INFO_QUERY
@@ -57,13 +59,11 @@ const Profile = ({ currentUser }) => {
         <>
           <ProfileHeader
             profileData={profileData}
-            currentUser={currentUser}
             user={user}
             errorMessages={errorMessages}
           />
           {user === currentUser ? (
             <ProfileForm
-              user={user}
               profileData={profileData}
               allowButton={allowButton}
               usernameInput={usernameInput}

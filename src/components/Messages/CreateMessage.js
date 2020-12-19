@@ -1,10 +1,12 @@
 import { useMutation } from "@apollo/react-hooks";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
 import { MESSAGE_CREATE_MUTATION } from "../Api/message";
+import { UserContext } from "../UserContext";
 
-const CreateMessage = ({ currentUser }) => {
+const CreateMessage = () => {
+  const { user } = useContext(UserContext);
   const { chatUser } = useParams();
 
   const [messageInput, setMessageInput] = useState("");
@@ -17,7 +19,7 @@ const CreateMessage = ({ currentUser }) => {
     if (form_is_filled && user_submited_button) {
       await createMessage({
         variables: {
-          user: currentUser,
+          user: user,
           chatUser: chatUser,
           content: messageInput,
         },

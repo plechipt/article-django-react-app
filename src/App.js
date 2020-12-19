@@ -1,15 +1,17 @@
 import { useQuery } from "@apollo/react-hooks";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
-// Import components from index.js
 import { Login, Navbar, Register } from "./components";
 import { USER_ME_QUERY } from "./components/Api/user";
+import { UserContext } from "./components/UserContext";
 import Routes from "./Routes";
 
 function App() {
   // Current logged in user
-  const [currentUser, setCurrentUser] = useState(null);
+  const [user, setUser] = useState(null);
+  const value = useMemo(() => ({ user, setUser }), [user, setUser]);
+
   const { data: meQuery, loading } = useQuery(USER_ME_QUERY, {
     fetchPolicy: "network-only",
   });
@@ -17,19 +19,19 @@ function App() {
   // Set user to memory
   useEffect(() => {
     if (meQuery && meQuery.me) {
-      setCurrentUser(meQuery.me.username);
+      setUser(meQuery.me.username);
     }
   }, [meQuery]);
 
   return (
     <div className="light-mode">
-      <Navbar currentUser={currentUser} />
+      <Navbar user={user} />
       <div>
-        {currentUser && loading === false ? (
+        {user && loading === false ? (
           <>
-            <Switch>
-              <Routes currentUser={currentUser} />
-            </Switch>
+            <UserContext.Provider value={value}>
+              <Routes />
+            </UserContext.Provider>
           </>
         ) : (
           <>

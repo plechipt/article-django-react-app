@@ -1,10 +1,12 @@
 import { useLazyQuery, useMutation } from "@apollo/react-hooks";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
 import { POST_EDIT_MUTATION, POST_FIND_QUERY } from "../Api/post/post";
+import { UserContext } from "../UserContext";
 
-const EditPost = ({ currentUser }) => {
+const EditPost = () => {
+  const { user } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
 
@@ -60,7 +62,7 @@ const EditPost = ({ currentUser }) => {
 
   return (
     <div className="post-create-container">
-      {detailData && detailData.findPost.user.username === currentUser ? (
+      {detailData && detailData.findPost.user.username === user ? (
         <Form>
           <Form.Field>
             <label>Title</label>

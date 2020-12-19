@@ -9,7 +9,7 @@ import LikeButton from "./LikeButton";
 const DEFAULT_IMAGE =
   "https://miro.medium.com/max/550/1*TxgjUE2uJuiRUVVmE_kU6g.png";
 
-const SubPostDetail = ({ id, detailData, currentUser }) => {
+const SubPostDetail = ({ id, detailData }) => {
   const {
     findPost: {
       title,
@@ -47,25 +47,16 @@ const SubPostDetail = ({ id, detailData, currentUser }) => {
 
             {/*Includes like, edit and delete buttons*/}
             <div className="post-detail-buttons-container">
-              <LikeButton
-                id={id}
-                likes={likes}
-                usersLikes={usersLikes}
-                currentUser={currentUser}
-              />
-              <EditDeleteButtons
-                id={id}
-                username={username}
-                currentUser={currentUser}
-              />
+              <LikeButton id={id} likes={likes} usersLikes={usersLikes} />
+              <EditDeleteButtons id={id} username={username} />
             </div>
 
             <div className="comments-container">
               {/*Map all comments from post*/}
-              <CommentsMap comments={comments} currentUser={currentUser} />
+              <CommentsMap comments={comments} />
 
               {/*Reply form for comments*/}
-              <CommentCreateForm id={id} currentUser={currentUser} />
+              <CommentCreateForm id={id} />
             </div>
           </Item.Content>
         </Item>

@@ -9,7 +9,7 @@ import "./Navbar.css";
 const SPECIAL_VIDEO_URL =
   "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO";
 
-const Navbar = ({ currentUser }) => {
+const Navbar = ({ user }) => {
   const history = useHistory();
   const [activeItem, setActiveItem] = useState();
 
@@ -36,7 +36,7 @@ const Navbar = ({ currentUser }) => {
     <div className="navbar-container">
       <Segment inverted>
         <Menu inverted secondary>
-          {currentUser ? (
+          {user ? (
             <>
               <Menu.Item
                 name="home"
@@ -68,7 +68,7 @@ const Navbar = ({ currentUser }) => {
                   active={activeItem === "profile"}
                   onClick={() => {
                     handleItemClick("profile");
-                    history.push(`/profile/${currentUser}`);
+                    history.push(`/profile/${user}`);
                   }}
                 />
                 <Menu.Item

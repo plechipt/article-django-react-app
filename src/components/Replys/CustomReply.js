@@ -1,11 +1,13 @@
-import React from "react";
-import { Comment } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
+import React, { useContext } from "react";
+import { Comment } from "semantic-ui-react";
 import { REPLY_DELETE_MUTATION } from "../Api/reply";
+import { UserContext } from "../UserContext";
 
 const PATH_TO_PICTURES = "Profiles/media/profile_pictures";
 
-const CustomReply = ({ id, content, posted, username, image, currentUser }) => {
+const CustomReply = ({ id, content, posted, username, image }) => {
+  const { user } = useContext(UserContext);
   const [deleteReply] = useMutation(REPLY_DELETE_MUTATION);
 
   const handleOnDelete = async () => {
@@ -29,7 +31,7 @@ const CustomReply = ({ id, content, posted, username, image, currentUser }) => {
             </Comment.Metadata>
             <Comment.Text>{content}</Comment.Text>
             <Comment.Actions>
-              {currentUser === username ? (
+              {user === username ? (
                 <Comment.Action onClick={handleOnDelete}>Delete</Comment.Action>
               ) : null}
             </Comment.Actions>

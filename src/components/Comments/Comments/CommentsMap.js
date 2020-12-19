@@ -4,7 +4,7 @@ import "../Comments.css";
 import CustomComment from "./CustomComment";
 
 // Map all comments
-const CommentsMap = ({ comments, currentUser }) => {
+const CommentsMap = ({ comments }) => {
   return (
     <div>
       <Comment.Group>
@@ -27,7 +27,6 @@ const CommentsMap = ({ comments, currentUser }) => {
                 content={content}
                 posted={posted}
                 username={username}
-                currentUser={currentUser}
                 image={image}
               />
             );
