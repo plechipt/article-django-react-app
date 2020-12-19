@@ -29,7 +29,6 @@ class CreateUserProfile(graphene.Mutation):
 # Update the profile by given inputs on frontend
 class UpdateProfile(graphene.Mutation):
    class Arguments:
-      user = graphene.String(required=True)
       new_user = graphene.String(required=True)
       new_email = graphene.String(required=True)
       image = graphene.String(required=True)
@@ -38,7 +37,7 @@ class UpdateProfile(graphene.Mutation):
 
    @staticmethod
    @login_required
-   def mutate(root, info, user, new_user, new_email, image):
+   def mutate(root, info, new_user, new_email, image):
       message = ''
 
       # New_user and new_email combined
@@ -48,7 +47,7 @@ class UpdateProfile(graphene.Mutation):
          '+','-','>','<','=','\\','*','+','{','}',':','"','|','?'
       ]
 
-      user = CustomUser.objects.get(username=user)
+      user = info.context.user
       profile = Profile.objects.get(user=user)
 
       user_already_exists = CustomUser.objects.filter(username=new_user).exists()

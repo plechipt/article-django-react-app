@@ -17,7 +17,6 @@ class PostType(DjangoObjectType):
 # Create post
 class CreatePost(graphene.Mutation):
    class Arguments:
-      user = graphene.String(required=True)
       title = graphene.String(required=True)
       content = graphene.String(required=True)
    
@@ -25,9 +24,9 @@ class CreatePost(graphene.Mutation):
 
    @staticmethod
    @login_required
-   def mutate(root, info, user, title, content):
+   def mutate(root, info, title, content):
       message = ''
-      user = CustomUser.objects.get(username=user)
+      user = info.context.user
       today = datetime.datetime.now().strftime('%d %B %Y')
 
       # Filter posts that belongs to user and are posted today
@@ -125,7 +124,6 @@ class EditPost(graphene.Mutation):
 class LikePost(graphene.Mutation):
    class Arguments:
       id = graphene.ID(required=True)
-      user = graphene.String(required=True)
 
    message = graphene.String()
 
@@ -133,8 +131,8 @@ class LikePost(graphene.Mutation):
    @login_required
    def mutate(root, info, id, user):
       message = ''
+      user = info.context.user
       post = Post.objects.get(id=id)
-      user = CustomUser.objects.get(username=user)
       
       # Add user to the post likes
       post.likes.add(user)
@@ -154,16 +152,15 @@ class LikePost(graphene.Mutation):
 class UnlikePost(graphene.Mutation):
    class Arguments:
       id = graphene.ID(required=True)
-      user = graphene.String(required=True)
 
    message = graphene.String()
 
    @staticmethod
    @login_required
-   def mutate(root, info, id, user):
+   def mutate(root, info, id):
       message = ''
+      user = info.context.user
       post = Post.objects.get(id=id)
-      user = CustomUser.objects.get(username=user)
       
       # Remove user from likes
       post.likes.remove(user)

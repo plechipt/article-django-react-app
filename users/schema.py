@@ -33,12 +33,11 @@ class UserQuery:
 
     get_profile_info = graphene.Field(
         ProfileType,
-        user = graphene.String(required=True)
     )
     
 
     @login_required
-    def resolve_chat_room_messages(self, root, user, chat_user):
+    def resolve_chat_room_messages(self, root, chat_user):
         chat_rooms = ChatRoom.objects.all()
 
         user_doesnt_exist = CustomUser.objects.filter(username=user).count() == 0
@@ -60,7 +59,8 @@ class UserQuery:
     
 
     @login_required
-    def resolve_get_profile_info(self, root, user):
+    def resolve_get_profile_info(self, info):
+        user = info.context.user
         user_doesnt_exist = CustomUser.objects.filter(username=user).count() == 0
 
         if user_doesnt_exist:

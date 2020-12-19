@@ -21,7 +21,6 @@ class CommentType(DjangoObjectType):
 class CommentPost(graphene.Mutation):
    class Arguments:
       id = graphene.ID(required=True)
-      user = graphene.String(required=True)
       content = graphene.String(required=True)
 
    message = graphene.String()
@@ -29,10 +28,10 @@ class CommentPost(graphene.Mutation):
    @staticmethod
    @login_required
    @ratelimit(key="ip", rate="3/m", block=True)
-   def mutate(root, info, id, user, content):
+   def mutate(root, info, id, content):
       message = ''
+      user = info.context.user
       post = Post.objects.get(id=id)
-      user = CustomUser.objects.get(username=user) 
       today = datetime.datetime.now().strftime('%d %B %Y')
 
       # Filter comments that belongs to user and are posted today

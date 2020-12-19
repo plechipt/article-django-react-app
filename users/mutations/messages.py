@@ -22,7 +22,6 @@ class ChatRoomType(DjangoObjectType):
 # Send user a message
 class CreateMessage(graphene.Mutation):
    class Arguments:
-      user = graphene.String(required=True)
       chat_user = graphene.String(required=True)
       content = graphene.String(required=True)
       
@@ -31,8 +30,9 @@ class CreateMessage(graphene.Mutation):
    @staticmethod
    @login_required
    @ratelimit(key="ip", rate="10/m", block=True)
-   def mutate(root, info, user, chat_user, content):
+   def mutate(root, info, chat_user, content):
       message = ''
+      user = info.context.user
       
       # Create date when message was messaged
       messaged = datetime.datetime.now().strftime('%d %B %Y, %H:%M')
@@ -42,7 +42,6 @@ class CreateMessage(graphene.Mutation):
          raise GraphQLError("Message must not be empty!")
          
       # Get the info
-      user = CustomUser.objects.get(username=user)
       chat_user = CustomUser.objects.get(username=chat_user)
       chat_rooms = ChatRoom.objects.all()
 
@@ -63,24 +62,22 @@ class CreateMessage(graphene.Mutation):
 #Create chatroom for user and chat_user
 class CreateChatRoom(graphene.Mutation):
    class Arguments:
-      user = graphene.String(required=True)
       chat_user = graphene.String(required=True)
    
    message = graphene.String()
    
    @staticmethod
    @login_required
-   def mutate(root, info, user, chat_user):
+   def mutate(root, info, chat_user):
       message = ''
-      user_doesnt_exist = CustomUser.objects.filter(username=user).count() == 0
       chat_user_doesnt_exist = CustomUser.objects.filter(username=chat_user).count() == 0
       chat_rooms = ChatRoom.objects.all()
 
-      if user_doesnt_exist or chat_user_doesnt_exist:
-         raise GraphQLError("User or chat user doesn't exist!")
+      if chat_user_doesnt_exist:
+         raise GraphQLError("Chat user doesn't exist!")
 
       # Get users
-      user = CustomUser.objects.get(username=user)
+      user = info.context.user
       chat_user = CustomUser.objects.get(username=chat_user)
 
       chat_room_doesnt_exist = chat_rooms.filter(users__username=user).filter(users__username=chat_user).count() == 0
