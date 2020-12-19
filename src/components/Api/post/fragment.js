@@ -7,6 +7,7 @@ export const POST_BASIC_ATTRIBUTES_FRAGMENT = gql`
     }
     id
     title
+    content
     posted
   }
 `;

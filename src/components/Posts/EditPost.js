@@ -32,6 +32,7 @@ const EditPost = () => {
       const {
         findPost: { title, content },
       } = detailData;
+      console.log(content);
 
       setTitleInput(title);
       setTextAreaInput(content);
