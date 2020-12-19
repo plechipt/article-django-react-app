@@ -6,8 +6,11 @@ import { Button, Form, Message } from "semantic-ui-react";
 import { USER_LOGIN_MUTATION } from "../../Api/user";
 import "./Login.css";
 
+const ONE_DAY = 1;
 const MINUTES_IN_DAY = 1440;
-const COOKIE_EXPIRATION_DATE = (1 / MINUTES_IN_DAY) * 16;
+const EXPIRATION_IN_MINUTES = 16;
+const COOKIE_EXPIRATION_DATE =
+  (ONE_DAY / MINUTES_IN_DAY) * EXPIRATION_IN_MINUTES;
 
 const Login = () => {
   const history = useHistory();

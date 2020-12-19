@@ -1,9 +1,13 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const apiKey = process.env.REACT_APP_API_KEY;
+const ONE_DAY = 1;
 const MINUTES_IN_DAY = 1440;
-const COOKIE_EXPIRATION_DATE = (1 / MINUTES_IN_DAY) * 16;
+const EXPIRATION_IN_MINUTES = 16;
+const COOKIE_EXPIRATION_DATE =
+  (ONE_DAY / MINUTES_IN_DAY) * EXPIRATION_IN_MINUTES;
+
+const apiKey = process.env.REACT_APP_API_KEY;
 const BASE_URL = "http://127.0.0.1:8000";
 //const BASE_URL = 'https://article-django-react-app.herokuapp.com'
 
