@@ -1,6 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
+const apiKey = process.env.REACT_APP_API_KEY;
 const MINUTES_IN_DAY = 1440;
 const COOKIE_EXPIRATION_DATE = (1 / MINUTES_IN_DAY) * 10;
 const BASE_URL = "http://127.0.0.1:8000";
@@ -14,6 +15,7 @@ export const checkIfUserIsLoggedIn = async () => {
     method: "post",
     headers: {
       "Content-Type": "application/json",
+      Authorization: apiKey,
       "X-CSRFToken": csrftoken,
     },
     data: {
@@ -45,6 +47,7 @@ export const refreshTokenSilently = async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: apiKey,
       "X-CSRFToken": csrftoken,
     },
     data: {

@@ -27,6 +27,7 @@ class CustomGraphQLView(GraphQLView):
         except:
             return HttpResponseForbidden()
         
+        print(passed_api_key, API_KEY)
         # If passed API_KEY is incorrect -> return 403
         if API_KEY != passed_api_key:
             return HttpResponseForbidden()
@@ -35,6 +36,6 @@ class CustomGraphQLView(GraphQLView):
 
 urlpatterns = [
     path(f'{ADMIN_PATH}/', admin.site.urls),
-    path('graphql/', csrf_exempt(CustomGraphQLView.as_view(schema=schema, graphiql=False))),
+    path('graphql/', jwt_cookie(CustomGraphQLView.as_view(schema=schema, graphiql=True))),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

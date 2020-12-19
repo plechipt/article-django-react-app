@@ -22,12 +22,6 @@ def revoke_refresh_token(sender, request, refresh_token, **kwargs):
    refresh_token.revoke(request)
 
 
-class ObtainJSONWebToken(mutations.ObtainJSONWebToken):
-   @classmethod
-   def resolve(cls, root, info, **kwargs):
-      return cls(user=info.context.user)
-
-
 class Logout(graphene.Mutation):
    message = graphene.String()
 
@@ -61,7 +55,7 @@ class AuthMutation(graphene.ObjectType):
    swap_emails = mutations.SwapEmails.Field()
 
    # Django-graphql-jwt inheritances
-   token_auth = ObtainJSONWebToken.Field()
+   token_auth = mutations.ObtainJSONWebToken.Field()
    verify_token = mutations.VerifyToken.Field()
    refresh_token = mutations.RefreshToken.Field()
    revoke_token = mutations.RevokeToken.Field() 

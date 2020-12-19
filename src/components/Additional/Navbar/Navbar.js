@@ -6,6 +6,9 @@ import { Menu, Segment } from "semantic-ui-react";
 import { USER_DELETE_TOKENS_MUTATION } from "../../Api/user";
 import "./Navbar.css";
 
+const SPECIAL_VIDEO_URL =
+  "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO";
+
 const Navbar = ({ currentUser }) => {
   const history = useHistory();
   const [activeItem, setActiveItem] = useState();
@@ -74,6 +77,14 @@ const Navbar = ({ currentUser }) => {
                   onClick={() => {
                     handleItemClick("support");
                     history.push(`/support`);
+                  }}
+                />
+                <Menu.Item
+                  name="special"
+                  active={activeItem === "special"}
+                  onClick={() => {
+                    handleItemClick("special");
+                    window.open(SPECIAL_VIDEO_URL, "_blank");
                   }}
                 />
                 <Menu.Item
