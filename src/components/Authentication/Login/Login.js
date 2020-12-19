@@ -17,23 +17,23 @@ const Login = () => {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
-  const [loginUser, { data: loginData, loading }] = useMutation(
-    USER_LOGIN_MUTATION
-  );
+  const [
+    loginUser,
+    { data: loginData, loading },
+  ] = useMutation(USER_LOGIN_MUTATION, { errorPolicy: "ignore" });
 
   // After a submit
   useEffect(() => {
-    if (loginData && loginData.tokenAuth) {
-      const {
-        tokenAuth: { success, payload },
-      } = loginData;
+    if (loginData) {
+      const { tokenAuth } = loginData;
 
-      if (success === true) {
+      if (tokenAuth !== null) {
         // Set expiration date
-        const expirationDate = payload.exp * 1000;
+        const expirationDate = tokenAuth.payload.exp * 1000;
         Cookies.set("tokenExpiration", expirationDate, {
           expires: COOKIE_EXPIRATION_DATE,
         });
+
         history.push("/posts");
         window.location.reload(false); // Reset site
       } else {
