@@ -24,9 +24,7 @@ const customFetch = async (uri, options) => {
   const tokenExpiration = Cookies.get("tokenExpiration");
 
   const tokenExpired = tokenExpiration < date.getTime();
-  const userIsNotAuthenticated = checkIfUserIsLoggedIn();
-
-  console.log(userIsNotAuthenticated);
+  const userIsNotAuthenticated = await checkIfUserIsLoggedIn();
 
   if (tokenExpired && userIsNotAuthenticated) {
     //Cookies.remove("tokenExpiration");
@@ -47,8 +45,6 @@ const authLink = setContext((_, { headers }) => {
   // Get csrftoken from Cookies
   const csrftoken = Cookies.get("csrftoken");
   const apiKey = process.env.REACT_APP_API_KEY;
-
-  console.log(csrftoken, apiKey);
 
   // Return the headers to the context so httpLink can read them
   return {

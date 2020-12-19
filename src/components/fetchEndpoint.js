@@ -12,7 +12,7 @@ export const checkIfUserIsLoggedIn = async () => {
 
   const res = await axios({
     url: `${BASE_URL}/graphql/`,
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: apiKey,

@@ -27,7 +27,6 @@ class CustomGraphQLView(GraphQLView):
         except:
             return HttpResponseForbidden()
         
-        print(passed_api_key, API_KEY)
         # If passed API_KEY is incorrect -> return 403
         if API_KEY != passed_api_key:
             return HttpResponseForbidden()

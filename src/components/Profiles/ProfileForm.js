@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
+import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
@@ -43,6 +44,7 @@ const ProfileForm = ({
       ) {
         // Delete JWT tokens
         await deleteTokens();
+        Cookies.remove("tokenExpiration");
 
         history.push("/login");
         window.location.reload(false); // Reset site
