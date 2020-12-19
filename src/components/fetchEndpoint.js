@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const MINUTES_IN_DAY = 1440;
-const COOKIE_EXPIRATION_DATE = (1 / MINUTES_IN_DAY) * 10;
+const COOKIE_EXPIRATION_DATE = (1 / MINUTES_IN_DAY) * 16;
 const BASE_URL = "http://127.0.0.1:8000";
 //const BASE_URL = 'https://article-django-react-app.herokuapp.com'
 

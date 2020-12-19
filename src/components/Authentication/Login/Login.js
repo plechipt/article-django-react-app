@@ -7,7 +7,7 @@ import { USER_LOGIN_MUTATION } from "../../Api/user";
 import "./Login.css";
 
 const MINUTES_IN_DAY = 1440;
-const COOKIE_EXPIRATION_DATE = (1 / MINUTES_IN_DAY) * 10;
+const COOKIE_EXPIRATION_DATE = (1 / MINUTES_IN_DAY) * 16;
 
 const Login = () => {
   const history = useHistory();
