@@ -1,11 +1,20 @@
 import { useLazyQuery } from "@apollo/react-hooks";
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useParams } from "react-router-dom";
 import { PROFILE_GET_INFO_QUERY } from "../Api/profile/profile";
 import { UserContext } from "../UserContext";
 import "./Profile.css";
 import ProfileForm from "./ProfileForm";
 import ProfileHeader from "./ProfileHeader";
+
+export const UserInputContext = createContext("");
+export const EmailInputContext = createContext("");
 
 const Profile = () => {
   const { user } = useParams();
@@ -16,10 +25,18 @@ const Profile = () => {
   );
   const [imageName, setImageName] = useState();
   const [allowButton, setAllowButton] = useState(false);
-  const [errorMessages, setErrorMessages] = useState();
 
   const [usernameInput, setUsernameInput] = useState("");
+  const usernameValue = useMemo(() => ({ usernameInput, setUsernameInput }), [
+    usernameInput,
+    setUsernameInput,
+  ]);
+
   const [emailInput, setEmailInput] = useState("");
+  const emailValue = useMemo(() => ({ emailInput, setEmailInput }), [
+    emailInput,
+    setEmailInput,
+  ]);
 
   useEffect(() => {
     if (user) {
@@ -57,22 +74,16 @@ const Profile = () => {
     <div className="profile-container">
       {profileData && imageName ? (
         <>
-          <ProfileHeader
-            profileData={profileData}
-            errorMessages={errorMessages}
-          />
+          <ProfileHeader profileData={profileData} />
           {user === currentUser ? (
-            <ProfileForm
-              profileData={profileData}
-              allowButton={allowButton}
-              usernameInput={usernameInput}
-              emailInput={emailInput}
-              setErrorMessagesFunction={(error) => setErrorMessages(error)}
-              setUsernameInputFunction={(username) =>
-                setUsernameInput(username)
-              }
-              setEmailInputFunction={(email) => setEmailInput(email)}
-            />
+            <UserInputContext.Provider value={usernameValue}>
+              <EmailInputContext.Provider value={emailValue}>
+                <ProfileForm
+                  profileData={profileData}
+                  allowButton={allowButton}
+                />
+              </EmailInputContext.Provider>
+            </UserInputContext.Provider>
           ) : null}
         </>
       ) : null}

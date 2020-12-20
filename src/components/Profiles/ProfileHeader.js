@@ -5,14 +5,12 @@ import ProfileBodyButtons from "./ProfileBodyButtons";
 
 const PATH_TO_PICTURES = "media/profile_pictures";
 
-const ProfileHeader = ({ profileData, errorMessages }) => {
+const ProfileHeader = ({ profileData: { getProfileInfo }, errorMessages }) => {
   const { user: currentUser } = useContext(UserContext);
   const {
-    getProfileInfo: {
-      image,
-      user: { username, email },
-    },
-  } = profileData;
+    image,
+    user: { username, email },
+  } = getProfileInfo;
 
   return (
     <div className="profile-header">
@@ -42,7 +40,7 @@ const ProfileHeader = ({ profileData, errorMessages }) => {
             </>
           )}
         </div>
-        <ProfileBodyButtons profileData={profileData} />
+        <ProfileBodyButtons getProfileInfo={getProfileInfo} />
       </div>
     </div>
   );

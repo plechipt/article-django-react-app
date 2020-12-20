@@ -8,7 +8,7 @@ import {
 } from "../Api/profile/profile";
 import { UserContext } from "../UserContext";
 
-const ProfileBodyButtons = ({ profileData: { getProfileInfo } }) => {
+const ProfileBodyButtons = ({ getProfileInfo }) => {
   const { user: currentUser } = useContext(UserContext);
   const {
     totalFollowers,

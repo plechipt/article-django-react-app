@@ -1,24 +1,20 @@
 import { useMutation } from "@apollo/react-hooks";
 import Cookies from "js-cookie";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
 import { PROFILE_UPDATE_MUTATION } from "../Api/profile/profile";
 import { USER_DELETE_TOKENS_MUTATION } from "../Api/user";
+import { EmailInputContext, UserInputContext } from "./Profile";
 import ProfileImage from "./ProfileImages";
 
-const ProfileForm = ({
-  profileData,
-  allowButton,
-  usernameInput,
-  emailInput,
-  setUsernameInputFunction,
-  setEmailInputFunction,
-  setErrorMessagesFunction,
-}) => {
+const ProfileForm = ({ profileData, allowButton }) => {
   const {
     getProfileInfo: { image },
   } = profileData;
+
+  const { usernameInput, setUsernameInput } = useContext(UserInputContext);
+  const { emailInput, setEmailInput } = useContext(EmailInputContext);
 
   const history = useHistory();
   const [profileImage, setProfileImage] = useState("none");
@@ -28,12 +24,14 @@ const ProfileForm = ({
     PROFILE_UPDATE_MUTATION
   );
 
+  /*
   // Set message to user (including error and success messages)
   useEffect(() => {
     if (updateData && updateData.updateProfile.message !== "Success") {
       setErrorMessagesFunction(updateData.updateProfile.message);
     }
   }, [updateData, setErrorMessagesFunction]);
+  */
 
   useEffect(() => {
     const updateProfile = async () => {
@@ -51,14 +49,6 @@ const ProfileForm = ({
     };
     updateProfile();
   }, [updateData, history, deleteTokens]);
-
-  const setUsernameInput = (name) => {
-    setUsernameInputFunction(name);
-  };
-
-  const setEmailInput = (email) => {
-    setEmailInputFunction(email);
-  };
 
   const handleOnSubmit = async (e) => {
     const user_submited_button = e.target.tagName === "BUTTON";
