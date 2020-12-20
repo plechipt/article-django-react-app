@@ -44,16 +44,16 @@ export const PROFILE_UPDATE_MUTATION = gql`
 `;
 
 export const PROFILE_FOLLOW_MUTATION = gql`
-  mutation($follower: String!, $following: String!) {
-    followProfile(follower: $follower, following: $following) {
+  mutation($following: String!) {
+    followProfile(following: $following) {
       message
     }
   }
 `;
 
 export const PROFILE_UNFOLLOW_MUTATION = gql`
-  mutation($follower: String!, $following: String!) {
-    unfollowProfile(follower: $follower, following: $following) {
+  mutation($following: String!) {
+    unfollowProfile(following: $following) {
       message
     }
   }

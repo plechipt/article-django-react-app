@@ -22,14 +22,14 @@ const ProfileBodyButtons = ({ profileData: { getProfileInfo } }) => {
 
   const handleOnFollow = async () => {
     await followProfile({
-      variables: { follower: currentUser, following: username },
+      variables: { following: username },
     });
     window.location.reload(false); // Reset site
   };
 
   const handleOnUnfollow = async () => {
     await unfollowProfile({
-      variables: { follower: currentUser, following: username },
+      variables: { following: username },
     });
     window.location.reload(false); // Reset site
   };

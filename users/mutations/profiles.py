@@ -108,18 +108,17 @@ class UpdateProfile(graphene.Mutation):
 # Follow user profile
 class FollowProfile(graphene.Mutation):
    class Arguments:
-      follower = graphene.String(required=True)
       following = graphene.String(required=True)
       
    message = graphene.String()
 
    @staticmethod
    @login_required
-   def mutate(root, info, follower, following):
+   def mutate(root, info, following):
       message = ''
 
       # Follower 
-      follower = CustomUser.objects.get(username=follower)
+      follower = info.context.user
 
       # Following
       following = CustomUser.objects.get(username=following)
@@ -147,16 +146,15 @@ class FollowProfile(graphene.Mutation):
 # Unfollow user profile
 class UnfollowProfile(graphene.Mutation):
    class Arguments:
-      follower = graphene.String(required=True)
       following = graphene.String(required=True)
       
    message = graphene.String()
 
    @staticmethod
    @login_required
-   def mutate(root, info, follower, following):
+   def mutate(root, info, following):
       message = ''
-      follower = CustomUser.objects.get(username=follower)
+      follower = info.context.user
 
       following = CustomUser.objects.get(username=following)
       following_profile = Profile.objects.get(user=following)
