@@ -39,7 +39,6 @@ class PostQuery:
         title=graphene.String(required=True)
     )
 
-    @login_required
     def resolve_find_post(self, root, id):
         post_doesnt_exist = Post.objects.filter(id=id).count() == 0
 
@@ -48,20 +47,16 @@ class PostQuery:
 
         return Post.objects.get(id=id)
 
-    @login_required
     def resolve_filter_post(self, root, title):
         # Filter post that starts with input in search bar
         return Post.objects.filter(title__startswith=title)
 
-    @login_required
     def resolve_all_posts(self, root, **kwargs):
         return Post.objects.all()
     
-    @login_required
     def resolve_all_comments(self, root, **kwargs):
         return Comment.objects.all()
 
-    @login_required
     def resolve_all_replys(self, root, **kwargs):
         return Reply.objects.all()
 

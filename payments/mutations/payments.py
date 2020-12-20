@@ -27,7 +27,6 @@ class CreateCheckoutSession(graphene.Mutation):
     session = graphene.JSONString()
 
     @staticmethod
-    @login_required
     def mutate(root, info, input=None):
         stripe.api_key = STRIPE_LIVE_SECRET_KEY
 

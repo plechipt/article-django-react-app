@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Popup } from "semantic-ui-react";
 
-const Message = ({ id, content, messaged, username }) => {
+const Message = ({ content, messaged, username }) => {
   const { chatUser } = useParams();
 
   return (

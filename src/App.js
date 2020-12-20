@@ -9,7 +9,7 @@ import Routes from "./Routes";
 
 function App() {
   // Current logged in user
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("TestUser1");
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   const { data: meQuery, loading } = useQuery(USER_ME_QUERY, {

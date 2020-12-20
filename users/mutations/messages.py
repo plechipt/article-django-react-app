@@ -28,7 +28,6 @@ class CreateMessage(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
-   @login_required
    @ratelimit(key="ip", rate="10/m", block=True)
    def mutate(root, info, chat_user, content):
       message = ''
@@ -67,7 +66,6 @@ class CreateChatRoom(graphene.Mutation):
    message = graphene.String()
    
    @staticmethod
-   @login_required
    def mutate(root, info, chat_user):
       message = ''
       chat_user_doesnt_exist = CustomUser.objects.filter(username=chat_user).count() == 0

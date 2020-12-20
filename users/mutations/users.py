@@ -1,6 +1,6 @@
 import graphene
 import graphql_jwt
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 from django.dispatch import receiver
 from django_graphql_ratelimit import ratelimit
 from graphene_django.types import DjangoObjectType
@@ -23,16 +23,39 @@ def revoke_refresh_token(sender, request, refresh_token, **kwargs):
    refresh_token.revoke(request)
 
 
+class Login(graphene.Mutation):
+   class Arguments:
+      username = graphene.String()
+      password = graphene.String()
+
+   message = graphene.String()
+
+   def mutate(self, info, username, password):
+      request = info.context
+      user = authenticate(username=username, password=password)
+      current_user = info.context.user
+
+      if user is None:
+         message = "You provided wrong credentials!"
+
+      elif current_user.is_authenticated:
+         message = 'User is already authenticated!'
+
+      else:
+         message = 'Success!'
+         login(request, user)
+
+      return Login(message)
+
 class Logout(graphene.Mutation):
    message = graphene.String()
 
-   @login_required
    def mutate(self, info, input=None):
       request = info.context
-      user = info.context.user
+      user = request.user
 
       if user.is_authenticated:
-         message = 'Success'
+         message = 'Success!'
          logout(request)
       
       else:
@@ -43,6 +66,7 @@ class Logout(graphene.Mutation):
 
 class AuthMutation(graphene.ObjectType):
    register = mutations.Register.Field()
+   login = Login.Field()
    logout = Logout.Field()
    verify_account = mutations.VerifyAccount.Field()
    resend_activation_email = mutations.ResendActivationEmail.Field()
