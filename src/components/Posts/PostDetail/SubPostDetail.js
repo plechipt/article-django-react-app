@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Item } from "semantic-ui-react";
-import CommentCreateForm from "../../Comments/CommentCreateForm";
 import CommentsMap from "../../Comments/Comments/CommentsMap";
-import EditDeleteButtons from "./EditDeleteButtons";
 import LikeButton from "./LikeButton";
+
+const EditDeleteButtons = lazy(() => import("./EditDeleteButtons"));
+const CommentCreateForm = lazy(() =>
+  import("../../Comments/CommentCreateForm")
+);
 
 const DEFAULT_IMAGE =
   "https://miro.medium.com/max/550/1*TxgjUE2uJuiRUVVmE_kU6g.png";
@@ -48,7 +51,9 @@ const SubPostDetail = ({ id, detailData }) => {
             {/*Includes like, edit and delete buttons*/}
             <div className="post-detail-buttons-container">
               <LikeButton id={id} likes={likes} usersLikes={usersLikes} />
-              <EditDeleteButtons id={id} username={username} />
+              <Suspense fallback={<div>Loading...</div>}>
+                <EditDeleteButtons id={id} username={username} />
+              </Suspense>
             </div>
 
             <div className="comments-container">
@@ -56,7 +61,9 @@ const SubPostDetail = ({ id, detailData }) => {
               <CommentsMap comments={comments} />
 
               {/*Reply form for comments*/}
-              <CommentCreateForm id={id} />
+              <Suspense fallback={<div>Loading...</div>}>
+                <CommentCreateForm id={id} />
+              </Suspense>
             </div>
           </Item.Content>
         </Item>

@@ -1,15 +1,20 @@
 import { useQuery } from "@apollo/react-hooks";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import { Login, Navbar, Register } from "./components";
+import { Navbar } from "./components";
 import { USER_ME_QUERY } from "./components/Api/user";
 import { UserContext } from "./components/UserContext";
 import Routes from "./Routes";
 
+const Login = lazy(() => import("./components/Authentication/Login/Login"));
+const Register = lazy(() =>
+  import("./components/Authentication/Register/Register")
+);
+
 function App() {
   // Current logged in user
-  const [user, setUser] = useState("TestUser1");
+  const [user, setUser] = useState(null);
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   const { data: meQuery, loading } = useQuery(USER_ME_QUERY, {
@@ -36,10 +41,12 @@ function App() {
         ) : (
           <>
             {loading === false ? (
-              <Switch>
-                <Route path="/register" component={() => <Register />} />
-                <Route path="/" component={() => <Login />} />
-              </Switch>
+              <Suspense fallback={<div>Loading...</div>}>
+                <Switch>
+                  <Route path="/register" component={() => <Register />} />
+                  <Route path="/" component={() => <Login />} />
+                </Switch>
+              </Suspense>
             ) : null}
           </>
         )}

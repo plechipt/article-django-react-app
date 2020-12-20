@@ -1,13 +1,13 @@
 import { useMutation } from "@apollo/react-hooks";
-import React, { useContext, useState } from "react";
+import React, { lazy, Suspense, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Comment } from "semantic-ui-react";
 import { COMMENT_DELETE_MUTATION } from "../../Api/comment";
-import ReplyForm from "../../Replys/ReplyForm";
 import ReplysMap from "../../Replys/ReplysMap";
 import { UserContext } from "../../UserContext";
 
 const PATH_TO_PICTURES = "Profiles/media/profile_pictures";
+const ReplyForm = lazy(() => import("../../Replys/ReplyForm"));
 
 const CustomComment = ({ id, replys, content, posted, username, image }) => {
   const { user } = useContext(UserContext);
@@ -47,7 +47,9 @@ const CustomComment = ({ id, replys, content, posted, username, image }) => {
         </Comment.Content>
 
         {/*Reply form when reply button is clicked*/}
-        <ReplyForm id={id} showReplyForm={showReplyForm} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ReplyForm id={id} showReplyForm={showReplyForm} />
+        </Suspense>
 
         {/*Mapping all replys of comment*/}
         {replys ? <ReplysMap replys={replys} /> : null}
