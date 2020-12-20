@@ -5,7 +5,11 @@ import { useHistory } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
 import { PROFILE_UPDATE_MUTATION } from "../Api/profile/profile";
 import { USER_DELETE_TOKENS_MUTATION } from "../Api/user";
-import { EmailInputContext, UserInputContext } from "./Profile";
+import {
+  EmailInputContext,
+  ErrorMessagesContext,
+  UserInputContext,
+} from "./Profile";
 import ProfileImage from "./ProfileImages";
 
 const ProfileForm = ({ profileData, allowButton }) => {
@@ -15,6 +19,7 @@ const ProfileForm = ({ profileData, allowButton }) => {
 
   const { usernameInput, setUsernameInput } = useContext(UserInputContext);
   const { emailInput, setEmailInput } = useContext(EmailInputContext);
+  const { setErrorMessages } = useContext(ErrorMessagesContext);
 
   const history = useHistory();
   const [profileImage, setProfileImage] = useState("none");
@@ -24,14 +29,12 @@ const ProfileForm = ({ profileData, allowButton }) => {
     PROFILE_UPDATE_MUTATION
   );
 
-  /*
   // Set message to user (including error and success messages)
   useEffect(() => {
     if (updateData && updateData.updateProfile.message !== "Success") {
-      setErrorMessagesFunction(updateData.updateProfile.message);
+      setErrorMessages(updateData.updateProfile.message);
     }
-  }, [updateData, setErrorMessagesFunction]);
-  */
+  }, [updateData, setErrorMessages]);
 
   useEffect(() => {
     const updateProfile = async () => {

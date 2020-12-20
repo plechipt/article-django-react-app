@@ -15,6 +15,7 @@ import ProfileHeader from "./ProfileHeader";
 
 export const UserInputContext = createContext("");
 export const EmailInputContext = createContext("");
+export const ErrorMessagesContext = createContext("");
 
 const Profile = () => {
   const { user } = useParams();
@@ -37,6 +38,12 @@ const Profile = () => {
     emailInput,
     setEmailInput,
   ]);
+
+  const [errorMessages, setErrorMessages] = useState("");
+  const errorMessagesValue = useMemo(
+    () => ({ errorMessages, setErrorMessages }),
+    [errorMessages, setErrorMessages]
+  );
 
   useEffect(() => {
     if (user) {
@@ -74,14 +81,18 @@ const Profile = () => {
     <div className="profile-container">
       {profileData && imageName ? (
         <>
-          <ProfileHeader profileData={profileData} />
+          <ErrorMessagesContext.Provider value={errorMessagesValue}>
+            <ProfileHeader profileData={profileData} />
+          </ErrorMessagesContext.Provider>
           {user === currentUser ? (
             <UserInputContext.Provider value={usernameValue}>
               <EmailInputContext.Provider value={emailValue}>
-                <ProfileForm
-                  profileData={profileData}
-                  allowButton={allowButton}
-                />
+                <ErrorMessagesContext.Provider value={errorMessagesValue}>
+                  <ProfileForm
+                    profileData={profileData}
+                    allowButton={allowButton}
+                  />
+                </ErrorMessagesContext.Provider>
               </EmailInputContext.Provider>
             </UserInputContext.Provider>
           ) : null}
