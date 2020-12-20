@@ -1,12 +1,10 @@
 import { useMutation } from "@apollo/react-hooks";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Comment, Form } from "semantic-ui-react";
 import { REPLY_ADD_MUTATION } from "../Api/reply";
-import { UserContext } from "../UserContext";
 import "./Replys.css";
 
 const ReplyForm = ({ id, showReplyForm }) => {
-  const { user } = useContext(UserContext);
   const [replyComment, { loading }] = useMutation(REPLY_ADD_MUTATION);
 
   const [replyInput, setReplyInput] = useState("");
@@ -14,7 +12,7 @@ const ReplyForm = ({ id, showReplyForm }) => {
 
   const handleOnAddReply = async () => {
     await replyComment({
-      variables: { id: id, user: user, content: replyInput },
+      variables: { id: id, content: replyInput },
     });
     window.location.reload(false); // Reset site
   };

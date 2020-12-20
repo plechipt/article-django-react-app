@@ -1,14 +1,12 @@
 import { useMutation } from "@apollo/react-hooks";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form, Message } from "semantic-ui-react";
 import { POST_CREATE_MUTATION } from "../../Api/post/post";
-import { UserContext } from "../../UserContext";
 
 //import styles from './Posts.module.css'
 
 const PostCreate = () => {
-  const { user } = useContext(UserContext);
   const history = useHistory();
 
   const [errorMessage, setErrorMessage] = useState();
@@ -29,7 +27,6 @@ const PostCreate = () => {
         variables: {
           title: titleInput,
           content: textareaInput,
-          user: user,
         },
       });
     }

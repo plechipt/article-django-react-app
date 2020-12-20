@@ -1,11 +1,10 @@
 import { useMutation } from "@apollo/react-hooks";
 import Cookies from "js-cookie";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
 import { PROFILE_UPDATE_MUTATION } from "../Api/profile/profile";
 import { USER_DELETE_TOKENS_MUTATION } from "../Api/user";
-import { UserContext } from "../UserContext";
 import ProfileImage from "./ProfileImages";
 
 const ProfileForm = ({
@@ -17,7 +16,6 @@ const ProfileForm = ({
   setEmailInputFunction,
   setErrorMessagesFunction,
 }) => {
-  const { user } = useContext(UserContext);
   const {
     getProfileInfo: { image },
   } = profileData;
@@ -68,7 +66,6 @@ const ProfileForm = ({
     if (user_submited_button) {
       await updateProfile({
         variables: {
-          user: user,
           newUser: usernameInput,
           newEmail: emailInput,
           image: profileImage,
