@@ -5,7 +5,7 @@ import ProfileBodyButtons from "./ProfileBodyButtons";
 
 const PATH_TO_PICTURES = "media/profile_pictures";
 
-const ProfileHeader = ({ profileData, user, errorMessages }) => {
+const ProfileHeader = ({ profileData, errorMessages }) => {
   const { user: currentUser } = useContext(UserContext);
   const {
     getProfileInfo: {
@@ -31,7 +31,7 @@ const ProfileHeader = ({ profileData, user, errorMessages }) => {
           alt=""
         />
         <div className="profile-body">
-          {user === currentUser ? (
+          {username === currentUser ? (
             <>
               <h2 className="account-heading">{username}</h2>
               <p className="text-secondary">{email}</p>

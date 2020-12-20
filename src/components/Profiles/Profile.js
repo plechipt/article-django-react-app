@@ -59,7 +59,6 @@ const Profile = () => {
         <>
           <ProfileHeader
             profileData={profileData}
-            user={user}
             errorMessages={errorMessages}
           />
           {user === currentUser ? (

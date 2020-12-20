@@ -74,24 +74,24 @@ export const POST_EDIT_MUTATION = gql`
 `;
 
 export const POST_CREATE_MUTATION = gql`
-  mutation($title: String!, $content: String!, $user: String!) {
-    createPost(title: $title, content: $content, user: $user) {
+  mutation($title: String!, $content: String!) {
+    createPost(title: $title, content: $content) {
       message
     }
   }
 `;
 
 export const POST_LIKE_MUTATION = gql`
-  mutation($id: ID!, $user: String!) {
-    likePost(id: $id, user: $user) {
+  mutation($id: ID!) {
+    likePost(id: $id) {
       message
     }
   }
 `;
 
 export const POST_UNLIKE_MUTATION = gql`
-  mutation($id: ID!, $user: String!) {
-    unlikePost(id: $id, user: $user) {
+  mutation($id: ID!) {
+    unlikePost(id: $id) {
       message
     }
   }

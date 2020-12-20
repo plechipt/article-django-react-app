@@ -2,8 +2,8 @@ import { gql } from "@apollo/client";
 
 // Mutation
 export const REPLY_ADD_MUTATION = gql`
-  mutation($id: ID!, $user: String!, $content: String!) {
-    replyComment(id: $id, user: $user, content: $content) {
+  mutation($id: ID!, $content: String!) {
+    replyComment(id: $id, content: $content) {
       message
     }
   }

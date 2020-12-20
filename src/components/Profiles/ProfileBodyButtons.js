@@ -9,11 +9,11 @@ import {
 import { UserContext } from "../UserContext";
 
 const ProfileBodyButtons = ({ profileData: { getProfileInfo } }) => {
-  const { user } = useContext(UserContext);
+  const { user: currentUser } = useContext(UserContext);
   const {
     totalFollowers,
-    user: { username: usersProfile },
     followers,
+    user: { username },
   } = getProfileInfo;
 
   const history = useHistory();
@@ -22,32 +22,32 @@ const ProfileBodyButtons = ({ profileData: { getProfileInfo } }) => {
 
   const handleOnFollow = async () => {
     await followProfile({
-      variables: { follower: user, following: usersProfile },
+      variables: { follower: currentUser, following: username },
     });
     window.location.reload(false); // Reset site
   };
 
   const handleOnUnfollow = async () => {
     await unfollowProfile({
-      variables: { follower: user, following: usersProfile },
+      variables: { follower: currentUser, following: username },
     });
     window.location.reload(false); // Reset site
   };
 
   const handleOnMessage = () => {
     // Redirect to chat room
-    history.push(`/message/${usersProfile}`);
+    history.push(`/message/${username}`);
   };
 
   // Check if user follow this profile
   const userIsFollowingProfile = followers.some((follower) => {
-    return follower.username === user;
+    return follower.username === currentUser;
   });
 
   return (
     <div className="profile-buttons-container">
       {/* If this is not users profile */}
-      {user !== usersProfile ? (
+      {currentUser !== username ? (
         <div className="profile-buttons">
           <Button as="div" labelPosition="right">
             {userIsFollowingProfile ? (

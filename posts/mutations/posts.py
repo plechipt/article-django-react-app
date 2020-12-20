@@ -129,7 +129,7 @@ class LikePost(graphene.Mutation):
 
    @staticmethod
    @login_required
-   def mutate(root, info, id, user):
+   def mutate(root, info, id):
       message = ''
       user = info.context.user
       post = Post.objects.get(id=id)

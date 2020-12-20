@@ -36,18 +36,8 @@ export const PROFILE_CREATE_MUTATION = gql`
 `;
 
 export const PROFILE_UPDATE_MUTATION = gql`
-  mutation(
-    $user: String!
-    $newUser: String!
-    $newEmail: String!
-    $image: String!
-  ) {
-    updateProfile(
-      user: $user
-      newUser: $newUser
-      newEmail: $newEmail
-      image: $image
-    ) {
+  mutation($newUser: String!, $newEmail: String!, $image: String!) {
+    updateProfile(newUser: $newUser, newEmail: $newEmail, image: $image) {
       message
     }
   }

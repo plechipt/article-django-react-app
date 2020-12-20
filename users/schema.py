@@ -27,27 +27,26 @@ class UserQuery:
 
     chat_room_messages = graphene.List(
         MessageType,
-        user=graphene.String(required=True),
         chat_user=graphene.String(required=True)
     )
 
     get_profile_info = graphene.Field(
         ProfileType,
+        user=graphene.String(required=True)
     )
     
 
     @login_required
-    def resolve_chat_room_messages(self, root, chat_user):
+    def resolve_chat_room_messages(self, info, chat_user):
         chat_rooms = ChatRoom.objects.all()
 
-        user_doesnt_exist = CustomUser.objects.filter(username=user).count() == 0
         chat_user_doesnt_exist = CustomUser.objects.filter(username=chat_user).count() == 0
 
-        if user_doesnt_exist or chat_user_doesnt_exist:
-            raise GraphQLError("User or chat user doesn't exist!")
+        if chat_user_doesnt_exist:
+            raise GraphQLError("Chat user doesn't exist!")
 
         # Get users
-        user = CustomUser.objects.get(username=user)
+        user = info.context.user
         chat_user = CustomUser.objects.get(username=chat_user)
 
         # Get messages
@@ -59,8 +58,7 @@ class UserQuery:
     
 
     @login_required
-    def resolve_get_profile_info(self, info):
-        user = info.context.user
+    def resolve_get_profile_info(self, info, user):
         user_doesnt_exist = CustomUser.objects.filter(username=user).count() == 0
 
         if user_doesnt_exist:

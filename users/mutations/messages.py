@@ -78,6 +78,7 @@ class CreateChatRoom(graphene.Mutation):
 
       # Get users
       user = info.context.user
+      print(user)
       chat_user = CustomUser.objects.get(username=chat_user)
 
       chat_room_doesnt_exist = chat_rooms.filter(users__username=user).filter(users__username=chat_user).count() == 0
