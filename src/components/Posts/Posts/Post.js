@@ -24,6 +24,7 @@ const Post = ({ username, title, posted, id }) => {
             src={DEFAULT_IMAGE}
             height="550px"
             width="340px"
+            alt="post default image"
           />
           <Item.Content className="post-content">
             <Item.Header className="post-title" as="a">

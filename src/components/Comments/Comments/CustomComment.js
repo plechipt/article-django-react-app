@@ -31,6 +31,7 @@ const CustomComment = ({ id, replys, content, posted, username, image }) => {
           src={require(`../../${PATH_TO_PICTURES}/small/${image.image}`)}
           height="50px"
           width="50px"
+          alt="user profile picture"
         />
         <Comment.Content>
           <Comment.Author as="a">

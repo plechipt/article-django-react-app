@@ -2,7 +2,7 @@ import { setContext } from "@apollo/client/link/context";
 import {
   ApolloProvider,
   createHttpLink,
-  InMemoryCache,
+  InMemoryCache
 } from "@apollo/react-hooks";
 import ApolloClient from "apollo-client";
 import Cookies from "js-cookie";
@@ -12,7 +12,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import {
   checkIfUserIsLoggedIn,
-  refreshTokenSilently,
+  refreshTokenSilently
 } from "./components/fetchEndpoint";
 
 const BASE_URL = "http://127.0.0.1:8000";
@@ -38,6 +38,7 @@ const httpLink = createHttpLink({
   uri: `${BASE_URL}/graphql/`,
   credentials: "include",
   fetch: customFetch,
+  "Cache-Control": "max-age=31536000",
 });
 
 // Access token is send through httponly cookie

@@ -5,6 +5,7 @@ import { ErrorMessagesContext } from "./Profile";
 import ProfileBodyButtons from "./ProfileBodyButtons";
 
 const PATH_TO_PICTURES = "media/profile_pictures";
+
 const ProfileHeader = ({ profileData: { getProfileInfo } }) => {
   const { errorMessages } = useContext(ErrorMessagesContext);
   const { user: currentUser } = useContext(UserContext);
@@ -27,9 +28,9 @@ const ProfileHeader = ({ profileData: { getProfileInfo } }) => {
         <img
           className="rounded-circle profile-picture"
           src={require(`./${PATH_TO_PICTURES}/large/${image}`)}
-          alt="main profile"
           height="325px"
           width="325px"
+          alt="user profile img"
         />
         <div className="profile-body">
           {username === currentUser ? (

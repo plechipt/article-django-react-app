@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import { Container, Header, Button } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
-import { Message } from "semantic-ui-react";
+import { loadStripe } from "@stripe/stripe-js";
+import React, { useState } from "react";
+import { Button, Container, Header, Message } from "semantic-ui-react";
 import { CREATE_CHECKOUT_SESSION_MUTATION } from "../../Api/payment";
-
 import "./Support.css";
 
 //const STRIPE_TEST_PUBLIC_KEY = 'pk_test_51HmaY7FJBInLPu36NfIu5fFdctsFQ3QOjUanAwK9HcXDCimTLT6AjfDC7CbKEwTjP1T4iMO4PF50hHHyz5vzqXHE00YimLS7KJ'
@@ -14,7 +12,12 @@ const stripePromise = loadStripe(STRIPE_LIVE_PUBLIC_KEY);
 
 const Support = () => {
   const [errorMessage, setErrorMessage] = useState(false);
-  const [createCheckoutSession] = useMutation(CREATE_CHECKOUT_SESSION_MUTATION);
+  const [createCheckoutSession] = useMutation(
+    CREATE_CHECKOUT_SESSION_MUTATION,
+    {
+      fetchPolicy: "network-only",
+    }
+  );
 
   const handleOnClick = async () => {
     // Get Stripe.js instance

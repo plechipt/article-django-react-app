@@ -18,6 +18,7 @@ const User = ({ username, image }) => {
         src={require(`../../${PATH_TO_PICTURES}/large/${image}`)}
         height="325px"
         width="325px"
+        alt="user profile image"
       />
       <Item.Content className="user-content-container">
         <Item.Header>{username}</Item.Header>

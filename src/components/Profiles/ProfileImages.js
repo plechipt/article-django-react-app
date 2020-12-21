@@ -41,6 +41,7 @@ const ProfileImages = ({ userImage, onImageChange }) => {
                 image={require(`./${PATH_TO_PICTURES}/large/${image}`)}
                 height="325px"
                 width="325px"
+                alt="profile picture"
               />
             );
           } else {
@@ -53,6 +54,7 @@ const ProfileImages = ({ userImage, onImageChange }) => {
                 image={require(`./${PATH_TO_PICTURES}/large/${image}`)}
                 height="325px"
                 width="325px"
+                alt="profile picture"
               />
             );
           }
