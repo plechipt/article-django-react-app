@@ -27,7 +27,9 @@ const ProfileHeader = ({ profileData: { getProfileInfo } }) => {
         <img
           className="rounded-circle profile-picture"
           src={require(`./${PATH_TO_PICTURES}/large/${image}`)}
-          alt=""
+          alt="main profile"
+          height="325px"
+          width="325px"
         />
         <div className="profile-body">
           {username === currentUser ? (

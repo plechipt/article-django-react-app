@@ -21,6 +21,8 @@ const CustomReply = ({ id, content, posted, username, image }) => {
         <Comment>
           <Comment.Avatar
             src={require(`../${PATH_TO_PICTURES}/small/${image}`)}
+            height="50px"
+            width="50px"
           />
           <Comment.Content>
             <Comment.Author as="a">

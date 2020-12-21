@@ -39,6 +39,8 @@ const ProfileImages = ({ userImage, onImageChange }) => {
                 onClick={() => setChosenImage(image)}
                 raised
                 image={require(`./${PATH_TO_PICTURES}/large/${image}`)}
+                height="325px"
+                width="325px"
               />
             );
           } else {
@@ -49,6 +51,8 @@ const ProfileImages = ({ userImage, onImageChange }) => {
                 onClick={() => setChosenImage(image)}
                 raised
                 image={require(`./${PATH_TO_PICTURES}/large/${image}`)}
+                height="325px"
+                width="325px"
               />
             );
           }

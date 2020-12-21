@@ -29,6 +29,8 @@ const CustomComment = ({ id, replys, content, posted, username, image }) => {
       <Comment>
         <Comment.Avatar
           src={require(`../../${PATH_TO_PICTURES}/small/${image.image}`)}
+          height="50px"
+          width="50px"
         />
         <Comment.Content>
           <Comment.Author as="a">
