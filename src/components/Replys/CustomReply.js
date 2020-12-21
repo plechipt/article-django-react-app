@@ -26,7 +26,7 @@ const CustomReply = ({ id, content, posted, username, image }) => {
             alt="user profile picture"
           />
           <Comment.Content>
-            <Comment.Author as="a">
+            <Comment.Author>
               <a href={`profile/${username}`}>{username}</a>
             </Comment.Author>
             <Comment.Metadata>

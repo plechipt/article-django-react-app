@@ -1,11 +1,12 @@
 import graphene
 import graphql_jwt
+from django import forms
 from django.contrib.auth import authenticate, login, logout
 from django.dispatch import receiver
 from django_graphql_ratelimit import ratelimit
+from graphene_django.forms.mutation import DjangoModelFormMutation
 from graphene_django.types import DjangoObjectType
 from graphql import GraphQLError
-from graphql_auth import mutations
 from graphql_jwt.decorators import login_required
 from graphql_jwt.refresh_token.signals import refresh_token_rotated
 
@@ -16,6 +17,11 @@ class CustomUserType(DjangoObjectType):
    class Meta:
       model = CustomUser
 
+class RegisterForm(forms.ModelForm):
+   class Meta:
+      model = CustomUser
+      fields = ('username', 'email', 'password',)
+
 
 # Revoke refresh token after it has been used
 @receiver(refresh_token_rotated)
@@ -23,10 +29,19 @@ def revoke_refresh_token(sender, request, refresh_token, **kwargs):
    refresh_token.revoke(request)
 
 
+class Register(DjangoModelFormMutation):
+   user = graphene.Field(CustomUserType)
+
+   class Meta:
+      form_class = RegisterForm
+      input_field_name = 'data'
+      return_field_name = 'user'
+
+
 class Login(graphene.Mutation):
    class Arguments:
-      username = graphene.String()
-      password = graphene.String()
+      username = graphene.String(required=True)
+      password = graphene.String(required=True)
 
    message = graphene.String()
 
@@ -47,6 +62,7 @@ class Login(graphene.Mutation):
 
       return Login(message)
 
+
 class Logout(graphene.Mutation):
    message = graphene.String()
 
@@ -65,27 +81,16 @@ class Logout(graphene.Mutation):
 
 
 class AuthMutation(graphene.ObjectType):
-   register = mutations.Register.Field()
+   register = Register.Field()
    login = Login.Field()
    logout = Logout.Field()
-   verify_account = mutations.VerifyAccount.Field()
-   resend_activation_email = mutations.ResendActivationEmail.Field()
-   send_password_reset_email = mutations.SendPasswordResetEmail.Field()
-   password_reset = mutations.PasswordReset.Field()
-   password_change = mutations.PasswordChange.Field()
-   archive_account = mutations.ArchiveAccount.Field()
-   delete_account = mutations.DeleteAccount.Field()
-   update_account = mutations.UpdateAccount.Field()
-   send_secondary_email_activation =  mutations.SendSecondaryEmailActivation.Field()
-   verify_secondary_email = mutations.VerifySecondaryEmail.Field()
-   swap_emails = mutations.SwapEmails.Field()
 
    # Django-graphql-jwt inheritances
-   token_auth = mutations.ObtainJSONWebToken.Field()
-   verify_token = mutations.VerifyToken.Field()
-   refresh_token = mutations.RefreshToken.Field()
-   revoke_token = mutations.RevokeToken.Field() 
+   token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+   verify_token = graphql_jwt.Verify.Field()
+   refresh_token = graphql_jwt.Refresh.Field()
    
    # Delete JWT tokens
    delete_token_cookie = graphql_jwt.DeleteJSONWebTokenCookie.Field()
    delete_refresh_token_cookie = graphql_jwt.DeleteRefreshTokenCookie.Field() 
+

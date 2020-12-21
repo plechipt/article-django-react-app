@@ -4,7 +4,6 @@ import graphene
 from django_graphql_ratelimit import ratelimit
 from graphene_django.types import DjangoObjectType
 from graphql import GraphQLError
-from graphql_auth import mutations
 from graphql_jwt.decorators import login_required
 
 from users.models import ChatRoom, CustomUser, Message, Profile

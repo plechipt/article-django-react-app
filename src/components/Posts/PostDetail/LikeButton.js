@@ -38,7 +38,7 @@ const LikeButton = ({ id, likes, usersLikes }) => {
             Like
           </Button>
         )}
-        <Label as="a" basic color="red" pointing="left">
+        <Label basic color="red" pointing="left">
           {likes}
         </Label>
       </Button>

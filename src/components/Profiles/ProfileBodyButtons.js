@@ -61,7 +61,7 @@ const ProfileBodyButtons = ({ getProfileInfo }) => {
                 Follow
               </Button>
             )}
-            <Label as="a" basic color="blue" pointing="left">
+            <Label basic color="blue" pointing="left">
               {totalFollowers}
             </Label>
           </Button>
@@ -79,7 +79,7 @@ const ProfileBodyButtons = ({ getProfileInfo }) => {
             <Icon name="users" />
             Followers
           </Button>
-          <Label as="a" basic color="blue" pointing="left">
+          <Label basic color="blue" pointing="left">
             {totalFollowers}
           </Label>
         </Button>

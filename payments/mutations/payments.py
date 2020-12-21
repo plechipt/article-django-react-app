@@ -4,7 +4,6 @@ import graphene
 import stripe
 from graphene_django.settings import *
 from graphene_django.types import DjangoObjectType
-from graphql_auth import mutations
 from graphql_jwt.decorators import login_required
 
 # Get both stripe keys from environment variables

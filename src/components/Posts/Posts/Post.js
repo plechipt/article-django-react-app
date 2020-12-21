@@ -27,9 +27,7 @@ const Post = ({ username, title, posted, id }) => {
             alt="post default image"
           />
           <Item.Content className="post-content">
-            <Item.Header className="post-title" as="a">
-              {title}
-            </Item.Header>
+            <Item.Header className="post-title">{title}</Item.Header>
             <Item.Meta className="post-user">{username}</Item.Meta>
             <Item.Meta className="post-date">{posted}</Item.Meta>
           </Item.Content>
