@@ -37,7 +37,12 @@ const SubPostDetail = ({ id, detailData }) => {
     <>
       <Item.Group>
         <Item>
-          <Item.Image size="small" src={DEFAULT_IMAGE} />
+          <Item.Image
+            size="small"
+            src={DEFAULT_IMAGE}
+            height="550px"
+            width="340px"
+          />
           <Item.Content className="post-content">
             <Item.Header className="post-title">{title}</Item.Header>
             <Item.Meta className="post-user">

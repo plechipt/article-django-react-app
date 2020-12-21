@@ -19,7 +19,12 @@ const Post = ({ username, title, posted, id }) => {
     <div className="post">
       <Item.Group>
         <Item onClick={handleOnClick} className="post">
-          <Item.Image size="small" src={DEFAULT_IMAGE} />
+          <Item.Image
+            size="small"
+            src={DEFAULT_IMAGE}
+            height="550px"
+            width="340px"
+          />
           <Item.Content className="post-content">
             <Item.Header className="post-title" as="a">
               {title}
