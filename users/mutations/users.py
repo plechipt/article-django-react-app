@@ -35,12 +35,7 @@ class Register(DjangoModelFormMutation):
 
    class Meta:
       form_class = RegisterForm
-      input_field_name = 'data'
       return_field_name = 'user'
-
-   def resolve_user(self, info, **kwargs):
-      print(kwargs)
-      return self.user
 
 
 class Login(graphene.Mutation):

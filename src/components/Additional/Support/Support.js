@@ -12,12 +12,7 @@ const stripePromise = loadStripe(STRIPE_LIVE_PUBLIC_KEY);
 
 const Support = () => {
   const [errorMessage, setErrorMessage] = useState(false);
-  const [createCheckoutSession] = useMutation(
-    CREATE_CHECKOUT_SESSION_MUTATION,
-    {
-      fetchPolicy: "network-only",
-    }
-  );
+  const [createCheckoutSession] = useMutation(CREATE_CHECKOUT_SESSION_MUTATION);
 
   const handleOnClick = async () => {
     // Get Stripe.js instance
