@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import React, { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import { Navbar } from "./components";
+import Navbar from "./components/Additional/Navbar/Navbar";
 import { USER_ME_QUERY } from "./components/Api/user";
 import { UserContext } from "./components/UserContext";
 import Routes from "./Routes";
