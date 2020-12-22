@@ -44,7 +44,7 @@ export const checkIfUserIsLoggedIn = async () => {
 export const refreshTokenSilently = async () => {
   const csrftoken = Cookies.get("csrftoken");
 
-  const data = await axios({
+  const { data } = await axios({
     url: `${BASE_URL}/graphql/`,
     method: "POST",
     headers: {
@@ -57,6 +57,8 @@ export const refreshTokenSilently = async () => {
         mutation refreshTokenSilently {
           refreshToken {
             payload
+            success
+            errors
           }
         }
       `,
@@ -72,7 +74,7 @@ export const refreshTokenSilently = async () => {
   } = data;
   const expirationDate = exp * 1000;
 
-  return Cookies.set("tokenExpiration", expirationDate, {
+  Cookies.set("tokenExpiration", expirationDate, {
     expires: COOKIE_EXPIRATION_DATE,
   });
 };

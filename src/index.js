@@ -51,6 +51,7 @@ const authLink = setContext((_, { headers }) => {
       ...headers,
       Authorization: apiKey,
       "X-CSRFToken": csrftoken,
+      //"Content-Type": "application/javascript",
     },
   };
 });
