@@ -85,12 +85,10 @@ class AuthMutation(graphene.ObjectType):
    login = Login.Field()
    logout = Logout.Field()
 
-   # Django-graphql-jwt inheritances
+   # django-graphql-jwt
    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
    verify_token = graphql_jwt.Verify.Field()
    refresh_token = graphql_jwt.Refresh.Field()
-   
-   # Delete JWT tokens
    delete_token_cookie = graphql_jwt.DeleteJSONWebTokenCookie.Field()
    delete_refresh_token_cookie = graphql_jwt.DeleteRefreshTokenCookie.Field() 
 

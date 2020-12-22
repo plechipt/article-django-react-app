@@ -22,6 +22,7 @@ class UserMutation(AuthMutation):
 
 
 class UserQuery:
+    me = graphene.Field(CustomUserType)
     all_users = graphene.List(CustomUserType)
     all_profiles = graphene.List(ProfileType)
 
@@ -66,6 +67,12 @@ class UserQuery:
         user = CustomUser.objects.get(username=user)
         return Profile.objects.get(user=user)
 
+    
+    def resolve_me(self, info):
+        user = info.context.user 
+        
+        if user.is_authenticated:
+            return user
 
     def resolve_all_users(self, info, **kwargs):
         return CustomUser.objects.all()
