@@ -36,11 +36,14 @@ const Register = () => {
           errorValues.map(([, errorArray]) => {
             const { messages } = errorArray;
 
+            messages.map((message) => {
+              return setMessage((prevState) => ({
+                type: "error",
+                text: [...prevState.text, message],
+              }));
+            });
+
             // Set the message with previous messages
-            return setMessage((prevState) => ({
-              type: "error",
-              text: [...prevState.text, messages],
-            }));
           });
         } else {
           await createProfile({ variables: { user: usernameInput } });
