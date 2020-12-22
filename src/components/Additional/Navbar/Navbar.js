@@ -1,8 +1,7 @@
 import { useApolloClient, useMutation } from "@apollo/client";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Menu, Segment } from "semantic-ui-react";
+import { Link, useHistory } from "react-router-dom";
 import { USER_DELETE_TOKENS_MUTATION } from "../../Api/user";
 import "./Navbar.css";
 
@@ -32,94 +31,66 @@ const Navbar = ({ user }) => {
     window.location.reload(false); // Reset site
   };
 
+  console.log(user);
+
   return (
-    <div className="navbar-container">
-      <Segment inverted>
-        <Menu inverted secondary>
-          {user ? (
-            <>
-              <Menu.Item
-                name="home"
-                active={activeItem === "home"}
-                onClick={() => {
-                  handleItemClick("home");
-                  history.push("/posts");
-                }}
-              />
-              <Menu.Item
-                name="users"
-                active={activeItem === "users"}
-                onClick={() => {
-                  handleItemClick();
-                  history.push("/users");
-                }}
-              />
-              <Menu.Menu position="right">
-                <Menu.Item
-                  name="create"
-                  active={activeItem === "create"}
-                  onClick={() => {
-                    handleItemClick("home");
-                    history.push("/createPost");
-                  }}
-                />
-                <Menu.Item
-                  name="profile"
-                  active={activeItem === "profile"}
-                  onClick={() => {
-                    handleItemClick("profile");
-                    history.push(`/profile/${user}`);
-                  }}
-                />
-                <Menu.Item
-                  name="support"
-                  active={activeItem === "support"}
-                  onClick={() => {
-                    handleItemClick("support");
-                    history.push(`/support`);
-                  }}
-                />
-                <Menu.Item
-                  name="special"
-                  active={activeItem === "special"}
-                  onClick={() => {
-                    handleItemClick("special");
-                    window.open(SPECIAL_VIDEO_URL, "_blank");
-                  }}
-                />
-                <Menu.Item
-                  name="logout"
-                  active={activeItem === "logout"}
-                  onClick={() => {
-                    handleItemClick("logout");
-                    handleOnLogout();
-                  }}
-                />
-              </Menu.Menu>
-            </>
-          ) : (
-            <Menu.Menu position="right">
-              <Menu.Item
-                name="login"
-                active={activeItem === "login"}
-                onClick={() => {
-                  handleItemClick("login");
-                  history.push("/login");
-                }}
-              />
-              <Menu.Item
-                name="register"
-                active={activeItem === "register"}
-                onClick={() => {
-                  handleItemClick("register");
-                  history.push("/register");
-                }}
-              />
-            </Menu.Menu>
-          )}
-        </Menu>
-      </Segment>
-    </div>
+    <>
+      <nav className="navbar navbar-container navbar-expand-lg navbar-dark bg-dark">
+        <div className="container-fluid">
+          <Link className="navbar-brand" href="#">
+            Article
+          </Link>
+          <>
+            {user ? (
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <ul className="navbar-nav me-auto mb-0 mb-lg-0">
+                  <li className="nav-item">
+                    <Link className="nav-link">Home</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link">Users</Link>
+                  </li>
+                </ul>
+                <div className="navbar-nav ml-auto">
+                  <li>
+                    <Link className="nav-link">Create</Link>
+                  </li>
+                  <li>
+                    <Link className="nav-link">Profile</Link>
+                  </li>
+                  <li>
+                    <Link className="nav-link">Support</Link>
+                  </li>
+                  <li>
+                    <Link className="nav-link">Special</Link>
+                  </li>
+                  <li>
+                    <Link className="nav-link">Logout</Link>
+                  </li>
+                </div>
+              </div>
+            ) : (
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <div className="navbar-nav ml-auto">
+                  <li>
+                    <Link className="nav-link active">Login</Link>
+                  </li>
+                  <li>
+                    <Link className="nav-link active">Register</Link>
+                  </li>
+                </div>
+              </div>
+            )}
+          </>
+        </div>
+      </nav>
+    </>
   );
 };
 

@@ -57,8 +57,6 @@ export const refreshTokenSilently = async () => {
         mutation refreshTokenSilently {
           refreshToken {
             payload
-            success
-            errors
           }
         }
       `,

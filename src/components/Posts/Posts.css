@@ -1,7 +1,7 @@
 .post-create-container {
   margin-top: 5rem !important;
   width: 40% !important;
-  margin: auto;
+  margin: auto !important;
 }
 
 .submit-button {
