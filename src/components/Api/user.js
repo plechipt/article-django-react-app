@@ -69,8 +69,6 @@ export const USER_REFRESH_TOKEN_SILENTLY_MUTATION = gql`
   mutation {
     refreshToken {
       payload
-      success
-      errors
     }
   }
 `;
@@ -78,8 +76,7 @@ export const USER_REFRESH_TOKEN_SILENTLY_MUTATION = gql`
 export const USER_VERIFY_TOKEN_MUTATION = gql`
   mutation($token: String!) {
     verifyToken(token: $token) {
-      success
-      errors
+      payload
     }
   }
 `;

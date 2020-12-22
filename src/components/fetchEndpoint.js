@@ -14,7 +14,7 @@ const BASE_URL = "http://127.0.0.1:8000";
 export const checkIfUserIsLoggedIn = async () => {
   const csrftoken = Cookies.get("csrftoken");
 
-  const res = await axios({
+  const { data } = await axios({
     url: `${BASE_URL}/graphql/`,
     method: "POST",
     headers: {
@@ -34,10 +34,8 @@ export const checkIfUserIsLoggedIn = async () => {
   });
 
   const {
-    data: {
-      data: { me },
-    },
-  } = res;
+    data: { me },
+  } = data;
   const userIsNotAuthenticated = me === null;
 
   return userIsNotAuthenticated;
@@ -46,7 +44,7 @@ export const checkIfUserIsLoggedIn = async () => {
 export const refreshTokenSilently = async () => {
   const csrftoken = Cookies.get("csrftoken");
 
-  const res = await axios({
+  const data = await axios({
     url: `${BASE_URL}/graphql/`,
     method: "POST",
     headers: {
@@ -59,8 +57,6 @@ export const refreshTokenSilently = async () => {
         mutation refreshTokenSilently {
           refreshToken {
             payload
-            success
-            errors
           }
         }
       `,
@@ -69,13 +65,11 @@ export const refreshTokenSilently = async () => {
 
   const {
     data: {
-      data: {
-        refreshToken: {
-          payload: { exp },
-        },
+      refreshToken: {
+        payload: { exp },
       },
     },
-  } = res;
+  } = data;
   const expirationDate = exp * 1000;
 
   Cookies.set("tokenExpiration", expirationDate, {
