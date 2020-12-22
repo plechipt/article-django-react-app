@@ -43,8 +43,8 @@ const Register = () => {
             }));
           });
         } else {
-          //await createProfile({ variables: { user: usernameInput } });
-          //history.push("/login");
+          await createProfile({ variables: { user: usernameInput } });
+          history.push("/login");
         }
       }
     };

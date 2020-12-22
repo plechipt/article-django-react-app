@@ -18,8 +18,7 @@ class CustomUserType(DjangoObjectType):
       model = CustomUser
 
 class RegisterForm(forms.ModelForm):
-   class Arguments:
-      password2 = graphene.String(required=True)
+   password2 = forms.CharField(widget=forms.PasswordInput)
 
    class Meta:
       model = CustomUser
@@ -40,9 +39,9 @@ class Register(DjangoModelFormMutation):
       input_field_name = 'data'
       return_field_name = 'user'
 
-   def clean():
-      cleaned_data = super().clean()
-      print(cleaned_data)
+   def resolve_user(self, info, **kwargs):
+      print(kwargs)
+      return self.user
 
 
 class Login(graphene.Mutation):
