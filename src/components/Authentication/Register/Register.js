@@ -61,7 +61,8 @@ const Register = () => {
         variables: {
           username: usernameInput,
           email: emailInput,
-          password: passwordInput,
+          password1: passwordInput,
+          password2: passwordConfirmInput,
         },
       });
     }

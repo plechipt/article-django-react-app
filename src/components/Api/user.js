@@ -21,9 +21,19 @@ export const USER_LIST_QUERY = gql`
 
 // Mutation
 export const USER_REGISTER_MUTATION = gql`
-  mutation($username: String!, $email: String!, $password: String!) {
+  mutation(
+    $username: String!
+    $email: String!
+    $password1: String!
+    $password2: String!
+  ) {
     register(
-      input: { username: $username, email: $email, password: $password }
+      input: {
+        username: $username
+        email: $email
+        password1: $password1
+        password2: $password2
+      }
     ) {
       user {
         username

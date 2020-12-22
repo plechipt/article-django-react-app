@@ -19,7 +19,6 @@ class CustomUserType(DjangoObjectType):
       model = CustomUser
 
 class RegisterForm(UserCreationForm):
-
    class Meta:
       model = CustomUser
       fields = ['username', 'email', 'password1', 'password2']
