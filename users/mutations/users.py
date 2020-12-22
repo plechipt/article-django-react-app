@@ -2,6 +2,7 @@ import graphene
 import graphql_jwt
 from django import forms
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from django.dispatch import receiver
 from django_graphql_ratelimit import ratelimit
 from graphene_django.forms.mutation import DjangoModelFormMutation
@@ -17,12 +18,11 @@ class CustomUserType(DjangoObjectType):
    class Meta:
       model = CustomUser
 
-class RegisterForm(forms.ModelForm):
-   password2 = forms.CharField(widget=forms.PasswordInput)
+class RegisterForm(UserCreationForm):
 
    class Meta:
       model = CustomUser
-      fields = ('username', 'email', 'password',)
+      fields = ['username', 'email', 'password1', 'password2']
 
 
 # Revoke refresh token after it has been used
