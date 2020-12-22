@@ -22,10 +22,10 @@ const Login = () => {
 
   const [
     loginUser,
-    { data: loginData, loading },
-  ] = useMutation(USER_LOGIN_MUTATION, { errorPolicy: "ignore" });
+    { data: loginData, loading, error },
+  ] = useMutation(USER_LOGIN_MUTATION, { errorPolicy: "all" });
 
-  // After a submit
+  // After a successfull submit
   useEffect(() => {
     if (loginData) {
       const { tokenAuth } = loginData;
@@ -39,11 +39,16 @@ const Login = () => {
 
         history.push("/posts");
         window.location.reload(false); // Reset site
-      } else {
-        setFailedToLogin(true);
       }
     }
   }, [loginData, history, usernameInput]);
+
+  // Valid credentials
+  useEffect(() => {
+    if (error) {
+      setFailedToLogin(true);
+    }
+  }, [error]);
 
   const handleOnSubmit = async (e) => {
     const user_pressed_enter = e.key === "Enter";
@@ -78,7 +83,7 @@ const Login = () => {
         <Message
           className="error-message-container"
           error
-          header="Please, enter valid credentials"
+          header="Please enter valid credentials"
         />
       ) : null}
       <Form onSubmit={handleOnSubmit}>
