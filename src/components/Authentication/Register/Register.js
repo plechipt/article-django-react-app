@@ -27,24 +27,24 @@ const Register = () => {
 
       if (data) {
         const {
-          register: { success, errors },
+          register: { user, errors },
         } = data;
 
-        if (success === false) {
+        if (user === null) {
           const errorValues = Object.entries(errors);
 
           errorValues.map(([, errorArray]) => {
-            const [errors] = errorArray;
+            const { messages } = errorArray;
 
             // Set the message with previous messages
             return setMessage((prevState) => ({
               type: "error",
-              text: [...prevState.text, errors.message],
+              text: [...prevState.text, messages],
             }));
           });
         } else {
-          await createProfile({ variables: { user: usernameInput } });
-          history.push("/login");
+          //await createProfile({ variables: { user: usernameInput } });
+          //history.push("/login");
         }
       }
     };
@@ -61,8 +61,7 @@ const Register = () => {
         variables: {
           username: usernameInput,
           email: emailInput,
-          password1: passwordInput,
-          password2: passwordConfirmInput,
+          password: passwordInput,
         },
       });
     }
