@@ -72,7 +72,7 @@ export const refreshTokenSilently = async () => {
   } = data;
   const expirationDate = exp * 1000;
 
-  Cookies.set("tokenExpiration", expirationDate, {
+  return Cookies.set("tokenExpiration", expirationDate, {
     expires: COOKIE_EXPIRATION_DATE,
   });
 };

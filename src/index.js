@@ -27,7 +27,6 @@ const customFetch = async (uri, options) => {
   const userIsNotAuthenticated = await checkIfUserIsLoggedIn();
 
   if (tokenExpired && userIsNotAuthenticated) {
-    //Cookies.remove("tokenExpiration");
     await refreshTokenSilently();
   }
 

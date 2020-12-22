@@ -34,7 +34,7 @@ const CustomComment = ({ id, replys, content, posted, username, image }) => {
           alt="user profile picture"
         />
         <Comment.Content>
-          <Comment.Author>
+          <Comment.Author as="a">
             <Link to={`profile/${username}`}>{username}</Link>
           </Comment.Author>
           <Comment.Metadata>
