@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form, Message } from "semantic-ui-react";
 import { POST_CREATE_MUTATION } from "../../Api/post/post";
+import "./PostCreate.css";
 
 const PostCreate = () => {
   const history = useHistory();

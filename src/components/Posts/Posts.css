@@ -1,6 +1,6 @@
 .post-create-container {
-  margin-top: 5rem !important;
-  width: 40% !important;
+  margin-top: 10rem !important;
+  max-width: 40% !important;
   margin: auto !important;
 }
 

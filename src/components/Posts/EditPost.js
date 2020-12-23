@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
 import { POST_EDIT_MUTATION, POST_FIND_QUERY } from "../Api/post/post";
 import { UserContext } from "../UserContext";
+import "./Posts.css";
 
 const EditPost = () => {
   const { user } = useContext(UserContext);
