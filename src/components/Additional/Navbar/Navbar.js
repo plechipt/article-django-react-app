@@ -9,6 +9,8 @@ const SPECIAL_VIDEO_URL =
   "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO";
 
 const Navbar = ({ user }) => {
+  const usersProfile = `/profile/${user}`;
+
   const history = useHistory();
   const [activeItem, setActiveItem] = useState();
 
@@ -31,8 +33,6 @@ const Navbar = ({ user }) => {
     window.location.reload(false); // Reset site
   };
 
-  console.log(user);
-
   return (
     <>
       <nav className="navbar navbar-container navbar-expand-lg navbar-dark bg-dark">
@@ -48,27 +48,50 @@ const Navbar = ({ user }) => {
               >
                 <ul className="navbar-nav me-auto mb-0 mb-lg-0">
                   <li className="nav-item">
-                    <Link className="nav-link">Home</Link>
+                    <Link to="/posts" className="nav-link">
+                      Home
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link">Users</Link>
+                    <Link to="/users" className="nav-link">
+                      Users
+                    </Link>
                   </li>
                 </ul>
                 <div className="navbar-nav ml-auto">
                   <li>
-                    <Link className="nav-link">Create</Link>
+                    <Link to="/createPost" className="nav-link">
+                      Create
+                    </Link>
                   </li>
                   <li>
-                    <Link className="nav-link">Profile</Link>
+                    <Link to={usersProfile} className="nav-link">
+                      Profile
+                    </Link>
                   </li>
                   <li>
-                    <Link className="nav-link">Support</Link>
+                    <Link to="/support" className="nav-link">
+                      Support
+                    </Link>
                   </li>
                   <li>
-                    <Link className="nav-link">Special</Link>
+                    <Link
+                      data-toggle="collapse"
+                      to="#"
+                      className="nav-link"
+                      onClick={() => window.open(SPECIAL_VIDEO_URL, "_blank")}
+                    >
+                      Special
+                    </Link>
                   </li>
                   <li>
-                    <Link className="nav-link">Logout</Link>
+                    <Link
+                      data-toggle="collapse"
+                      className="nav-link"
+                      onClick={() => handleOnLogout()}
+                    >
+                      Logout
+                    </Link>
                   </li>
                 </div>
               </div>
@@ -79,10 +102,14 @@ const Navbar = ({ user }) => {
               >
                 <div className="navbar-nav ml-auto">
                   <li>
-                    <Link className="nav-link active">Login</Link>
+                    <Link to="/login" className="nav-link active">
+                      Login
+                    </Link>
                   </li>
                   <li>
-                    <Link className="nav-link active">Register</Link>
+                    <Link to="/register" className="nav-link active">
+                      Register
+                    </Link>
                   </li>
                 </div>
               </div>
