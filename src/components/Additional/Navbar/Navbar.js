@@ -1,6 +1,6 @@
 import { useApolloClient, useMutation } from "@apollo/client";
 import Cookies from "js-cookie";
-import React, { useState } from "react";
+import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { USER_DELETE_TOKENS_MUTATION } from "../../Api/user";
 import "./Navbar.css";
@@ -9,17 +9,10 @@ const SPECIAL_VIDEO_URL =
   "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO";
 
 const Navbar = ({ user }) => {
-  const usersProfile = `/profile/${user}`;
-
   const history = useHistory();
-  const [activeItem, setActiveItem] = useState();
 
   const client = useApolloClient();
   const [deleteTokens] = useMutation(USER_DELETE_TOKENS_MUTATION);
-
-  const handleItemClick = (name) => {
-    setActiveItem(name);
-  };
 
   const handleOnLogout = async () => {
     // Delete JWT tokens
@@ -37,7 +30,7 @@ const Navbar = ({ user }) => {
     <>
       <nav className="navbar navbar-container navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" href="#">
+          <Link to="#" className="navbar-brand">
             Article
           </Link>
           <>
@@ -65,7 +58,7 @@ const Navbar = ({ user }) => {
                     </Link>
                   </li>
                   <li>
-                    <Link to={usersProfile} className="nav-link">
+                    <Link to={`profile/${user}`} className="nav-link">
                       Profile
                     </Link>
                   </li>
@@ -76,8 +69,8 @@ const Navbar = ({ user }) => {
                   </li>
                   <li>
                     <Link
-                      data-toggle="collapse"
                       to="#"
+                      data-toggle="collapse"
                       className="nav-link"
                       onClick={() => window.open(SPECIAL_VIDEO_URL, "_blank")}
                     >
@@ -86,6 +79,7 @@ const Navbar = ({ user }) => {
                   </li>
                   <li>
                     <Link
+                      to="#"
                       data-toggle="collapse"
                       className="nav-link"
                       onClick={() => handleOnLogout()}

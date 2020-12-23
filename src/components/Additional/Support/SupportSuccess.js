@@ -1,6 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Container, Header } from "semantic-ui-react";
-
 import "./Support.css";
 
 const SupportSuccess = () => {
@@ -11,9 +11,9 @@ const SupportSuccess = () => {
         <p className="text-muted support-text">
           We really appreciate your help!
         </p>
-        <a className="support-home" href="/posts">
+        <Link to="/posts" className="support-home">
           Home
-        </a>
+        </Link>
       </Container>
     </div>
   );

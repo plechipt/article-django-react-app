@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button, Form, Message } from "semantic-ui-react";
 import { USER_LOGIN_MUTATION } from "../../Api/user";
 import "./Login.css";
@@ -112,9 +112,9 @@ const Login = () => {
         <Form.Field>
           <p className="text-muted">
             Need an account?{" "}
-            <a href="/register" className="ml-2">
+            <Link to="/register" className="ml-2">
               Sign up
-            </a>
+            </Link>
           </p>
         </Form.Field>
         <Button

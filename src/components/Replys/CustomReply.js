@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/react-hooks";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Comment } from "semantic-ui-react";
 import { REPLY_DELETE_MUTATION } from "../Api/reply";
 import { UserContext } from "../UserContext";
@@ -27,7 +28,7 @@ const CustomReply = ({ id, content, posted, username, image }) => {
           />
           <Comment.Content>
             <Comment.Author as="a">
-              <a href={`profile/${username}`}>{username}</a>
+              <Link href={`profile/${username}`}>{username}</Link>
             </Comment.Author>
             <Comment.Metadata>
               <div>{posted}</div>

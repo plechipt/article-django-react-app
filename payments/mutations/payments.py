@@ -9,6 +9,8 @@ from graphql_jwt.decorators import login_required
 # Get both stripe keys from environment variables
 STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY') 
 STRIPE_LIVE_SECRET_KEY = os.environ.get('STRIPE_LIVE_SECRET_KEY') 
+TEST_PRODUCT_PRICE = 'price_1I1VSYFJBInLPu36ADPik2IN'
+LIVE_PRODUCT_PRICE = 'price_1Hn5ncFJBInLPu362CpNESpw'
 
 def return_urls():
     local_base_url = 'http://127.0.0.1:8000'
@@ -27,7 +29,7 @@ class CreateCheckoutSession(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, input=None):
-        stripe.api_key = STRIPE_LIVE_SECRET_KEY
+        stripe.api_key = STRIPE_TEST_SECRET_KEY
 
         # Get urls
         urls = return_urls()
@@ -35,7 +37,7 @@ class CreateCheckoutSession(graphene.Mutation):
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[{
-                'price': 'price_1Hn5ncFJBInLPu362CpNESpw',
+                'price': TEST_PRODUCT_PRICE,
                 'quantity': 1,
             }],
             mode='payment',

@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button, Form, Message } from "semantic-ui-react";
 import { PROFILE_CREATE_MUTATION } from "../../Api/profile/profile";
 import { USER_REGISTER_MUTATION } from "../../Api/user";
@@ -36,7 +36,7 @@ const Register = () => {
           errorValues.map(([, errorArray]) => {
             const { messages } = errorArray;
 
-            messages.map((message) => {
+            return messages.map((message) => {
               return setMessage((prevState) => ({
                 type: "error",
                 text: [...prevState.text, message],
@@ -143,9 +143,9 @@ const Register = () => {
         <Form.Field>
           <p className="text-muted">
             Already have an account?{" "}
-            <a href="/login" className="ml-2">
+            <Link to="/login" className="ml-2">
               Sign in
-            </a>
+            </Link>
           </p>
         </Form.Field>
         <Button
