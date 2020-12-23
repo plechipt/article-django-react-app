@@ -3,7 +3,19 @@
 }
 
 .post-create-container {
-  margin-top: 5rem !important;
-  max-width: 40% !important;
+  width: 40% !important;
   margin: auto !important;
+  margin-top: 5rem !important;
+}
+
+@media all and (max-width: 1400px) {
+  .post-create-container {
+    min-width: 60% !important;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .post-create-container {
+    min-width: 80% !important;
+  }
 }

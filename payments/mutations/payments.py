@@ -29,7 +29,7 @@ class CreateCheckoutSession(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, input=None):
-        stripe.api_key = STRIPE_TEST_SECRET_KEY
+        stripe.api_key = STRIPE_LIVE_SECRET_KEY
 
         # Get urls
         urls = return_urls()
@@ -37,7 +37,7 @@ class CreateCheckoutSession(graphene.Mutation):
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[{
-                'price': TEST_PRODUCT_PRICE,
+                'price': LIVE_PRODUCT_PRICE,
                 'quantity': 1,
             }],
             mode='payment',

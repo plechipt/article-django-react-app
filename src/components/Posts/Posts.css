@@ -1,7 +1,7 @@
 .post-create-container {
-  margin-top: 10rem !important;
   max-width: 40% !important;
   margin: auto !important;
+  margin-top: 5rem !important;
 }
 
 .submit-button {
@@ -81,7 +81,7 @@
 
 @media all and (max-width: 1400px) {
   .post-create-container {
-    width: 60% !important;
+    min-width: 60% !important;
   }
 
   .search-bar-container {
@@ -100,7 +100,7 @@
     margin-left: 0rem !important;
   }
   .post-create-container {
-    width: 80% !important;
+    min-width: 80% !important;
   }
 
   .post-content {
