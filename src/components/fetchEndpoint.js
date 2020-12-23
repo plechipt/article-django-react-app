@@ -8,8 +8,8 @@ const COOKIE_EXPIRATION_DATE =
   (ONE_DAY / MINUTES_IN_DAY) * EXPIRATION_IN_MINUTES;
 
 const apiKey = process.env.REACT_APP_API_KEY;
-const BASE_URL = "http://127.0.0.1:8000";
-//const BASE_URL = 'https://article-django-react-app.herokuapp.com'
+//const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = "https://article-django-react-app.herokuapp.com";
 
 export const checkIfUserIsLoggedIn = async () => {
   const csrftoken = Cookies.get("csrftoken");
