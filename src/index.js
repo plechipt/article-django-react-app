@@ -35,7 +35,7 @@ const customFetch = async (uri, options) => {
 
 const httpLink = createHttpLink({
   uri: `${BASE_URL}/graphql/`,
-  credentials: "include",
+  credentials: "same-origin",
   fetch: customFetch,
 });
 

@@ -20,7 +20,6 @@ API_KEY = os.environ.get('REACT_APP_API_KEY')
 
 class CustomGraphQLView(GraphQLView):
     def dispatch(self, request, *args, **kwargs):
-        def dispatch(self, request, *args, **kwargs):
         res = super(CustomGraphQLView, self).dispatch(request, *args, **kwargs)
         
         # If Authorization is not passed to headers -> return 403
@@ -33,7 +32,7 @@ class CustomGraphQLView(GraphQLView):
         if API_KEY != passed_api_key:
             return HttpResponseForbidden()
         else:
-            return ress
+            return res
 
 
 urlpatterns = [
