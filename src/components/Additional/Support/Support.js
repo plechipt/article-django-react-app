@@ -49,8 +49,8 @@ const Support = () => {
           header="Payment was not successful"
         />
       ) : null}
-      <div className="support-container">
-        <Container className="container">
+      <Container className="support-container">
+        <div className="container">
           <Header className="support-header">Support Us</Header>
           <p className="text-muted support-text">
             By buying coffee for only 5$
@@ -64,8 +64,8 @@ const Support = () => {
           >
             Support
           </Button>
-        </Container>
-      </div>
+        </div>
+      </Container>
     </>
   );
 };

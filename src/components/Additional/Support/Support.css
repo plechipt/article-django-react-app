@@ -60,3 +60,10 @@
     width: 90% !important;
   }
 }
+
+@media all and (max-width: 460px) {
+  .support-container {
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+  }
+}
