@@ -28,67 +28,80 @@ const Navbar = ({ user }) => {
 
   return (
     <>
-      <nav className="navbar navbar-container navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-container navbar-expand-md navbar-dark bg-dark">
         <div className="container-fluid">
           <Link to="#" className="navbar-brand">
             Article
           </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
           <>
             {user ? (
-              <div
-                className="collapse navbar-collapse"
-                id="navbarSupportedContent"
-              >
-                <ul className="navbar-nav me-auto mb-0 mb-lg-0">
-                  <li className="nav-item">
-                    <Link to="/posts" className="nav-link">
-                      Home
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/users" className="nav-link">
-                      Users
-                    </Link>
-                  </li>
-                </ul>
-                <div className="navbar-nav ml-auto">
-                  <li>
-                    <Link to="/createPost" className="nav-link">
-                      Create
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={`profile/${user}`} className="nav-link">
-                      Profile
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/support" className="nav-link">
-                      Support
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="#"
-                      data-toggle="collapse"
-                      className="nav-link"
-                      onClick={() => window.open(SPECIAL_VIDEO_URL, "_blank")}
-                    >
-                      Special
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="#"
-                      data-toggle="collapse"
-                      className="nav-link"
-                      onClick={() => handleOnLogout()}
-                    >
-                      Logout
-                    </Link>
-                  </li>
+              <>
+                <div
+                  className="collapse navbar-collapse"
+                  id="navbarSupportedContent"
+                >
+                  <ul className="navbar-nav me-auto mb-0 mb-lg-0">
+                    <li className="nav-item">
+                      <Link to="/posts" className="nav-link">
+                        Home
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/users" className="nav-link">
+                        Users
+                      </Link>
+                    </li>
+                  </ul>
+                  <div className="navbar-nav ml-auto">
+                    <li>
+                      <Link to="/createPost" className="nav-link">
+                        Create
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={`profile/${user}`} className="nav-link">
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/support" className="nav-link">
+                        Support
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="#"
+                        data-toggle="collapse"
+                        className="nav-link"
+                        onClick={() => window.open(SPECIAL_VIDEO_URL, "_blank")}
+                      >
+                        Special
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="#"
+                        data-toggle="collapse"
+                        className="nav-link"
+                        onClick={() => handleOnLogout()}
+                      >
+                        Logout
+                      </Link>
+                    </li>
+                  </div>
                 </div>
-              </div>
+              </>
             ) : (
               <div
                 className="collapse navbar-collapse"

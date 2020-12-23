@@ -1,7 +1,12 @@
 .navbar-container {
   margin-bottom: 1.25rem;
-  height: 4.5rem;
+  min-height: 4.5rem;
   font-size: 15px !important;
+
+  /*Sticky navbar*/
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
 }
 
 .navbar-container li {
