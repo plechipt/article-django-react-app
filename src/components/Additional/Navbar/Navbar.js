@@ -28,7 +28,7 @@ const Navbar = ({ user }) => {
 
   return (
     <>
-      <nav className="navbar navbar-container navbar-expand-md navbar-dark bg-dark">
+      <nav className="navbar navbar-container fixed-top navbar-expand-md navbar-dark bg-dark">
         <div className="container-fluid">
           <Link to={user ? "/posts" : "/login"} className="navbar-brand">
             Article

@@ -2,11 +2,6 @@
   min-height: 4.5rem;
   font-size: 15px !important;
   margin-bottom: 1.25rem !important;
-
-  /*Sticky navbar*/
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 100 !important;
 }
 
 .navbar-container li {
