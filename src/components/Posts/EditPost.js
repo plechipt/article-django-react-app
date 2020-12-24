@@ -41,14 +41,22 @@ const EditPost = () => {
 
   // If title and textarea are filled -> undisable button
   useEffect(() => {
-    const fields_are_filled = titleInput !== "" && textAreaInput !== "";
+    if (detailData) {
+      const {
+        findPost: { title, content },
+      } = detailData;
 
-    if (fields_are_filled) {
-      setAllowButton(true);
-    } else {
-      setAllowButton(false);
+      const fields_are_filled = titleInput !== "" && textAreaInput !== "";
+      const field_is_different =
+        titleInput !== title || textAreaInput !== content;
+
+      if (fields_are_filled && field_is_different) {
+        setAllowButton(true);
+      } else {
+        setAllowButton(false);
+      }
     }
-  }, [titleInput, textAreaInput]);
+  }, [titleInput, textAreaInput, detailData]);
 
   const handleOnSubmit = async (e) => {
     const user_submited_button = e.target.tagName === "BUTTON";
