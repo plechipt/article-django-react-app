@@ -63,7 +63,7 @@ const Navbar = ({ user }) => {
                       </Link>
                     </li>
                   </ul>
-                  <div className="navbar-nav ml-auto">
+                  <ul className="navbar-nav ml-auto">
                     <li>
                       <Link to="/createPost" className="nav-link">
                         Create
@@ -99,7 +99,7 @@ const Navbar = ({ user }) => {
                         Logout
                       </Link>
                     </li>
-                  </div>
+                  </ul>
                 </div>
               </>
             ) : (
