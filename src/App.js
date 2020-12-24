@@ -14,7 +14,7 @@ const Register = lazy(() =>
 
 function App() {
   // Current logged in user
-  const [user, setUser] = useState("TestUser");
+  const [user, setUser] = useState(null);
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   const { data: meQuery, loading } = useQuery(USER_ME_QUERY, {
