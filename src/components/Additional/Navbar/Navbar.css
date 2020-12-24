@@ -1,7 +1,7 @@
 .navbar-container {
-  margin-bottom: 1.25rem;
   min-height: 4.5rem;
   font-size: 15px !important;
+  margin-bottom: 1.25rem !important;
 
   /*Sticky navbar*/
   position: sticky !important;

@@ -30,8 +30,10 @@ function App() {
 
   return (
     <div className="light-mode">
-      <Navbar user={user} />
-      <div>
+      <header>
+        <Navbar user={user} />
+      </header>
+      <main>
         {user && loading === false ? (
           <>
             <UserContext.Provider value={value}>
@@ -50,7 +52,7 @@ function App() {
             ) : null}
           </>
         )}
-      </div>
+      </main>
     </div>
   );
 }
