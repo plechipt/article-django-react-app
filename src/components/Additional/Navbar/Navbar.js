@@ -30,7 +30,7 @@ const Navbar = ({ user }) => {
     <>
       <nav className="navbar navbar-container navbar-expand-md navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link to="#" className="navbar-brand">
+          <Link to={user ? "/posts" : "/login"} className="navbar-brand">
             Article
           </Link>
           <button
