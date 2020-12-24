@@ -35,9 +35,8 @@ class CustomGraphQLView(GraphQLView):
             return res
 
 
-
 urlpatterns = [
     path(f'{ADMIN_PATH}/', admin.site.urls),
-    path('graphql/', jwt_cookie(CustomGraphQLView.as_view(schema=schema, graphiql=True))),
+    path('graphql/', jwt_cookie(CustomGraphQLView.as_view(schema=schema, graphiql=False))),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
