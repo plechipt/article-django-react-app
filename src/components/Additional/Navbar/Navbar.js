@@ -70,7 +70,7 @@ const Navbar = ({ user }) => {
                       </Link>
                     </li>
                     <li>
-                      <Link to={`profile/${user}`} className="nav-link">
+                      <Link to={`/profile/${user}`} className="nav-link">
                         Profile
                       </Link>
                     </li>
