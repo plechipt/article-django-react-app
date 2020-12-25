@@ -157,7 +157,7 @@ class UnfollowProfile(graphene.Mutation):
       following_profile = Profile.objects.get(user=following)
 
       if follower == following:
-         raise GraphQLError('You cannot follow yourself!')
+         raise GraphQLError('You cannot unfollow yourself!')
 
       # Remove follower from followers
       following_profile.followers.remove(follower)

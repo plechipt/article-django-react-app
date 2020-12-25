@@ -43,7 +43,7 @@ class PostQuery:
         post_doesnt_exist = Post.objects.filter(id=id).count() == 0
 
         if post_doesnt_exist:
-            raise GraphQLError("Post doesn't exist")
+            raise GraphQLError("This post doesn't exist!")
 
         return Post.objects.get(id=id)
 

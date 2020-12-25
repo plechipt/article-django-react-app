@@ -60,7 +60,14 @@ class DeleteReply(graphene.Mutation):
    @staticmethod
    def mutate(root, info, id):
       message = ''
+      user = info.context.user
       reply = Reply.objects.get(id=id)
+
+      not_users_reply = user != reply.user
+
+      if not_users_reply:
+         raise GraphQLError('This is not your reply!')
+
       reply.delete()
       message = 'Success'
 

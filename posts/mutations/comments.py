@@ -65,7 +65,14 @@ class DeleteComment(graphene.Mutation):
    @staticmethod
    def mutate(root, info, id):
       message = ''
+      user = info.context.user
       comment = Comment.objects.get(id=id)
+
+      not_users_comment = user != comment.user
+
+      if not_users_comment:
+         raise GraphQLError('This is not your comment!')
+
       comment.delete()
       message = 'Success'
 

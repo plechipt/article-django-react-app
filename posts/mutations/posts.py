@@ -71,7 +71,14 @@ class DeletePost(graphene.Mutation):
    @staticmethod
    def mutate(root, info, id):
       message = ''
+      user = info.context.user
       post = Post.objects.get(id=id)
+
+      not_users_post = user != post.user
+
+      if not_users_post:
+         raise GraphQLError('This is not your post!')
+
       post.delete()
       message = 'Success'
 
@@ -107,7 +114,13 @@ class EditPost(graphene.Mutation):
 
       # Success
       else:
+         user = info.context.user
          post = Post.objects.get(id=id)
+
+         not_users_post = user != post.user
+
+         if not_users_post:
+            raise GraphQLError('This is not your post!')
 
          post.title = title
          post.content = content
