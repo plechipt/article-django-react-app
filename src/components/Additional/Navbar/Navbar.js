@@ -53,29 +53,29 @@ const Navbar = ({ user }) => {
                 >
                   <ul className="navbar-nav me-auto mb-0 mb-lg-0">
                     <li className="nav-item">
-                      <Link to="/posts" className="nav-link">
+                      <Link to="/posts" className="nav-link active">
                         Home
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link to="/users" className="nav-link">
+                      <Link to="/users" className="nav-link active">
                         Users
                       </Link>
                     </li>
                   </ul>
                   <ul className="navbar-nav ml-auto">
                     <li>
-                      <Link to="/createPost" className="nav-link">
+                      <Link to="/createPost" className="nav-link active">
                         Create
                       </Link>
                     </li>
                     <li>
-                      <Link to={`/profile/${user}`} className="nav-link">
+                      <Link to={`/profile/${user}`} className="nav-link active">
                         Profile
                       </Link>
                     </li>
                     <li>
-                      <Link to="/support" className="nav-link">
+                      <Link to="/support" className="nav-link active">
                         Support
                       </Link>
                     </li>
@@ -83,7 +83,7 @@ const Navbar = ({ user }) => {
                       <Link
                         to="#"
                         data-toggle="collapse"
-                        className="nav-link"
+                        className="nav-link active"
                         onClick={() => window.open(SPECIAL_VIDEO_URL, "_blank")}
                       >
                         Special
@@ -93,7 +93,7 @@ const Navbar = ({ user }) => {
                       <Link
                         to="#"
                         data-toggle="collapse"
-                        className="nav-link"
+                        className="nav-link active"
                         onClick={() => handleOnLogout()}
                       >
                         Logout
@@ -107,7 +107,7 @@ const Navbar = ({ user }) => {
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               >
-                <div className="navbar-nav ml-auto">
+                <ul className="navbar-nav ml-auto">
                   <li>
                     <Link to="/login" className="nav-link active">
                       Login
@@ -118,7 +118,7 @@ const Navbar = ({ user }) => {
                       Register
                     </Link>
                   </li>
-                </div>
+                </ul>
               </div>
             )}
           </>
