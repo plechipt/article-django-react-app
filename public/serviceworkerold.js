@@ -18,7 +18,9 @@ self.addEventListener("install", (event) => {
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then(async () => {
-      return fetch(event.request).catch(() => caches.match("offline.html"));
+      return await fetch(event.request).catch(() =>
+        caches.match("offline.html")
+      );
     })
   );
 });
@@ -26,6 +28,7 @@ self.addEventListener("fetch", (event) => {
 // Activate the SW
 self.addEventListener("activate", (event) => {
   const cacheWhitelist = [];
+  console.log(cacheWhitelist);
   cacheWhitelist.push(CACHE_NAME);
 
   event.waitUntil(
