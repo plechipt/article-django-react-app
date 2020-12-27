@@ -47,6 +47,7 @@ const Login = () => {
   useEffect(() => {
     if (error) {
       setFailedToLogin(true);
+      setPasswordInput("");
     }
   }, [error]);
 
