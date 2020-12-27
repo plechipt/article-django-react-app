@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 //Additional
 const Support = lazy(() => import("./components/Additional/Support/Support"));
@@ -28,18 +28,24 @@ const Routes = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>
-        <Route path="/posts" component={() => <Posts />} />
-        <Route path="/users" component={() => <Users />} />
-        <Route path="/support" component={() => <Support />} />
-        <Route path="/support-success" component={() => <SupportSuccess />} />
+        <Route exact path="/posts" component={() => <Posts />} />
+        <Route exact path="/support" component={() => <Support />} />
+        <Route exact path="/users" component={() => <Users />} />
+        <Route exact path="/createPost" component={() => <PostCreate />} />
+        <Route exact path="/:id" component={() => <PostDetail />} />
+        <Route exact path="/editPost/:id" component={() => <EditPost />} />
+        <Route exact path="/profile/:user" component={() => <Profile />} />
         <Route
+          exact
+          path="/support-success"
+          component={() => <SupportSuccess />}
+        />
+        <Route
+          exact
           path="/message/:chatUser"
           component={() => <MessagesContainer />}
         />
-        <Route path="/profile/:user" component={() => <Profile />} />
-        <Route path="/editPost/:id" component={() => <EditPost />} />
-        <Route path="/createPost" component={() => <PostCreate />} />
-        <Route path="/:id" component={() => <PostDetail />} />
+        <Redirect to="/posts" />
       </Switch>
     </Suspense>
   );
