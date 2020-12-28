@@ -43,7 +43,7 @@ const Login = () => {
     }
   }, [loginData, history, usernameInput]);
 
-  // Valid credentials
+  // Invalid credentials
   useEffect(() => {
     if (error) {
       setFailedToLogin(true);

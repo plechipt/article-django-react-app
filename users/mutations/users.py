@@ -23,6 +23,11 @@ class RegisterForm(UserCreationForm):
       model = CustomUser
       fields = ['username', 'email', 'password1', 'password2']
 
+   @classmethod
+   def perform_mutate(form, info):
+      print(form, info)
+      return Register(user=user)
+
 
 # Revoke refresh token after it has been used
 @receiver(refresh_token_rotated)
@@ -36,7 +41,7 @@ class Register(DjangoModelFormMutation):
    class Meta:
       form_class = RegisterForm
       return_field_name = 'user'
-
+   
 
 class Login(graphene.Mutation):
    class Arguments:
