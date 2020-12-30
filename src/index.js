@@ -1,42 +1,43 @@
-import { setContext } from "@apollo/client/link/context";
 import {
+  ApolloClient,
   ApolloProvider,
   createHttpLink,
+  fromPromise,
   InMemoryCache,
-} from "@apollo/react-hooks";
-import ApolloClient from "apollo-client";
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { onError } from "@apollo/client/link/error";
 import Cookies from "js-cookie";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
-import {
-  checkIfUserIsLoggedIn,
-  refreshTokenSilently,
-} from "./components/fetchEndpoint";
+import { refreshTokenSilently } from "./components/fetchEndpoint";
 
-//const BASE_URL = "http://127.0.0.1:8000";
-const BASE_URL = "https://article-django-react-app.herokuapp.com";
-
-// Refresh access token if it expired
-const customFetch = async (uri, options) => {
-  const date = new Date();
-  const tokenExpiration = Cookies.get("tokenExpiration");
-
-  const tokenExpired = tokenExpiration < date.getTime();
-  const userIsNotAuthenticated = await checkIfUserIsLoggedIn();
-
-  if (tokenExpired && userIsNotAuthenticated) {
-    await refreshTokenSilently();
-  }
-
-  return fetch(uri, options);
-};
+const BASE_URL = "http://127.0.0.1:8000";
+//const BASE_URL = "https://article-django-react-app.herokuapp.com";
 
 const httpLink = createHttpLink({
   uri: `${BASE_URL}/graphql/`,
-  credentials: "same-origin",
-  fetch: customFetch,
+  credentials: "include",
+});
+
+const refreshAccessToken = onError(({ networkError, operation, forward }) => {
+  if (networkError.statusCode === 401) {
+    return fromPromise(
+      refreshTokenSilently().then(() => {
+        const oldHeaders = operation.getContext().headers;
+        console.log(oldHeaders);
+
+        operation.setContext({
+          headers: {
+            ...oldHeaders,
+          },
+        });
+        return forward(operation);
+      })
+    );
+  }
 });
 
 // Access token is send through httponly cookie
@@ -56,7 +57,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: refreshAccessToken.concat(authLink.concat(httpLink)),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {

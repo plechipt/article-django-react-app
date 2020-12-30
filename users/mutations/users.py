@@ -1,6 +1,10 @@
+import time
+
 import graphene
 import graphql_jwt
+import jwt
 from django import forms
+from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.dispatch import receiver
@@ -22,12 +26,6 @@ class RegisterForm(UserCreationForm):
    class Meta:
       model = CustomUser
       fields = ['username', 'email', 'password1', 'password2']
-
-   @classmethod
-   def perform_mutate(form, info):
-      print(form, info)
-      return Register(user=user)
-
 
 # Revoke refresh token after it has been used
 @receiver(refresh_token_rotated)
@@ -53,7 +51,7 @@ class Login(graphene.Mutation):
    def mutate(self, info, username, password):
       request = info.context
       user = authenticate(username=username, password=password)
-      current_user = info.context.user
+      current_user = request.user
 
       if user is None:
          message = "You provided wrong credentials!"
@@ -85,10 +83,35 @@ class Logout(graphene.Mutation):
       return Logout(message)
 
 
+class VerifyAccessToken(graphene.Mutation):
+   is_expired = graphene.String()
+
+   def mutate(self, info, input=None):
+      is_expired = None
+      request = info.context
+      access_token = request.COOKIES.get('accessToken')
+
+      ONE_SECOND = 1
+      current_time = round(time.time())
+
+      if access_token:
+         decoded_jwt = jwt.decode(access_token, settings.SECRET_KEY, algorithms=["HS256"])
+         expiration_time = decoded_jwt['exp']
+
+         if (expiration_time - current_time) <= ONE_SECOND:
+            is_expired = True
+         
+         else:
+            is_expired = False
+
+      return VerifyAccessToken(is_expired)
+
+
 class AuthMutation(graphene.ObjectType):
    register = Register.Field()
    login = Login.Field()
    logout = Logout.Field()
+   verify_access_token = VerifyAccessToken.Field()
 
    # django-graphql-jwt
    token_auth = graphql_jwt.ObtainJSONWebToken.Field()

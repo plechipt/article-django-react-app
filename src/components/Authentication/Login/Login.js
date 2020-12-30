@@ -43,13 +43,14 @@ const Login = () => {
     }
   }, [loginData, history, usernameInput]);
 
+  /*
   // Invalid credentials
   useEffect(() => {
     if (error) {
       setFailedToLogin(true);
       setPasswordInput("");
     }
-  }, [error]);
+  }, [error])*/
 
   const handleOnSubmit = async (e) => {
     const user_pressed_enter = e.key === "Enter";
