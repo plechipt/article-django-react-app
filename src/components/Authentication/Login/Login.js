@@ -82,7 +82,7 @@ const Login = () => {
             autoFocus
           />
         </Form.Field>
-        <Form.Field icon="user" iconPosition="right">
+        <Form.Field icon="user">
           <label>Password</label>
           <Input
             icon={
