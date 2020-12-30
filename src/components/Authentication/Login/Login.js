@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Button, Form, Message } from "semantic-ui-react";
+import { Button, Form, Icon, Input, Message } from "semantic-ui-react";
 import { USER_LOGIN_MUTATION } from "../../Api/user";
 import "./Login.css";
 
@@ -9,6 +9,7 @@ const Login = () => {
   const history = useHistory();
   const [failedToLogin, setFailedToLogin] = useState("");
   const [allowButton, setAllowButton] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -81,13 +82,20 @@ const Login = () => {
             autoFocus
           />
         </Form.Field>
-        <Form.Field>
+        <Form.Field icon="user" iconPosition="right">
           <label>Password</label>
-          <input
+          <Input
+            icon={
+              <Icon
+                onClick={() => setShowPassword(!showPassword)}
+                name="eye"
+                link
+              />
+            }
             onChange={(e) => setPasswordInput(e.target.value)}
             value={passwordInput}
             autoComplete="one-time-code"
-            type="password"
+            type={showPassword ? "text" : "password"}
             maxLength="30"
             placeholder="Password"
           />

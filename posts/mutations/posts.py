@@ -23,6 +23,7 @@ class CreatePost(graphene.Mutation):
    message = graphene.String()
 
    @staticmethod
+   @login_required
    def mutate(root, info, title, content):
       message = ''
       user = info.context.user
