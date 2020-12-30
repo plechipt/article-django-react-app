@@ -88,7 +88,7 @@ const Login = () => {
             icon={
               <Icon
                 onClick={() => setShowPassword(!showPassword)}
-                name="eye"
+                name={showPassword ? "eye" : "eye slash"}
                 link
               />
             }
