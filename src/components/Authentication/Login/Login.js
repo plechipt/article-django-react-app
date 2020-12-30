@@ -26,6 +26,9 @@ const Login = () => {
       if (tokenAuth !== null) {
         history.push("/posts");
         window.location.reload(false); // Reset site
+      } else {
+        setFailedToLogin(true);
+        setPasswordInput("");
       }
     }
   }, [loginData, history, usernameInput]);

@@ -92,10 +92,7 @@ class VerifyAccessToken(graphene.Mutation):
       access_token = request.COOKIES.get('accessToken')
       refresh_token = request.COOKIES.get('refreshToken')
 
-      print(request.user.is_authenticated)
-
       if refresh_token != None and access_token == None:
-         print('test')
          is_expired = True
       
       else:
