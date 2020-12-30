@@ -5,7 +5,7 @@ import { COMMENT_POST_MUTATION } from "../Api/comment";
 
 const CommentCreateForm = ({ id }) => {
   const [allowButton, setAllowButton] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const [commentInput, setCommentInput] = useState("");
   const [commentPost, { data: commentData, loading, error }] = useMutation(
@@ -50,7 +50,7 @@ const CommentCreateForm = ({ id }) => {
 
   return (
     <div className="comment-create-container">
-      {errorMessage !== "" ? (
+      {errorMessage ? (
         <Message
           className="error-message-container"
           error

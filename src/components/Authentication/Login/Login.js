@@ -7,7 +7,7 @@ import "./Login.css";
 
 const Login = () => {
   const history = useHistory();
-  const [failedToLogin, setFailedToLogin] = useState("");
+  const [failedToLogin, setFailedToLogin] = useState(false);
   const [allowButton, setAllowButton] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -63,7 +63,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      {failedToLogin !== false && failedToLogin !== "" ? (
+      {failedToLogin ? (
         <Message
           className="error-message-container"
           error

@@ -14,7 +14,7 @@ const Register = () => {
 
   const history = useHistory();
   const [allowButton, setAllowButton] = useState(false);
-  const [message, setMessage] = useState({ type: "", text: [] });
+  const [errorMessages, setErrorMessages] = useState([]);
 
   const [createProfile] = useMutation(PROFILE_CREATE_MUTATION);
   const [registerUser, { data, loading }] = useMutation(USER_REGISTER_MUTATION);
@@ -23,7 +23,7 @@ const Register = () => {
   useEffect(() => {
     const handleLogin = async () => {
       // Reset previous state
-      setMessage({ type: "", text: [] });
+      setErrorMessages([]);
 
       if (data) {
         const {
@@ -37,13 +37,9 @@ const Register = () => {
             const { messages } = errorArray;
 
             return messages.map((message) => {
-              return setMessage((prevState) => ({
-                type: "error",
-                text: [...prevState.text, message],
-              }));
+              // Set the message with previous messages
+              return setErrorMessages((prevState) => [...prevState, message]);
             });
-
-            // Set the message with previous messages
           });
         } else {
           await createProfile({ variables: { user: usernameInput } });
@@ -88,12 +84,12 @@ const Register = () => {
 
   return (
     <div className="register-container">
-      {message.type ? (
+      {errorMessages.length !== 0 ? (
         <Message
           className="error-message-container"
           error
           header="There was some errors with your submission"
-          list={message.text}
+          list={errorMessages}
         />
       ) : null}
       <Form onSubmit={handleOnClick}>
