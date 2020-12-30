@@ -51,6 +51,7 @@ class PostQuery:
         # Filter post that starts with input in search bar
         return Post.objects.filter(title__startswith=title)
 
+    @login_required
     def resolve_all_posts(self, root, **kwargs):
         return Post.objects.all()
     

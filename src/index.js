@@ -2,42 +2,37 @@ import {
   ApolloClient,
   ApolloProvider,
   createHttpLink,
-  fromPromise,
   InMemoryCache,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { onError } from "@apollo/client/link/error";
 import Cookies from "js-cookie";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
-import { refreshTokenSilently } from "./components/fetchEndpoint";
+import {
+  refreshTokenSilently,
+  verifyAccessToken,
+} from "./components/fetchEndpoint";
 
 const BASE_URL = "http://127.0.0.1:8000";
 //const BASE_URL = "https://article-django-react-app.herokuapp.com";
 
+// Verify if access token expired
+const customFetch = async (uri, options) => {
+  const tokenExpired = await verifyAccessToken();
+
+  if (tokenExpired === "true") {
+    await refreshTokenSilently();
+  }
+
+  return fetch(uri, options);
+};
+
 const httpLink = createHttpLink({
   uri: `${BASE_URL}/graphql/`,
   credentials: "include",
-});
-
-const refreshAccessToken = onError(({ networkError, operation, forward }) => {
-  if (networkError.statusCode === 401) {
-    return fromPromise(
-      refreshTokenSilently().then(() => {
-        const oldHeaders = operation.getContext().headers;
-        console.log(oldHeaders);
-
-        operation.setContext({
-          headers: {
-            ...oldHeaders,
-          },
-        });
-        return forward(operation);
-      })
-    );
-  }
+  fetch: customFetch,
 });
 
 // Access token is send through httponly cookie
@@ -57,7 +52,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: refreshAccessToken.concat(authLink.concat(httpLink)),
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {

@@ -90,19 +90,16 @@ class VerifyAccessToken(graphene.Mutation):
       is_expired = None
       request = info.context
       access_token = request.COOKIES.get('accessToken')
+      refresh_token = request.COOKIES.get('refreshToken')
 
-      ONE_SECOND = 1
-      current_time = round(time.time())
+      print(request.user.is_authenticated)
 
-      if access_token:
-         decoded_jwt = jwt.decode(access_token, settings.SECRET_KEY, algorithms=["HS256"])
-         expiration_time = decoded_jwt['exp']
-
-         if (expiration_time - current_time) <= ONE_SECOND:
-            is_expired = True
-         
-         else:
-            is_expired = False
+      if refresh_token != None and access_token == None:
+         print('test')
+         is_expired = True
+      
+      else:
+         is_expired = False
 
       return VerifyAccessToken(is_expired)
 
