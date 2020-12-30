@@ -1,5 +1,4 @@
 import { useApolloClient, useMutation } from "@apollo/client";
-import Cookies from "js-cookie";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { USER_DELETE_TOKENS_MUTATION } from "../../Api/user";
@@ -17,7 +16,6 @@ const Navbar = ({ user }) => {
   const handleOnLogout = async () => {
     // Delete JWT tokens
     await deleteTokens();
-    Cookies.remove("tokenExpiration");
 
     // Reset store
     client.resetStore();

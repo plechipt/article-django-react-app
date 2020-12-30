@@ -1,16 +1,9 @@
 import { useMutation } from "@apollo/react-hooks";
-import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Button, Form, Message } from "semantic-ui-react";
 import { USER_LOGIN_MUTATION } from "../../Api/user";
 import "./Login.css";
-
-const ONE_DAY = 1;
-const MINUTES_IN_DAY = 1440;
-const EXPIRATION_IN_MINUTES = 16;
-const COOKIE_EXPIRATION_DATE =
-  (ONE_DAY / MINUTES_IN_DAY) * EXPIRATION_IN_MINUTES;
 
 const Login = () => {
   const history = useHistory();
@@ -22,7 +15,7 @@ const Login = () => {
 
   const [
     loginUser,
-    { data: loginData, loading, error },
+    { data: loginData, loading },
   ] = useMutation(USER_LOGIN_MUTATION, { errorPolicy: "all" });
 
   // After a successfull submit
@@ -31,26 +24,11 @@ const Login = () => {
       const { tokenAuth } = loginData;
 
       if (tokenAuth !== null) {
-        // Set expiration date
-        const expirationDate = tokenAuth.payload.exp * 1000;
-        Cookies.set("tokenExpiration", expirationDate, {
-          expires: COOKIE_EXPIRATION_DATE,
-        });
-
         history.push("/posts");
         window.location.reload(false); // Reset site
       }
     }
   }, [loginData, history, usernameInput]);
-
-  /*
-  // Invalid credentials
-  useEffect(() => {
-    if (error) {
-      setFailedToLogin(true);
-      setPasswordInput("");
-    }
-  }, [error])*/
 
   const handleOnSubmit = async (e) => {
     const user_pressed_enter = e.key === "Enter";
