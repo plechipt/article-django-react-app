@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Button, Form, Message } from "semantic-ui-react";
+import { Button, Checkbox, Form, Message } from "semantic-ui-react";
 import { PROFILE_CREATE_MUTATION } from "../../Api/profile/profile";
 import { USER_REGISTER_MUTATION } from "../../Api/user";
 import "./Register.css";
@@ -14,6 +14,7 @@ const Register = () => {
 
   const history = useHistory();
   const [allowButton, setAllowButton] = useState(false);
+  const [showPasswords, setShowPasswords] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
   const [createProfile] = useMutation(PROFILE_CREATE_MUTATION);
@@ -119,8 +120,8 @@ const Register = () => {
           <input
             onChange={(e) => setPasswordInput(e.target.value)}
             value={passwordInput}
+            type={showPasswords ? "text" : "password"}
             autoComplete="one-time-code"
-            type="password"
             maxLength="30"
             placeholder="Password"
           />
@@ -130,10 +131,16 @@ const Register = () => {
           <input
             onChange={(e) => setPasswordConfirmInput(e.target.value)}
             value={passwordConfirmInput}
+            type={showPasswords ? "text" : "password"}
             autoComplete="one-time-code"
-            type="password"
             maxLength="30"
             placeholder="Confirm Password"
+          />
+        </Form.Field>
+        <Form.Field>
+          <Checkbox
+            onClick={() => setShowPasswords(!showPasswords)}
+            label="Show Passwords"
           />
         </Form.Field>
         <Form.Field>
