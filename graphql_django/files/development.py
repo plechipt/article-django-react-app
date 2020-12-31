@@ -42,6 +42,7 @@ CORS_ORIGIN_WHITELIST = (
 
 
 WSGI_APPLICATION = 'graphql_django.wsgi.application'
+ASGI_APPLICATION = "graphql_django.asgi.application"
 ROOT_URLCONF = 'graphql_django.urls'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
