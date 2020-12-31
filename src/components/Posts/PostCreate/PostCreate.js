@@ -1,3 +1,4 @@
+import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -15,7 +16,26 @@ const PostCreate = () => {
   const [textareaInput, setTextareaInput] = useState("");
 
   const [createPost, { data: postData, loading }] = useMutation(
-    POST_CREATE_MUTATION
+    POST_CREATE_MUTATION,
+    {
+      update(cache, { data: { createPost } }) {
+        cache.modify({
+          fields: {
+            posts(existingPosts = []) {
+              const newPostRef = cache.writeFragment({
+                data: createPost,
+                fragment: gql`
+                  fragment NewPost on PostType {
+                    id
+                  }
+                `,
+              });
+              return [...existingPosts, newPostRef];
+            },
+          },
+        });
+      },
+    }
   );
 
   const handleOnSubmit = async (e) => {

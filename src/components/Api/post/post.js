@@ -57,9 +57,9 @@ export const POST_FILTER_QUERY = gql`
 `;
 
 // Mutation
-export const POST_DELETE_MUTATION = gql`
-  mutation($id: ID!) {
-    deletePost(id: $id) {
+export const POST_CREATE_MUTATION = gql`
+  mutation($title: String!, $content: String!) {
+    createPost(title: $title, content: $content) {
       message
     }
   }
@@ -73,9 +73,9 @@ export const POST_EDIT_MUTATION = gql`
   }
 `;
 
-export const POST_CREATE_MUTATION = gql`
-  mutation($title: String!, $content: String!) {
-    createPost(title: $title, content: $content) {
+export const POST_DELETE_MUTATION = gql`
+  mutation($id: ID!) {
+    deletePost(id: $id) {
       message
     }
   }
