@@ -41,7 +41,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-sw": "node ./src/sw-build.js",
+    "build": "react-scripts build && npm run build-sw",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -64,6 +65,7 @@
     "@types/js-cookie": "^2.2.6",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.6",
-    "compression-webpack-plugin": "^7.1.0"
+    "compression-webpack-plugin": "^7.1.0",
+    "workbox-build": "^6.0.2"
   }
 }

@@ -14,6 +14,7 @@ import {
   refreshTokenSilently,
   verifyAccessToken,
 } from "./components/fetchEndpoint";
+import * as serviceWorker from "./serviceWorker";
 
 //const BASE_URL = "http://127.0.0.1:8000";
 const BASE_URL = "https://article-django-react-app.herokuapp.com";
@@ -76,3 +77,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+
+serviceWorker.register();
