@@ -9,7 +9,3 @@ application = ProtocolTypeRouter({
     "http": get_asgi_application(),
     # Just HTTP for now. (We can add other protocols later.)
 })
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ac49519c07141e0bb404d35721c7ae9c4b789bd
