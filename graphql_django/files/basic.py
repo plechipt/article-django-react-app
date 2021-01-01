@@ -17,14 +17,13 @@ INSTALLED_APPS = [
     'django_extensions',
     'corsheaders',
     'stripe',
+    'channels',
 
     # GraphQL
     'django_filters',
     'graphene_django',
     'graphql_jwt',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
-
-    # Django REST framework 
 ]
 
 MIDDLEWARE = [
@@ -39,5 +38,4 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware', # User authentication
     'whitenoise.middleware.WhiteNoiseMiddleware', # Whitenoise
     "django_graphql_ratelimit.middleware.ParseClientIpMiddleware", # Django graphql ratelimit
-    'django_otp.middleware.OTPMiddleware', # Two factor auth on django admin
 ]

@@ -40,8 +40,8 @@ CORS_ORIGIN_WHITELIST = (
     'https://article-django-react-app.herokuapp.com',
 )
 
-
 WSGI_APPLICATION = 'graphql_django.wsgi.application'
+ASGI_APPLICATION = "graphql_django.asgi.application"
 ROOT_URLCONF = 'graphql_django.urls'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
