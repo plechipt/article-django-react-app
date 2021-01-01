@@ -90,8 +90,10 @@ service_identity = "==18.1.0"
 Twisted = "==20.3.0"
 Unidecode = "==1.1.1"
 django-braces = "==1.14.0"
-channels = "*"
+channels = "==2.4.0"
 daphne = "*"
+graphene-subscriptions = "*"
+channels-redis = "*"
 
 [dev-packages]
 

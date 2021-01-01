@@ -7,6 +7,11 @@ from graphql_jwt.decorators import login_required
 from .mutations.messages import *
 from .mutations.profiles import *
 from .mutations.users import *
+from .subscriptions.messages import *
+
+
+class UserSubscription(MessageSubscription):
+    pass
 
 
 class UserMutation(AuthMutation):
