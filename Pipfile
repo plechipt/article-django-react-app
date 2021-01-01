@@ -22,6 +22,10 @@ decorator = "==4.4.2"
 distlib = "==0.3.1"
 dj-database-url = "==0.5.0"
 dj-static = "==0.0.6"
+<<<<<<< HEAD
+=======
+django-channels = "==0.7.0"
+>>>>>>> 0ac49519c07141e0bb404d35721c7ae9c4b789bd
 django-cors-headers = "==3.5.0"
 django-debug-toolbar = "==3.1.1"
 django-extensions = "==3.1.0"
@@ -91,7 +95,10 @@ Twisted = "==20.3.0"
 Unidecode = "==1.1.1"
 django-braces = "==1.14.0"
 channels = "*"
+<<<<<<< HEAD
 daphne = "*"
+=======
+>>>>>>> 0ac49519c07141e0bb404d35721c7ae9c4b789bd
 
 [dev-packages]
 
