@@ -38,5 +38,4 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware', # User authentication
     'whitenoise.middleware.WhiteNoiseMiddleware', # Whitenoise
     "django_graphql_ratelimit.middleware.ParseClientIpMiddleware", # Django graphql ratelimit
-    'django_otp.middleware.OTPMiddleware', # Two factor auth on django admin
 ]
