@@ -1,5 +1,7 @@
 import os
 
+from channels_redis.core import RedisChannelLayer
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -41,7 +43,15 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 
+# Subscriptions
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    },
+}
+
 WSGI_APPLICATION = 'graphql_django.wsgi.application'
+ASGI_APPLICATION = "graphql_django.asgi.application"
 ROOT_URLCONF = 'graphql_django.urls'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
