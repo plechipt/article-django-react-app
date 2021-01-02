@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-aiohttp = "==3.7.3"
 aniso8601 = "==7.0.0"
 appdirs = "==1.4.4"
 asgiref = "==3.3.1"
@@ -89,14 +88,7 @@ Rx = "==1.6.1"
 service_identity = "==18.1.0"
 Twisted = "==20.3.0"
 Unidecode = "==1.1.1"
-<<<<<<< HEAD
-djangorestframework = "*"
-=======
->>>>>>> 501ea498eac3d37ab704c306d6981715d6d96eb6
 django-braces = "==1.14.0"
-daphne = "*"
-channels = "==3.0.3"
-graphql-ws = "*"
 
 [dev-packages]
 

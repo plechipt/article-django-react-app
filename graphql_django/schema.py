@@ -5,7 +5,6 @@ from posts.schema import PostMutation, PostQuery
 from users.models import CustomUser
 from users.schema import UserMutation
 from users.schema import UserQuery as MyUserQuery
-from users.schema import UserSubscription
 
 
 class Query(MyUserQuery, PostQuery, graphene.ObjectType):

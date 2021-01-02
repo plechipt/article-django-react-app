@@ -17,15 +17,12 @@ INSTALLED_APPS = [
     'django_extensions',
     'corsheaders',
     'stripe',
-    'channels',
-    'channels_redis',
 
     # GraphQL
     'django_filters',
     'graphene_django',
     'graphql_jwt',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
-    'graphene_subscriptions',
 ]
 
 MIDDLEWARE = [
