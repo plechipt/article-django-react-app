@@ -1,5 +1,7 @@
 import os
 
+from channels_redis.core import RedisChannelLayer
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {

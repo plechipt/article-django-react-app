@@ -25,6 +25,7 @@ class CustomGraphQLView(GraphQLView):
     def dispatch(self, request, *args, **kwargs):
         res = super(CustomGraphQLView, self).dispatch(request, *args, **kwargs)
 
+        '''
         # If Authorization is not passed to headers -> return 403
         try:
             passed_api_key = request.headers['Authorization']
@@ -34,13 +35,13 @@ class CustomGraphQLView(GraphQLView):
         # If passed API_KEY is incorrect -> return 403
         if API_KEY != passed_api_key:
             return HttpResponseForbidden()
-            
+        '''
         return res
 
 
 urlpatterns = [
     path(f'{ADMIN_PATH}/', admin.site.urls),
-    path('graphql/', jwt_cookie(CustomGraphQLView.as_view(schema=schema, graphiql=False))),
+    path('graphql/', jwt_cookie(CustomGraphQLView.as_view(schema=schema, graphiql=True))),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

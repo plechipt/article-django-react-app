@@ -20,8 +20,6 @@ class Subscription(UserSubscription):
    pass
 
 
-
-
 schema = graphene.Schema(
    query=Query,
    mutation=Mutation,
