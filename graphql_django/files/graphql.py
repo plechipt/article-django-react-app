@@ -24,10 +24,3 @@ GRAPHQL_JWT = {
     'JWT_COOKIE_NAME': 'accessToken',
     'JWT_REFRESH_TOKEN_COOKIE_NAME': 'refreshToken',
 }
-
-# Subscriptions
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
-}
