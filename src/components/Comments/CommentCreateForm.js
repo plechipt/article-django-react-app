@@ -33,7 +33,7 @@ const CommentCreateForm = ({ id }) => {
   // If rate limit
   useEffect(() => {
     if (error) {
-      setErrorMessage("You are commentng too much!");
+      setErrorMessage("You are commenting too much!");
     }
   }, [error]);
 
