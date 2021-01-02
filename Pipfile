@@ -22,7 +22,6 @@ decorator = "==4.4.2"
 distlib = "==0.3.1"
 dj-database-url = "==0.5.0"
 dj-static = "==0.0.6"
-django-channels = "==0.7.0"
 django-cors-headers = "==3.5.0"
 django-debug-toolbar = "==3.1.1"
 django-extensions = "==3.1.0"
@@ -90,9 +89,14 @@ Rx = "==1.6.1"
 service_identity = "==18.1.0"
 Twisted = "==20.3.0"
 Unidecode = "==1.1.1"
+<<<<<<< HEAD
 djangorestframework = "*"
+=======
+>>>>>>> 501ea498eac3d37ab704c306d6981715d6d96eb6
 django-braces = "==1.14.0"
-channels = "*"
+daphne = "*"
+channels = "==3.0.3"
+graphql-ws = "*"
 
 [dev-packages]
 

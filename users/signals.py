@@ -1,14 +1,8 @@
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from .models import CustomUser, Profile
+from django.db.models.signals import post_delete, post_save
+from graphene_subscriptions.signals import (post_delete_subscription,
+                                            post_save_subscription)
 
+from .models import Message
 
-@receiver(post_save, sender=CustomUser)
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=CustomUser)
-def save_profile(sender, instance, **kwargs):
-    instance.profile.save()
+post_save.connect(post_save_subscription, sender=Message, dispatch_uid="message_post_save")
+post_delete.connect(post_delete_subscription, sender=Message, dispatch_uid="message_post_delete")

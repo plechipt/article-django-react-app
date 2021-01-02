@@ -1,5 +1,7 @@
 import os
 
+from channels_redis.core import RedisChannelLayer
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -40,6 +42,13 @@ CORS_ORIGIN_WHITELIST = (
     'https://article-django-react-app.herokuapp.com',
 )
 
+
+# Subscriptions
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    },
+}
 
 WSGI_APPLICATION = 'graphql_django.wsgi.application'
 ASGI_APPLICATION = "graphql_django.asgi.application"
