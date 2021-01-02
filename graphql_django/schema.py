@@ -16,12 +16,7 @@ class Mutation(UserMutation, PostMutation, PaymentMutation):
    pass
 
 
-class Subscription(UserSubscription):
-   pass
-
-
 schema = graphene.Schema(
    query=Query,
    mutation=Mutation,
-   subscription=Subscription
 )
