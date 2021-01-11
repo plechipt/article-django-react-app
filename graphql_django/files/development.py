@@ -1,21 +1,5 @@
 import os
 
-# Password validation
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
 ALLOWED_HOSTS = [
     'article-django-react-app.herokuapp.com',
     '127.0.0.1:8000',
@@ -28,6 +12,8 @@ ALLOWED_HOSTS = [
 
 
 CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Allowed urls which can access API
 CORS_ORIGIN_WHITELIST = (
