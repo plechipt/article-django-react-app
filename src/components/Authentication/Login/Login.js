@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useApolloClient, useMutation } from "@apollo/react-hooks";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Button, Form, Icon, Input, Message } from "semantic-ui-react";
@@ -7,6 +7,7 @@ import "./Login.css";
 
 const Login = () => {
   const history = useHistory();
+  const client = useApolloClient();
   const [failedToLogin, setFailedToLogin] = useState(false);
   const [allowButton, setAllowButton] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -25,14 +26,14 @@ const Login = () => {
       const { tokenAuth } = loginData;
 
       if (tokenAuth !== null) {
+        client.resetStore();
         history.push("/posts");
-        window.location.reload(false); // Reset site
       } else {
         setFailedToLogin(true);
         setPasswordInput("");
       }
     }
-  }, [loginData, history, usernameInput]);
+  }, [loginData, history, usernameInput, client]);
 
   const handleOnSubmit = async (e) => {
     const user_pressed_enter = e.key === "Enter";

@@ -19,26 +19,9 @@ from .schema import schema
 ADMIN_PATH = os.environ.get('ADMIN_PATH')
 API_KEY = os.environ.get('REACT_APP_API_KEY')
 
-class CustomGraphQLView(GraphQLView):
-    def dispatch(self, request, *args, **kwargs):
-        res = super(CustomGraphQLView, self).dispatch(request, *args, **kwargs)
-
-        # If Authorization is not passed to headers -> return 403
-        try:
-            passed_api_key = request.headers['Authorization']
-        except:
-            return HttpResponseForbidden()
-
-        # If passed API_KEY is incorrect -> return 403
-        if API_KEY != passed_api_key:
-            return HttpResponseForbidden()
-       
-        return res
-
-
 urlpatterns = [
     path(f'{ADMIN_PATH}/', admin.site.urls),
-    path('graphql/', jwt_cookie(CustomGraphQLView.as_view(schema=schema, graphiql=True))),
+    path('graphql/', jwt_cookie(GraphQLView.as_view(schema=schema, graphiql=True))),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

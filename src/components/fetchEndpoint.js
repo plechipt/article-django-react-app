@@ -1,7 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const apiKey = process.env.REACT_APP_API_KEY;
 //const BASE_URL = "http://127.0.0.1:8000";
 const BASE_URL = "https://article-django-react-app.herokuapp.com";
 
@@ -14,7 +13,6 @@ export const checkIfUserIsLoggedIn = async () => {
     headers: {
       "Content-Type": "application/json",
       "X-CSRFToken": csrftoken,
-      Authorization: apiKey,
     },
     data: {
       query: `
@@ -44,7 +42,6 @@ export const refreshTokenSilently = async () => {
     headers: {
       "Content-Type": "application/json",
       "X-CSRFToken": csrftoken,
-      Authorization: apiKey,
     },
     data: {
       query: `
@@ -67,7 +64,6 @@ export const verifyAccessToken = async () => {
     headers: {
       "Content-Type": "application/json",
       "X-CSRFToken": csrftoken,
-      Authorization: apiKey,
     },
     data: {
       query: `

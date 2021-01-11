@@ -39,13 +39,11 @@ const httpLink = createHttpLink({
 const authLink = setContext((_, { headers }) => {
   // Get csrftoken from Cookies
   const csrftoken = Cookies.get("csrftoken");
-  const apiKey = process.env.REACT_APP_API_KEY;
 
   // Return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      Authorization: apiKey,
       "X-CSRFToken": csrftoken,
     },
   };
