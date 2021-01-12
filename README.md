@@ -1,21 +1,26 @@
 # Article-Django-React-App
 
 ## Overview
+
 Article app with decent features
 
-#### **Link: https://article-django-react-app.herokuapp.com/**
-
+#### **Link: https://kubova-uzasna-socialni-sit.com/**
 
 ## Technologies used
+
 - On backend Django with GraphQL
 - On frontend React with Apollo
 
 ## Features
+
 #### Users
+
 - JWT Authentication
 - Listing all users
 - Pagination
+
 #### Posts
+
 - Searching for Posts
 - Pagination
 - Creating Posts
@@ -26,9 +31,13 @@ Article app with decent features
 - Deleting Comments
 - Replying Comments
 - Deleting Replys
+
 #### Profiles
+
 - Following Users
 - Messaging Users
 - Updating Profile
+
 #### Payments
+
 - Support website by buying coffee for 5$

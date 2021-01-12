@@ -1,7 +1,7 @@
 import os
 
 ALLOWED_HOSTS = [
-    'article-django-react-app.herokuapp.com',
+    'kubova-uzasna-socialni-sit.com',
     '127.0.0.1:8000',
     '127.0.0.1',
     'localhost',
@@ -22,7 +22,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:5000',
     'http://127.0.0.1:3000',
     'http://127.0.0.1:8000',
-    'https://article-django-react-app.herokuapp.com',
+    'https://kubova-uzasna-socialni-sit.com',
 )
 
 ASGI_APPLICATION = "graphql_django.asgi.application"
