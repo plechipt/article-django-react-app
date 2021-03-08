@@ -13,7 +13,11 @@ SESSION_COOKIE_SECURE = True
 # Allowed urls which can access API
 CORS_ORIGIN_WHITELIST = (
     'http://localhost',
+<<<<<<< HEAD
     'http://127.0.0.1:8000',
+=======
+    'http://127.0.0.1',
+>>>>>>> 2d460efd86583b502dac314e7b7e372f0a2e2916
     'https://kubova-uzasna-socialni-sit.com',
 )
 
