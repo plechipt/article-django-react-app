@@ -14,7 +14,7 @@ SESSION_COOKIE_SECURE = True
 CORS_ORIGIN_WHITELIST = (
     'http://localhost',
     'http://127.0.0.1:8000',
-    'https://kubova-uzasna-socialni-sit.com',
+    'https://kubova-uzasna-socialni-sit.herokuapp.com',
 )
 
 ASGI_APPLICATION = "graphql_django.asgi.application"
