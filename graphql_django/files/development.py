@@ -1,13 +1,9 @@
 import os
 
 ALLOWED_HOSTS = [
-    'kubova-uzasna-socialni-sit.com',
-    '127.0.0.1:8000',
-    '127.0.0.1',
     'localhost',
-    'localhost:3000',
-    'localhost:3001',
-    'localhost:5000',
+    '127.0.0.1',
+    'kubova-uzasna-socialni-sit.com',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -17,10 +13,6 @@ SESSION_COOKIE_SECURE = True
 # Allowed urls which can access API
 CORS_ORIGIN_WHITELIST = (
     'http://localhost',
-    'http://localhost:3000',
-    'http://localhost:3001',
-    'http://localhost:5000',
-    'http://127.0.0.1:3000',
     'http://127.0.0.1:8000',
     'https://kubova-uzasna-socialni-sit.com',
 )
