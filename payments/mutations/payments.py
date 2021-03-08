@@ -14,7 +14,7 @@ LIVE_PRODUCT_PRICE = 'price_1Hn5ncFJBInLPu362CpNESpw'
 
 def return_urls():
     local_base_url = 'http://127.0.0.1:8000'
-    heroku_base_url = 'https://kubova-uzasna-socialni-sit.com'
+    heroku_base_url = 'https://kubova-uzasna-socialni-sit.herokuapp.com'
 
     # If DEBUG is on True -> return local urls, otherwise return urls on heroku
     if settings.DEBUG == True:

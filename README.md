@@ -4,7 +4,7 @@
 
 Article app with decent features
 
-#### **Link: https://kubova-uzasna-socialni-sit.com/**
+#### **Link: https://kubova-uzasna-socialni-sit.herokuapp.com/**
 
 ## Technologies used
 

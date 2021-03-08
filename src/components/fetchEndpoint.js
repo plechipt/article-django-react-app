@@ -1,8 +1,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const BASE_URL = "http://127.0.0.1:8000";
-//const BASE_URL = "https://kubova-uzasna-socialni-sit.com";
+//const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = "https://kubova-uzasna-socialni-sit.herokuapp.com";
 
 export const checkIfUserIsLoggedIn = async () => {
   const csrftoken = Cookies.get("csrftoken");
