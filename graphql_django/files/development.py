@@ -3,7 +3,7 @@ import os
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'kubova-uzasna-socialni-sit.com',
+    'kubova-uzasna-socialni-sit.herokuapp.com',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
