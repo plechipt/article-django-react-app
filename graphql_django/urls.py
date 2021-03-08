@@ -22,6 +22,7 @@ API_KEY = os.environ.get('REACT_APP_API_KEY')
 urlpatterns = [
     path(f'{ADMIN_PATH}/', admin.site.urls),
     path('graphql/', jwt_cookie(GraphQLView.as_view(schema=schema, graphiql=False))),
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt')),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
